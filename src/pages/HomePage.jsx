@@ -210,7 +210,7 @@ const HomePage = () => {
         </div>
 
         {/* UPDATED: Main Content Container with Mobile Fixed Spacing */}
-        <div className="relative z-10 flex items-center justify-center px-3 sm:px-4 lg:px-6 pt-20 pb-8 sm:pt-0 sm:pb-0 sm:h-screen">
+        <div className="relative z-10 flex items-center justify-center px-3 sm:px-4 lg:px-6 pt-16 pb-8 sm:pt-0 sm:pb-0 sm:h-screen">
           <div className="w-full h-full flex flex-col justify-center">
             <div className="max-w-6xl mx-auto w-full">
               <div className="text-center space-y-3 sm:space-y-4">
