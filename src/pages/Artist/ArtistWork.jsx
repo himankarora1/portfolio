@@ -847,16 +847,16 @@ const ArtistWork = () => {
               </motion.div>
             )}
 
-            {/* Tab Navigation with Refresh Button - Mobile Responsive */}
+            {/* Tab Navigation with Refresh Button - FIXED: Equal width buttons, no scrolling */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
-              {/* Tab Navigation */}
-              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 w-full sm:w-auto">
-                <div className="flex flex-row sm:space-x-2 overflow-x-auto">
+              {/* Tab Navigation - FIXED: Equal width buttons, no scrolling, INCREASED WIDTH */}
+              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 w-full sm:w-auto sm:min-w-[420px]"> {/* ADDED: min-width for larger buttons */}
+                <div className="grid grid-cols-3 gap-2 sm:gap-3"> {/* INCREASED: gap from 1 to 2, and sm:gap-2 to sm:gap-3 */}
                   {tabs.map((tab) => (
                     <motion.button
                       key={tab.id}
                       onClick={() => handleTabSwitch(tab.id)}
-                      className={`flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-semibold transition-all whitespace-nowrap text-sm sm:text-base ${
+                      className={`flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-3 sm:py-4 rounded-xl font-semibold transition-all text-xs sm:text-base min-w-0 ${
                         activeTab === tab.id
                           ? `bg-gradient-to-r ${tab.color} text-white shadow-lg`
                           : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
@@ -864,8 +864,8 @@ const ArtistWork = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <tab.icon size={16} className="sm:w-5 sm:h-5" />
-                      <span>{tab.label}</span>
+                      <tab.icon size={16} className="sm:w-5 sm:h-5 flex-shrink-0" />
+                      <span className="truncate">{tab.label}</span>
                     </motion.button>
                   ))}
                 </div>
