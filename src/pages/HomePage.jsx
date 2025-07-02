@@ -152,7 +152,8 @@ const HomePage = () => {
         image={contentData.meta.og_image}
       />
       
-<div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] px-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+      {/* MOBILE VIEWPORT FIX - Using min-h-screen + mobile-specific padding */}
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         {/* Enhanced Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* More Floating Particles */}
@@ -209,10 +210,12 @@ const HomePage = () => {
           />
         </div>
 
-        <div className="relative z-10 h-screen flex items-center justify-center px-3 sm:px-4 lg:px-6">
+        {/* FIXED: Mobile-only padding, desktop keeps original layout */}
+        <div className="relative z-10 h-screen flex items-center justify-center px-3 sm:px-4 lg:px-6 py-8 sm:py-0">
           <div className="max-w-6xl mx-auto w-full h-full flex flex-col justify-center">
+            {/* Mobile gets extra spacing, desktop stays compact */}
             <div className="text-center space-y-3 sm:space-y-4">
-              {/* Enhanced Profile Image/Avatar - SLIGHTLY BIGGER */}
+              {/* Enhanced Profile Image/Avatar - MOBILE RESPONSIVE */}
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
@@ -221,6 +224,7 @@ const HomePage = () => {
                   duration: 1.2,
                   bounce: 0.6
                 }}
+                className="mb-1 sm:mb-2"
               >
                 <motion.div 
                   className="w-14 h-14 sm:w-18 sm:h-18 lg:w-24 lg:h-24 mx-auto rounded-full bg-transparent border-2 border-white flex items-center justify-center shadow-2xl backdrop-blur-sm"
@@ -239,7 +243,7 @@ const HomePage = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Enhanced Name Animation - CLOSER TO BIO */}
+              {/* Enhanced Name Animation - MOBILE OPTIMIZED */}
               <motion.h1
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -249,7 +253,7 @@ const HomePage = () => {
                   type: "spring",
                   bounce: 0.4
                 }}
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white px-2"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white px-2 mb-1 sm:mb-2"
               >
                 <motion.span
                   initial={{ display: "inline-block" }}
@@ -266,7 +270,7 @@ const HomePage = () => {
                 </motion.span>
               </motion.h1>
 
-              {/* Enhanced Bio Animation - CLOSER TO NAME */}
+              {/* Enhanced Bio Animation - MOBILE OPTIMIZED */}
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -275,7 +279,7 @@ const HomePage = () => {
                   duration: 0.8,
                   type: "spring"
                 }}
-                className="text-sm sm:text-base md:text-lg text-gray-300 px-4"
+                className="text-sm sm:text-base md:text-lg text-gray-300 px-4 mb-4 sm:mb-6"
               >
                 <motion.span
                   animate={{
@@ -298,14 +302,14 @@ const HomePage = () => {
                 </motion.span>
               </motion.p>
 
-              {/* Enhanced Portfolio Cards - ADJUSTED TOP MARGIN */}
+              {/* Enhanced Portfolio Cards - MOBILE OPTIMIZED SPACING */}
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto px-3 pt-2 sm:pt-3"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 max-w-4xl mx-auto px-3 pt-2 sm:pt-3 mb-4 sm:mb-6"
               >
-                {/* Enhanced Tech Developer Card */}
+                {/* Enhanced Tech Developer Card - MOBILE OPTIMIZED */}
                 <motion.div 
                   variants={cardVariants}
                   className="bg-gray-800/30 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-700/50 hover:bg-gray-800/50 transition-all duration-300 shadow-xl"
@@ -317,7 +321,7 @@ const HomePage = () => {
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="text-center">
-                    {/* Icon - Responsive sizing */}
+                    {/* Icon - Mobile optimized */}
                     <motion.div 
                       variants={cardElementVariants}
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4"
@@ -331,7 +335,7 @@ const HomePage = () => {
                       <Code size={20} className="text-white sm:w-6 sm:h-6" />
                     </motion.div>
                     
-                    {/* Title - Responsive text */}
+                    {/* Title - Mobile optimized */}
                     <motion.h3 
                       variants={cardElementVariants}
                       className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3"
@@ -339,7 +343,7 @@ const HomePage = () => {
                       Full Stack Developer
                     </motion.h3>
                     
-                    {/* Description - Better mobile formatting */}
+                    {/* Description - Mobile optimized */}
                     <motion.p 
                       variants={cardElementVariants}
                       className="text-gray-300 mb-3 sm:mb-4 text-sm leading-relaxed px-2"
@@ -347,7 +351,7 @@ const HomePage = () => {
                       Building innovative web solutions and data-driven applications using modern technologies and machine learning.
                     </motion.p>
 
-                    {/* Skills Tags - Better mobile spacing */}
+                    {/* Skills Tags - Mobile optimized */}
                     <motion.div 
                       variants={cardElementVariants}
                       className="flex flex-wrap gap-1 sm:gap-2 justify-center mb-4 sm:mb-6"
@@ -374,7 +378,7 @@ const HomePage = () => {
                       ))}
                     </motion.div>
                     
-                    {/* Button - Responsive sizing */}
+                    {/* Button - Mobile optimized */}
                     <motion.div
                       variants={buttonVariants}
                       whileHover={{ scale: 1.05 }}
@@ -397,7 +401,7 @@ const HomePage = () => {
                   </div>
                 </motion.div>
 
-                {/* Enhanced Artist/Content Creator Card */}
+                {/* Enhanced Artist/Content Creator Card - MOBILE OPTIMIZED */}
                 <motion.div 
                   variants={cardVariants}
                   className="bg-gray-800/30 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-700/50 hover:bg-gray-800/50 transition-all duration-300 shadow-xl"
@@ -409,7 +413,7 @@ const HomePage = () => {
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="text-center">
-                    {/* Icon - Responsive sizing */}
+                    {/* Icon - Mobile optimized */}
                     <motion.div 
                       variants={cardElementVariants}
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4"
@@ -423,7 +427,7 @@ const HomePage = () => {
                       <Palette size={20} className="text-white sm:w-6 sm:h-6" />
                     </motion.div>
                     
-                    {/* Title - Responsive text */}
+                    {/* Title - Mobile optimized */}
                     <motion.h3 
                       variants={cardElementVariants}
                       className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3"
@@ -431,7 +435,7 @@ const HomePage = () => {
                       Artist & Content Creator
                     </motion.h3>
                     
-                    {/* Description - Better mobile formatting */}
+                    {/* Description - Mobile optimized */}
                     <motion.p 
                       variants={cardElementVariants}
                       className="text-gray-300 mb-3 sm:mb-4 text-sm leading-relaxed px-2"
@@ -439,7 +443,7 @@ const HomePage = () => {
                       An Artist and a passionate Content Creator across YouTube, gaming, and music platforms building authentic communities.
                     </motion.p>
 
-                    {/* Creative Skills Tags - Better mobile spacing */}
+                    {/* Creative Skills Tags - Mobile optimized */}
                     <motion.div 
                       variants={cardElementVariants}
                       className="flex flex-wrap gap-1 sm:gap-2 justify-center mb-4 sm:mb-6"
@@ -466,7 +470,7 @@ const HomePage = () => {
                       ))}
                     </motion.div>
                     
-                    {/* Button - Responsive sizing */}
+                    {/* Button - Mobile optimized */}
                     <motion.div
                       variants={buttonVariants}
                       whileHover={{ scale: 1.05 }}
@@ -490,7 +494,7 @@ const HomePage = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Enhanced Social Links - Responsive spacing and touch targets */}
+              {/* Enhanced Social Links - MOBILE OPTIMIZED TOUCH TARGETS */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -499,7 +503,7 @@ const HomePage = () => {
                   duration: 0.8,
                   type: "spring"
                 }}
-                className="flex justify-center space-x-4 sm:space-x-6 px-4"
+                className="flex justify-center space-x-4 sm:space-x-6 px-4 safe-area-inset-bottom"
               >
                 {[
                   { icon: Github, href: socialLinks.github, color: "hover:text-gray-300", platform: "GitHub" },
@@ -513,7 +517,7 @@ const HomePage = () => {
                     target={social.href.startsWith('mailto') ? undefined : "_blank"}
                     rel={social.href.startsWith('mailto') ? undefined : "noopener noreferrer"}
                     onClick={() => handleSocialClick(social.platform, social.href)}
-                    className={`text-gray-400 ${social.color} transition-colors p-1.5`}
+                    className={`text-gray-400 ${social.color} transition-colors p-1.5 sm:p-2`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ 
