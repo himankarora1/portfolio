@@ -152,7 +152,7 @@ const HomePage = () => {
         image={contentData.meta.og_image}
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+<div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] px-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
         {/* Enhanced Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* More Floating Particles */}
