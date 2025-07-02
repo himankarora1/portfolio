@@ -2,73 +2,160 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#6366f1" />
-    <meta name="description" content="John Doe - Full Stack Developer & Creative Artist. Professional portfolio showcasing development projects and artistic work." />
-    <meta name="keywords" content="full stack developer, web developer, artist, musician, portfolio, react, javascript, creative" />
-    <meta name="author" content="John Doe" />
+    <!-- Enhanced viewport meta tag for better mobile control -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="John Doe - Developer & Artist Portfolio" />
-    <meta property="og:description" content="Explore my work as a Full Stack Developer and Creative Artist. Professional projects and artistic creations." />
+    <!-- Theme colors for different platforms -->
+    <meta name="theme-color" content="#ec4899" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1f2937" />
+    <meta name="msapplication-TileColor" content="#ec4899" />
+    
+    <!-- Enhanced SEO meta tags -->
+    <meta name="description" content="Himank Arora - Full Stack Developer & Creative Artist. Professional portfolio showcasing development projects, music creations, gaming content, and artistic work. Available for collaborations and projects." />
+    <meta name="keywords" content="Himank Arora, full stack developer, web developer, artist, musician, content creator, gamer, portfolio, react, javascript, python, creative, Boston developer, machine learning" />
+    <meta name="author" content="Himank Arora" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- Geo tags -->
+    <meta name="geo.region" content="US-MA" />
+    <meta name="geo.placename" content="Boston" />
+    
+    <!-- Enhanced Open Graph Meta Tags -->
+    <meta property="og:title" content="Himank Arora - Full Stack Developer & Creative Artist Portfolio" />
+    <meta property="og:description" content="Explore my work as a Full Stack Developer and Creative Artist. Professional projects, music creations, gaming content, and artistic collaborations." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://johndoe.dev" />
-    <meta property="og:image" content="https://johndoe.dev/og-image.jpg" />
+    <meta property="og:url" content="https://himankarora.dev" />
+    <meta property="og:image" content="https://himankarora.dev/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Himank Arora - Developer & Artist Portfolio" />
+    <meta property="og:site_name" content="Himank Arora Portfolio" />
+    <meta property="og:locale" content="en_US" />
     
-    <!-- Twitter Card Meta Tags -->
+    <!-- Enhanced Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="John Doe - Developer & Artist Portfolio" />
-    <meta name="twitter:description" content="Explore my work as a Full Stack Developer and Creative Artist." />
-    <meta name="twitter:image" content="https://johndoe.dev/twitter-image.jpg" />
+    <meta name="twitter:title" content="Himank Arora - Full Stack Developer & Creative Artist" />
+    <meta name="twitter:description" content="Professional portfolio showcasing development projects, music, gaming content, and creative work." />
+    <meta name="twitter:image" content="https://himankarora.dev/images/twitter-image.jpg" />
+    <meta name="twitter:image:alt" content="Himank Arora Portfolio Preview" />
+    <meta name="twitter:creator" content="@himankaroraa" />
+    <meta name="twitter:site" content="@himankaroraa" />
     
-    <!-- Favicon -->
+    <!-- Enhanced Favicon set -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ec4899" />
     
-    <!-- Preconnect to external domains for performance -->
+    <!-- DNS prefetch and preconnect for performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//www.youtube.com" />
+    <link rel="dns-prefetch" href="//i.ytimg.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Google Fonts -->
+    <!-- Optimized Google Fonts with font-display:swap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     
-    <!-- Structured Data -->
+    <!-- Enhanced Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "John Doe",
-      "jobTitle": ["Full Stack Developer", "Creative Artist"],
-      "url": "https://johndoe.dev",
+      "name": "Himank Arora",
+      "jobTitle": ["Full Stack Developer", "Creative Artist", "Content Creator", "Musician"],
+      "url": "https://himankarora.dev",
+      "image": "https://himankarora.dev/images/profile.jpg",
+      "email": "himankarora.dev@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Boston",
+        "addressRegion": "MA",
+        "addressCountry": "US"
+      },
       "sameAs": [
-        "https://github.com/johndoe",
-        "https://linkedin.com/in/johndoe",
-        "https://twitter.com/johndoe"
+        "https://github.com/himankarora",
+        "https://linkedin.com/in/himankarora",
+        "https://twitter.com/himankaroraa",
+        "https://instagram.com/himankarora1",
+        "https://youtube.com/@himankarora",
+        "https://youtube.com/@himankaroragaming"
       ],
-      "knowsAbout": ["Web Development", "React", "Node.js", "Music", "Digital Art"],
-      "description": "Full Stack Developer and Creative Artist specializing in modern web technologies and artistic expression."
+      "knowsAbout": [
+        "Web Development", 
+        "React", 
+        "Node.js", 
+        "Python", 
+        "Machine Learning", 
+        "Full Stack Development",
+        "Music Production", 
+        "Content Creation",
+        "Gaming",
+        "Digital Art"
+      ],
+      "description": "Full Stack Developer and Creative Artist specializing in modern web technologies, music production, gaming content, and artistic expression.",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Northeastern University"
+      }
     }
     </script>
     
-    <title>John Doe - Full Stack Developer & Creative Artist</title>
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <title>Himank Arora - Full Stack Developer & Creative Artist Portfolio</title>
     
     <style>
-      /* Critical CSS for faster loading */
+      /* Critical CSS for faster loading with mobile optimizations */
+      :root {
+        --primary-color: #ec4899;
+        --secondary-color: #8b5cf6;
+        --background-dark: #0f172a;
+        --text-light: #f8fafc;
+        --border-color: #374151;
+      }
+      
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        background-color: var(--background-dark);
+        color: var(--text-light);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        /* Prevent horizontal overflow on mobile */
+        width: 100%;
+        min-height: 100vh;
       }
       
       *, *::before, *::after {
         box-sizing: inherit;
       }
       
-      /* Loading screen */
+      /* Enhanced loading screen with mobile optimizations */
       .loading-screen {
         position: fixed;
         top: 0;
@@ -77,19 +164,45 @@
         bottom: 0;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         z-index: 9999;
         transition: opacity 0.5s ease-out;
+        /* Prevent scrolling while loading */
+        overflow: hidden;
+      }
+      
+      .loading-content {
+        text-align: center;
+        padding: 1rem;
       }
       
       .loading-spinner {
-        width: 50px;
-        height: 50px;
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-top: 4px solid white;
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
         border-radius: 50%;
         animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+      }
+      
+      /* Mobile-specific spinner size */
+      @media (max-width: 640px) {
+        .loading-spinner {
+          width: 32px;
+          height: 32px;
+          border-width: 2px;
+        }
+      }
+      
+      .loading-text {
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 500;
+        opacity: 0.9;
+        animation: fadeInOut 2s ease-in-out infinite;
       }
       
       @keyframes spin {
@@ -97,47 +210,310 @@
         100% { transform: rotate(360deg); }
       }
       
+      @keyframes fadeInOut {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+      
       /* Hide loading screen when React app loads */
       #root:not(:empty) + .loading-screen {
         opacity: 0;
         pointer-events: none;
       }
+      
+      /* Prevent flash of unstyled content */
+      #root {
+        min-height: 100vh;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      
+      #root.loaded {
+        opacity: 1;
+      }
+      
+      /* Mobile-specific optimizations */
+      @media (max-width: 768px) {
+        body {
+          /* Improve text rendering on mobile */
+          text-rendering: optimizeLegibility;
+          /* Prevent zoom on input focus for iOS */
+          -webkit-text-size-adjust: 100%;
+          /* Improve touch scrolling */
+          -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Ensure proper mobile viewport handling */
+        html, body {
+          width: 100%;
+          overflow-x: hidden;
+        }
+      }
+      
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        
+        .loading-spinner {
+          animation: none;
+          border: 3px solid rgba(255, 255, 255, 0.6);
+        }
+      }
+      
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .loading-screen {
+          background: #000;
+          color: #fff;
+        }
+        
+        .loading-spinner {
+          border-color: #fff;
+          border-top-color: transparent;
+        }
+      }
+      
+      /* Error state styling */
+      .error-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #dc2626;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        text-align: center;
+        z-index: 10000;
+      }
+      
+      .error-content {
+        max-width: 400px;
+      }
+      
+      .error-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      
+      .error-text {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+      
+      .error-button {
+        background: white;
+        color: #dc2626;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      
+      .error-button:hover {
+        background: #f3f4f6;
+      }
     </style>
   </head>
   <body>
+    <!-- Enhanced noscript with better styling -->
     <noscript>
-      <div style="padding: 2rem; text-align: center; background: #fee2e2; color: #991b1b; font-family: sans-serif;">
-        <h1>JavaScript Required</h1>
-        <p>This portfolio requires JavaScript to function properly. Please enable JavaScript in your browser settings to view the full experience.</p>
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        z-index: 9999;
+      ">
+        <div style="max-width: 500px;">
+          <h1 style="font-size: 2rem; margin-bottom: 1rem; font-weight: bold;">JavaScript Required</h1>
+          <p style="font-size: 1.125rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            This portfolio requires JavaScript to function properly. Please enable JavaScript in your browser settings to view the full experience.
+          </p>
+          <p style="font-size: 1rem; opacity: 0.9;">
+            If you continue to see this message, try refreshing the page or contact me at 
+            <a href="mailto:himankarora.dev@gmail.com" style="color: #fbbf24; text-decoration: underline;">
+              himankarora.dev@gmail.com
+            </a>
+          </p>
+        </div>
       </div>
     </noscript>
     
+    <!-- React app root -->
     <div id="root"></div>
     
-    <!-- Loading screen shown while React loads -->
+    <!-- Enhanced loading screen -->
     <div class="loading-screen">
-      <div class="loading-spinner"></div>
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Portfolio...</div>
+      </div>
     </div>
     
-    <!-- Performance monitoring (optional) -->
+    <!-- Enhanced performance monitoring and error handling -->
     <script>
-      // Simple performance monitoring
+      // Global error handler
+      window.addEventListener('error', function(event) {
+        console.error('Global error:', event.error);
+        showErrorScreen('Application Error', 'Something went wrong. Please refresh the page.');
+      });
+      
+      window.addEventListener('unhandledrejection', function(event) {
+        console.error('Unhandled promise rejection:', event.reason);
+        event.preventDefault();
+      });
+      
+      // Error screen function
+      function showErrorScreen(title, message) {
+        const errorHtml = `
+          <div class="error-container">
+            <div class="error-content">
+              <div class="error-title">${title}</div>
+              <div class="error-text">${message}</div>
+              <button class="error-button" onclick="window.location.reload()">
+                Refresh Page
+              </button>
+            </div>
+          </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', errorHtml);
+      }
+      
+      // Enhanced performance monitoring
       window.addEventListener('load', function() {
-        if ('performance' in window) {
-          const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-          console.log('Page load time:', loadTime + 'ms');
+        // Performance metrics
+        if ('performance' in window && 'timing' in performance) {
+          const timing = performance.timing;
+          const loadTime = timing.loadEventEnd - timing.navigationStart;
+          const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
+          
+          console.log('Performance Metrics:');
+          console.log('- Page load time:', loadTime + 'ms');
+          console.log('- DOM ready time:', domReady + 'ms');
+          
+          // Track slow loading
+          if (loadTime > 3000) {
+            console.warn('Slow page load detected:', loadTime + 'ms');
+          }
+        }
+        
+        // Connection information
+        if ('connection' in navigator) {
+          const connection = navigator.connection;
+          console.log('Connection info:', {
+            effectiveType: connection.effectiveType,
+            downlink: connection.downlink,
+            rtt: connection.rtt
+          });
         }
       });
       
-      // Remove loading screen after React mounts
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-          const loadingScreen = document.querySelector('.loading-screen');
-          if (loadingScreen) {
+      // Remove loading screen with better timing
+      let loadingRemoved = false;
+      
+      function removeLoadingScreen() {
+        if (loadingRemoved) return;
+        loadingRemoved = true;
+        
+        const loadingScreen = document.querySelector('.loading-screen');
+        const root = document.getElementById('root');
+        
+        if (loadingScreen && root && root.children.length > 0) {
+          root.classList.add('loaded');
+          setTimeout(() => {
             loadingScreen.style.display = 'none';
-          }
-        }, 1000);
+          }, 300);
+        }
+      }
+      
+      // Multiple fallbacks to ensure loading screen is removed
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(removeLoadingScreen, 1000);
       });
+      
+      // Observer to watch for React app mounting
+      const observer = new MutationObserver(function(mutations) {
+        const root = document.getElementById('root');
+        if (root && root.children.length > 0) {
+          removeLoadingScreen();
+          observer.disconnect();
+        }
+      });
+      
+      observer.observe(document.getElementById('root'), {
+        childList: true,
+        subtree: true
+      });
+      
+      // Final fallback
+      setTimeout(removeLoadingScreen, 5000);
+      
+      // Mobile-specific optimizations
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        // Prevent zoom on input focus (iOS Safari)
+        document.addEventListener('touchstart', function() {}, {passive: true});
+        
+        // Optimize scrolling performance
+        document.addEventListener('touchmove', function(e) {
+          // Allow default behavior for better performance
+        }, {passive: true});
+      }
+      
+      // Network status monitoring
+      if ('navigator' in window && 'onLine' in navigator) {
+        function updateNetworkStatus() {
+          const status = navigator.onLine ? 'online' : 'offline';
+          console.log('Network status:', status);
+          
+          if (!navigator.onLine) {
+            // Show offline notification if needed
+            console.warn('Application is offline');
+          }
+        }
+        
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+      }
+      
+      // Preload critical resources
+      function preloadCriticalResources() {
+        const criticalImages = [
+          '/images/mewithguitar.jpg',
+          '/images/itsrhiney.jpg'
+        ];
+        
+        criticalImages.forEach(src => {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = src;
+          document.head.appendChild(link);
+        });
+      }
+      
+      // Start preloading after initial load
+      setTimeout(preloadCriticalResources, 1000);
     </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Mail, 
@@ -27,7 +27,9 @@ import {
   Globe,
   Mic,
   Edit,
-  Users
+  Users,
+  Menu,
+  X
 } from 'lucide-react';
 import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
@@ -43,6 +45,7 @@ const XIcon = ({ size = 24, className = "" }) => (
 const ArtistContact = () => {
   const location = useLocation();
   const analytics = useAnalytics();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Get data from content manager
   const personalInfo = contentData.personal;
@@ -54,6 +57,14 @@ const ArtistContact = () => {
     subject: '',
     message: ''
   });
+
+  // Mobile menu items
+  const mobileMenuItems = [
+    { id: 'home', label: 'Home', icon: Home, path: '/artist' },
+    { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
+    { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
+    { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' }
+  ];
 
   const handleInputChange = (e) => {
     setFormData({
@@ -77,6 +88,7 @@ const ArtistContact = () => {
 
   // Analytics event handlers
   const handleNavigationClick = (section) => {
+    setIsMobileMenuOpen(false);
     if (analytics?.trackPortfolioEvents) {
       analytics.trackPortfolioEvents.sectionView(section);
     }
@@ -233,90 +245,130 @@ const ArtistContact = () => {
       />
 
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
-        {/* Navigation */}
+        {/* Navigation - FIXED WITH SEPARATOR */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
-          <div className="max-w-none mx-auto px-2 sm:px-4 lg:px-6">
-            <div className="flex justify-between items-center h-20">
-              <Link to="/artist" className="flex items-center space-x-4 group transition-all duration-300 hover:scale-105">
-                <div className="w-12 h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-pink-500/30 group-hover:border-pink-400 transition-all duration-300">
-                  <span className="text-white font-bold text-lg tracking-tight">HA</span>
+          <div className="max-w-none mx-auto px-3 sm:px-4 lg:px-6">
+            <div className="flex justify-between items-center h-16 sm:h-20">
+              <Link 
+                to="/artist" 
+                className="flex items-center space-x-3 sm:space-x-4 group transition-all duration-300 hover:scale-105"
+              >
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-pink-500/30 group-hover:border-pink-400 transition-all duration-300">
+                  <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-white tracking-tight leading-none bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                  <span className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-none bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
                     {personalInfo.name}
                   </span>
                 </div>
               </Link>
 
-              <div className="flex items-center space-x-6">
-                {/* Main Navigation */}
-                <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 sm:space-x-6">
+                {/* Desktop Navigation - Hidden on mobile */}
+                <div className="hidden md:flex items-center space-x-4">
+                  {mobileMenuItems.map((item) => (
+                    <Link 
+                      key={item.id}
+                      to={item.path}
+                      onClick={() => handleNavigationClick(item.id)}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
+                        isActive(item.path) 
+                          ? 'bg-white/10 text-white border border-white/20' 
+                          : 'text-white hover:bg-white/10'
+                      }`}
+                    >
+                      <item.icon size={18} />
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* FIXED: Added Divider for Desktop */}
+                <div className="hidden md:block h-8 w-px bg-white/20"></div>
+
+                {/* Portfolio Hub Button - Desktop */}
+                <div className="hidden md:block">
                   <Link 
-                    to="/artist" 
-                    onClick={() => handleNavigationClick('artist-home')}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
-                      isActive('/artist') ? 'bg-white/10 text-white border border-white/20' : 'text-white hover:bg-white/10'
-                    }`}
+                    to="/" 
+                    onClick={() => handleNavigationClick('portfolio-hub')}
+                    className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-pink-500/20 hover:to-purple-600/20 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg"
                   >
-                    <Home size={18} />
-                    <span>Home</span>
-                  </Link>
-                  <Link 
-                    to="/artist/about" 
-                    onClick={() => handleNavigationClick('artist-about')}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
-                      isActive('/artist/about') ? 'bg-white/10 text-white border border-white/20' : 'text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <User size={18} />
-                    <span>About Me</span>
-                  </Link>
-                  <Link 
-                    to="/artist/work" 
-                    onClick={() => handleNavigationClick('artist-work')}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
-                      isActive('/artist/work') ? 'bg-white/10 text-white border border-white/20' : 'text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <Brush size={18} />
-                    <span>My Work</span>
-                  </Link>
-                  <Link 
-                    to="/artist/contact" 
-                    onClick={() => handleNavigationClick('artist-contact')}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
-                      isActive('/artist/contact') ? 'bg-white/10 text-white border border-white/20' : 'text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <Mail size={18} />
-                    <span>Contact</span>
+                    <Globe size={18} />
+                    <span>Portfolio Hub</span>
                   </Link>
                 </div>
 
-                {/* Divider */}
-                <div className="h-8 w-px bg-white/20"></div>
-
-                {/* Portfolio Hub Button */}
-                <Link 
-                  to="/" 
-                  onClick={() => handleNavigationClick('portfolio-hub')}
-                  className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-pink-500/20 hover:to-purple-600/20 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg"
+                {/* Mobile Hamburger Menu */}
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="md:hidden p-2 rounded-lg bg-gray-800/50 border border-gray-600/30 text-gray-300 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300"
                 >
-                  <Globe size={18} />
-                  <span>Portfolio Hub</span>
-                </Link>
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
               </div>
             </div>
           </div>
+
+          {/* Mobile Dropdown Menu */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/30"
+              >
+                <div className="px-3 py-4 space-y-2">
+                  {mobileMenuItems.map((item) => (
+                    <motion.div
+                      key={item.id}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Link
+                        to={item.path}
+                        onClick={() => handleNavigationClick(item.id)}
+                        className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
+                          isActive(item.path)
+                            ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/25'
+                            : 'text-gray-300 hover:text-pink-400 hover:bg-gray-800/50'
+                        }`}
+                      >
+                        <item.icon size={18} />
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  {/* Portfolio Hub Link for Mobile */}
+                  <motion.div
+                    className="pt-2 mt-2 border-t border-gray-700/30"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Link
+                      to="/"
+                      onClick={() => handleNavigationClick('portfolio-hub')}
+                      className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-pink-400 hover:bg-gray-800/50 transition-all duration-300"
+                    >
+                      <Globe size={18} />
+                      <span className="font-medium">Portfolio Hub</span>
+                    </Link>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </nav>
 
-        {/* Animated Background */}
+        {/* Animated Background - Mobile Optimized */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating Elements */}
-          {[...Array(25)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-20"
+              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-20"
               animate={{
                 y: [-20, -120],
                 x: [Math.random() * 150 - 75, Math.random() * 150 - 75],
@@ -336,9 +388,9 @@ const ArtistContact = () => {
             />
           ))}
 
-          {/* Gradient Orbs */}
+          {/* Gradient Orbs - Responsive */}
           <motion.div 
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.1, 0.2, 0.1]
@@ -351,27 +403,31 @@ const ArtistContact = () => {
           />
         </div>
 
-        {/* Main Content */}
+        {/* Main Content - FIXED SPACING */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 pt-32 pb-12 px-4 sm:px-6 lg:px-8"
+          className="relative z-10 px-3 sm:px-4 lg:px-6"
+          style={{
+            paddingTop: '8rem', // INCREASED from 5rem to 8rem (128px) for more spacing
+            paddingBottom: '2rem'
+          }}
         >
           <div className="max-w-7xl mx-auto">
             
-            {/* Header */}
-            <motion.div variants={itemVariants} className="text-center mb-16">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            {/* Header - FIXED SPACING */}
+            <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
                 Let's <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Create Together</span>
               </h1>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
                 Ready to collaborate, book a session, or just chat about creative projects? I'm always excited to connect with fellow creators and explore new opportunities.
               </p>
             </motion.div>
 
-            {/* Updated Contact Methods with Better Design */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {/* Updated Contact Methods - Mobile Responsive */}
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
               {contactMethods.map((method, index) => (
                 <motion.a
                   key={index}
@@ -383,107 +439,107 @@ const ArtistContact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className={`${method.bgColor} backdrop-blur-sm border ${method.borderColor} rounded-2xl p-6 hover:border-white/40 transition-all group cursor-pointer`}
+                  className={`${method.bgColor} backdrop-blur-sm border ${method.borderColor} rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all group cursor-pointer`}
                 >
-                  <div className={`w-12 h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-all shadow-lg`}>
-                    <method.icon size={24} className="text-white" />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all shadow-lg`}>
+                    <method.icon size={20} className="text-white sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{method.title}</h3>
-                  <p className="text-cyan-300 font-semibold mb-2">{method.value}</p>
-                  <p className="text-gray-300 text-sm">{method.description}</p>
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2">{method.title}</h3>
+                  <p className="text-cyan-300 font-semibold mb-2 text-sm sm:text-base">{method.value}</p>
+                  <p className="text-gray-300 text-xs sm:text-sm">{method.description}</p>
                 </motion.a>
               ))}
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
               
               {/* Left Column */}
-              <motion.div variants={itemVariants} className="space-y-8">
+              <motion.div variants={itemVariants} className="space-y-6 sm:space-y-8">
                 
                 {/* Quick Info */}
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-white mb-6">
+                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                     Quick <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Info</span>
                   </h3>
-                  <div className="space-y-6">
-                    <div className="flex items-center space-x-3 text-gray-300">
-                      <Clock size={18} className="text-pink-400" />
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                      <Clock size={16} className="text-pink-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Response time: 24-48 hours</span>
                     </div>
-                    <div className="flex items-center space-x-3 text-gray-300">
-                      <MapPin size={18} className="text-purple-400" />
+                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                      <MapPin size={16} className="text-purple-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Based in {personalInfo.location}</span>
                     </div>
-                    <div className="flex items-center space-x-3 text-gray-300">
-                      <Calendar size={18} className="text-cyan-400" />
+                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                      <Calendar size={16} className="text-cyan-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Available for projects worldwide</span>
                     </div>
-                    <div className="flex items-center space-x-3 text-gray-300">
-                      <Mail size={18} className="text-green-400" />
+                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                      <Mail size={16} className="text-green-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Professional collaborations welcome</span>
                     </div>
-                    <div className="flex items-center space-x-3 text-gray-300">
-                      <Star size={18} className="text-yellow-400" />
+                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                      <Star size={16} className="text-yellow-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Quality-focused content creation</span>
                     </div>
-                    <div className="flex items-center space-x-3 text-gray-300">
-                      <Zap size={18} className="text-orange-400" />
+                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                      <Zap size={16} className="text-orange-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Fast turnaround times</span>
                     </div>
                   </div>
                 </div>
 
-                {/* What I Offer - Updated */}
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-white mb-6">
+                {/* What I Offer - Mobile Responsive */}
+                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                     What I <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Offer</span>
                   </h3>
-                  <div className="grid grid-cols-1 gap-4 mb-7">
+                  <div className="grid grid-cols-1 gap-3 sm:gap-4 mb-6 sm:mb-7">
                     {services.map((service, index) => (
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 + index * 0.1 }}
-                        className="flex items-center space-x-4 p-4 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all"
+                        className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all"
                       >
-                        <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                          <service.icon size={20} className="text-white" />
+                        <div className={`w-10 h-10 sm:w-12 sm:h-12 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                          <service.icon size={18} className="text-white sm:w-5 sm:h-5" />
                         </div>
-                        <span className="text-white font-medium">{service.label}</span>
+                        <span className="text-white font-medium text-sm sm:text-base">{service.label}</span>
                       </motion.div>
                     ))}
                   </div>
                   
                   {/* Updated Pricing Info */}
-                  <div className="border-t border-gray-600/30 pt-6 mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-4">Pricing & Packages</h4>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center text-gray-300">
+                  <div className="border-t border-gray-600/30 pt-4 sm:pt-6 mb-4 sm:mb-6">
+                    <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Pricing & Packages</h4>
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
                         <span>• Live Gigs & Performances</span>
                         <span className="text-green-400 font-medium">From $300</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300">
+                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
                         <span>• Gaming Stream Collaborations</span>
                         <span className="text-green-400 font-medium">From $100</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300">
+                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
                         <span>• Music Production</span>
                         <span className="text-green-400 font-medium">From $200</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300">
+                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
                         <span>• Audio & Video Editing</span>
                         <span className="text-green-400 font-medium">From $150</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300">
+                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
                         <span>• Brand Collaborations</span>
                         <span className="text-green-400 font-medium">Custom Quote</span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="border-t border-gray-600/30 pt-6">
-                    <p className="text-gray-300 text-sm leading-relaxed">
+                  <div className="border-t border-gray-600/30 pt-4 sm:pt-6">
+                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                       I specialize in creating authentic, engaging content across multiple platforms. From live performances to gaming content and music production, I bring passion and professionalism to every project. All packages include revisions and source files.
                     </p>
                   </div>
@@ -491,18 +547,18 @@ const ArtistContact = () => {
               </motion.div>
 
               {/* Right Column */}
-              <motion.div variants={itemVariants} className="space-y-8">
+              <motion.div variants={itemVariants} className="space-y-6 sm:space-y-8">
                 
-                {/* Contact Form */}
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8">
-                  <h2 className="text-3xl font-bold text-white mb-8">
+                {/* Contact Form - Mobile Responsive */}
+                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">
                     Send Me a <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Message</span>
                   </h2>
                   
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       <div>
-                        <label className="block text-white text-base font-semibold mb-3">
+                        <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
                           Name *
                         </label>
                         <input
@@ -511,13 +567,13 @@ const ArtistContact = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base"
                           placeholder="Your full name"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-white text-base font-semibold mb-3">
+                        <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
                           Email *
                         </label>
                         <input
@@ -526,14 +582,14 @@ const ArtistContact = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base"
                           placeholder="your.email@example.com"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-white text-base font-semibold mb-3">
+                      <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
                         Subject *
                       </label>
                       <select
@@ -541,7 +597,7 @@ const ArtistContact = () => {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-4 py-4 rounded-xl bg-gray-900/50 text-white border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all"
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base"
                       >
                         <option value="" className="text-gray-400">Select a subject</option>
                         <option value="live-performance" className="text-gray-900">Live Gigs & Performances</option>
@@ -555,7 +611,7 @@ const ArtistContact = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-white text-base font-semibold mb-3">
+                      <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
                         Message *
                       </label>
                       <textarea
@@ -563,30 +619,30 @@ const ArtistContact = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
-                        rows={8}
-                        className="w-full px-4 py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none resize-none transition-all"
+                        rows={6}
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none resize-none transition-all text-sm sm:text-base"
                         placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       />
                     </div>
                     
                     <motion.button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-pink-500/25 flex items-center justify-center space-x-2"
+                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-pink-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <Send size={18} />
+                      <Send size={16} className="sm:w-[18px] sm:h-[18px]" />
                       <span>Send Message</span>
                     </motion.button>
                   </form>
                 </div>
 
-                {/* Connect on Social */}
-                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-white mb-6">
+                {/* Connect on Social - Mobile Responsive */}
+                <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                     Connect on <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Social</span>
                   </h3>
-                  <div className="space-y-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {socialPlatforms.map((platform, index) => (
                       <motion.a
                         key={index}
@@ -594,19 +650,19 @@ const ArtistContact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => handleSocialClick(platform.name, platform.url)}
-                        className="flex items-center justify-between p-4 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all group"
+                        className="flex items-center justify-between p-3 sm:p-4 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all group"
                         whileHover={{ scale: 1.02 }}
                       >
                         <div className="flex items-center space-x-3">
-                          <div className={`w-10 h-10 ${platform.color} rounded-lg flex items-center justify-center`}>
-                            <platform.icon size={18} className="text-white" />
+                          <div className={`w-8 h-8 sm:w-10 sm:h-10 ${platform.color} rounded-lg flex items-center justify-center`}>
+                            <platform.icon size={16} className="text-white sm:w-[18px] sm:h-[18px]" />
                           </div>
                           <div>
-                            <div className="text-white font-semibold">{platform.name}</div>
-                            <div className="text-gray-400 text-sm">{platform.handle}</div>
+                            <div className="text-white font-semibold text-sm sm:text-base">{platform.name}</div>
+                            <div className="text-gray-400 text-xs sm:text-sm">{platform.handle}</div>
                           </div>
                         </div>
-                        <div className="text-purple-400 font-semibold text-sm">
+                        <div className="text-purple-400 font-semibold text-xs sm:text-sm">
                           {platform.followers}
                         </div>
                       </motion.a>
@@ -618,28 +674,28 @@ const ArtistContact = () => {
           </div>
         </motion.div>
 
-        {/* Footer */}
+        {/* Footer - Mobile Responsive */}
         <footer className="bg-gray-900/80 backdrop-blur-sm border-t border-white/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
               {/* Brand Section */}
               <div className="md:col-span-2">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-12 h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-lg tracking-tight">HA</span>
+                <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
                       {personalInfo.name}
                     </h3>
-                    <p className="text-gray-400 text-sm">Content Creator & Artist</p>
+                    <p className="text-gray-400 text-xs sm:text-sm">Content Creator & Artist</p>
                   </div>
                 </div>
-                <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
+                <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
                   Ready to collaborate? Let's create something amazing together. 
                   I'm always excited to work on new projects and creative ideas.
                 </p>
-                <div className="flex space-x-4">
+                <div className="flex space-x-3 sm:space-x-4">
                   {socialPlatforms.map((platform, index) => (
                     <motion.a
                       key={index}
@@ -647,10 +703,10 @@ const ArtistContact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick(platform.name, platform.url)}
-                      className={`w-10 h-10 ${platform.color} rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all`}
+                      className={`w-8 h-8 sm:w-10 sm:h-10 ${platform.color} rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all`}
                       whileHover={{ scale: 1.1 }}
                     >
-                      <platform.icon size={18} />
+                      <platform.icon size={16} className="sm:w-[18px] sm:h-[18px]" />
                     </motion.a>
                   ))}
                 </div>
@@ -658,55 +714,27 @@ const ArtistContact = () => {
 
               {/* Quick Links */}
               <div>
-                <h4 className="text-white font-semibold mb-6">Quick Links</h4>
-                <ul className="space-y-3">
-                  <li>
-                    <Link 
-                      to="/artist"
-                      onClick={() => handleNavigationClick('artist-home')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
-                    >
-                      <Home size={16} />
-                      <span>Home</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/artist/about"
-                      onClick={() => handleNavigationClick('artist-about')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
-                    >
-                      <User size={16} />
-                      <span>About Me</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/artist/work"
-                      onClick={() => handleNavigationClick('artist-work')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
-                    >
-                      <Brush size={16} />
-                      <span>My Work</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/artist/contact"
-                      onClick={() => handleNavigationClick('artist-contact')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
-                    >
-                      <Mail size={16} />
-                      <span>Contact</span>
-                    </Link>
-                  </li>
+                <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Quick Links</h4>
+                <ul className="space-y-2 sm:space-y-3">
+                  {mobileMenuItems.map((item) => (
+                    <li key={item.id}>
+                      <Link 
+                        to={item.path}
+                        onClick={() => handleNavigationClick(item.id)}
+                        className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      >
+                        <item.icon size={14} className="sm:w-4 sm:h-4" />
+                        <span>{item.label}</span>
+                      </Link>
+                    </li>
+                  ))}
                   <li>
                     <Link 
                       to="/"
                       onClick={() => handleNavigationClick('portfolio-hub')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
+                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
-                      <Globe size={16} />
+                      <Globe size={14} className="sm:w-4 sm:h-4" />
                       <span>Portfolio Hub</span>
                     </Link>
                   </li>
@@ -715,15 +743,15 @@ const ArtistContact = () => {
 
               {/* Contact Methods */}
               <div>
-                <h4 className="text-white font-semibold mb-6">Get In Touch</h4>
-                <ul className="space-y-3">
+                <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Get In Touch</h4>
+                <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <a 
                       href={`mailto:${personalInfo.email}`}
                       onClick={() => handleSocialClick('Email', personalInfo.email)}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
+                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
-                      <Mail size={16} />
+                      <Mail size={14} className="sm:w-4 sm:h-4" />
                       <span>Email Me</span>
                     </a>
                   </li>
@@ -733,27 +761,27 @@ const ArtistContact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('Discord', contentData.social.discord)}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2"
+                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
-                      <MessageSquare size={16} />
+                      <MessageSquare size={14} className="sm:w-4 sm:h-4" />
                       <span>Join Discord</span>
                     </a>
                   </li>
                   <li>
-                    <span className="text-gray-400 flex items-center space-x-2">
-                      <Clock size={16} />
+                    <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
+                      <Clock size={14} className="sm:w-4 sm:h-4" />
                       <span>24-48h Response</span>
                     </span>
                   </li>
                   <li>
-                    <span className="text-gray-400 flex items-center space-x-2">
-                      <MapPin size={16} />
+                    <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
+                      <MapPin size={14} className="sm:w-4 sm:h-4" />
                       <span>{personalInfo.location}</span>
                     </span>
                   </li>
                   <li>
-                    <span className="text-gray-400 flex items-center space-x-2">
-                      <Globe size={16} />
+                    <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
+                      <Globe size={14} className="sm:w-4 sm:h-4" />
                       <span>Available Remotely</span>
                     </span>
                   </li>
@@ -762,11 +790,11 @@ const ArtistContact = () => {
             </div>
 
             {/* Bottom Section with Privacy Policy & Terms */}
-            <div className="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm mb-4 md:mb-0">
+            <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center">
+              <p className="text-gray-400 text-xs sm:text-sm mb-4 md:mb-0">
                 © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
               </p>
-              <div className="flex items-center space-x-6 text-sm text-gray-400">
+              <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-400">
                 <Link to="/" className="hover:text-pink-400 transition-colors">
                   Privacy Policy
                 </Link>
@@ -775,7 +803,7 @@ const ArtistContact = () => {
                 </Link>
                 <span className="flex items-center space-x-1">
                   <span>Made with</span>
-                  <Heart size={14} className="text-pink-400" />
+                  <Heart size={12} className="text-pink-400 sm:w-3.5 sm:h-3.5" />
                   <span>and creativity</span>
                 </span>
               </div>

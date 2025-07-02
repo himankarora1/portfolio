@@ -1,0 +1,162 @@
+{
+  "name": "Himank Arora - Developer & Artist Portfolio",
+  "short_name": "Himank Portfolio",
+  "description": "Full Stack Developer and Creative Artist portfolio showcasing professional projects, music creations, gaming content, and artistic work.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#ec4899",
+  "background_color": "#0f172a",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  
+  "categories": [
+    "portfolio",
+    "developer",
+    "artist",
+    "music",
+    "gaming",
+    "creative"
+  ],
+  
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Tech Portfolio",
+      "short_name": "Tech",
+      "description": "View my development projects and technical expertise",
+      "url": "/tech",
+      "icons": [
+        {
+          "src": "/icons/tech-shortcut-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Artist Portfolio",
+      "short_name": "Artist",
+      "description": "Explore my creative work, music, and gaming content",
+      "url": "/artist",
+      "icons": [
+        {
+          "src": "/icons/artist-shortcut-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch for collaborations and projects",
+      "url": "/artist/contact",
+      "icons": [
+        {
+          "src": "/icons/contact-shortcut-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-homepage.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Portfolio homepage on desktop"
+    },
+    {
+      "src": "/screenshots/mobile-homepage.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Portfolio homepage on mobile"
+    },
+    {
+      "src": "/screenshots/tech-portfolio.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Technical portfolio section"
+    },
+    {
+      "src": "/screenshots/artist-portfolio.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Artist portfolio section"
+    }
+  ],
+  
+  "prefer_related_applications": false,
+  
+  "protocol_handlers": [
+    {
+      "protocol": "mailto",
+      "url": "/contact?email=%s"
+    }
+  ],
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "text/plain": [".txt"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+  
+  "share_target": {
+    "action": "/contact",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

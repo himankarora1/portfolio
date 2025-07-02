@@ -141,25 +141,6 @@ const ArtistWelcome = ({ onComplete }) => {
     }
   };
 
-  const sparkleVariants = {
-    hidden: {
-      scale: 0,
-      rotate: 0,
-      opacity: 0
-    },
-    visible: (index) => ({
-      scale: [0, 1, 0],
-      rotate: [0, 180, 360],
-      opacity: [0, 1, 0],
-      transition: {
-        duration: 2,
-        repeat: Infinity,
-        delay: 0.5 + index * 0.2,
-        ease: "easeInOut"
-      }
-    })
-  };
-
   const titleVariants = {
     hidden: { 
       y: 60,
@@ -243,22 +224,6 @@ const ArtistWelcome = ({ onComplete }) => {
     }
   };
 
-  const progressDotVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0 
-    },
-    visible: (index) => ({
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-        delay: index * 0.1
-      }
-    })
-  };
-
   const creativityIcons = [
     { 
       Icon: Music, 
@@ -289,20 +254,20 @@ const ArtistWelcome = ({ onComplete }) => {
         exit="exit"
         className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-slate-900 overflow-hidden"
       >
-        {/* Skip Intro Button - Bottom Right */}
+        {/* Skip Intro Button - Mobile Responsive */}
         <motion.button
           onClick={handleSkipIntro}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="fixed bottom-8 right-8 z-[9999] group cursor-pointer pointer-events-auto"
+          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] group cursor-pointer pointer-events-auto"
           style={{ pointerEvents: 'auto' }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <div className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300">
             <motion.span 
-              className="text-sm font-medium tracking-wide"
+              className="text-xs sm:text-sm font-medium tracking-wide"
               animate={{ 
                 opacity: [0.7, 1, 0.7]
               }}
@@ -333,7 +298,7 @@ const ArtistWelcome = ({ onComplete }) => {
               }}
               className="group-hover:text-pink-400 transition-colors duration-300"
             >
-              <ArrowRight size={16} />
+              <ArrowRight size={14} className="sm:w-4 sm:h-4" />
             </motion.div>
           </div>
           
@@ -346,11 +311,11 @@ const ArtistWelcome = ({ onComplete }) => {
           />
         </motion.button>
 
-        {/* Dynamic Background Elements */}
+        {/* Dynamic Background Elements - Mobile Optimized */}
         <div className="absolute inset-0">
-          {/* Animated Gradient Orbs - More subtle */}
+          {/* Animated Gradient Orbs - Responsive sizes */}
           <motion.div 
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{
               opacity: [0, 0.15, 0.1],
@@ -366,7 +331,7 @@ const ArtistWelcome = ({ onComplete }) => {
             }}
           />
           <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-cyan-500/8 to-blue-500/8 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-cyan-500/8 to-blue-500/8 rounded-full blur-3xl"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{
               opacity: [0, 0.12, 0.08],
@@ -382,11 +347,11 @@ const ArtistWelcome = ({ onComplete }) => {
             }}
           />
 
-          {/* Floating Particles - More subtle */}
-          {[...Array(20)].map((_, i) => (
+          {/* Floating Particles - Mobile Optimized */}
+          {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full"
+              className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full"
               initial={{ opacity: 0, scale: 0 }}
               animate={{
                 opacity: [0, 0.4, 0],
@@ -408,10 +373,10 @@ const ArtistWelcome = ({ onComplete }) => {
           ))}
         </div>
 
-        {/* Main Content - Fixed spacing with proper positioning */}
-        <div className="relative z-10 w-full h-full flex items-center justify-center">
+        {/* Main Content - Mobile Responsive with ORIGINAL SPACING */}
+        <div className="relative z-10 w-full h-full flex items-center justify-center px-4 sm:px-6">
           
-          {/* Welcome Text Sequence - Always centered */}
+          {/* Welcome Text Sequence - Mobile Responsive */}
           <AnimatePresence mode="wait">
             {currentWordIndex >= 0 && !textSequenceComplete && (
               <motion.div
@@ -428,7 +393,7 @@ const ArtistWelcome = ({ onComplete }) => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 text-center px-4"
                     style={{
                       backgroundSize: "200% 100%"
                     }}
@@ -440,7 +405,7 @@ const ArtistWelcome = ({ onComplete }) => {
             )}
           </AnimatePresence>
 
-          {/* Logo Animation - Starts centered, moves to final top position */}
+          {/* Logo Animation - Mobile Responsive with ORIGINAL SPACING */}
           <AnimatePresence>
             {showLogo && (
               <motion.div
@@ -452,63 +417,69 @@ const ArtistWelcome = ({ onComplete }) => {
                 animate={{ 
                   opacity: 1,
                   scale: 1,
-                  y: logoShouldMoveUp ? -160 : 0 // Move up based on independent trigger
+                  y: logoShouldMoveUp ? -160 : 0 // KEEP ORIGINAL SPACING for desktop
                 }}
                 transition={{
-                  opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // Faster
-                  scale: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // Faster
-                  y: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } // Much faster move up
+                  opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
+                  scale: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
+                  y: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  // Responsive Y offset using CSS transforms for mobile - CLOSER spacing
+                  transform: logoShouldMoveUp ? 'translateY(max(-80px, -160px))' : 'translateY(0)'
+                }}
               >
                 <div className="relative">
                   <motion.div 
-                    className="w-32 h-32 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 p-1 shadow-2xl"
+                    className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 p-1 shadow-2xl"
                     animate={{
                       rotate: [0, 360],
                       scale: [1, 1.1, 1]
                     }}
                     transition={{
-                      rotate: { duration: 2, repeat: Infinity, ease: "linear" }, // Faster rotation
-                      scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" } // Faster scale
+                      rotate: { duration: 2, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
                     }}
                   >
                     <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                      <span className="text-4xl font-bold text-transparent bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text">
+                      <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text">
                         HA
                       </span>
                     </div>
                   </motion.div>
-
-                  {/* Removed sparkle effects */}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Title Animation - Appears directly in its final position */}
+          {/* Title Animation - Mobile Responsive with ORIGINAL SPACING */}
           <AnimatePresence>
             {showTitle && (
               <motion.div
                 initial={{ 
                   opacity: 0,
-                  y: -20, // Final position matching screenshot
+                  y: -20, // KEEP ORIGINAL positioning
                   scale: 0.9
                 }}
                 animate={{ 
                   opacity: 1,
-                  y: -20, // Stay in final position
+                  y: -20, // KEEP ORIGINAL positioning
                   scale: 1
                 }}
                 transition={{
-                  opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }, // Faster
-                  y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }, // Faster
-                  scale: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] } // Faster
+                  opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
+                  y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
+                  scale: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  // Responsive positioning using CSS - CLOSER spacing
+                  transform: 'translateY(max(-5px, -20px))'
+                }}
               >
                 <motion.h1 
-                  className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 text-center px-4"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
                   }}
@@ -527,25 +498,29 @@ const ArtistWelcome = ({ onComplete }) => {
             )}
           </AnimatePresence>
 
-          {/* Icons Animation - Appears directly in its final position */}
+          {/* Icons Animation - Mobile Responsive with ORIGINAL SPACING */}
           <AnimatePresence>
             {showIcons && (
               <motion.div
                 initial={{ 
                   opacity: 0,
-                  y: 110 // Final position matching screenshot
+                  y: 110 // KEEP ORIGINAL spacing for desktop
                 }}
                 animate={{ 
                   opacity: 1,
-                  y: 110 // Stay in final position
+                  y: 110 // KEEP ORIGINAL spacing for desktop
                 }}
                 transition={{
-                  opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }, // Faster
-                  y: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } // Faster
+                  opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
+                  y: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  // Responsive positioning using CSS - CLOSER spacing
+                  transform: 'translateY(max(60px, 110px))'
+                }}
               >
-                <div className="flex justify-center items-center space-x-12">
+                <div className="flex justify-center items-center space-x-6 sm:space-x-8 lg:space-x-12">
                   {creativityIcons.map(({ Icon, color, label }, index) => (
                     <motion.div
                       key={label}
@@ -553,10 +528,10 @@ const ArtistWelcome = ({ onComplete }) => {
                       initial="hidden"
                       animate="visible"
                       custom={index}
-                      className="flex flex-col items-center space-y-3"
+                      className="flex flex-col items-center space-y-2 sm:space-y-3"
                     >
                       <motion.div 
-                        className={`w-16 h-16 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center shadow-xl`}
+                        className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center shadow-xl`}
                         whileHover={{ 
                           scale: 1.2, 
                           rotate: 10,
@@ -574,11 +549,11 @@ const ArtistWelcome = ({ onComplete }) => {
                           }
                         }}
                       >
-                        <Icon size={28} className="text-white" />
+                        <Icon size={20} className="text-white sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
                       </motion.div>
                       
                       <motion.span 
-                        className="text-white font-medium text-sm"
+                        className="text-white font-medium text-xs sm:text-sm"
                         variants={iconLabelVariants}
                         initial="hidden"
                         animate="visible"
@@ -593,25 +568,29 @@ const ArtistWelcome = ({ onComplete }) => {
             )}
           </AnimatePresence>
 
-          {/* Final Text - Appears directly in its final position */}
+          {/* Final Text - Mobile Responsive with ORIGINAL SPACING */}
           <AnimatePresence>
             {showFinalText && (
               <motion.div
                 initial={{ 
                   opacity: 0,
-                  y: 220 // Final position matching screenshot
+                  y: 220 // KEEP ORIGINAL spacing for desktop
                 }}
                 animate={{ 
                   opacity: 1,
-                  y: 220 // Stay in final position
+                  y: 220 // KEEP ORIGINAL spacing for desktop
                 }}
                 transition={{
-                  opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }, // Faster
-                  y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] } // Faster
+                  opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
+                  y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  // Responsive positioning using CSS - CLOSER spacing
+                  transform: 'translateY(max(120px, 220px))'
+                }}
               >
-                <motion.p className="text-2xl text-gray-300">
+                <motion.p className="text-lg sm:text-xl lg:text-2xl text-gray-300 text-center px-4">
                   Welcome to my world...
                 </motion.p>
               </motion.div>
