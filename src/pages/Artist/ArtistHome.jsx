@@ -433,7 +433,7 @@ const ArtistHome = () => {
                     <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
                       {/* Your Image */}
                       <img 
-                        src="/images/mewithguitar.jpg" 
+                        src="/images/mewithguitar.JPG" 
                         alt={personalInfo.name}
                         className="w-full h-full object-cover rounded-full"
                         onError={(e) => {
