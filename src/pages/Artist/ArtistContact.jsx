@@ -461,7 +461,7 @@ const ArtistContact = () => {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
                     Quick <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Info</span>
                   </h3>
-                  <div className="space-y-4 sm:space-y-6">
+                  <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
                       <Clock size={16} className="text-pink-400 sm:w-[18px] sm:h-[18px]" />
                       <span>Response time: 24-48 hours</span>
@@ -489,58 +489,61 @@ const ArtistContact = () => {
                   </div>
                 </div>
 
-                {/* What I Offer - Mobile Responsive */}
+                {/* What I Offer - OPTIMIZED SPACING AND TEXT SIZE */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-5">
                     What I <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Offer</span>
                   </h3>
-                  <div className="grid grid-cols-1 gap-3 sm:gap-4 mb-6 sm:mb-7">
+                  <div className="grid grid-cols-1 gap-3 mb-5">
                     {services.map((service, index) => (
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 + index * 0.1 }}
-                        className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all"
+                        className="flex items-center space-x-3 p-3 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all"
                       >
-                        <div className={`w-10 h-10 sm:w-12 sm:h-12 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                          <service.icon size={18} className="text-white sm:w-5 sm:h-5" />
+                        <div className={`w-9 h-9 sm:w-10 sm:h-10 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                          <service.icon size={16} className="text-white sm:w-[18px] sm:h-[18px]" />
                         </div>
                         <span className="text-white font-medium text-sm sm:text-base">{service.label}</span>
                       </motion.div>
                     ))}
                   </div>
                   
-                  {/* Updated Pricing Info */}
-                  <div className="border-t border-gray-600/30 pt-4 sm:pt-6 mb-4 sm:mb-6">
-                    <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Pricing & Packages</h4>
-                    <div className="space-y-2 sm:space-y-3">
-                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
+                  {/* Updated Pricing Info - REDUCED SPACING */}
+                  <div className="border-t border-gray-600/30 pt-4 mb-4">
+                    <h4 className="text-base sm:text-lg font-semibold text-white mb-3">Pricing & Packages</h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center text-gray-300 text-sm">
                         <span>• Live Gigs & Performances</span>
                         <span className="text-green-400 font-medium">From $300</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
+                      <div className="flex justify-between items-center text-gray-300 text-sm">
                         <span>• Gaming Stream Collaborations</span>
                         <span className="text-green-400 font-medium">From $100</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
+                      <div className="flex justify-between items-center text-gray-300 text-sm">
                         <span>• Music Production</span>
                         <span className="text-green-400 font-medium">From $200</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
+                      <div className="flex justify-between items-center text-gray-300 text-sm">
                         <span>• Audio & Video Editing</span>
                         <span className="text-green-400 font-medium">From $150</span>
                       </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm sm:text-base">
+                      <div className="flex justify-between items-center text-gray-300 text-sm">
                         <span>• Brand Collaborations</span>
                         <span className="text-green-400 font-medium">Custom Quote</span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="border-t border-gray-600/30 pt-4 sm:pt-6">
-                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                      I specialize in creating authentic, engaging content across multiple platforms. From live performances to gaming content and music production, I bring passion and professionalism to every project. All packages include revisions and source files.
+                  <div className="border-t border-gray-600/30 pt-4">
+                    <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                      My services include live performance booking, gaming stream collaborations, custom music production, and audio-video editing. Each service is delivered with professional standards and personalized attention to ensure exceptional results.
+                    </p>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      All packages include revisions and source files.
                     </p>
                   </div>
                 </div>
@@ -637,12 +640,12 @@ const ArtistContact = () => {
                   </form>
                 </div>
 
-                {/* Connect on Social - Mobile Responsive */}
+                {/* Connect on Social - REDUCED SPACING */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-5">
                     Connect on <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Social</span>
                   </h3>
-                  <div className="space-y-2 sm:space-y-3">
+                  <div className="space-y-2">
                     {socialPlatforms.map((platform, index) => (
                       <motion.a
                         key={index}
@@ -650,19 +653,19 @@ const ArtistContact = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => handleSocialClick(platform.name, platform.url)}
-                        className="flex items-center justify-between p-3 sm:p-4 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all group"
+                        className="flex items-center justify-between p-3 rounded-xl bg-gray-700/30 border border-gray-600/30 hover:border-gray-500/50 transition-all group"
                         whileHover={{ scale: 1.02 }}
                       >
                         <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 sm:w-10 sm:h-10 ${platform.color} rounded-lg flex items-center justify-center`}>
-                            <platform.icon size={16} className="text-white sm:w-[18px] sm:h-[18px]" />
+                          <div className={`w-8 h-8 sm:w-9 sm:h-9 ${platform.color} rounded-lg flex items-center justify-center`}>
+                            <platform.icon size={14} className="text-white sm:w-4 sm:h-4" />
                           </div>
                           <div>
-                            <div className="text-white font-semibold text-sm sm:text-base">{platform.name}</div>
-                            <div className="text-gray-400 text-xs sm:text-sm">{platform.handle}</div>
+                            <div className="text-white font-semibold text-sm">{platform.name}</div>
+                            <div className="text-gray-400 text-xs">{platform.handle}</div>
                           </div>
                         </div>
-                        <div className="text-purple-400 font-semibold text-xs sm:text-sm">
+                        <div className="text-purple-400 font-semibold text-xs">
                           {platform.followers}
                         </div>
                       </motion.a>
