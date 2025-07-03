@@ -74,45 +74,76 @@ const ArtistContact = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  // Show loading state
-  const submitButton = e.target.querySelector('button[type="submit"]');
-  const originalText = submitButton.textContent;
-  submitButton.textContent = 'Sending...';
-  submitButton.disabled = true;
-  
-  try {
-    const response = await fetch('/api/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+    e.preventDefault();
+    
+    // Show loading state
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...';
+    submitButton.disabled = true;
 
-    const result = await response.json();
+    try {
+      // Send to your Vercel API endpoint
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (response.ok) {
-      alert('Message sent successfully! I\'ll get back to you soon.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Track form submission
-      if (analytics?.trackPortfolioEvents) {
-        analytics.trackPortfolioEvents.contactForm('artist-contact-form');
+      // Check if response is ok
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    } else {
-      alert(`Failed to send message: ${result.message}`);
+
+      // Check if response has content
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response');
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Track successful form submission
+        if (analytics?.trackPortfolioEvents) {
+          analytics.trackPortfolioEvents.contactForm('artist-contact-form-success');
+        }
+        
+        alert('🎉 Message sent successfully! I\'ll get back to you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error(result.message || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Email sending error:', error);
+      
+      // Track failed form submission
+      if (analytics?.trackPortfolioEvents) {
+        analytics.trackPortfolioEvents.contactForm('artist-contact-form-error');
+      }
+      
+      // Show specific error message
+      let errorMessage = '❌ Failed to send message. ';
+      
+      if (error.message.includes('HTTP error! status: 405')) {
+        errorMessage += 'API endpoint not configured properly.';
+      } else if (error.message.includes('Failed to fetch')) {
+        errorMessage += 'Network error. Please check your connection.';
+      } else if (error.message.includes('non-JSON response')) {
+        errorMessage += 'Server configuration error.';
+      } else {
+        errorMessage += 'Please try again or email me directly at himankaroraofficial@gmail.com';
+      }
+      
+      alert(errorMessage);
+    } finally {
+      // Restore button state
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
     }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Failed to send message. Please check your connection and try again.');
-  } finally {
-    // Reset button
-    submitButton.textContent = originalText;
-    submitButton.disabled = false;
-  }
-};
+  };
 
   // Analytics event handlers
   const handleNavigationClick = (section) => {
