@@ -1,7 +1,7 @@
 {
   "functions": {
-    "api/send-email.js": {
-      "maxDuration": 10
+    "api/*.js": {
+      "runtime": "nodejs18.x"
     }
   }
 }
