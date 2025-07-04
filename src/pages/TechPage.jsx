@@ -28,7 +28,8 @@ import {
   ChevronRight,
   Sparkles,
   Menu,
-  X
+  X,
+  Send
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useAnalytics } from '../components/Analytics';
@@ -50,6 +51,21 @@ const TechPage = () => {
   const [currentCertPage, setCurrentCertPage] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const [formStatus, setFormStatus] = useState({
+    isSubmitting: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: ''
+  });
   
   const analytics = useAnalytics();
 
@@ -77,6 +93,110 @@ const TechPage = () => {
     { id: 'certificates', label: 'Certificates', icon: GraduationCap },
     { id: 'contact', label: 'Contact', icon: Mail }
   ];
+
+  // Form handlers
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Reset status and start submitting
+    setFormStatus({
+      isSubmitting: true,
+      isSuccess: false,
+      isError: false,
+      errorMessage: ''
+    });
+
+    try {
+      // Send to your Vercel API endpoint with pageType
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          pageType: 'tech' // This will route to himankarora1000@gmail.com
+        }),
+      });
+
+      // Check if response is ok
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Check if response has content
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned non-JSON response');
+      }
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Track successful form submission
+        if (analytics?.trackPortfolioEvents) {
+          analytics.trackPortfolioEvents.contactForm('tech-contact-form-success');
+        }
+        
+        // Show success message and clear form
+        setFormStatus({
+          isSubmitting: false,
+          isSuccess: true,
+          isError: false,
+          errorMessage: ''
+        });
+        
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus({
+            isSubmitting: false,
+            isSuccess: false,
+            isError: false,
+            errorMessage: ''
+          });
+        }, 5000);
+        
+      } else {
+        throw new Error(result.message || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Email sending error:', error);
+      
+      // Track failed form submission
+      if (analytics?.trackPortfolioEvents) {
+        analytics.trackPortfolioEvents.contactForm('tech-contact-form-error');
+      }
+      
+      // Show specific error message
+      let errorMessage = 'Failed to send message. ';
+      
+      if (error.message.includes('HTTP error! status: 405')) {
+        errorMessage += 'API endpoint not configured properly.';
+      } else if (error.message.includes('Failed to fetch')) {
+        errorMessage += 'Network error. Please check your connection.';
+      } else if (error.message.includes('non-JSON response')) {
+        errorMessage += 'Server configuration error.';
+      } else {
+        errorMessage += 'Please try again or email me directly at himankarora1000@gmail.com';
+      }
+      
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: false,
+        isError: true,
+        errorMessage: errorMessage
+      });
+    }
+  };
 
   // Event handlers with analytics
   const handleResumeDownload = () => {
@@ -518,8 +638,8 @@ const TechPage = () => {
                     <Linkedin size={22} className="sm:w-6 sm:h-6" /> {/* SLIGHTLY SMALLER */}
                   </a>
                   <a 
-                    href={`mailto:${personalInfo.email}`}
-                    onClick={() => handleSocialClick('Email', personalInfo.email)}
+                    href="mailto:himankarora1000@gmail.com"
+                    onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
                     className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
                   >
                     <Mail size={22} className="sm:w-6 sm:h-6" /> {/* SLIGHTLY SMALLER */}
@@ -1103,17 +1223,17 @@ const TechPage = () => {
                     <div>
                       <h4 className="text-base sm:text-lg font-semibold text-cyan-300 mb-2">EMAIL</h4>
                       <a 
-                        href={`mailto:${personalInfo.email}`}
-                        onClick={() => handleSocialClick('Email', personalInfo.email)}
+                        href="mailto:himankarora1000@gmail.com"
+                        onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
                         className="text-white text-base sm:text-lg hover:text-cyan-300 transition-colors"
                       >
-                        {personalInfo.email}
+                        himankarora1000@gmail.com
                       </a>
                     </div>
                     
                     <div>
                       <h4 className="text-base sm:text-lg font-semibold text-cyan-300 mb-2">WORKING HOURS</h4>
-                      <p className="text-white text-base sm:text-lg">10:00 AM - 6:00 PM</p>
+                      <p className="text-white text-base sm:text-lg">10:00 AM - 6:00 PM EST</p>
                     </div>
                     
                     <div>
@@ -1149,20 +1269,22 @@ const TechPage = () => {
                     </motion.a>
                     
                     <motion.a
-                      href={socialLinks.twitter}
+                      href={socialLinks.x_twitter}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => handleSocialClick('Twitter', socialLinks.twitter)}
+                      onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-110 transition-all"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Twitter size={20} className="sm:w-6 sm:h-6" />
+                      <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor" className="sm:w-6 sm:h-6">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      </svg>
                     </motion.a>
                     
                     <motion.a
-                      href={`mailto:${personalInfo.email}`}
-                      onClick={() => handleSocialClick('Email', personalInfo.email)}
+                      href="mailto:himankarora1000@gmail.com"
+                      onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
                       className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-110 transition-all"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -1181,7 +1303,51 @@ const TechPage = () => {
                 viewport={{ once: true }}
                 className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 sm:p-8"
               >
-                <form className="space-y-4 sm:space-y-6">
+                {/* Success Message */}
+                {formStatus.isSuccess && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-xl"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-green-300 font-semibold text-sm sm:text-base">Message sent successfully!</p>
+                        <p className="text-green-400 text-xs sm:text-sm">I'll get back to you within 24 hours.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {formStatus.isError && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-red-300 font-semibold text-sm sm:text-base">Failed to send message</p>
+                        <p className="text-red-400 text-xs sm:text-sm">{formStatus.errorMessage}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                <form onSubmit={handleFormSubmit} className="space-y-4 sm:space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-white text-base sm:text-lg font-medium mb-2 sm:mb-3">
                       Name
@@ -1190,8 +1356,12 @@ const TechPage = () => {
                       type="text"
                       id="name"
                       name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       placeholder="Your Full Name"
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base"
+                      required
+                      disabled={formStatus.isSubmitting}
+                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   
@@ -1203,8 +1373,12 @@ const TechPage = () => {
                       type="email"
                       id="email"
                       name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="your.email@example.com"
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base"
+                      required
+                      disabled={formStatus.isSubmitting}
+                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   
@@ -1212,13 +1386,24 @@ const TechPage = () => {
                     <label htmlFor="subject" className="block text-white text-base sm:text-lg font-medium mb-2 sm:mb-3">
                       Subject
                     </label>
-                    <input
-                      type="text"
+                    <select
                       id="subject"
                       name="subject"
-                      placeholder="Project Discussion"
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base"
-                    />
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      disabled={formStatus.isSubmitting}
+                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <option value="" className="text-gray-400">Select a subject</option>
+                      <option value="project-inquiry" className="text-gray-900">Project Inquiry</option>
+                      <option value="collaboration" className="text-gray-900">Collaboration Opportunity</option>
+                      <option value="job-opportunity" className="text-gray-900">Job Opportunity</option>
+                      <option value="freelance-work" className="text-gray-900">Freelance Work</option>
+                      <option value="consultation" className="text-gray-900">Technical Consultation</option>
+                      <option value="general" className="text-gray-900">General Inquiry</option>
+                      <option value="other" className="text-gray-900">Other</option>
+                    </select>
                   </div>
                   
                   <div>
@@ -1228,20 +1413,37 @@ const TechPage = () => {
                     <textarea
                       id="message"
                       name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
                       rows={5}
                       placeholder="Looking for a proficient software developer skilled in React and Next.js for a specific project..."
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all resize-none text-sm sm:text-base"
+                      required
+                      disabled={formStatus.isSubmitting}
+                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all resize-none text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                   
                   <motion.button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-cyan-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={formStatus.isSubmitting}
+                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] disabled:hover:scale-100 shadow-lg shadow-cyan-500/25 disabled:shadow-gray-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base disabled:cursor-not-allowed"
+                    whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
+                    whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
                   >
-                    <span>Submit</span>
-                    <ArrowRight size={18} className="sm:w-5 sm:h-5" />
+                    {formStatus.isSubmitting ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit</span>
+                        <ArrowRight size={18} className="sm:w-5 sm:h-5" />
+                      </>
+                    )}
                   </motion.button>
                 </form>
               </motion.div>
@@ -1305,8 +1507,8 @@ const TechPage = () => {
                   </svg>
                 </motion.a>
                 <motion.a
-                  href={`mailto:${personalInfo.email}`}
-                  onClick={() => handleSocialClick('Email', personalInfo.email)}
+                  href="mailto:himankarora1000@gmail.com"
+                  onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
                   className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
                   whileHover={{ scale: 1.1 }}
                 >
@@ -1382,8 +1584,8 @@ const TechPage = () => {
               <ul className="space-y-2 sm:space-y-3">
                 <li>
                   <a 
-                    href={`mailto:${personalInfo.email}`}
-                    onClick={() => handleSocialClick('Email', personalInfo.email)}
+                    href="mailto:himankarora1000@gmail.com"
+                    onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
                     className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                   >
                     <Mail size={14} className="sm:w-4 sm:h-4" />

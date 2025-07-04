@@ -1,4 +1,4 @@
-// api/send-email.js - Vercel Serverless Function
+// api/send-email.js - Vercel Serverless Function with Tech Page Support
 const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
   console.log('Request body:', req.body);
 
   try {
-    const { name, email, subject, message } = req.body;
+    const { name, email, subject, message, pageType = 'artist' } = req.body;
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
@@ -46,6 +46,12 @@ module.exports = async (req, res) => {
         message: 'Please provide a valid email address'
       });
     }
+
+    // Determine recipient email based on page type
+    const recipientEmail = pageType === 'tech' ? 'himankarora1000@gmail.com' : 'himankaroraofficial@gmail.com';
+    const pageTitle = pageType === 'tech' ? 'Tech Portfolio' : 'Artist Portfolio';
+    
+    console.log(`📧 Sending ${pageTitle} contact form to:`, recipientEmail);
 
     // Check if environment variables exist
     console.log('🔍 Environment check:');
@@ -68,7 +74,6 @@ module.exports = async (req, res) => {
 
     console.log('📬 Creating email transporter...');
     
-    // FIXED: Use createTransport (not createTransporter)
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -106,19 +111,20 @@ module.exports = async (req, res) => {
 
     console.log('📝 Preparing email content...');
 
-    // Gmail-compatible email content
-    const mailOptions = {
-      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
-      to: 'himankaroraofficial@gmail.com',
-      replyTo: email,
-      subject: `Portfolio Contact: ${subject}`,
-      html: `
+    // Different email templates based on page type
+    const getEmailTemplate = (pageType, name, email, subject, message) => {
+      const isTeachPage = pageType === 'tech';
+      const brandColor = isTeachPage ? '#06b6d4' : '#ec4899'; // cyan for tech, pink for artist
+      const pageTitle = isTeachPage ? 'Tech Portfolio' : 'Artist Portfolio';
+      const emoji = isTeachPage ? '💻' : '🎨';
+
+      return `
         <!DOCTYPE html>
         <html>
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Portfolio Contact</title>
+          <title>${pageTitle} Contact</title>
         </head>
         <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f5f5f5;">
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f5f5f5;">
@@ -129,11 +135,11 @@ module.exports = async (req, res) => {
                   <!-- Header -->
                   <tr>
                     <td style="background: linear-gradient(135deg, #1e293b, #334155); padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
-                      <div style="background-color: #0ea5e9; width: 50px; height: 50px; border-radius: 8px; display: inline-block; text-align: center; line-height: 50px; margin-bottom: 15px;">
-                        <span style="color: white; font-size: 24px;">📧</span>
+                      <div style="background-color: ${brandColor}; width: 50px; height: 50px; border-radius: 8px; display: inline-block; text-align: center; line-height: 50px; margin-bottom: 15px;">
+                        <span style="color: white; font-size: 24px;">${emoji}</span>
                       </div>
-                      <h1 style="color: #ffffff; font-size: 24px; margin: 0 0 5px 0; font-weight: bold;">New Contact Form Submission</h1>
-                      <p style="color: #cbd5e1; font-size: 14px; margin: 0;">Someone reached out through your portfolio website</p>
+                      <h1 style="color: #ffffff; font-size: 24px; margin: 0 0 5px 0; font-weight: bold;">New ${pageTitle} Contact</h1>
+                      <p style="color: #cbd5e1; font-size: 14px; margin: 0;">Someone reached out through your ${pageTitle.toLowerCase()} website</p>
                     </td>
                   </tr>
                   
@@ -200,7 +206,7 @@ module.exports = async (req, res) => {
                             <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 10px 0; font-weight: bold;">
                               💬 Message
                             </h3>
-                            <div style="background-color: #f8fafc; border-radius: 6px; padding: 15px; border-left: 4px solid #0ea5e9; line-height: 1.6; color: #374151; font-size: 14px;">
+                            <div style="background-color: #f8fafc; border-radius: 6px; padding: 15px; border-left: 4px solid ${brandColor}; line-height: 1.6; color: #374151; font-size: 14px;">
                               ${message.replace(/\n/g, '<br>')}
                             </div>
                           </td>
@@ -238,7 +244,7 @@ module.exports = async (req, res) => {
                       <table width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                           <td style="text-align: left; font-size: 12px; color: #64748b;">
-                            🌐 Sent from Portfolio Contact Form
+                            🌐 Sent from ${pageTitle} Contact Form
                           </td>
                           <td style="text-align: right; font-size: 12px; color: #64748b;">
                             🕒 ${new Date().toLocaleString('en-US', { 
@@ -253,7 +259,7 @@ module.exports = async (req, res) => {
                         </tr>
                       </table>
                       <div style="margin-top: 10px; font-size: 13px; color: #64748b; line-height: 1.4;">
-                        This email was automatically generated from your portfolio website.<br>
+                        This email was automatically generated from your ${pageTitle.toLowerCase()} website.<br>
                         <strong>Reply directly to this email</strong> to respond to ${name}.
                       </div>
                     </td>
@@ -265,9 +271,18 @@ module.exports = async (req, res) => {
           </table>
         </body>
         </html>
-      `,
+      `;
+    };
+
+    // Gmail-compatible email content
+    const mailOptions = {
+      from: `"${pageTitle} Contact" <${process.env.GMAIL_USER}>`,
+      to: recipientEmail,
+      replyTo: email,
+      subject: `${pageTitle} Contact: ${subject}`,
+      html: getEmailTemplate(pageType, name, email, subject, message),
       text: `
-New Portfolio Contact Form Submission
+New ${pageTitle} Contact Form Submission
 
 Name: ${name}
 Email: ${email}
@@ -289,13 +304,15 @@ Reply directly to this email to respond to ${name}.
     
     console.log('✅ Email sent successfully!');
     console.log('Message ID:', info.messageId);
+    console.log('Sent to:', recipientEmail);
 
     // Return success response
     return res.status(200).json({
       success: true,
       message: 'Email sent successfully!',
       messageId: info.messageId,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      sentTo: recipientEmail
     });
 
   } catch (error) {
