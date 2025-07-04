@@ -93,14 +93,14 @@ const ArtistAbout = () => {
     {
       year: "2019",
       title: "Content Creation",
-      description: "Started digital content creation, sharing musical performances and creative processes across various social media platforms.",
+      description: "Started digital content creation, sharing musical performances and creative processes across various social media platforms with dedicated focus.",
       icon: Camera,
       color: "from-purple-500 to-indigo-500"
     },
     {
       year: "2020",
       title: "Gaming Content",
-      description: "Expanded into gaming entertainment, creating gameplay walkthroughs and hosting live streaming sessions.",
+      description: "Expanded into gaming entertainment, creating gameplay walkthroughs and hosting live streaming sessions with engaging interactions.",
       icon: Gamepad2,
       color: "from-blue-500 to-cyan-500"
     },
