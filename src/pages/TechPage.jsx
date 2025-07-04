@@ -1566,15 +1566,6 @@ const TechPage = () => {
                     <span>Certificates</span>
                   </button>
                 </li>
-                <li>
-                  <Link 
-                    to="/"
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <Globe size={14} className="sm:w-4 sm:h-4" />
-                    <span>Portfolio Hub</span>
-                  </Link>
-                </li>
               </ul>
             </div>
 
