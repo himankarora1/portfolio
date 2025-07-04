@@ -37,7 +37,7 @@ import { getChannelVideos, testYouTubeAPI, forceRefreshVideos, getCacheInfo } fr
 import YouTubeVideo from '../../components/YouTubeVideo';
 import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
-import { contentData } from '../../utils/contentManager';
+import { contentData, getEmailForContext } from '../../utils/contentManager';
 
 // Redesigned Refresh Videos Button Component (integrated directly)
 const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
@@ -312,6 +312,7 @@ const ArtistWork = () => {
   // Get data from content manager
   const personalInfo = contentData.personal;
   const artistData = contentData.artist;
+  const artistEmail = getEmailForContext('artist'); // Use artist email
 
   // Mobile menu items
   const mobileMenuItems = [
@@ -1228,8 +1229,8 @@ const ArtistWork = () => {
                 <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <a 
-                      href={`mailto:${personalInfo.email}`}
-                      onClick={() => handleSocialClick('Email', personalInfo.email)}
+                      href={`mailto:${artistEmail}`}
+                      onClick={() => handleSocialClick('Email', artistEmail)}
                       className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Mail size={14} className="sm:w-4 sm:h-4" />

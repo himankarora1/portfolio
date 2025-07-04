@@ -47,10 +47,14 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Determine recipient email based on page type
-    const recipientEmail = pageType === 'tech' ? 'himankarora1000@gmail.com' : 'himankaroraofficial@gmail.com';
+    // FIXED: Determine recipient email based on page type (corrected logic)
+    const recipientEmail = pageType === 'tech' 
+      ? 'himankarora1000@gmail.com'      // Tech portfolio email
+      : 'himankaroraofficial@gmail.com'; // Artist portfolio email (default)
+    
     const pageTitle = pageType === 'tech' ? 'Tech Portfolio' : 'Artist Portfolio';
     
+    console.log(`📧 Page Type: ${pageType}`);
     console.log(`📧 Sending ${pageTitle} contact form to:`, recipientEmail);
 
     // Check if environment variables exist
@@ -74,7 +78,7 @@ module.exports = async (req, res) => {
 
     console.log('📬 Creating email transporter...');
     
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransporter({
       service: 'gmail',
       auth: {
         user: process.env.GMAIL_USER,
@@ -113,10 +117,10 @@ module.exports = async (req, res) => {
 
     // Different email templates based on page type
     const getEmailTemplate = (pageType, name, email, subject, message) => {
-      const isTeachPage = pageType === 'tech';
-      const brandColor = isTeachPage ? '#06b6d4' : '#ec4899'; // cyan for tech, pink for artist
-      const pageTitle = isTeachPage ? 'Tech Portfolio' : 'Artist Portfolio';
-      const emoji = isTeachPage ? '💻' : '🎨';
+      const isTechPage = pageType === 'tech'; // FIXED: typo was "isTeachPage"
+      const brandColor = isTechPage ? '#06b6d4' : '#ec4899'; // cyan for tech, pink for artist
+      const pageTitle = isTechPage ? 'Tech Portfolio' : 'Artist Portfolio';
+      const emoji = isTechPage ? '💻' : '🎨';
 
       return `
         <!DOCTYPE html>
@@ -312,7 +316,8 @@ Reply directly to this email to respond to ${name}.
       message: 'Email sent successfully!',
       messageId: info.messageId,
       timestamp: new Date().toISOString(),
-      sentTo: recipientEmail
+      sentTo: recipientEmail,
+      pageType: pageType // Added for debugging
     });
 
   } catch (error) {

@@ -30,7 +30,7 @@ import {
 } from 'lucide-react';
 import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
-import { contentData } from '../../utils/contentManager';
+import { contentData, getEmailForContext } from '../../utils/contentManager';
 
 // Custom X (Twitter) icon component
 const XIcon = ({ size = 24, className = "" }) => (
@@ -47,6 +47,7 @@ const ArtistAbout = () => {
   // Get data from content manager
   const personalInfo = contentData.personal;
   const socialLinks = contentData.social;
+  const artistEmail = getEmailForContext('artist'); // Use artist email
 
   // Mobile menu items
   const mobileMenuItems = [
@@ -629,8 +630,8 @@ const ArtistAbout = () => {
                 <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <a 
-                      href={`mailto:${personalInfo.email}`}
-                      onClick={() => handleSocialClick('Email', personalInfo.email)}
+                      href={`mailto:${artistEmail}`}
+                      onClick={() => handleSocialClick('Email', artistEmail)}
                       className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Mail size={14} className="sm:w-4 sm:h-4" />

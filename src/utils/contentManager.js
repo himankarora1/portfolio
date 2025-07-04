@@ -6,7 +6,8 @@ export const contentData = {
     shortTitle: "Developer & Artist",
     bio: "Transforming complex data into actionable insights and building innovative web solutions that drive business growth and exceptional user experiences.",
     location: "Boston, MA",
-    email: "himankarora1000@gmail.com",
+    email: "himankarora1000@gmail.com", // Tech portfolio email
+    artistEmail: "himankaroraofficial@gmail.com", // Artist portfolio email
     phone: "+1 (XXX) XXX-XXXX", // Add your phone if needed
     avatar: "/images/avatar.jpg",
     resume: "/resume.pdf"
@@ -447,6 +448,14 @@ export const contentData = {
       "Northeastern University"
     ]
   }
+};
+
+// Helper function to get the appropriate email based on context
+export const getEmailForContext = (context = 'tech') => {
+  if (context === 'artist') {
+    return contentData.personal.artistEmail;
+  }
+  return contentData.personal.email;
 };
 
 // Helper functions for content management

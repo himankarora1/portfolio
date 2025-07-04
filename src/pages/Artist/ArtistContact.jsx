@@ -33,7 +33,7 @@ import {
 } from 'lucide-react';
 import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
-import { contentData } from '../../utils/contentManager';
+import { contentData, getEmailForContext } from '../../utils/contentManager';
 
 // Custom X (Twitter) icon component
 const XIcon = ({ size = 24, className = "" }) => (
@@ -50,6 +50,7 @@ const ArtistContact = () => {
   // Get data from content manager
   const personalInfo = contentData.personal;
   const artistData = contentData.artist;
+  const artistEmail = getEmailForContext('artist'); // Use artist email
   
   const [formData, setFormData] = useState({
     name: '',
@@ -92,13 +93,16 @@ const ArtistContact = () => {
     });
 
     try {
-      // Send to your Vercel API endpoint
+      // Send to your Vercel API endpoint with pageType for artist
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          pageType: 'artist' // This will route to himankaroraofficial@gmail.com
+        }),
       });
 
       // Check if response is ok
@@ -151,7 +155,7 @@ const ArtistContact = () => {
         analytics.trackPortfolioEvents.contactForm('artist-contact-form-error');
       }
       
-      // Show specific error message
+      // Show specific error message with artist email
       let errorMessage = 'Failed to send message. ';
       
       if (error.message.includes('HTTP error! status: 405')) {
@@ -161,7 +165,7 @@ const ArtistContact = () => {
       } else if (error.message.includes('non-JSON response')) {
         errorMessage += 'Server configuration error.';
       } else {
-        errorMessage += 'Please try again or email me directly at himankaroraofficial@gmail.com';
+        errorMessage += `Please try again or email me directly at ${artistEmail}`;
       }
       
       setFormStatus({
@@ -195,17 +199,17 @@ const ArtistContact = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  // Updated contact methods with improved design
+  // Updated contact methods with improved design and artist email
   const contactMethods = [
     {
       icon: Mail,
       title: "Email",
-      value: personalInfo.email,
+      value: artistEmail, // Use artist email
       description: "For all inquiries and collaborations",
       bgColor: "bg-pink-500/10",
       borderColor: "border-pink-500/30",
       iconBg: "bg-pink-500",
-      href: `mailto:${personalInfo.email}`
+      href: `mailto:${artistEmail}`
     },
     {
       icon: Music,
@@ -898,8 +902,8 @@ const ArtistContact = () => {
                 <ul className="space-y-2 sm:space-y-3">
                   <li>
                     <a 
-                      href={`mailto:${personalInfo.email}`}
-                      onClick={() => handleSocialClick('Email', personalInfo.email)}
+                      href={`mailto:${artistEmail}`}
+                      onClick={() => handleSocialClick('Email', artistEmail)}
                       className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Mail size={14} className="sm:w-4 sm:h-4" />
