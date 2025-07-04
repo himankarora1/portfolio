@@ -106,53 +106,130 @@ module.exports = async (req, res) => {
 
     console.log('📝 Preparing email content...');
 
-    // Email content
+    // Email content with professional design
     const mailOptions = {
       from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
       to: 'himankaroraofficial@gmail.com',
       replyTo: email,
       subject: `Portfolio Contact: ${subject}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: white; padding: 20px; text-align: center;">
-            <h2>🎵 New Contact Form Submission</h2>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Portfolio Contact Form</title>
+        </head>
+        <body style="margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background-color: #f8fafc; color: #334155;">
+          <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);">
+            
+            <!-- Header with gradient -->
+            <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 32px 24px; text-align: center; position: relative;">
+              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1000 1000\"><defs><radialGradient id=\"a\" cx=\".5\" cy=\".5\" r=\".5\"><stop offset=\"0%\" stop-color=\"%23ffffff\" stop-opacity=\"0.1\"/><stop offset=\"100%\" stop-color=\"%23ffffff\" stop-opacity=\"0\"/></radialGradient></defs><rect width=\"1000\" height=\"1000\" fill=\"url(%23a)\"/></svg>'); opacity: 0.3;"></div>
+              <div style="position: relative; z-index: 1;">
+                <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #06b6d4, #8b5cf6); border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                  <span style="color: white; font-size: 24px; font-weight: bold;">✉️</span>
+                </div>
+                <h1 style="margin: 0; color: white; font-size: 28px; font-weight: 700; letter-spacing: -0.025em;">New Contact Form Submission</h1>
+                <p style="margin: 8px 0 0 0; color: #cbd5e1; font-size: 16px;">Someone reached out through your portfolio website</p>
+              </div>
+            </div>
+            
+            <!-- Content Area -->
+            <div style="padding: 32px 24px;">
+              
+              <!-- Contact Information Card -->
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <h2 style="margin: 0 0 20px 0; color: #1e293b; font-size: 20px; font-weight: 600; display: flex; align-items: center;">
+                  <span style="background: linear-gradient(135deg, #06b6d4, #8b5cf6); color: white; width: 32px; height: 32px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 16px;">👤</span>
+                  Contact Information
+                </h2>
+                
+                <div style="display: grid; gap: 16px;">
+                  <div style="display: flex; align-items: flex-start;">
+                    <div style="background: #dbeafe; color: #1e40af; padding: 8px; border-radius: 8px; margin-right: 12px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">👤</div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 600; color: #374151; font-size: 14px; margin-bottom: 4px;">Full Name</div>
+                      <div style="color: #1f2937; font-size: 16px; font-weight: 500;">${name}</div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: flex; align-items: flex-start;">
+                    <div style="background: #dcfce7; color: #166534; padding: 8px; border-radius: 8px; margin-right: 12px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">📧</div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 600; color: #374151; font-size: 14px; margin-bottom: 4px;">Email Address</div>
+                      <div style="color: #1f2937; font-size: 16px; font-weight: 500;">
+                        <a href="mailto:${email}" style="color: #059669; text-decoration: none;">${email}</a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div style="display: flex; align-items: flex-start;">
+                    <div style="background: #fef3c7; color: #92400e; padding: 8px; border-radius: 8px; margin-right: 12px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;">📝</div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 600; color: #374151; font-size: 14px; margin-bottom: 4px;">Subject</div>
+                      <div style="color: #1f2937; font-size: 16px; font-weight: 500;">${subject}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Message Card -->
+              <div style="background: white; border: 2px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin: 0 0 16px 0; color: #1e293b; font-size: 18px; font-weight: 600; display: flex; align-items: center;">
+                  <span style="background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; width: 28px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 14px;">💬</span>
+                  Message
+                </h3>
+                <div style="background: #f8fafc; border-radius: 8px; padding: 20px; border-left: 4px solid #06b6d4; line-height: 1.6; color: #374151; font-size: 15px;">
+                  ${message.replace(/\n/g, '<br>')}
+                </div>
+              </div>
+              
+              <!-- Action Buttons -->
+              <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+                <a href="mailto:${email}" style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                  <span style="margin-right: 8px;">↩️</span>
+                  Reply to ${name}
+                </a>
+                <a href="tel:${email}" style="background: white; color: #374151; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: 2px solid #e5e7eb; display: inline-flex; align-items: center;">
+                  <span style="margin-right: 8px;">💼</span>
+                  Add to Contacts
+                </a>
+              </div>
+              
+              <!-- Metadata -->
+              <div style="background: #f1f5f9; border-radius: 8px; padding: 16px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #64748b;">
+                  <div style="display: flex; align-items: center;">
+                    <span style="margin-right: 8px;">🌐</span>
+                    <span>Sent from Portfolio Contact Form</span>
+                  </div>
+                  <div style="display: flex; align-items: center;">
+                    <span style="margin-right: 8px;">🕒</span>
+                    <span>${new Date().toLocaleString('en-US', { 
+                      weekday: 'short', 
+                      year: 'numeric', 
+                      month: 'short', 
+                      day: 'numeric', 
+                      hour: '2-digit', 
+                      minute: '2-digit',
+                      timeZoneName: 'short'
+                    })}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="background: #f8fafc; padding: 24px; text-align: center; border-top: 1px solid #e2e8f0;">
+              <p style="margin: 0; color: #64748b; font-size: 14px; line-height: 1.5;">
+                This email was automatically generated from your portfolio website.<br>
+                <strong>Reply directly to this email</strong> to respond to ${name}.
+              </p>
+            </div>
           </div>
-          <div style="background: #f9f9f9; padding: 30px;">
-            <div style="margin-bottom: 20px;">
-              <strong>👤 Name:</strong>
-              <div style="background: white; padding: 15px; margin-top: 5px; border-radius: 5px; border-left: 4px solid #ec4899;">
-                ${name}
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-              <strong>📧 Email:</strong>
-              <div style="background: white; padding: 15px; margin-top: 5px; border-radius: 5px; border-left: 4px solid #ec4899;">
-                ${email}
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-              <strong>📝 Subject:</strong>
-              <div style="background: white; padding: 15px; margin-top: 5px; border-radius: 5px; border-left: 4px solid #ec4899;">
-                ${subject}
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 20px;">
-              <strong>💬 Message:</strong>
-              <div style="background: white; padding: 20px; margin-top: 5px; border-radius: 5px; border: 1px solid #ddd; min-height: 100px;">
-                ${message.replace(/\n/g, '<br>')}
-              </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 30px; padding: 15px; background: #e8e8e8; border-radius: 5px;">
-              <p><strong>📱 Sent from Portfolio Contact Form</strong></p>
-              <p>Reply directly to this email to respond to ${name}</p>
-              <p>Time: ${new Date().toLocaleString()}</p>
-            </div>
-          </div>
-        </div>
+        </body>
+        </html>
       `,
       text: `
 New Portfolio Contact Form Submission

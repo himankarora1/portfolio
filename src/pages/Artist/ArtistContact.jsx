@@ -58,6 +58,13 @@ const ArtistContact = () => {
     message: ''
   });
 
+  const [formStatus, setFormStatus] = useState({
+    isSubmitting: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: ''
+  });
+
   // Mobile menu items
   const mobileMenuItems = [
     { id: 'home', label: 'Home', icon: Home, path: '/artist' },
@@ -76,11 +83,13 @@ const ArtistContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Show loading state
-    const submitButton = e.target.querySelector('button[type="submit"]');
-    const originalText = submitButton.innerHTML;
-    submitButton.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Sending...';
-    submitButton.disabled = true;
+    // Reset status and start submitting
+    setFormStatus({
+      isSubmitting: true,
+      isSuccess: false,
+      isError: false,
+      errorMessage: ''
+    });
 
     try {
       // Send to your Vercel API endpoint
@@ -111,8 +120,26 @@ const ArtistContact = () => {
           analytics.trackPortfolioEvents.contactForm('artist-contact-form-success');
         }
         
-        alert('🎉 Message sent successfully! I\'ll get back to you soon.');
+        // Show success message and clear form
+        setFormStatus({
+          isSubmitting: false,
+          isSuccess: true,
+          isError: false,
+          errorMessage: ''
+        });
+        
         setFormData({ name: '', email: '', subject: '', message: '' });
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus({
+            isSubmitting: false,
+            isSuccess: false,
+            isError: false,
+            errorMessage: ''
+          });
+        }, 5000);
+        
       } else {
         throw new Error(result.message || 'Failed to send message');
       }
@@ -125,7 +152,7 @@ const ArtistContact = () => {
       }
       
       // Show specific error message
-      let errorMessage = '❌ Failed to send message. ';
+      let errorMessage = 'Failed to send message. ';
       
       if (error.message.includes('HTTP error! status: 405')) {
         errorMessage += 'API endpoint not configured properly.';
@@ -137,11 +164,12 @@ const ArtistContact = () => {
         errorMessage += 'Please try again or email me directly at himankaroraofficial@gmail.com';
       }
       
-      alert(errorMessage);
-    } finally {
-      // Restore button state
-      submitButton.innerHTML = originalText;
-      submitButton.disabled = false;
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: false,
+        isError: true,
+        errorMessage: errorMessage
+      });
     }
   };
 
@@ -617,6 +645,50 @@ const ArtistContact = () => {
                     Send Me a <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Message</span>
                   </h2>
                   
+                  {/* Success Message */}
+                  {formStatus.isSuccess && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                      className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-xl"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-green-300 font-semibold text-sm sm:text-base">Message sent successfully!</p>
+                          <p className="text-green-400 text-xs sm:text-sm">I'll get back to you soon.</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Error Message */}
+                  {formStatus.isError && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                      className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </div>
+                        <div>
+                          <p className="text-red-300 font-semibold text-sm sm:text-base">Failed to send message</p>
+                          <p className="text-red-400 text-xs sm:text-sm">{formStatus.errorMessage}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                  
                   <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       <div>
@@ -629,7 +701,8 @@ const ArtistContact = () => {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base"
+                          disabled={formStatus.isSubmitting}
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="Your full name"
                         />
                       </div>
@@ -644,7 +717,8 @@ const ArtistContact = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base"
+                          disabled={formStatus.isSubmitting}
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="your.email@example.com"
                         />
                       </div>
@@ -659,7 +733,8 @@ const ArtistContact = () => {
                         value={formData.subject}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base"
+                        disabled={formStatus.isSubmitting}
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <option value="" className="text-gray-400">Select a subject</option>
                         <option value="live-performance" className="text-gray-900">Live Gigs & Performances</option>
@@ -681,20 +756,34 @@ const ArtistContact = () => {
                         value={formData.message}
                         onChange={handleInputChange}
                         required
+                        disabled={formStatus.isSubmitting}
                         rows={6}
-                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none resize-none transition-all text-sm sm:text-base"
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none resize-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                         placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       />
                     </div>
                     
                     <motion.button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-pink-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      disabled={formStatus.isSubmitting}
+                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] disabled:hover:scale-100 shadow-lg shadow-pink-500/25 disabled:shadow-gray-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base disabled:cursor-not-allowed"
+                      whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
+                      whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
                     >
-                      <Send size={16} className="sm:w-[18px] sm:h-[18px]" />
-                      <span>Send Message</span>
+                      {formStatus.isSubmitting ? (
+                        <>
+                          <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} className="sm:w-[18px] sm:h-[18px]" />
+                          <span>Send Message</span>
+                        </>
+                      )}
                     </motion.button>
                   </form>
                 </div>
