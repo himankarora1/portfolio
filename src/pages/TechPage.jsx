@@ -1012,7 +1012,14 @@ const TechPage = () => {
                         <h3 className="text-lg sm:text-xl font-bold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
                           {project.title}
                         </h3>
-                        <p className="text-gray-300 leading-relaxed text-sm sm:text-base line-clamp-3">
+                        <p
+                          className="text-gray-300 leading-relaxed text-sm sm:text-base overflow-hidden"
+                          style={{
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical'
+                          }}
+                        >
                           {project.description}
                         </p>
                       </div>
