@@ -76,7 +76,7 @@ const ArtistWelcome = ({ onComplete }) => {
     return () => {
       timeouts.forEach(timeout => clearTimeout(timeout));
     };
-  }, [onComplete, welcomeWords]);
+  }, [onComplete]);
 
   const containerVariants = {
     hidden: { opacity: 0 },

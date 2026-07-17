@@ -250,7 +250,7 @@ const TechPage = () => {
     const timer = setTimeout(typeChar, speed);
 
     return () => clearTimeout(timer);
-  }, [displayText, isTyping, isDeleting, currentRoleIndex, roles]);
+  }, [displayText, isTyping, isDeleting, currentRoleIndex]);
 
   // Scroll detection
   useEffect(() => {
