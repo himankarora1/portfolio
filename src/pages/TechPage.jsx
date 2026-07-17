@@ -942,19 +942,21 @@ const TechPage = () => {
                   </div>
                   
                   <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
-                    <a 
-                      href={project.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleProjectGithub(project);
-                      }}
-                      className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
-                    >
-                      <Github size={16} className="sm:w-4 sm:h-4" />
-                      <span className="text-sm sm:text-base">Code</span>
-                    </a>
+                    {project.github && (
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleProjectGithub(project);
+                        }}
+                        className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
+                      >
+                        <Github size={16} className="sm:w-4 sm:h-4" />
+                        <span className="text-sm sm:text-base">Code</span>
+                      </a>
+                    )}
                     {project.demo && project.demo !== "#" && (
                       <a 
                         href={project.demo} 
