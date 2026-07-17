@@ -337,7 +337,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3"
                       >
-                        Full Stack Developer
+                        Technical Business Analyst
                       </motion.h3>
                       
                       {/* Description - Better mobile formatting */}

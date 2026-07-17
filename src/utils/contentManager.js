@@ -2,9 +2,9 @@
 export const contentData = {
   personal: {
     name: "Himank Arora",
-    title: "Full Stack Developer & Creative Artist",
-    shortTitle: "Developer & Artist",
-    bio: "Transforming complex data into actionable insights and building innovative web solutions that drive business growth and exceptional user experiences.",
+    title: "Technical Business Analyst & Creative Artist",
+    shortTitle: "Analyst & Artist",
+    bio: "Technical Business Analyst with 3+ years serving as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.",
     location: "Boston, MA",
     email: "himankarora1000@gmail.com", // Tech portfolio email
     artistEmail: "himankaroraofficial@gmail.com", // Artist portfolio email
@@ -298,53 +298,63 @@ export const contentData = {
   experience: [
     {
       id: "northeastern-university",
-      title: "Graduate Student",
+      title: "Master of Science in Information Systems",
       company: "Northeastern University",
-      duration: "September 2024 - Present",
+      duration: "Expected May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Pursuing Master of Science in Information Systems with focus on Application Engineering, Web Design & UX, Data Science, and Program Structures & Algorithms.",
+      description: "Relevant coursework: Business Analysis & Information Engineering, Data Management & Database Design, Data Science & ML.",
       achievements: [
-        "Developing expertise in full-stack application development",
-        "Learning advanced data science and machine learning techniques",
-        "Building proficiency in modern web technologies and frameworks",
-        "Gaining hands-on experience with cloud platforms and DevOps practices"
+        "Business Analysis & Information Engineering",
+        "Data Management & Database Design",
+        "Data Science & Machine Learning"
       ],
       logo: "/images/companies/northeastern.png",
       website: "https://northeastern.edu"
     },
     {
+      id: "ggsipu",
+      title: "Bachelor of Commerce (Honors)",
+      company: "Guru Gobind Singh Indraprastha University",
+      duration: "September 2021",
+      location: "New Delhi, India",
+      type: "education",
+      description: "Bachelor of Commerce (Honors).",
+      achievements: [],
+      logo: "/images/companies/ggsipu.png",
+      website: "http://www.ipu.ac.in"
+    },
+    {
       id: "ferro-star",
-      title: "Technical Analyst",
+      title: "Technical Business Analyst",
       company: "Ferro Star",
       duration: "April 2022 - April 2024",
       location: "New Delhi, India",
       type: "work",
-      description: "Worked between business and technology, engineering backend systems and automations to support inventory management, pricing, and procurement operations.",
+      description: "Sole technical resource owning requirements, analysis, and execution across reporting, ERP inventory workflows, and operational tooling.",
       achievements: [
-        "Engineered FastAPI backend for inventory management, processing 1,000+ monthly transactions with audit logging",
-        "Redesigned MySQL schema to 3NF with B-tree indexes and connection pooling, cutting query response time by 60%",
-        "Constructed Python/Pandas ETL pipeline normalizing supplier catalogs, eliminating 12+ hours of weekly data entry",
-        "Implemented JWT auth and RBAC across 3 departments, securing inventory and pricing data with stateless API design",
-        "Delivered React dashboard adopted by 4 departments and leadership for pricing and procurement decisions"
+        "Delivered a React reporting dashboard adopted by 4 departments and leadership for daily pricing decisions",
+        "Elicited ERP inventory requirements by interviewing dept leads, mapped workflows, and caught gaps before go-live",
+        "Surfaced a MySQL query performance gap via usage analysis and validated 60% improvement after B-tree indexing",
+        "Recommended reorder thresholds for SKUs based on depletion rate analysis, reducing excess stock orders by 15%",
+        "Traced a 12+ hour weekly bottleneck to catalog inconsistencies and eliminated it by building Excel templates"
       ],
       logo: "/images/companies/ferro-star.png",
       website: "https://ferrostar.com"
     },
     {
       id: "super-enterprises",
-      title: "Technical Analyst",
+      title: "Technical Business Analyst",
       company: "Super Enterprises",
       duration: "April 2021 - March 2022",
       location: "New Delhi, India",
       type: "work",
-      description: "Combined business analysis with hands-on development, building and maintaining the company's web presence and internal tooling.",
+      description: "Owned requirements through delivery for the company website, form UX, notifications, and product catalog data quality.",
       achievements: [
-        "Launched React/Node.js website reaching 8,000+ monthly sessions (Google Analytics), improving engagement by 35%",
-        "Designed RESTful API with MySQL backend for product catalog and pricing, cutting latency by 50% across 300+ SKUs",
-        "Automated pricing and inventory sync via Python scripts, cutting update time from 90 to under 10 minutes",
-        "Integrated third-party email notification APIs, reducing customer response time from 24 hours to under 2",
-        "Developed React components with dynamic filtering and validation, reducing incomplete submissions by 28%"
+        "Launched company website in HTML, CSS, and JavaScript, growing traffic to 8,000+ sessions and engagement by 35%",
+        "Spotted a form drop-off, added validation and dynamic filtering, and cut incomplete submissions by 28%",
+        "Found a manual notification bottleneck and cut response time from 24 hours to under 2 by integrating email APIs",
+        "Audited 300+ SKUs for pricing and data inconsistencies, resolving errors undetected across manual records"
       ],
       logo: "/images/companies/super-enterprises.png",
       website: "#"
@@ -564,15 +574,15 @@ export const contentData = {
     version: "2.0.0",
     keywords: [
       "Himank Arora",
-      "Full Stack Developer",
+      "Technical Business Analyst",
+      "Business Analysis",
       "Content Creator",
-      "React Developer",
-      "Python Developer",
-      "Machine Learning",
+      "React",
+      "Python",
       "Data Analysis",
       "YouTube Creator",
       "Music Producer",
-      "Boston Developer",
+      "Boston",
       "Northeastern University"
     ]
   }
@@ -643,8 +653,8 @@ export const generateSEOData = (page) => {
     case 'tech':
       return {
         ...baseData,
-        title: `${contentData.personal.name} - Full Stack Developer Portfolio`,
-        description: "Experienced full stack developer specializing in React, Python, and machine learning. View my professional portfolio, projects, and technical expertise.",
+        title: `${contentData.personal.name} - Technical Business Analyst Portfolio`,
+        description: "Technical Business Analyst with 3+ years owning requirements, analysis, and execution across data tools, web products, and AI-enabled applications.",
         keywords: [
           ...contentData.meta.keywords,
           "portfolio",

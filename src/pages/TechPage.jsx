@@ -33,8 +33,8 @@ import { contentData } from '../utils/contentManager';
 
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
-  'Full Stack Developer',
-  'Data Enthusiast', 
+  'Technical Business Analyst',
+  'Product-Minded Builder',
   'Problem Solver'
 ];
 
@@ -332,9 +332,9 @@ const TechPage = () => {
     <>
       {/* SEO */}
       <SEO 
-        title="Himank Arora - Full Stack Developer Portfolio"
-        description="Experienced full stack developer specializing in React, Python, and machine learning. View my professional portfolio, projects, and technical expertise."
-        keywords="full stack developer, React, Python, machine learning, web development, Boston developer"
+        title="Himank Arora - Technical Business Analyst Portfolio"
+        description="Technical Business Analyst with 3+ years owning requirements, analysis, and execution across data tools, web products, and AI-enabled applications."
+        keywords="technical business analyst, business analysis, React, Python, data analysis, product requirements, Boston"
       />
 
       {/* Professional Navigation - FIXED WITH PROPER SPACING */}
@@ -800,14 +800,13 @@ const TechPage = () => {
               >
                 <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
                   <p>
-                    I'm a dynamic full stack developer with a foundation in business analysis and a deep interest in building impactful digital solutions. 
-                    With over 3 years of experience working across data analytics, web development, and user-focused design, I bring a unique blend of logic, creativity, and strategic thinking to every project I take on.
+                    I'm a Technical Business Analyst with 3+ years as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.
                   </p>
                   <p>
-                    My journey began with a curiosity about how systems work — both technical and human. That curiosity evolved into a passion for developing web applications that solve real-world problems, streamline processes, and deliver meaningful user experiences.
+                    My strength is bridging business and technology — eliciting requirements, mapping workflows, validating improvements with data, and shipping tools that departments actually adopt.
                   </p>
                   <p>
-                    Whether it's creating responsive UIs, designing backend logic, or turning raw data into actionable insights, I love working across the full stack to bring ideas to life. I'm always exploring new technologies, refining my craft, and building solutions that blend function with purpose.
+                    Whether it's a reporting dashboard, a product workflow redesign, or an AI-assisted application, I focus on clear problem framing, measurable outcomes, and solutions that blend analysis with execution.
                   </p>
                 </div>
               </motion.div>
@@ -883,17 +882,19 @@ const TechPage = () => {
                     </div>
                   </div>
                   <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{exp.description}</p>
-                  <div>
-                    <h4 className="font-semibold text-white mb-2 text-sm sm:text-base">Key Achievements:</h4>
-                    <ul className="space-y-1">
-                      {exp.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start space-x-2 text-gray-300 text-sm sm:text-base">
-                          <Award size={14} className="text-cyan-400 mt-0.5 flex-shrink-0 sm:w-4 sm:h-4" />
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {exp.achievements?.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-white mb-2 text-sm sm:text-base">Key Achievements:</h4>
+                      <ul className="space-y-1">
+                        {exp.achievements.map((achievement, i) => (
+                          <li key={i} className="flex items-start space-x-2 text-gray-300 text-sm sm:text-base">
+                            <Award size={14} className="text-cyan-400 mt-0.5 flex-shrink-0 sm:w-4 sm:h-4" />
+                            <span>{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -1460,11 +1461,11 @@ const TechPage = () => {
                   <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                     {personalInfo.name}
                   </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">Full Stack Developer & Data Enthusiast</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Technical Business Analyst</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
-                Full Stack Developer & Data Enthusiast passionate about creating innovative solutions 
+                Technical Business Analyst passionate about bridging business needs with technical solutions 
                 that bridge technology and business objectives.
               </p>
               <div className="flex space-x-3 sm:space-x-4">
