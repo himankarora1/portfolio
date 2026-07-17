@@ -15,7 +15,6 @@ import {
   Home,
   User,
   Brush,
-  Heart,
   Zap,
   Calendar,
   Camera,
@@ -939,24 +938,11 @@ const ArtistContact = () => {
               </div>
             </div>
 
-            {/* Bottom Section with Privacy Policy & Terms */}
-            <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-xs sm:text-sm mb-4 md:mb-0">
+            {/* Copyright */}
+            <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-center items-center">
+              <p className="text-gray-400 text-xs sm:text-sm">
                 © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
               </p>
-              <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-400">
-                <Link to="/" className="hover:text-pink-400 transition-colors">
-                  Privacy Policy
-                </Link>
-                <Link to="/" className="hover:text-pink-400 transition-colors">
-                  Terms of Service
-                </Link>
-                <span className="flex items-center space-x-1">
-                  <span>Made with</span>
-                  <Heart size={12} className="text-pink-400 sm:w-3.5 sm:h-3.5" />
-                  <span>and creativity</span>
-                </span>
-              </div>
             </div>
           </div>
         </footer>

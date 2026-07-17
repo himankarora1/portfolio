@@ -303,12 +303,8 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Relevant coursework: Business Analysis & Information Engineering, Data Management & Database Design, Data Science & ML.",
-      achievements: [
-        "Business Analysis & Information Engineering",
-        "Data Management & Database Design",
-        "Data Science & Machine Learning"
-      ],
+      description: "",
+      achievements: [],
       logo: "/images/companies/northeastern.png",
       website: "https://northeastern.edu"
     },
@@ -319,7 +315,7 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Bachelor of Commerce (Honors).",
+      description: "",
       achievements: [],
       logo: "/images/companies/ggsipu.png",
       website: "http://www.ipu.ac.in"

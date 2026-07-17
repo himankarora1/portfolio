@@ -20,7 +20,6 @@ import {
   CheckCircle,
   ArrowRight,
   Clock,
-  Heart,
   ChevronLeft,
   ChevronRight,
   Sparkles,
@@ -47,6 +46,7 @@ const TechPage = () => {
   const [showFloatingNav, setShowFloatingNav] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [currentCertPage, setCurrentCertPage] = useState(0);
+  const [currentProjectPage, setCurrentProjectPage] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   
@@ -76,6 +76,12 @@ const TechPage = () => {
   const certificates = contentData.certifications;
   const personalInfo = contentData.personal;
   const socialLinks = contentData.social;
+  const projectsPerPage = 4;
+  const totalProjectPages = Math.ceil(projects.length / projectsPerPage);
+  const paginatedProjects = projects.slice(
+    currentProjectPage * projectsPerPage,
+    (currentProjectPage + 1) * projectsPerPage
+  );
 
   // Mobile menu items for in-page navigation
   const mobileMenuItems = [
@@ -794,14 +800,14 @@ const TechPage = () => {
               <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+            <div className="max-w-3xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
+                <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed text-center sm:text-left">
                   <p>
                     I'm a Technical Business Analyst with 3+ years as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.
                   </p>
@@ -811,31 +817,6 @@ const TechPage = () => {
                   <p>
                     Whether it's a reporting dashboard, a product workflow redesign, or an AI-assisted application, I focus on clear problem framing, measurable outcomes, and solutions that blend analysis with execution.
                   </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                className="grid grid-cols-2 gap-4 sm:gap-6"
-              >
-                <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm border border-blue-500/30 p-4 sm:p-6 rounded-xl text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-2">3+</div>
-                  <div className="text-gray-300 text-sm sm:text-base">Years Experience</div>
-                </div>
-                <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-sm border border-green-500/30 p-4 sm:p-6 rounded-xl text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-2">50+</div>
-                  <div className="text-gray-300 text-sm sm:text-base">Projects Completed</div>
-                </div>
-                <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-500/30 p-4 sm:p-6 rounded-xl text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-2">15+</div>
-                  <div className="text-gray-300 text-sm sm:text-base">Technologies</div>
-                </div>
-                <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-500/30 p-4 sm:p-6 rounded-xl text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-2">100%</div>
-                  <div className="text-gray-300 text-sm sm:text-base">Client Satisfaction</div>
                 </div>
               </motion.div>
             </div>
@@ -884,7 +865,9 @@ const TechPage = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{exp.description}</p>
+                  {exp.description && (
+                    <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{exp.description}</p>
+                  )}
                   {exp.achievements?.length > 0 && (
                     <div>
                       <h4 className="font-semibold text-white mb-2 text-sm sm:text-base">Relevant Coursework:</h4>
@@ -982,65 +965,119 @@ const TechPage = () => {
               <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  onClick={() => handleProjectClick(project)}
-                  className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-cyan-500/10 transition-all transform hover:scale-105 cursor-pointer"
-                >
-                  <div className="mb-4">
-                    <div className="text-xs sm:text-sm font-medium text-cyan-400 mb-2">{project.category}</div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{project.title}</h3>
-                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{project.description}</p>
+            <div className="relative">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 min-h-[400px]">
+                {paginatedProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    onClick={() => handleProjectClick(project)}
+                    className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/50 cursor-pointer"
+                  >
+                    <div className="mb-4">
+                      <div className="text-xs sm:text-sm font-medium text-cyan-400 mb-2">{project.category}</div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{project.title}</h3>
+                      <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{project.description}</p>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                      {project.tech.map(tech => (
+                        <span key={tech} className="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+                      {project.github && (
+                        <a 
+                          href={project.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectGithub(project);
+                          }}
+                          className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
+                        >
+                          <Github size={16} className="sm:w-4 sm:h-4" />
+                          <span className="text-sm sm:text-base">Code</span>
+                        </a>
+                      )}
+                      {project.demo && project.demo !== "#" && (
+                        <a 
+                          href={project.demo} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectDemo(project);
+                          }}
+                          className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
+                        >
+                          <ExternalLink size={16} className="sm:w-4 sm:h-4" />
+                          <span className="text-sm sm:text-base">Live Demo</span>
+                        </a>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {totalProjectPages > 1 && (
+                <>
+                  <div className="flex items-center justify-between mt-6 sm:mt-8">
+                    <button
+                      onClick={() => setCurrentProjectPage(Math.max(0, currentProjectPage - 1))}
+                      disabled={currentProjectPage === 0}
+                      className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
+                        currentProjectPage === 0
+                          ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
+                          : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg hover:shadow-cyan-500/25'
+                      }`}
+                    >
+                      <ChevronLeft size={16} className="sm:w-4 sm:h-4" />
+                      <span>Previous</span>
+                    </button>
+
+                    <div className="flex items-center space-x-2">
+                      {Array.from({ length: totalProjectPages }).map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentProjectPage(index)}
+                          className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
+                            index === currentProjectPage
+                              ? 'bg-cyan-400 scale-125'
+                              : 'bg-gray-600 hover:bg-gray-500'
+                          }`}
+                          aria-label={`Go to projects page ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+
+                    <button
+                      onClick={() => setCurrentProjectPage(Math.min(totalProjectPages - 1, currentProjectPage + 1))}
+                      disabled={currentProjectPage >= totalProjectPages - 1}
+                      className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
+                        currentProjectPage >= totalProjectPages - 1
+                          ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
+                          : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg hover:shadow-cyan-500/25'
+                      }`}
+                    >
+                      <span>Next</span>
+                      <ChevronRight size={16} className="sm:w-4 sm:h-4" />
+                    </button>
                   </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
-                    {project.tech.map(tech => (
-                      <span key={tech} className="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-                        {tech}
-                      </span>
-                    ))}
+
+                  <div className="text-center mt-3 sm:mt-4">
+                    <p className="text-gray-400 text-xs sm:text-sm">
+                      Showing {currentProjectPage * projectsPerPage + 1}-{Math.min((currentProjectPage + 1) * projectsPerPage, projects.length)} of {projects.length} projects
+                    </p>
                   </div>
-                  
-                  <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
-                    {project.github && (
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleProjectGithub(project);
-                        }}
-                        className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
-                      >
-                        <Github size={16} className="sm:w-4 sm:h-4" />
-                        <span className="text-sm sm:text-base">Code</span>
-                      </a>
-                    )}
-                    {project.demo && project.demo !== "#" && (
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleProjectDemo(project);
-                        }}
-                        className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
-                      >
-                        <ExternalLink size={16} className="sm:w-4 sm:h-4" />
-                        <span className="text-sm sm:text-base">Live Demo</span>
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -1680,24 +1717,11 @@ const TechPage = () => {
             </div>
           </div>
 
-          {/* Bottom Section with Privacy Policy & Terms */}
-          <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-xs sm:text-sm mb-4 md:mb-0">
+          {/* Copyright */}
+          <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-center items-center">
+            <p className="text-gray-400 text-xs sm:text-sm">
               © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
             </p>
-            <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-400">
-              <Link to="/" className="hover:text-cyan-400 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/" className="hover:text-cyan-400 transition-colors">
-                Terms of Service
-              </Link>
-              <span className="flex items-center space-x-1">
-                <span>Made with</span>
-                <Heart size={12} className="text-cyan-400 sm:w-3.5 sm:h-3.5" />
-                <span>and React</span>
-              </span>
-            </div>
           </div>
         </div>
       </footer>
