@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   Mail, 
   Music, 
-  Phone,
   MapPin,
   Instagram,
   Youtube,
@@ -13,15 +12,12 @@ import {
   Send,
   Star,
   Clock,
-  Palette,
   Home,
   User,
   Brush,
   Heart,
   Zap,
-  MessageCircle,
   Calendar,
-  Headphones,
   Camera,
   Gamepad2,
   Globe,
@@ -49,7 +45,6 @@ const ArtistContact = () => {
   
   // Get data from content manager
   const personalInfo = contentData.personal;
-  const artistData = contentData.artist;
   const artistEmail = getEmailForContext('artist'); // Use artist email
   
   const [formData, setFormData] = useState({

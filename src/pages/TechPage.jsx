@@ -14,37 +14,35 @@ import {
   MapPin,
   Calendar,
   Globe,
-  Coffee,
   Zap,
   Target,
   GraduationCap,
-  Star,
   CheckCircle,
   ArrowRight,
-  Twitter,
   Clock,
   Heart,
   ChevronLeft,
   ChevronRight,
   Sparkles,
   Menu,
-  X,
-  Send
+  X
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { useAnalytics } from '../components/Analytics';
-import { 
-  contentData, 
-  getProjectsByCategory, 
-  getWorkExperience, 
-  getFeaturedCertifications 
-} from '../utils/contentManager';
+import { contentData } from '../utils/contentManager';
+
+// Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
+const roles = [
+  'Full Stack Developer',
+  'Data Enthusiast', 
+  'Problem Solver'
+];
 
 const TechPage = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
+  const [isTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [showFloatingNav, setShowFloatingNav] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -68,12 +66,6 @@ const TechPage = () => {
   });
   
   const analytics = useAnalytics();
-
-  const roles = [
-    'Full Stack Developer',
-    'Data Enthusiast', 
-    'Problem Solver'
-  ];
 
   // Get data from content manager
   const projects = contentData.featured_projects;

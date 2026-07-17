@@ -1,7 +1,7 @@
 // components/YouTubeVideo.jsx - Simplified for direct click-to-swap-and-play
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Eye, Calendar, ExternalLink, Youtube } from 'lucide-react';
+import { Play, Eye, Calendar, Youtube } from 'lucide-react';
 import { getVideoStats, formatDuration, formatViewCount, formatDate } from '../services/youtubeService';
 
 const YouTubeVideo = ({ video, onPlay, index = 0 }) => {

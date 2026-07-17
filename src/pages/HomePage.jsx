@@ -9,7 +9,7 @@ import {
   Mail,
   ArrowRight
 } from 'lucide-react';
-import { contentData, getFeaturedProjects } from '../utils/contentManager';
+import { contentData } from '../utils/contentManager';
 import SEO from '../components/SEO';
 import { useAnalytics } from '../components/Analytics';
 
@@ -25,7 +25,6 @@ const HomePage = () => {
 
   // Use content manager data
   const personalInfo = contentData.personal;
-  const featuredProjects = getFeaturedProjects();
   const socialLinks = contentData.social;
 
   // Function to handle Artist portfolio navigation

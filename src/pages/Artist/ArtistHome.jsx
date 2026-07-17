@@ -3,19 +3,11 @@ import { Link, useLocation, useNavigationType } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Music, 
-  Play,
-  Heart,
   Home,
   User,
   Mail,
   Brush,
-  Palette,
-  Youtube,
-  Twitch,
-  Instagram,
-  Twitter,
   Gamepad2,
-  Headphones,
   Camera,
   Mic,
   ArrowRight,
@@ -41,7 +33,6 @@ const ArtistHome = () => {
   // Get artist data from content manager
   const artistData = contentData.artist;
   const personalInfo = contentData.personal;
-  const socialLinks = contentData.social;
 
   // Mobile menu items
   const mobileMenuItems = [
@@ -73,12 +64,6 @@ const ArtistHome = () => {
     setIsMobileMenuOpen(false);
     if (analytics?.trackPortfolioEvents) {
       analytics.trackPortfolioEvents.sectionView(section);
-    }
-  };
-
-  const handleSocialClick = (platform, url) => {
-    if (analytics?.trackPortfolioEvents) {
-      analytics.trackPortfolioEvents.socialClick(platform, url);
     }
   };
 

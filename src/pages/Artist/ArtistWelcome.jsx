@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Music, Gamepad2, Camera, Heart, Star, Sparkles, ArrowRight } from 'lucide-react';
+import { Music, Gamepad2, Camera, ArrowRight } from 'lucide-react';
+
+// Welcome sequence words (module-level so the array reference is stable across renders)
+const welcomeWords = ['WELCOME', 'PAUSE', 'FEEL', 'EXPLORE', 'THIS IS ME', 'THROUGH MY ART'];
 
 const ArtistWelcome = ({ onComplete }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(-1); // Start with -1 to show initial delay
@@ -10,9 +13,6 @@ const ArtistWelcome = ({ onComplete }) => {
   const [showIcons, setShowIcons] = useState(false);
   const [showFinalText, setShowFinalText] = useState(false);
   const [textSequenceComplete, setTextSequenceComplete] = useState(false);
-
-  // Welcome sequence words
-  const welcomeWords = ['WELCOME', 'PAUSE', 'FEEL', 'EXPLORE', 'THIS IS ME', 'THROUGH MY ART'];
 
   // Skip intro function
   const handleSkipIntro = () => {
@@ -76,7 +76,7 @@ const ArtistWelcome = ({ onComplete }) => {
     return () => {
       timeouts.forEach(timeout => clearTimeout(timeout));
     };
-  }, [onComplete, welcomeWords.length]);
+  }, [onComplete, welcomeWords]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -123,42 +123,6 @@ const ArtistWelcome = ({ onComplete }) => {
     }
   };
 
-  const logoVariants = {
-    hidden: { 
-      scale: 0,
-      rotate: -180,
-      opacity: 0
-    },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      opacity: 1,
-      transition: {
-        opacity: { duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] },
-        scale: { duration: 2.0, ease: [0.25, 0.46, 0.45, 0.94] },
-        rotate: { duration: 2.2, ease: [0.25, 0.46, 0.45, 0.94] }
-      }
-    }
-  };
-
-  const titleVariants = {
-    hidden: { 
-      y: 60,
-      opacity: 0,
-      scale: 0.9
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        opacity: { duration: 1.8, ease: [0.25, 0.46, 0.45, 0.94] },
-        y: { duration: 2.0, ease: [0.25, 0.46, 0.45, 0.94] },
-        scale: { duration: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }
-      }
-    }
-  };
-
   const iconVariants = {
     hidden: { 
       scale: 0,
@@ -191,37 +155,6 @@ const ArtistWelcome = ({ onComplete }) => {
         delay: 0.8 + index * 0.15
       }
     })
-  };
-
-  const completionVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8 
-    },
-    visible: {
-      opacity: 1, 
-      scale: 1,
-      transition: {
-        duration: 1.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        staggerChildren: 0.6
-      }
-    }
-  };
-
-  const finalTextVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20 
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1.8,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
   };
 
   const creativityIcons = [

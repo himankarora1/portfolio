@@ -9,15 +9,10 @@ import {
   ExternalLink,
   Youtube,
   Heart,
-  Eye,
-  Calendar,
   Home,
   User,
   Mail,
   Brush,
-  Palette,
-  Subscribe,
-  PlayCircle,
   Instagram,
   Facebook,
   MessageSquare,
@@ -311,7 +306,6 @@ const ArtistWork = () => {
 
   // Get data from content manager
   const personalInfo = contentData.personal;
-  const artistData = contentData.artist;
   const artistEmail = getEmailForContext('artist'); // Use artist email
 
   // Mobile menu items
@@ -495,9 +489,6 @@ const ArtistWork = () => {
   const handleManualRefresh = async (refreshedVideos) => {
     setIsRefreshing(true);
     try {
-      // Determine which channel was refreshed based on activeTab
-      const channelType = activeTab === 'Gaming' ? 'gaming' : 'music';
-      
       // Update the videos state with fresh data
       setYoutubeVideos(prev => ({
         ...prev,

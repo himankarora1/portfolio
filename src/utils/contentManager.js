@@ -8,7 +8,7 @@ export const contentData = {
     location: "Boston, MA",
     email: "himankarora1000@gmail.com", // Tech portfolio email
     artistEmail: "himankaroraofficial@gmail.com", // Artist portfolio email
-    phone: "+1 (XXX) XXX-XXXX", // Add your phone if needed
+    phone: "+1 (617) 858-4450",
     avatar: "/images/avatar.jpg",
     resume: "/resume.pdf"
   },
@@ -27,111 +27,237 @@ export const contentData = {
 
   featured_projects: [
     {
+      id: "matchride",
+      title: "MatchRide",
+      description: "Full-stack carpooling platform matching riders and drivers in real time. Uses PostGIS spatial queries for sub-second route matching, a fairness algorithm to prevent new-driver bias, and real-time chat plus WebRTC voice signaling.",
+      tech: ["Next.js 14", "TypeScript", "PostgreSQL", "PostGIS", "Supabase", "Clerk", "Google Gemini AI", "WebRTC", "Tailwind CSS"],
+      category: "Full Stack Development",
+      featured: true,
+      image: "/images/projects/matchride.jpg",
+      github: "REPLACE_WITH_ACTUAL_GITHUB_URL",
+      demo: "REPLACE_WITH_ACTUAL_DEMO_URL",
+      status: "completed",
+      year: "2025",
+      highlights: [
+        "Sub-second matching via PostGIS spatial indexing",
+        "Fairness algorithm preventing new-driver bias",
+        "Real-time chat and WebRTC voice signaling"
+      ]
+    },
+    {
+      id: "matchwise",
+      title: "MatchWise",
+      description: "AI-powered job matching platform using semantic analysis rather than keyword search to match resumes to job descriptions. Includes recruiter and job-seeker dashboards with role-based access, LLM-based candidate scoring, and a full CI/CD pipeline.",
+      tech: ["Python", "FastAPI", "React", "MongoDB", "LLM APIs", "GitHub Actions"],
+      category: "Full Stack Development",
+      featured: true,
+      image: "/images/projects/matchwise.jpg",
+      github: "REPLACE_WITH_YOUR_OWN_COPY_GITHUB_URL",
+      demo: "https://matchwise.vercel.app",
+      status: "completed",
+      year: "2025",
+      highlights: [
+        "45% higher resume-to-JD relevance vs. keyword search",
+        "Role-based 3-tier architecture (React, FastAPI, MongoDB)",
+        "CI/CD with 40+ automated tests on every push"
+      ]
+    },
+    {
       id: "medulloblastoma-ml",
       title: "Medulloblastoma Classification Using Machine Learning",
-      description: "Developed a predictive machine learning model achieving 93% accuracy in classifying medulloblastoma tumor subtypes using gene expression data. Utilized advanced feature-selection methods and trained multiple algorithms across 22 distinct configurations.",
+      description: "Developed a predictive machine learning model achieving 93% accuracy in classifying medulloblastoma tumor subtypes using high-dimensional gene expression data. Compared multiple feature-selection strategies and models across dozens of configurations.",
       tech: ["Python", "Scikit-Learn", "Jupyter", "LASSO", "PCA", "Random Forest", "XGBoost"],
       category: "Machine Learning",
       featured: true,
       image: "/images/projects/medulloblastoma.jpg",
-      github: "https://github.com/himankarora/medulloblastoma-classification",
-      demo: "#",
+      github: "https://github.com/himankarora1/ML-Medulloblastoma-Subtype-Classification",
+      demo: null,
       status: "completed",
-      year: "2024",
+      year: "2025",
       highlights: [
-        "93% accuracy in tumor classification",
-        "22 distinct algorithm configurations tested",
-        "Advanced feature selection with LASSO and PCA"
+        "93% accuracy classifying 4 tumor subtypes",
+        "Feature space reduced 99.7% (54,675 → 150 features)",
+        "Benchmarked SVM, XGBoost, Random Forest, Logistic Regression"
       ]
     },
     {
       id: "mental-health-webapp",
       title: "Mental Health Wellness Website",
-      description: "Developed a full-stack mental health wellness platform to manage therapy bookings and mental health resources. Created a Patient Dashboard with secure role-based authentication and integrated chatbot feature for enhanced user experience.",
-      tech: ["React", "Node.js", "Express.js", "MongoDB", "Authentication", "Chatbot"],
+      description: "Full-stack mental health wellness platform managing therapy bookings and mental health resources, with role-based dashboards for patients, doctors, and admins.",
+      tech: ["React", "Node.js", "Express.js", "MongoDB", "JWT Authentication"],
       category: "Full Stack Development",
       featured: true,
       image: "/images/projects/mental-health.jpg",
-      github: "https://github.com/himankarora/mental-health-wellness",
-      demo: "https://mental-health-wellness.himankarora.dev",
+      github: "https://github.com/himankarora1/mentalhealthwellnessplatform",
+      demo: "https://mentalhealthwellnessplatform.vercel.app",
       status: "completed",
       year: "2024",
       highlights: [
-        "Full-stack MERN application",
-        "Secure role-based authentication",
-        "Integrated AI chatbot for support"
+        "Full-stack MERN application with 3 role-based dashboards",
+        "JWT authentication and RBAC middleware",
+        "Deployed on Vercel (frontend) and Render (backend)"
+      ]
+    },
+    {
+      id: "train-reservation-system",
+      title: "Train Reservation System",
+      description: "Train ticket booking and reservation system modeling real-world reservation logic: seat allocation, waitlist promotion, role-based access control, and booking business rules — implemented as a full Oracle PL/SQL schema, package layer, and test suite.",
+      tech: ["SQL", "PL/SQL", "Oracle", "Database Design"],
+      category: "Database Systems",
+      featured: false,
+      image: "/images/projects/train-reservation.jpg",
+      github: "REPLACE_WITH_ACTUAL_GITHUB_URL",
+      demo: null,
+      status: "completed",
+      year: "2025",
+      highlights: [
+        "3NF schema with 4 packages and role-based grants",
+        "Automatic waitlist promotion on cancellation",
+        "1,100+ line PL/SQL test suite"
+      ]
+    },
+    {
+      id: "fithub-ai",
+      title: "FitHub AI",
+      description: "AI health companion delivering personalized fitness and nutrition recommendations, built around structured prompt engineering (zero-shot, few-shot, chain-of-thought) and a LangGraph-based agentic workflow.",
+      tech: ["Python", "OpenAI API", "LangChain", "LangGraph", "Streamlit"],
+      category: "AI / Machine Learning",
+      featured: true,
+      image: "/images/projects/fithub-ai.jpg",
+      github: "REPLACE_WITH_ACTUAL_GITHUB_URL",
+      demo: "REPLACE_WITH_STREAMLIT_URL_ONCE_DEPLOYED",
+      status: "completed",
+      year: "2025",
+      highlights: [
+        "Multi-node LangGraph agentic workflow",
+        "Structured JSON output for consistent rendering",
+        "Custom evaluation pipeline for prompt variations"
+      ]
+    },
+    {
+      id: "inventory-management-invatron",
+      title: "Invatron — Inventory Management System",
+      description: "Desktop inventory and stock management system covering the full lifecycle of stock control: purchasing, selling, supplier/customer management, and reporting, with role-based dashboards.",
+      tech: ["Java", "JavaFX", "MySQL", "JDBC"],
+      category: "Desktop Application",
+      featured: false,
+      image: "/images/projects/invatron.jpg",
+      github: "https://github.com/himankarora1/Invatron_Inventory_Management_System",
+      demo: null,
+      status: "completed",
+      year: "2025",
+      highlights: [
+        "JDBC connection pooling with prepared statements",
+        "Role-based access control across 4 dashboards",
+        "Automated invoice generation with tax calculations"
+      ]
+    },
+    {
+      id: "disentangled-gans",
+      title: "Disentangled Representation Learning (InfoGAN & CGN)",
+      description: "Explored disentangled, controllable generative modeling: four InfoGAN variants (baseline, orthogonal regularization, contrastive regularization, combined) compared head-to-head, plus a Counterfactual Generative Network separating shape, foreground, and background as independent causal factors on Colored MNIST.",
+      tech: ["Python", "PyTorch", "GANs", "TensorBoard", "Jupyter"],
+      category: "Machine Learning",
+      featured: false,
+      image: "/images/projects/gans.jpg",
+      github: "https://github.com/himankarora1/Disentangled-Generative-Networks",
+      demo: null,
+      status: "completed",
+      year: "2025",
+      highlights: [
+        "4 InfoGAN variants benchmarked with custom disentanglement metrics",
+        "CGN disentangling shape/texture as independent causal factors",
+        "Custom metrics: mutual information, traversal linearity, factor independence"
       ]
     },
     {
       id: "health-management-system",
       title: "Health Management System",
-      description: "Developed a Healthcare Management System to streamline healthcare resource distribution and supply chain. Implemented role-based access control and built an interactive UI with real-time validation for secure data entry.",
-      tech: ["Java", "Swing", "MySQL", "Authentication", "Real-time Validation"],
+      description: "Healthcare supply chain and resource distribution system built as a Java desktop application, modeling hospitals, blood banks, clinics, and suppliers with role-based access control.",
+      tech: ["Java", "Swing", "MySQL"],
       category: "Desktop Application",
-      featured: true,
+      featured: false,
       image: "/images/projects/health-management.jpg",
-      github: "https://github.com/himankarora/health-management-system",
-      demo: "#",
+      github: "https://github.com/himankarora1/healthcaremanagementsystem",
+      demo: null,
       status: "completed",
-      year: "2024",
+      year: "2025",
       highlights: [
-        "Healthcare resource optimization",
+        "Healthcare resource optimization across multiple org types",
         "Role-based access control",
-        "Real-time data validation"
+        "Normalized MySQL schema across 8 tables"
       ]
     },
     {
       id: "ecommerce-data-analysis",
       title: "E-commerce Sales Data Analysis",
-      description: "Cleaned and preprocessed over 10,000 data entries, identified top-grossing months and highest-demand cities through comprehensive sales trend analysis. Analyzed product performance and provided recommendations for inventory optimization.",
-      tech: ["Python", "Jupyter", "Pandas", "Matplotlib", "NumPy", "Data Visualization"],
+      description: "Cleaned and analyzed over 10,000 sales records, identifying top-grossing months and highest-demand cities through comprehensive trend analysis, with pricing elasticity insights for inventory strategy.",
+      tech: ["Python", "Jupyter", "Pandas", "Matplotlib", "NumPy"],
       category: "Data Analysis",
       featured: false,
       image: "/images/projects/ecommerce-analysis.jpg",
-      github: "https://github.com/himankarora/ecommerce-data-analysis",
-      demo: "#",
+      github: "REPLACE_WITH_ACTUAL_GITHUB_URL",
+      demo: null,
       status: "completed",
       year: "2023",
       highlights: [
-        "Processed 10,000+ data entries",
-        "Comprehensive sales trend analysis",
-        "Inventory optimization recommendations"
+        "Processed 10,000+ records, resolved 480+ missing values",
+        "Top 3 months drove 47% of sales; 5 cities drove 58%",
+        "Pricing elasticity analysis informing markdown strategy"
       ]
     },
     {
       id: "portfolio-website",
       title: "Developer Portfolio Website",
-      description: "Built a modern, responsive portfolio website showcasing professional experience, projects, and skills. Features smooth animations, dark theme, floating navigation, and professional contact form with glassmorphism design elements.",
-      tech: ["React", "Tailwind CSS", "Framer Motion", "Responsive Design", "Modern UI/UX"],
+      description: "This site — a dual-identity portfolio (tech + artist) built with React and Tailwind, featuring smooth animations, dark theme, and a working contact form backed by a serverless email function.",
+      tech: ["React", "Tailwind CSS", "Vercel Serverless Functions"],
       category: "Web Development",
       featured: true,
       image: "/images/projects/portfolio.jpg",
-      github: "https://github.com/himankarora/portfolio-website",
-      demo: "https://himankarora.dev",
+      github: "https://github.com/himankarora1/portfolio",
+      demo: "https://himankarora.com",
       status: "completed",
-      year: "2024",
+      year: "2025",
       highlights: [
-        "Modern glassmorphism design",
-        "Smooth Framer Motion animations",
+        "Dual-identity design (tech + artist personas)",
+        "Serverless contact form via Vercel functions",
         "Responsive across all devices"
       ]
     },
     {
       id: "do-all-app",
-      title: "Do All - Multi-Utility Web Application",
-      description: "Built a comprehensive web application combining To-Do List, Notes, and Calendar Reminders for task management. Enhanced with AngularJS and jQuery, featuring secure user authentication and SQLite backend storage.",
-      tech: ["Python", "Flask", "SQL", "HTML", "CSS", "JavaScript", "AngularJS", "Bootstrap"],
+      title: "Do All — Multi-Utility Web Application",
+      description: "A multi-page productivity web app combining a to-do list, sticky notes, and reminders/calendar tools, built with vanilla JavaScript alongside AngularJS and Vue for different pages.",
+      tech: ["HTML", "CSS", "JavaScript", "jQuery", "AngularJS", "Vue.js"],
       category: "Web Development",
       featured: false,
       image: "/images/projects/do-all.jpg",
-      github: "https://github.com/himankarora/do-all-app",
-      demo: "#",
+      github: "https://github.com/himankarora1/doall",
+      demo: "REPLACE_WITH_NETLIFY_URL",
       status: "completed",
       year: "2023",
       highlights: [
-        "Multi-utility task management",
-        "AngularJS frontend with Flask backend",
-        "Secure user authentication"
+        "Multi-utility task management across 4 tools",
+        "Vanilla JS, AngularJS, and Vue used across different pages",
+        "Deployed on Netlify"
+      ]
+    },
+    {
+      id: "stopwatch-app",
+      title: "Stopwatch App",
+      description: "A precision browser-based stopwatch with start, stop, resume, lap, and reset functionality.",
+      tech: ["HTML", "CSS", "JavaScript", "Bootstrap", "jQuery"],
+      category: "Web Development",
+      featured: false,
+      image: "/images/projects/stopwatch.jpg",
+      github: "https://github.com/himankarora1/Stopwatch-App",
+      demo: "REPLACE_WITH_NETLIFY_URL",
+      status: "completed",
+      year: "2023",
+      highlights: [
+        "Precision timing using JavaScript timing APIs",
+        "Start/stop/lap/reset functionality",
+        "Deployed on Netlify"
       ]
     }
   ],
@@ -189,34 +315,36 @@ export const contentData = {
     },
     {
       id: "ferro-star",
-      title: "Business Analyst",
+      title: "Technical Analyst",
       company: "Ferro Star",
       duration: "April 2022 - April 2024",
       location: "New Delhi, India",
       type: "work",
-      description: "Evaluated operational workflows and proposed efficiency improvements, conducted market research, and utilized ERP systems to optimize supply chain and inventory processes.",
+      description: "Worked between business and technology, engineering backend systems and automations to support inventory management, pricing, and procurement operations.",
       achievements: [
-        "Cut processing time by 22% through operational workflow improvements",
-        "Increased sales by 8% by assisting company expansion into new markets",
-        "Optimized stock levels using SQL data analysis, minimizing overstocking",
-        "Enhanced overall efficiency through ERP system optimization"
+        "Engineered FastAPI backend for inventory management, processing 1,000+ monthly transactions with audit logging",
+        "Redesigned MySQL schema to 3NF with B-tree indexes and connection pooling, cutting query response time by 60%",
+        "Constructed Python/Pandas ETL pipeline normalizing supplier catalogs, eliminating 12+ hours of weekly data entry",
+        "Implemented JWT auth and RBAC across 3 departments, securing inventory and pricing data with stateless API design",
+        "Delivered React dashboard adopted by 4 departments and leadership for pricing and procurement decisions"
       ],
       logo: "/images/companies/ferro-star.png",
       website: "https://ferrostar.com"
     },
     {
       id: "super-enterprises",
-      title: "Analyst",
+      title: "Technical Analyst",
       company: "Super Enterprises",
       duration: "April 2021 - March 2022",
       location: "New Delhi, India",
       type: "work",
-      description: "Analyzed market and sales trends to improve pricing strategies, collaborated with senior management on business strategies, and streamlined sales and inventory tracking systems.",
+      description: "Combined business analysis with hands-on development, building and maintaining the company's web presence and internal tooling.",
       achievements: [
-        "Improved pricing strategies through market and sales trend analysis",
-        "Contributed to better decision-making by developing business strategies",
-        "Increased inventory turnover by 15% through ERP system integration",
-        "Enhanced management efficiency with insightful reports and presentations"
+        "Launched React/Node.js website reaching 8,000+ monthly sessions (Google Analytics), improving engagement by 35%",
+        "Designed RESTful API with MySQL backend for product catalog and pricing, cutting latency by 50% across 300+ SKUs",
+        "Automated pricing and inventory sync via Python scripts, cutting update time from 90 to under 10 minutes",
+        "Integrated third-party email notification APIs, reducing customer response time from 24 hours to under 2",
+        "Developed React components with dynamic filtering and validation, reducing incomplete submissions by 28%"
       ],
       logo: "/images/companies/super-enterprises.png",
       website: "#"
