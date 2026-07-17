@@ -101,7 +101,7 @@ export const contentData = {
     {
       id: "train-reservation-system",
       title: "Train Reservation System",
-      description: "Train ticket booking and reservation system modeling real-world reservation logic: seat allocation, waitlist promotion, role-based access control, and booking business rules — implemented as a full Oracle PL/SQL schema, package layer, and test suite.",
+      description: "Train ticket booking and reservation system modeling real-world reservation logic: seat allocation, waitlist promotion, role-based access control, and booking business rules. Implemented as a full Oracle PL/SQL schema, package layer, and test suite.",
       tech: ["SQL", "PL/SQL", "Oracle", "Database Design"],
       category: "Database Systems",
       featured: false,
@@ -136,7 +136,7 @@ export const contentData = {
     },
     {
       id: "inventory-management-invatron",
-      title: "Invatron — Inventory Management System",
+      title: "Invatron: Inventory Management System",
       description: "Desktop inventory and stock management system covering the full lifecycle of stock control: purchasing, selling, supplier/customer management, and reporting, with role-based dashboards.",
       tech: ["Java", "JavaFX", "MySQL", "JDBC"],
       category: "Desktop Application",
@@ -209,7 +209,7 @@ export const contentData = {
     {
       id: "portfolio-website",
       title: "Developer Portfolio Website",
-      description: "This site — a dual-identity portfolio (tech + artist) built with React and Tailwind, featuring smooth animations, dark theme, and a working contact form backed by a serverless email function.",
+      description: "This site: a dual-identity portfolio (tech + artist) built with React and Tailwind, featuring smooth animations, dark theme, and a working contact form backed by a serverless email function.",
       tech: ["React", "Tailwind CSS", "Vercel Serverless Functions"],
       category: "Web Development",
       featured: true,
@@ -226,7 +226,7 @@ export const contentData = {
     },
     {
       id: "do-all-app",
-      title: "Do All — Multi-Utility Web Application",
+      title: "Do All: Multi-Utility Web Application",
       description: "A multi-page productivity web app combining a to-do list, sticky notes, and reminders/calendar tools, built with vanilla JavaScript alongside AngularJS and Vue for different pages.",
       tech: ["HTML", "CSS", "JavaScript", "jQuery", "AngularJS", "Vue.js"],
       category: "Web Development",
@@ -300,7 +300,7 @@ export const contentData = {
       id: "northeastern-university",
       title: "Master of Science in Information Systems",
       company: "Northeastern University",
-      duration: "Expected May 2026",
+      duration: "May 2026",
       location: "Boston, MA",
       type: "education",
       description: "Relevant coursework: Business Analysis & Information Engineering, Data Management & Database Design, Data Science & ML.",

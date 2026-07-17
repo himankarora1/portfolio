@@ -295,7 +295,7 @@ const HomePage = () => {
                       backgroundClip: "text"
                     }}
                   >
-                    A Developer by profession and an Artist by passion
+                    A Professional by craft and an Artist by passion
                   </motion.span>
                 </motion.p>
 
@@ -337,7 +337,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3"
                       >
-                        Technical Business Analyst
+                        Professional Portfolio
                       </motion.h3>
                       
                       {/* Description - Better mobile formatting */}

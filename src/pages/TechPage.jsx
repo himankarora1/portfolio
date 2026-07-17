@@ -71,6 +71,8 @@ const TechPage = () => {
   const projects = contentData.featured_projects;
   const skills = contentData.skills;
   const experience = contentData.experience;
+  const workExperience = experience.filter(exp => exp.type === 'work');
+  const education = experience.filter(exp => exp.type === 'education');
   const certificates = contentData.certifications;
   const personalInfo = contentData.personal;
   const socialLinks = contentData.social;
@@ -79,10 +81,11 @@ const TechPage = () => {
   const mobileMenuItems = [
     { id: 'hero', label: 'Home', icon: Home },
     { id: 'about', label: 'About', icon: User },
+    { id: 'education', label: 'Education', icon: GraduationCap },
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'projects', label: 'Projects', icon: Target },
     { id: 'skills', label: 'Skills', icon: Zap },
-    { id: 'certificates', label: 'Certificates', icon: GraduationCap },
+    { id: 'certificates', label: 'Certificates', icon: Award },
     { id: 'contact', label: 'Contact', icon: Mail }
   ];
 
@@ -257,7 +260,7 @@ const TechPage = () => {
     let scrollTimer;
     
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'certificates', 'contact'];
+      const sections = ['hero', 'about', 'education', 'experience', 'projects', 'skills', 'certificates', 'contact'];
       const scrollPosition = window.scrollY + 200;
       const isScrolled = window.scrollY > 100;
 
@@ -803,7 +806,7 @@ const TechPage = () => {
                     I'm a Technical Business Analyst with 3+ years as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.
                   </p>
                   <p>
-                    My strength is bridging business and technology — eliciting requirements, mapping workflows, validating improvements with data, and shipping tools that departments actually adopt.
+                    My strength is bridging business and technology: eliciting requirements, mapping workflows, validating improvements with data, and shipping tools that departments actually adopt.
                   </p>
                   <p>
                     Whether it's a reporting dashboard, a product workflow redesign, or an AI-assisted application, I focus on clear problem framing, measurable outcomes, and solutions that blend analysis with execution.
@@ -839,8 +842,70 @@ const TechPage = () => {
           </div>
         </section>
 
-        {/* Experience Section */}
-        <section id="experience" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-900/50 backdrop-blur-sm">
+        {/* Education Section */}
+        <section id="education" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-900/50 backdrop-blur-sm">
+          <div className="max-w-6xl mx-auto w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-12 sm:mb-16"
+            >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
+                Education
+              </h2>
+              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
+            </motion.div>
+
+            <div className="space-y-6 sm:space-y-8">
+              {education.map((exp, index) => (
+                <motion.div
+                  key={exp.id || index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-cyan-500/10 transition-all"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3 sm:mb-4">
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{exp.title}</h3>
+                      <div className="text-cyan-400 font-semibold mb-2">{exp.company}</div>
+                    </div>
+                    <div className="flex flex-col md:items-end text-xs sm:text-sm text-gray-400">
+                      <div className="flex items-center space-x-1 mb-1">
+                        <Calendar size={12} className="sm:w-3.5 sm:h-3.5" />
+                        <span>{exp.duration}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <MapPin size={12} className="sm:w-3.5 sm:h-3.5" />
+                        <span>{exp.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">{exp.description}</p>
+                  {exp.achievements?.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold text-white mb-2 text-sm sm:text-base">Relevant Coursework:</h4>
+                      <ul className="space-y-1">
+                        {exp.achievements.map((achievement, i) => (
+                          <li key={i} className="flex items-start space-x-2 text-gray-300 text-sm sm:text-base">
+                            <Award size={14} className="text-cyan-400 mt-0.5 flex-shrink-0 sm:w-4 sm:h-4" />
+                            <span>{achievement}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Professional Experience Section */}
+        <section id="experience" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-800/50 backdrop-blur-sm border-y border-gray-700">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -856,9 +921,9 @@ const TechPage = () => {
             </motion.div>
 
             <div className="space-y-6 sm:space-y-8">
-              {experience.map((exp, index) => (
+              {workExperience.map((exp, index) => (
                 <motion.div
-                  key={index}
+                  key={exp.id || index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -902,7 +967,7 @@ const TechPage = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-800/50 backdrop-blur-sm border-y border-gray-700">
+        <section id="projects" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-900/50 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1523,6 +1588,15 @@ const TechPage = () => {
                   >
                     <User size={14} className="sm:w-4 sm:h-4" />
                     <span>About Me</span>
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => scrollToSection('education')}
+                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                  >
+                    <GraduationCap size={14} className="sm:w-4 sm:h-4" />
+                    <span>Education</span>
                   </button>
                 </li>
                 <li>
