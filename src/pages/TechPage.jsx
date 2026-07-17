@@ -800,14 +800,14 @@ const TechPage = () => {
               <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
             </motion.div>
 
-            <div className="max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
               >
-                <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed text-center sm:text-left">
+                <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
                   <p>
                     I'm a Technical Business Analyst with 3+ years as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.
                   </p>
@@ -817,6 +817,34 @@ const TechPage = () => {
                   <p>
                     Whether it's a reporting dashboard, a product workflow redesign, or an AI-assisted application, I focus on clear problem framing, measurable outcomes, and solutions that blend analysis with execution.
                   </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 sm:p-8 space-y-5 sm:space-y-6"
+              >
+                <h3 className="text-lg sm:text-xl font-semibold text-white">At a glance</h3>
+                <div className="space-y-4">
+                  {[
+                    { icon: Briefcase, label: 'Role', value: 'Technical Business Analyst' },
+                    { icon: Clock, label: 'Experience', value: '3+ years owning analysis and delivery' },
+                    { icon: GraduationCap, label: 'Education', value: 'MS Information Systems, Northeastern' },
+                    { icon: MapPin, label: 'Location', value: 'Boston, MA' }
+                  ].map(({ icon: Icon, label, value }) => (
+                    <div key={label} className="flex items-start space-x-3">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                        <Icon size={16} className="text-cyan-400 sm:w-[18px] sm:h-[18px]" />
+                      </div>
+                      <div>
+                        <div className="text-xs sm:text-sm text-gray-400 mb-0.5">{label}</div>
+                        <div className="text-sm sm:text-base text-white font-medium">{value}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </div>
@@ -974,54 +1002,79 @@ const TechPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     onClick={() => handleProjectClick(project)}
-                    className="flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/50 cursor-pointer"
+                    className="group flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg overflow-hidden hover:shadow-cyan-500/10 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer"
                   >
-                    <div className="mb-4">
-                      <div className="text-xs sm:text-sm font-medium text-cyan-400 mb-2">{project.category}</div>
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{project.title}</h3>
-                      <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{project.description}</p>
+                    <div className="flex flex-col flex-1 p-6 sm:p-7">
+                      <div className="mb-4">
+                        <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2">
+                          {project.category}
+                        </div>
+                        <h3 className="text-lg sm:text-xl font-bold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-300 leading-relaxed text-sm sm:text-base line-clamp-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="mt-auto pt-4">
+                        <div className="rounded-lg border border-gray-700/80 bg-gray-900/40 p-3 sm:p-4">
+                          <div className="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2.5">
+                            Tech stack
+                          </div>
+                          <div className="flex flex-wrap gap-2 min-h-[52px] content-start">
+                            {project.tech.slice(0, 6).map(tech => (
+                              <span
+                                key={tech}
+                                className="bg-blue-500/15 border border-blue-500/25 text-blue-300 px-2.5 py-1 rounded-md text-xs font-medium"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                            {project.tech.length > 6 && (
+                              <span className="text-gray-400 text-xs px-2 py-1">
+                                +{project.tech.length - 6} more
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
-                      {project.tech.map(tech => (
-                        <span key={tech} className="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="mt-auto flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 pt-2">
-                      {project.github && (
-                        <a 
-                          href={project.github} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleProjectGithub(project);
-                          }}
-                          className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
-                        >
-                          <Github size={16} className="sm:w-4 sm:h-4" />
-                          <span className="text-sm sm:text-base">Code</span>
-                        </a>
-                      )}
-                      {project.demo && project.demo !== "#" && (
-                        <a 
-                          href={project.demo} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleProjectDemo(project);
-                          }}
-                          className="flex items-center justify-center sm:justify-start space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-2 px-3 rounded-lg hover:bg-gray-700/30"
-                        >
-                          <ExternalLink size={16} className="sm:w-4 sm:h-4" />
-                          <span className="text-sm sm:text-base">Live Demo</span>
-                        </a>
-                      )}
-                    </div>
+
+                    {(project.github || (project.demo && project.demo !== "#")) && (
+                      <div className="flex items-center gap-2 sm:gap-3 px-6 sm:px-7 py-3.5 sm:py-4 border-t border-gray-700/80 bg-gray-900/30">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleProjectGithub(project);
+                            }}
+                            className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
+                          >
+                            <Github size={15} />
+                            <span>Code</span>
+                          </a>
+                        )}
+                        {project.demo && project.demo !== "#" && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleProjectDemo(project);
+                            }}
+                            className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
+                          >
+                            <ExternalLink size={15} />
+                            <span>Live Demo</span>
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </motion.div>
                 ))}
               </div>
