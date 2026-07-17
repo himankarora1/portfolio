@@ -974,7 +974,7 @@ const TechPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     onClick={() => handleProjectClick(project)}
-                    className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/50 cursor-pointer"
+                    className="flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-6 sm:p-8 hover:shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/50 cursor-pointer"
                   >
                     <div className="mb-4">
                       <div className="text-xs sm:text-sm font-medium text-cyan-400 mb-2">{project.category}</div>
@@ -990,7 +990,7 @@ const TechPage = () => {
                       ))}
                     </div>
                     
-                    <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+                    <div className="mt-auto flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 pt-2">
                       {project.github && (
                         <a 
                           href={project.github} 
