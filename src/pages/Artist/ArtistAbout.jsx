@@ -154,7 +154,10 @@ const ArtistAbout = () => {
         keywords="about, creative journey, content creator, musician, gaming, digital storytelling"
       />
 
-      <ArtistPageShell atmosphereSrc={artistMedia.about.atmosphere} atmosphereFit="contain">
+      <ArtistPageShell
+        atmosphereSrc={artistMedia.about.atmosphere}
+        atmospherePosition="center 18%"
+      >
         {/* Main Content */}
         <motion.div 
           variants={containerVariants}

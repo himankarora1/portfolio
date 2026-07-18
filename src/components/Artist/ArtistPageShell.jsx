@@ -3,26 +3,26 @@ import ArtistNav from './ArtistNav';
 
 /**
  * Shared cinematic chrome for artist inner pages.
- * @param {string} [atmosphereSrc] - Full-bleed still behind content
- * @param {'cover'|'contain'} [atmosphereFit='cover'] - contain keeps tall shots in frame
+ * @param {string} [atmosphereSrc] - Full-bleed still behind content (blurred, cover)
+ * @param {string} [atmospherePosition='center 22%'] - Bias crop toward faces
  * @param {React.ReactNode} children
  */
-const ArtistPageShell = ({ atmosphereSrc, atmosphereFit = 'cover', children, className = '' }) => {
-  const fitContain = atmosphereFit === 'contain';
-
+const ArtistPageShell = ({
+  atmosphereSrc,
+  atmospherePosition = 'center 22%',
+  children,
+  className = '',
+}) => {
   return (
     <div className={`relative min-h-screen overflow-hidden bg-black ${className}`}>
       {atmosphereSrc && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black">
+        <div className="pointer-events-none absolute inset-0">
           <img
             src={atmosphereSrc}
             alt=""
             aria-hidden="true"
-            className={
-              fitContain
-                ? 'h-full w-full object-contain object-center opacity-45 blur-[2px] sm:blur-[3px]'
-                : 'h-full w-full scale-105 object-cover opacity-40 blur-[3px]'
-            }
+            className="h-full w-full scale-105 object-cover opacity-40 blur-[3px]"
+            style={{ objectPosition: atmospherePosition }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/40" />

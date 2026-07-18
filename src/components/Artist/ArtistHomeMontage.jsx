@@ -4,10 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 /**
  * Crossfading photo + short video-beat montage for the artist home hero.
  * Videos play muted from `startAt` for `duration` only (not full loops).
- *
- * Slide options:
- * - fit: 'cover' | 'contain' — contain keeps tall outdoor shots fully in frame
- * - objectPosition: CSS object-position
+ * Always object-cover (no letterboxing). Use objectPosition to keep faces in frame.
  */
 const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
@@ -16,7 +13,6 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
-  const fitContain = slide?.fit === 'contain';
 
   useEffect(() => {
     const next = slides[nextIndex];
@@ -70,18 +66,14 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
   if (!slides?.length) return null;
 
-  const mediaClass = fitContain
-    ? 'h-full w-full object-contain object-center blur-[1.5px] sm:blur-[2.5px]'
-    : 'h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]';
-
   return (
     <div className={`absolute inset-0 overflow-hidden bg-black ${className}`}>
       <AnimatePresence mode="sync">
         <motion.div
           key={`${slide.type}-${slide.src}-${index}`}
-          className="absolute inset-0 flex items-center justify-center bg-black"
-          initial={{ opacity: 0, scale: fitContain ? 1 : 1.06 }}
-          animate={{ opacity: 1, scale: fitContain ? 1 : 1.02 }}
+          className="absolute inset-0"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1.02 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeInOut' }}
         >
@@ -89,12 +81,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
             <video
               ref={videoRef}
               src={slide.src}
-              className={mediaClass}
-              style={
-                fitContain
-                  ? undefined
-                  : { objectPosition: slide.objectPosition || 'center center' }
-              }
+              className="h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]"
+              style={{ objectPosition: slide.objectPosition || 'center 28%' }}
               muted
               playsInline
               preload="auto"
@@ -105,12 +93,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               src={slide.src}
               alt=""
               aria-hidden="true"
-              className={mediaClass}
-              style={
-                fitContain
-                  ? undefined
-                  : { objectPosition: slide.objectPosition || 'center 30%' }
-              }
+              className="h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]"
+              style={{ objectPosition: slide.objectPosition || 'center 28%' }}
             />
           )}
         </motion.div>
