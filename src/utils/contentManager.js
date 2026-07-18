@@ -303,13 +303,17 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Building depth across software development, systems design, and analysis. Coursework covers application engineering, web and UX design, algorithms, software engineering practices, database design, data science and machine learning, prompt engineering, and business analysis for information systems.",
+      description: "Building full-stack applications, designing databases, and applying data science and machine learning to product and information problems. Coursework also covers software engineering practices, algorithms, UX-focused web design, prompt engineering, and business analysis for information systems.",
       achievements: [],
       skills: [
-        "Program Structures & Algorithms",
+        "Application Engineering",
         "Software Engineering",
+        "Program Structures & Algorithms",
+        "Database Design",
         "Data Science & ML",
-        "Database Design"
+        "Web Design & UX",
+        "Business Analysis",
+        "Prompt Engineering"
       ],
       logo: "/images/companies/northeastern.png",
       website: "https://northeastern.edu"
@@ -321,14 +325,17 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Commerce degree with a real technical base. Learned information systems management, computer applications, and computerized accounting tied to ERP-style workflows, plus e-commerce web design and development. Also built quantitative skills through business statistics, business mathematics, and financial modeling, alongside project management, research methods, and core accounting and business coursework.",
+      description: "Core commerce and management training with a real technical base: computer applications, information systems management, computerized accounting and ERP-style workflows, plus e-commerce and web development. Strengthened quantitative skills through business statistics, mathematics, and financial modeling, alongside project management and research methods used in analyst work.",
       achievements: [],
       skills: [
         "Information Systems Management",
         "Computer Applications",
-        "E-Commerce / Web Development",
+        "E-Commerce & Web Development",
+        "Computerized Accounting / ERP",
         "Business Statistics",
-        "Business Mathematics"
+        "Business Mathematics",
+        "Financial Modeling",
+        "Project Management"
       ],
       logo: "/images/companies/ggsipu.png",
       website: "http://www.ipu.ac.in"
