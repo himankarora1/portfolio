@@ -203,22 +203,24 @@ const ArtistAbout = () => {
                 My Creative <span className={artistHeadingAccent}>Journey</span>
               </h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
                 {creativeJourney.map((item, index) => (
                   <motion.div
                     key={item.year}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 * index }}
-                    className="relative"
+                    transition={{ delay: 0.08 * index, duration: 0.4 }}
+                    className="h-full"
                   >
-                    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 sm:p-6 hover:border-gray-600/50 transition-all group">
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${item.color} rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all`}>
-                        <item.icon size={20} className="text-white sm:w-6 sm:h-6" />
+                    <div className="flex h-full flex-col rounded-2xl border border-gray-700/50 bg-gray-800/50 p-4 backdrop-blur-sm transition-colors group hover:border-gray-600/50 sm:p-6">
+                      <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r ${item.color} sm:mb-4 sm:h-12 sm:w-12`}>
+                        <item.icon size={20} className="text-white sm:h-6 sm:w-6" />
                       </div>
-                      <div className="text-amber-200 font-bold text-base sm:text-lg mb-2">{item.year}</div>
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{item.title}</h3>
-                      <p className="text-gray-300 text-sm sm:text-base leading-relaxed">{item.description}</p>
+                      <div className="mb-2 text-base font-bold text-amber-200 sm:text-lg">{item.year}</div>
+                      <h3 className="mb-2 text-lg font-bold text-white sm:mb-3 sm:text-xl">{item.title}</h3>
+                      <p className="min-h-[4.5rem] flex-1 text-sm leading-relaxed text-gray-300 sm:min-h-[5rem] sm:text-base">
+                        {item.description}
+                      </p>
                     </div>
                   </motion.div>
                 ))}
@@ -256,7 +258,7 @@ const ArtistAbout = () => {
                 Connect with me across different platforms and be part of my creative community. Let's create, learn, and grow together!
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
                 {socialPlatforms.map((platform, index) => (
                   <motion.a
                     key={platform.name}
@@ -264,17 +266,16 @@ const ArtistAbout = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleSocialClick(platform.name, platform.url)}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 sm:p-6 hover:border-gray-600/50 transition-all group"
+                    transition={{ delay: 0.06 * index, duration: 0.35 }}
+                    className="flex h-full flex-col rounded-2xl border border-gray-700/50 bg-gray-800/50 p-4 backdrop-blur-sm transition-colors group hover:border-gray-600/50 sm:p-6"
                   >
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 ${platform.color} rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-all`}>
-                      <platform.icon size={20} className="text-white sm:w-6 sm:h-6" />
+                    <div className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${platform.color} sm:mb-4 sm:h-12 sm:w-12`}>
+                      <platform.icon size={20} className="text-white sm:h-6 sm:w-6" />
                     </div>
-                    <h3 className="text-base sm:text-lg font-semibold text-white mb-2">{platform.name}</h3>
-                    <p className="text-gray-400 text-sm">{platform.handle}</p>
+                    <h3 className="mb-2 text-base font-semibold text-white sm:text-lg">{platform.name}</h3>
+                    <p className="mt-auto text-sm text-gray-400">{platform.handle}</p>
                   </motion.a>
                 ))}
               </div>
