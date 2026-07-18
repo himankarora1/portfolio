@@ -187,16 +187,17 @@ const ArtistWelcome = ({ onComplete }) => {
         exit="exit"
         className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden"
       >
-        {/* Subtle full-bleed atmosphere */}
+        {/* Silhouette atmosphere — framed so stage feet stay visible */}
         <div className="pointer-events-none absolute inset-0">
           <img
             src="/images/artist/artist-silhouette-pink.jpg"
             alt=""
             aria-hidden="true"
-            className="h-full w-full object-cover opacity-35"
+            className="h-full w-full scale-105 object-cover opacity-45"
+            style={{ objectPosition: 'center 72%' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/50" />
         </div>
 
         {/* Skip Intro Button - Mobile Responsive */}

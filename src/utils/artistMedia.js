@@ -68,15 +68,6 @@ export const artistMedia = {
         objectPosition: 'center 65%',
       },
       {
-        type: 'image',
-        src: '/images/artist/artist-silhouette-pink.jpg',
-        duration: 4800,
-        orientation: 'landscape',
-        scale: 1,
-        objectPosition: 'center center',
-        kenBurns: 'out-right',
-      },
-      {
         type: 'video',
         src: '/videos/artist/artist-stage-landscape.mp4',
         duration: 4000,
@@ -96,7 +87,7 @@ export const artistMedia = {
     banner: '/images/artist/artist-ensemble-red.jpg',
   },
   contact: {
-    atmosphere: '/images/artist/artist-silhouette-pink.jpg',
+    atmosphere: '/images/artist/artist-ensemble-red.jpg',
   },
   welcome: {
     atmosphere: '/images/artist/artist-silhouette-pink.jpg',
