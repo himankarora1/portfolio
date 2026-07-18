@@ -39,7 +39,8 @@ export const artistMedia = {
         playFor: 4.2,
         orientation: 'landscape',
         scale: 1,
-        objectPosition: 'center center',
+        // Tiny bias down-crop so shoes stay in frame
+        objectPosition: 'center 58%',
       },
       {
         type: 'image',
