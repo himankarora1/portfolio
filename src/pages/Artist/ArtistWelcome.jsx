@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Music, Gamepad2, Camera, ArrowRight } from 'lucide-react';
 
 // Welcome sequence words (module-level so the array reference is stable across renders)
 const welcomeWords = ['WELCOME', 'PAUSE', 'FEEL', 'EXPLORE', 'THIS IS ME', 'THROUGH MY ART'];
-
-const softEase = [0.22, 1, 0.36, 1];
-const layoutTransition = { duration: 0.65, ease: softEase };
 
 const ArtistWelcome = ({ onComplete }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(-1);
@@ -53,10 +50,10 @@ const ArtistWelcome = ({ onComplete }) => {
 
               setTimeout(() => {
                 onComplete();
-              }, 1400);
-            }, 1100);
-          }, 1100);
-        }, 900);
+              }, 1500);
+            }, 1300);
+          }, 1300);
+        }, 1000);
       }, 500);
     }, 200 + welcomeWords.length * 1000));
 
@@ -73,34 +70,37 @@ const ArtistWelcome = ({ onComplete }) => {
     },
     exit: {
       opacity: 0,
-      transition: { duration: 0.7, ease: 'easeIn' },
+      scale: 0.96,
+      transition: { duration: 0.8, ease: 'easeIn' },
     },
   };
 
   const welcomeTextVariants = {
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 15, scale: 0.97 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.55, ease: softEase },
+      scale: 1,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
     },
     exit: {
       opacity: 0,
-      y: -14,
-      transition: { duration: 0.35, ease: softEase },
+      y: -15,
+      scale: 0.97,
+      transition: { duration: 0.4, ease: [0.55, 0.06, 0.55, 0.94] },
     },
   };
 
   const iconVariants = {
-    hidden: { opacity: 0, y: 18, scale: 0.92 },
+    hidden: { scale: 0, rotate: -90, opacity: 0 },
     visible: (index) => ({
-      opacity: 1,
-      y: 0,
       scale: 1,
+      rotate: 0,
+      opacity: 1,
       transition: {
-        duration: 0.55,
-        ease: softEase,
-        delay: index * 0.12,
+        opacity: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.2 },
+        scale: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.2 },
+        rotate: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.2 },
       },
     }),
   };
@@ -120,18 +120,18 @@ const ArtistWelcome = ({ onComplete }) => {
         exit="exit"
         className="fixed inset-0 z-50 flex h-[100dvh] min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-black"
       >
-        {/* Atmosphere — soft silhouette under a dark veil */}
+        {/* Atmosphere photo — soft under dark wash, not fully visible */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <img
             src="/images/artist/artist-silhouette-welcome.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-[1px] sm:scale-105 sm:opacity-20"
+            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-[0.22] sm:scale-105 sm:opacity-[0.18]"
             style={{ objectPosition: 'center 45%' }}
           />
           <div className="absolute inset-0 bg-black/55" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/35" />
         </div>
 
         <motion.button
@@ -157,7 +157,7 @@ const ArtistWelcome = ({ onComplete }) => {
                 key="word-stage"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.4 } }}
+                exit={{ opacity: 0 }}
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <AnimatePresence mode="wait">
@@ -176,117 +176,116 @@ const ArtistWelcome = ({ onComplete }) => {
             )}
           </AnimatePresence>
 
-          {/* Identity stack — layout animates so items slide instead of jumping */}
+          {/* Identity stack — layout animation so items drift up smoothly (no jump) */}
           {(showLogo || showTitle || showIcons || showFinalText) && (
-            <LayoutGroup id="welcome-identity">
-              <motion.div
-                layout
-                transition={{ layout: layoutTransition }}
-                className="flex max-h-full w-full flex-col items-center justify-center gap-7 py-10 sm:gap-9 lg:gap-11"
-              >
-                <AnimatePresence initial={false}>
-                  {showLogo && (
+            <motion.div
+              layout
+              transition={{ layout: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } }}
+              className="flex max-h-full w-full flex-col items-center justify-center gap-7 py-10 sm:gap-9 lg:gap-11"
+            >
+              <AnimatePresence>
+                {showLogo && (
+                  <motion.div
+                    key="welcome-logo"
+                    layout
+                    initial={{ opacity: 0, scale: 0.8, y: 28 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{
+                      opacity: { duration: 0.55 },
+                      scale: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+                      y: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                      layout: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                    }}
+                  >
                     <motion.div
-                      key="welcome-logo"
-                      layout
-                      initial={{ opacity: 0, y: 28, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      className="h-20 w-20 rounded-full bg-gradient-to-r from-amber-500/80 via-orange-400/60 to-stone-600/80 p-1 shadow-2xl sm:h-28 sm:w-28 lg:h-32 lg:w-32"
+                      animate={{ rotate: [0, 360], scale: [1, 1.05, 1] }}
                       transition={{
-                        layout: layoutTransition,
-                        opacity: { duration: 0.55, ease: softEase },
-                        y: { duration: 0.65, ease: softEase },
-                        scale: { duration: 0.65, ease: softEase },
+                        rotate: { duration: 2, repeat: Infinity, ease: 'linear' },
+                        scale: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
                       }}
                     >
+                      <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-900">
+                        <span className="text-xl font-bold text-amber-200 sm:text-3xl lg:text-4xl">HA</span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {showTitle && (
+                  <motion.h1
+                    key="welcome-title"
+                    layout
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      opacity: { duration: 0.55 },
+                      y: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                      layout: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                    }}
+                    className="text-center text-3xl font-bold tracking-tight text-amber-200 sm:text-5xl lg:text-6xl xl:text-7xl"
+                  >
+                    HIMANK ARORA
+                  </motion.h1>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {showIcons && (
+                  <motion.div
+                    key="welcome-icons"
+                    layout
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      opacity: { duration: 0.55 },
+                      y: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                      layout: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                    }}
+                    className="flex items-center justify-center gap-7 sm:gap-10 lg:gap-14"
+                  >
+                    {creativityIcons.map(({ Icon, color, label }, index) => (
                       <motion.div
-                        className="h-20 w-20 rounded-full bg-gradient-to-r from-amber-500/80 via-orange-400/60 to-stone-600/80 p-1 shadow-2xl sm:h-28 sm:w-28 lg:h-32 lg:w-32"
-                        animate={{ rotate: [0, 360] }}
-                        transition={{
-                          rotate: { duration: 8, repeat: Infinity, ease: 'linear' },
-                        }}
+                        key={label}
+                        variants={iconVariants}
+                        initial="hidden"
+                        animate="visible"
+                        custom={index}
+                        className="flex flex-col items-center gap-2.5 sm:gap-3"
                       >
-                        <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-900">
-                          <span className="text-xl font-bold text-amber-200 sm:text-3xl lg:text-4xl">HA</span>
-                        </div>
-                      </motion.div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                <AnimatePresence initial={false}>
-                  {showTitle && (
-                    <motion.h1
-                      key="welcome-title"
-                      layout
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        layout: layoutTransition,
-                        opacity: { duration: 0.55, ease: softEase },
-                        y: { duration: 0.65, ease: softEase },
-                      }}
-                      className="text-center text-3xl font-bold tracking-tight text-amber-200 sm:text-5xl lg:text-6xl xl:text-7xl"
-                    >
-                      HIMANK ARORA
-                    </motion.h1>
-                  )}
-                </AnimatePresence>
-
-                <AnimatePresence initial={false}>
-                  {showIcons && (
-                    <motion.div
-                      key="welcome-icons"
-                      layout
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        layout: layoutTransition,
-                        opacity: { duration: 0.55, ease: softEase },
-                        y: { duration: 0.65, ease: softEase },
-                      }}
-                      className="flex items-center justify-center gap-7 sm:gap-10 lg:gap-14"
-                    >
-                      {creativityIcons.map(({ Icon, color, label }, index) => (
-                        <motion.div
-                          key={label}
-                          variants={iconVariants}
-                          initial="hidden"
-                          animate="visible"
-                          custom={index}
-                          className="flex flex-col items-center gap-2.5 sm:gap-3"
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-r ${color} shadow-xl sm:h-14 sm:w-14 lg:h-16 lg:w-16`}
                         >
-                          <div
-                            className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-r ${color} shadow-xl sm:h-14 sm:w-14 lg:h-16 lg:w-16`}
-                          >
-                            <Icon size={20} className="text-white sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
-                          </div>
-                          <span className="text-xs font-medium text-white sm:text-sm">{label}</span>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                          <Icon size={20} className="text-white sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
+                        </div>
+                        <span className="text-xs font-medium text-white sm:text-sm">{label}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-                <AnimatePresence initial={false}>
-                  {showFinalText && (
-                    <motion.p
-                      key="welcome-final"
-                      layout
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        layout: layoutTransition,
-                        opacity: { duration: 0.55, ease: softEase },
-                        y: { duration: 0.65, ease: softEase },
-                      }}
-                      className="px-4 text-center text-base text-gray-300 sm:text-xl lg:text-2xl"
-                    >
-                      Welcome to my world...
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </LayoutGroup>
+              <AnimatePresence>
+                {showFinalText && (
+                  <motion.p
+                    key="welcome-final"
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      opacity: { duration: 0.55 },
+                      y: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+                      layout: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+                    }}
+                    className="px-4 text-center text-base text-gray-300 sm:text-xl lg:text-2xl"
+                  >
+                    Welcome to my world...
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
           )}
         </div>
       </motion.div>
