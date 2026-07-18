@@ -1036,40 +1036,38 @@ const TechPage = () => {
                       </div>
                     </div>
 
-                    {(project.github || (project.demo && project.demo !== "#")) && (
-                      <div className="flex items-center gap-2 sm:gap-3 px-6 sm:px-7 py-3.5 sm:py-4 border-t border-gray-700/80 bg-gray-900/30">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleProjectGithub(project);
-                            }}
-                            className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
-                          >
-                            <Github size={15} />
-                            <span>Code</span>
-                          </a>
-                        )}
-                        {project.demo && project.demo !== "#" && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleProjectDemo(project);
-                            }}
-                            className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
-                          >
-                            <ExternalLink size={15} />
-                            <span>Live Demo</span>
-                          </a>
-                        )}
-                      </div>
-                    )}
+                    <div className="flex items-center gap-2 sm:gap-3 min-h-[52px] px-6 sm:px-7 py-3.5 sm:py-4 border-t border-gray-700/80 bg-gray-900/30">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectGithub(project);
+                          }}
+                          className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
+                        >
+                          <Github size={15} />
+                          <span>Code</span>
+                        </a>
+                      )}
+                      {project.demo && project.demo !== "#" && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleProjectDemo(project);
+                          }}
+                          className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
+                        >
+                          <ExternalLink size={15} />
+                          <span>Live Demo</span>
+                        </a>
+                      )}
+                    </div>
                   </motion.div>
                 ))}
               </div>
