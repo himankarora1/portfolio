@@ -303,8 +303,14 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "",
+      description: "Graduate training at the intersection of software engineering, data systems, and business analysis—building applications, designing databases, and applying ML to real product and information problems.",
       achievements: [],
+      skills: [
+        "Program Structures & Algorithms",
+        "Software Engineering",
+        "Data Science & ML",
+        "Database Design"
+      ],
       logo: "/images/companies/northeastern.png",
       website: "https://northeastern.edu"
     },
@@ -315,8 +321,14 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "",
+      description: "Business foundation with a technical through-line in information systems, computer applications, and quantitative methods—bridging accounting, operations, and early systems thinking into analyst work.",
       achievements: [],
+      skills: [
+        "Information Systems Management",
+        "Computer Applications",
+        "Business Statistics",
+        "Business Mathematics"
+      ],
       logo: "/images/companies/ggsipu.png",
       website: "http://www.ipu.ac.in"
     },

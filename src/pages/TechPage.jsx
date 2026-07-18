@@ -952,10 +952,30 @@ const TechPage = () => {
                         )}
                       </div>
 
-                      <div className="pl-10 md:pl-8 lg:pl-12 flex items-start md:pt-2">
-                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                          {exp.description || 'Academic foundation supporting technical analysis and product delivery.'}
-                        </p>
+                      <div className="pl-10 md:pl-8 lg:pl-12">
+                        {exp.description && (
+                          <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
+                            {exp.description}
+                          </p>
+                        )}
+
+                        {exp.skills?.length > 0 && (
+                          <div>
+                            <p className="text-xs uppercase tracking-wider text-gray-500 mb-2.5 font-medium">
+                              Relevant Coursework
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {exp.skills.map((skill) => (
+                                <span
+                                  key={skill}
+                                  className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   ))}
