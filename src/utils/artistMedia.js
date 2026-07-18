@@ -23,7 +23,8 @@ export const artistMedia = {
         type: 'video',
         src: '/videos/artist/artist-stage-landscape.mp4',
         duration: 4200,
-        startAt: 4,
+        // Mid-file seeks often black out on iOS Safari — play from the start beat
+        startAt: 0,
         playFor: 4,
         orientation: 'landscape',
         scale: 1,
@@ -71,7 +72,7 @@ export const artistMedia = {
         type: 'video',
         src: '/videos/artist/artist-stage-landscape.mp4',
         duration: 4000,
-        startAt: 14,
+        startAt: 12,
         playFor: 3.8,
         orientation: 'landscape',
         scale: 1,

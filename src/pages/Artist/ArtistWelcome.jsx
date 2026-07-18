@@ -194,19 +194,19 @@ const ArtistWelcome = ({ onComplete }) => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden"
+        className="fixed inset-0 z-50 flex h-[100dvh] min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-black"
       >
-        {/* Silhouette atmosphere — framed so stage feet stay visible */}
+        {/* Silhouette atmosphere — mobile crops higher so stage fills the phone */}
         <div className="pointer-events-none absolute inset-0">
           <img
             src="/images/artist/artist-silhouette-pink.jpg"
             alt=""
             aria-hidden="true"
-            className="h-full w-full scale-105 object-cover opacity-45"
-            style={{ objectPosition: 'center 72%' }}
+            className="absolute inset-0 h-full w-full object-cover opacity-50 sm:opacity-45"
+            style={{ objectPosition: compactLayout ? 'center 40%' : 'center 72%' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/50 to-black/85 sm:from-black/80 sm:via-black/70 sm:to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/45" />
         </div>
 
         {/* Skip Intro Button - Mobile Responsive */}
