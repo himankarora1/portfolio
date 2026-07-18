@@ -45,7 +45,7 @@ const ArtistAbout = () => {
     {
       year: "2005",
       title: "Musical Foundations",
-      description: "Started learning music—picking up instruments and working on vocals.",
+      description: "Started learning music, picking up instruments and working on vocals.",
       icon: Music,
       color: "from-amber-600 to-orange-700"
     },

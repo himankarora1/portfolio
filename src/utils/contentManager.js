@@ -663,7 +663,7 @@ export const getCertificationById = (id) => {
 // SEO helpers
 export const generateSEOData = (page) => {
   const baseData = {
-    title: `${contentData.personal.name} — Analyst by craft, Artist by passion`,
+    title: `${contentData.personal.name} - Analyst by craft, Artist by passion`,
     description: "Explore both sides: Technical Analyst & Developer, and Artist & Content Creator. Analysis-driven product work, development projects, music, and creative content.",
     url: contentData.meta.site_url,
     image: `${contentData.meta.site_url}${contentData.meta.og_image}`,

@@ -178,7 +178,7 @@ const HomePage = () => {
                       </h3>
 
                       <p className="mb-3 min-h-[3.5rem] px-2 text-sm leading-relaxed text-gray-300 sm:mb-4 sm:min-h-[4rem]">
-                        Creating across YouTube, gaming, and music — building authentic communities.
+                        Creating across YouTube, gaming, and music while building authentic communities.
                       </p>
 
                       <div className="mb-4 flex flex-wrap justify-center gap-1.5 sm:mb-6 sm:gap-2">

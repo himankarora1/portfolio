@@ -162,7 +162,7 @@ const ArtistFooter = () => {
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock size={14} className="text-amber-300 mt-0.5 shrink-0" />
-                <span>24–48h response</span>
+                <span>24-48h response</span>
               </li>
             </ul>
           </div>

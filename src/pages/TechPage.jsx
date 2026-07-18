@@ -1453,7 +1453,7 @@ const TechPage = () => {
                 Let's Have a <span className="text-cyan-400">Chat</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
-                Leave your email and I will get back to you within 24–48 hours
+                Leave your email and I will get back to you within 24-48 hours
               </p>
             </motion.div>
 
@@ -1569,7 +1569,7 @@ const TechPage = () => {
                       </div>
                       <div>
                         <p className="text-green-300 font-semibold text-sm sm:text-base">Message sent successfully!</p>
-                        <p className="text-green-400 text-xs sm:text-sm">I'll get back to you within 24–48 hours.</p>
+                        <p className="text-green-400 text-xs sm:text-sm">I'll get back to you within 24-48 hours.</p>
                       </div>
                     </div>
                   </motion.div>
@@ -1827,7 +1827,7 @@ const TechPage = () => {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Clock size={14} className="text-cyan-400 mt-0.5 shrink-0" />
-                  <span>24–48h response</span>
+                  <span>24-48h response</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <Briefcase size={14} className="text-cyan-400 mt-0.5 shrink-0" />
