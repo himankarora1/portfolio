@@ -1702,168 +1702,126 @@ const TechPage = () => {
         </section>
       </div>
 
-      {/* Footer - MATCHING ARTISTABOUT STYLE */}
-      <footer className="bg-black/40 backdrop-blur-sm border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
-            {/* Brand Section */}
-            <div className="md:col-span-2">
-              <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center">
-                  <span className="font-display text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
+      {/* Footer */}
+      <footer className="border-t border-white/10 bg-black/30">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-10 sm:py-12">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
+            <div className="max-w-md">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center">
+                  <span className="font-display text-white font-semibold text-sm tracking-tight">HA</span>
                 </div>
                 <div>
-                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-white">
-                      {personalInfo.name}
-                    </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">Technical Analyst & Developer</p>
+                  <h3 className="font-display text-lg sm:text-xl font-semibold text-white">
+                    {personalInfo.name}
+                  </h3>
+                  <p className="text-gray-500 text-xs sm:text-sm">Technical Analyst & Developer</p>
                 </div>
               </div>
-              <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
-                Technical Analyst and developer: bridging business needs with working products that teams actually adopt.
+              <p className="text-gray-400 text-sm leading-relaxed mb-5">
+                Bridging analysis and engineering to ship products people actually use.
               </p>
-              <div className="flex space-x-3 sm:space-x-4">
+              <div className="flex space-x-2.5">
                 <motion.a
                   href={socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('GitHub', socialLinks.github)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
+                  whileHover={{ scale: 1.06 }}
+                  aria-label="GitHub"
                 >
-                  <Github size={16} className="sm:w-[18px] sm:h-[18px]" />
+                  <Github size={16} />
                 </motion.a>
                 <motion.a
                   href={socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
+                  whileHover={{ scale: 1.06 }}
+                  aria-label="LinkedIn"
                 >
-                  <Linkedin size={16} className="sm:w-[18px] sm:h-[18px]" />
+                  <Linkedin size={16} />
                 </motion.a>
                 <motion.a
                   href={socialLinks.x_twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
+                  whileHover={{ scale: 1.06 }}
+                  aria-label="X"
                 >
-                  <svg width={16} height={16} viewBox="0 0 24 24" fill="currentColor" className="sm:w-[18px] sm:h-[18px]">
+                  <svg width={15} height={15} viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </motion.a>
                 <motion.a
                   href="mailto:himankarora1000@gmail.com"
                   onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
-                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
+                  whileHover={{ scale: 1.06 }}
+                  aria-label="Email"
                 >
-                  <Mail size={16} className="sm:w-[18px] sm:h-[18px]" />
+                  <Mail size={16} />
                 </motion.a>
               </div>
             </div>
 
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Quick Links</h4>
-              <ul className="space-y-2 sm:space-y-3">
-                <li>
-                  <button 
-                    onClick={() => scrollToSection('about')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <User size={14} className="sm:w-4 sm:h-4" />
-                    <span>About Me</span>
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => scrollToSection('experience')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <Briefcase size={14} className="sm:w-4 sm:h-4" />
-                    <span>Experience & Education</span>
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => scrollToSection('projects')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <Target size={14} className="sm:w-4 sm:h-4" />
-                    <span>Projects</span>
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => scrollToSection('skills')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <Zap size={14} className="sm:w-4 sm:h-4" />
-                    <span>Skills</span>
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => scrollToSection('certificates')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <GraduationCap size={14} className="sm:w-4 sm:h-4" />
-                    <span>Certificates</span>
-                  </button>
-                </li>
-              </ul>
-            </div>
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-14">
+              <div>
+                <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-3">
+                  Navigate
+                </h4>
+                <ul className="space-y-2">
+                  {[
+                    { id: 'about', label: 'About' },
+                    { id: 'experience', label: 'Experience' },
+                    { id: 'projects', label: 'Projects' },
+                    { id: 'skills', label: 'Skills' },
+                    { id: 'contact', label: 'Contact' },
+                  ].map((item) => (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        onClick={() => scrollToSection(item.id)}
+                        className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
+                      >
+                        {item.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Get In Touch */}
-            <div>
-              <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Get In Touch</h4>
-              <ul className="space-y-2 sm:space-y-3">
-                <li>
-                  <a 
-                    href="mailto:himankarora1000@gmail.com"
-                    onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <Mail size={14} className="sm:w-4 sm:h-4" />
-                    <span>Email Me</span>
-                  </a>
-                </li>
-                <li>
-                  <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                    <MapPin size={14} className="sm:w-4 sm:h-4" />
-                    <span>{personalInfo.location}</span>
-                  </span>
-                </li>
-                <li>
-                  <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                    <Globe size={14} className="sm:w-4 sm:h-4" />
-                    <span>Available Remotely</span>
-                  </span>
-                </li>
-                <li>
-                  <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                    <Clock size={14} className="sm:w-4 sm:h-4" />
-                    <span>24-48h Response</span>
-                  </span>
-                </li>
-                <li>
-                  <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                    <Briefcase size={14} className="sm:w-4 sm:h-4" />
-                    <span>Open to opportunities</span>
-                  </span>
-                </li>
-              </ul>
+              <div>
+                <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-3">
+                  Connect
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  <li>
+                    <a
+                      href="mailto:himankarora1000@gmail.com"
+                      onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                      className="hover:text-cyan-300 transition-colors"
+                    >
+                      himankarora1000@gmail.com
+                    </a>
+                  </li>
+                  <li>{personalInfo.location}</li>
+                  <li>Open to opportunities</li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          {/* Copyright */}
-          <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-center items-center">
-            <p className="text-gray-400 text-xs sm:text-sm">
-              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
+          <div className="border-t border-white/10 mt-8 sm:mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <p className="text-gray-500 text-xs sm:text-sm">
+              © {new Date().getFullYear()} {personalInfo.name}
+            </p>
+            <p className="text-gray-600 text-xs">
+              Built with care in Boston
             </p>
           </div>
         </div>
