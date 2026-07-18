@@ -960,15 +960,20 @@ const TechPage = () => {
                         )}
 
                         {exp.skills?.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {exp.skills.map((skill) => (
-                              <span
-                                key={skill}
-                                className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
-                              >
-                                {skill}
-                              </span>
-                            ))}
+                          <div>
+                            <p className="text-xs uppercase tracking-wider text-gray-500 mb-2.5 font-medium">
+                              Skills
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {exp.skills.map((skill) => (
+                                <span
+                                  key={skill}
+                                  className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         )}
                       </div>

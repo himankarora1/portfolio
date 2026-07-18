@@ -303,16 +303,15 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Learned to build and ship applications end to end, design and query databases, and apply data science and machine learning to product and information problems. Also developed skills in software engineering, algorithms, web design and UX, prompt engineering, and business analysis for information systems.",
+      description: "Learning to build and ship software end to end: application development, database design, algorithms, and solid engineering practices. Also picking up data science and machine learning, web and UX design, prompt engineering, and how to turn business needs into information systems.",
       achievements: [],
       skills: [
-        "Application Development",
+        "Full-Stack Development",
         "Software Engineering",
         "Algorithms",
         "Database Design",
-        "Data Science",
-        "Machine Learning",
-        "Web Design & UX",
+        "Data Science & ML",
+        "Web & UX Design",
         "Business Analysis",
         "Prompt Engineering"
       ],
@@ -326,18 +325,17 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Built a commerce and management foundation while picking up a practical tech base: computer applications, information systems, computerized accounting and ERP workflows, plus e-commerce and web development. Also strengthened quantitative and analyst skills through business statistics, mathematics, financial modeling, project management, and research methods.",
+      description: "Built a commerce and management foundation with an early tech base in computer applications, information systems, ERP and computerized accounting, plus web development for e-commerce. Also developed quantitative skills in statistics, mathematics, and financial modeling, with project management and research habits that carry into analyst work.",
       achievements: [],
       skills: [
         "Information Systems",
         "Computer Applications",
         "Web Development",
-        "E-Commerce",
-        "ERP",
-        "Computerized Accounting",
+        "ERP & Accounting Systems",
         "Business Statistics",
         "Financial Modeling",
-        "Project Management"
+        "Project Management",
+        "Research Methods"
       ],
       logo: "/images/companies/ggsipu.png",
       website: "http://www.ipu.ac.in"
