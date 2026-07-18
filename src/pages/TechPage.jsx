@@ -1702,11 +1702,12 @@ const TechPage = () => {
         </section>
       </div>
 
-      {/* Footer */}
+      {/* Footer — full link map, inspired by reference layout */}
       <footer className="border-t border-white/10 bg-black/30">
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 lg:px-6 py-10 sm:py-12">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
-            <div className="max-w-md">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-10 sm:py-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            {/* Brand */}
+            <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center">
                   <span className="font-display text-white font-semibold text-sm tracking-tight">HA</span>
@@ -1718,9 +1719,18 @@ const TechPage = () => {
                   <p className="text-gray-500 text-xs sm:text-sm">Technical Analyst & Developer</p>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed mb-5">
+              <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-xs">
                 Bridging analysis and engineering to ship products people actually use.
               </p>
+              <a
+                href={personalInfo.resume}
+                download
+                onClick={handleResumeDownload}
+                className={`${btnSecondary} mb-5`}
+              >
+                <Download size={15} />
+                <span>Download Resume</span>
+              </a>
               <div className="flex space-x-2.5">
                 <motion.a
                   href={socialLinks.github}
@@ -1769,59 +1779,122 @@ const TechPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-8 sm:gap-14">
-              <div>
-                <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-3">
-                  Navigate
-                </h4>
-                <ul className="space-y-2">
-                  {[
-                    { id: 'about', label: 'About' },
-                    { id: 'experience', label: 'Experience' },
-                    { id: 'projects', label: 'Projects' },
-                    { id: 'skills', label: 'Skills' },
-                    { id: 'contact', label: 'Contact' },
-                  ].map((item) => (
-                    <li key={item.id}>
-                      <button
-                        type="button"
-                        onClick={() => scrollToSection(item.id)}
-                        className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
-                      >
-                        {item.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-3">
-                  Connect
-                </h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  <li>
-                    <a
-                      href="mailto:himankarora1000@gmail.com"
-                      onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
-                      className="hover:text-cyan-300 transition-colors"
+            {/* Quick Links — all in-page sections */}
+            <div>
+              <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
+                Quick Links
+              </h4>
+              <ul className="space-y-2.5">
+                {[
+                  { id: 'hero', label: 'Home' },
+                  { id: 'about', label: 'About Me' },
+                  { id: 'experience', label: 'Experience' },
+                  { id: 'projects', label: 'Projects' },
+                  { id: 'skills', label: 'Skills' },
+                  { id: 'certificates', label: 'Certificates' },
+                  { id: 'contact', label: 'Contact' },
+                ].map((item) => (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      onClick={() => scrollToSection(item.id)}
+                      className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
                     >
-                      himankarora1000@gmail.com
-                    </a>
+                      {item.label}
+                    </button>
                   </li>
-                  <li>{personalInfo.location}</li>
-                  <li>Open to opportunities</li>
-                </ul>
-              </div>
+                ))}
+              </ul>
+            </div>
+
+            {/* Explore — hub / artist / education (his “extra” column, adapted) */}
+            <div>
+              <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
+                Explore
+              </h4>
+              <ul className="space-y-2.5">
+                <li>
+                  <Link to="/" className="text-gray-400 hover:text-cyan-300 transition-colors text-sm">
+                    Portfolio Hub
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/artist" className="text-gray-400 hover:text-cyan-300 transition-colors text-sm">
+                    Artist Portfolio
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection('education')}
+                    className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
+                  >
+                    Education
+                  </button>
+                </li>
+                <li>
+                  <a
+                    href={personalInfo.resume}
+                    download
+                    onClick={handleResumeDownload}
+                    className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
+                  >
+                    Resume PDF
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
+                Contact
+              </h4>
+              <ul className="space-y-2.5 text-sm text-gray-400 mb-5">
+                <li className="flex items-start gap-2">
+                  <MapPin size={14} className="text-cyan-400 mt-0.5 shrink-0" />
+                  <span>{personalInfo.location}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Mail size={14} className="text-cyan-400 mt-0.5 shrink-0" />
+                  <a
+                    href="mailto:himankarora1000@gmail.com"
+                    onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                    className="hover:text-cyan-300 transition-colors break-all"
+                  >
+                    himankarora1000@gmail.com
+                  </a>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Globe size={14} className="text-cyan-400 mt-0.5 shrink-0" />
+                  <span>Available remotely</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Clock size={14} className="text-cyan-400 mt-0.5 shrink-0" />
+                  <span>24–48h response</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Briefcase size={14} className="text-cyan-400 mt-0.5 shrink-0" />
+                  <span>Open to opportunities</span>
+                </li>
+              </ul>
+              <button
+                type="button"
+                onClick={() => scrollToSection('contact')}
+                className={btnPrimary}
+              >
+                <Mail size={15} />
+                <span>Get in Touch</span>
+              </button>
             </div>
           </div>
 
-          <div className="border-t border-white/10 mt-8 sm:mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p className="text-gray-500 text-xs sm:text-sm">
-              © {new Date().getFullYear()} {personalInfo.name}
+              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
             </p>
             <p className="text-gray-600 text-xs">
-              Built with care in Boston
+              Boston, MA
             </p>
           </div>
         </div>
