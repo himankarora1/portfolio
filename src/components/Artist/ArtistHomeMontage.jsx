@@ -108,7 +108,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/88 via-black/55 to-black/25" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/92 via-black/70 to-transparent sm:via-black/55 lg:via-black/40" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" />
     </div>
   );

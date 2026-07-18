@@ -16,9 +16,9 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4800,
         scale: 1,
-        // Bias crop left so the face lands in the open right half (clear of text)
-        objectPosition: '18% 14%',
-        offsetY: '2.5%',
+        // Far-right face (clear of copy); hair just under nav
+        objectPosition: '0% 5%',
+        offsetY: '-1%',
       },
       {
         type: 'video',
@@ -76,8 +76,8 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4000,
         scale: 1,
-        objectPosition: '18% 14%',
-        offsetY: '2.5%',
+        objectPosition: '0% 5%',
+        offsetY: '-1%',
       },
       {
         type: 'image',
