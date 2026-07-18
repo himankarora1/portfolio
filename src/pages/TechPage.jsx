@@ -18,7 +18,6 @@ import {
   Target,
   GraduationCap,
   CheckCircle,
-  ArrowRight,
   Clock,
   ChevronLeft,
   ChevronRight,
@@ -28,6 +27,16 @@ import {
 import SEO from '../components/SEO';
 import { useAnalytics } from '../components/Analytics';
 import { contentData } from '../utils/contentManager';
+
+// Shared button styles for consistent CTAs across the page
+const btnPrimary =
+  'inline-flex items-center justify-center space-x-2 bg-white hover:bg-gray-100 text-gray-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all text-sm sm:text-base shadow-sm';
+const btnSecondary =
+  'inline-flex items-center justify-center space-x-2 border border-gray-500/70 text-gray-200 hover:border-cyan-400/60 hover:text-cyan-300 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all text-sm sm:text-base';
+const btnPager =
+  'inline-flex items-center justify-center space-x-1 sm:space-x-2 border border-gray-600/70 text-gray-300 hover:border-cyan-400/50 hover:text-cyan-300 px-3 sm:px-4 py-2 rounded-full transition-all text-sm sm:text-base';
+const btnPagerDisabled =
+  'inline-flex items-center justify-center space-x-1 sm:space-x-2 border border-gray-700/50 text-gray-600 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base cursor-not-allowed';
 
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
@@ -611,7 +620,7 @@ const TechPage = () => {
                 >
                   <button
                     onClick={() => scrollToSection('projects')}
-                    className="bg-white hover:bg-gray-100 text-gray-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all flex items-center justify-center space-x-2 text-sm sm:text-base shadow-sm"
+                    className={btnPrimary}
                   >
                     <Target size={16} className="sm:w-5 sm:h-5" />
                     <span>View My Work</span>
@@ -621,7 +630,7 @@ const TechPage = () => {
                     href={personalInfo.resume}
                     download
                     onClick={handleResumeDownload}
-                    className="border border-gray-500/70 text-gray-200 hover:border-cyan-400/60 hover:text-cyan-300 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
+                    className={btnSecondary}
                   >
                     <Download size={16} className="sm:w-5 sm:h-5" />
                     <span>Download Resume</span>
@@ -629,9 +638,10 @@ const TechPage = () => {
 
                   <button
                     onClick={() => scrollToSection('contact')}
-                    className="text-sm sm:text-base text-gray-400 hover:text-cyan-300 transition-colors underline-offset-4 hover:underline px-1 py-2 sm:py-0 text-left sm:text-center"
+                    className={btnSecondary}
                   >
-                    Get in Touch
+                    <Mail size={16} className="sm:w-5 sm:h-5" />
+                    <span>Get in Touch</span>
                   </button>
                 </motion.div>
 
@@ -1125,11 +1135,7 @@ const TechPage = () => {
                     <button
                       onClick={() => setCurrentProjectPage(Math.max(0, currentProjectPage - 1))}
                       disabled={currentProjectPage === 0}
-                      className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
-                        currentProjectPage === 0
-                          ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
-                          : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg hover:shadow-cyan-500/25'
-                      }`}
+                      className={currentProjectPage === 0 ? btnPagerDisabled : btnPager}
                     >
                       <ChevronLeft size={16} className="sm:w-4 sm:h-4" />
                       <span>Previous</span>
@@ -1153,11 +1159,7 @@ const TechPage = () => {
                     <button
                       onClick={() => setCurrentProjectPage(Math.min(totalProjectPages - 1, currentProjectPage + 1))}
                       disabled={currentProjectPage >= totalProjectPages - 1}
-                      className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
-                        currentProjectPage >= totalProjectPages - 1
-                          ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
-                          : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg hover:shadow-cyan-500/25'
-                      }`}
+                      className={currentProjectPage >= totalProjectPages - 1 ? btnPagerDisabled : btnPager}
                     >
                       <span>Next</span>
                       <ChevronRight size={16} className="sm:w-4 sm:h-4" />
@@ -1333,11 +1335,7 @@ const TechPage = () => {
                 <button
                   onClick={() => setCurrentCertPage(Math.max(0, currentCertPage - 1))}
                   disabled={currentCertPage === 0}
-                  className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
-                    currentCertPage === 0
-                      ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg hover:shadow-cyan-500/25'
-                  }`}
+                  className={currentCertPage === 0 ? btnPagerDisabled : btnPager}
                 >
                   <ChevronLeft size={16} className="sm:w-4 sm:h-4" />
                   <span>Previous</span>
@@ -1362,11 +1360,7 @@ const TechPage = () => {
                 <button
                   onClick={() => setCurrentCertPage(Math.min(Math.ceil(certificates.length / 6) - 1, currentCertPage + 1))}
                   disabled={currentCertPage >= Math.ceil(certificates.length / 6) - 1}
-                  className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-all text-sm sm:text-base ${
-                    currentCertPage >= Math.ceil(certificates.length / 6) - 1
-                      ? 'bg-gray-700/50 text-gray-500 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg hover:shadow-cyan-500/25'
-                  }`}
+                  className={currentCertPage >= Math.ceil(certificates.length / 6) - 1 ? btnPagerDisabled : btnPager}
                 >
                   <span>Next</span>
                   <ChevronRight size={16} className="sm:w-4 sm:h-4" />
@@ -1414,7 +1408,7 @@ const TechPage = () => {
                 className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end"
               >
                 <div className="relative z-10 space-y-6 sm:space-y-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Get in touch</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Get in Touch</h3>
                   
                   <div className="space-y-4 sm:space-y-6">
                     <div>
@@ -1623,7 +1617,7 @@ const TechPage = () => {
                   <motion.button
                     type="submit"
                     disabled={formStatus.isSubmitting}
-                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] disabled:hover:scale-100 shadow-lg shadow-cyan-500/25 disabled:shadow-gray-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base disabled:cursor-not-allowed"
+                    className={`w-full ${btnPrimary} disabled:bg-gray-600 disabled:text-gray-300 disabled:hover:bg-gray-600 disabled:cursor-not-allowed py-3 sm:py-4`}
                     whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
                     whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
                   >
@@ -1637,8 +1631,8 @@ const TechPage = () => {
                       </>
                     ) : (
                       <>
-                        <span>Submit</span>
-                        <ArrowRight size={18} className="sm:w-5 sm:h-5" />
+                        <Mail size={18} className="sm:w-5 sm:h-5" />
+                        <span>Get in Touch</span>
                       </>
                     )}
                   </motion.button>
