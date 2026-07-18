@@ -303,7 +303,7 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Graduate training at the intersection of software engineering, data systems, and business analysis—building applications, designing databases, and applying ML to real product and information problems.",
+      description: "Building depth across software development, systems design, and analysis. Coursework covers application engineering, web and UX design, algorithms, software engineering practices, database design, data science and machine learning, prompt engineering, and business analysis for information systems.",
       achievements: [],
       skills: [
         "Program Structures & Algorithms",
@@ -321,11 +321,12 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Business foundation with a technical through-line in information systems, computer applications, and quantitative methods—bridging accounting, operations, and early systems thinking into analyst work.",
+      description: "Commerce degree with a real technical base. Learned information systems management, computer applications, and computerized accounting tied to ERP-style workflows, plus e-commerce web design and development. Also built quantitative skills through business statistics, business mathematics, and financial modeling, alongside project management, research methods, and core accounting and business coursework.",
       achievements: [],
       skills: [
         "Information Systems Management",
         "Computer Applications",
+        "E-Commerce / Web Development",
         "Business Statistics",
         "Business Mathematics"
       ],
