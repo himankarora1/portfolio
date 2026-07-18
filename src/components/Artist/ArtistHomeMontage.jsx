@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 /**
  * Home hero montage — photos + short video beats.
  * Default: object-cover at scale 1 (no zoom-in, no translate → no black bars).
- * Landscape slides stay centered so the full frame reads naturally.
+ * fit: 'containBlur' — show full frame (zoomed out) over a blurred cover fill (no side bars).
  */
 const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
@@ -15,6 +15,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
   const nextIndex = (index + 1) % slides.length;
   const mediaScale = slide?.scale ?? 1;
   const isLandscape = slide?.orientation === 'landscape';
+  const containBlur = slide?.fit === 'containBlur';
 
   useEffect(() => {
     const next = slides[nextIndex];
@@ -77,6 +78,33 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
     transform: mediaScale === 1 ? undefined : `scale(${mediaScale})`,
   };
 
+  const renderMedia = (fitClass, extraClass = '', withRef = false) => {
+    if (slide.type === 'video') {
+      return (
+        <video
+          ref={withRef ? videoRef : undefined}
+          src={slide.src}
+          className={`h-full w-full ${fitClass} ${extraClass}`}
+          style={mediaStyle}
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        />
+      );
+    }
+
+    return (
+      <img
+        src={slide.src}
+        alt=""
+        aria-hidden="true"
+        className={`h-full w-full ${fitClass} ${extraClass}`}
+        style={mediaStyle}
+      />
+    );
+  };
+
   return (
     <div className={`absolute inset-0 overflow-hidden bg-black ${className}`}>
       <AnimatePresence mode="sync">
@@ -88,25 +116,26 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeInOut' }}
         >
-          {slide.type === 'video' ? (
-            <video
-              ref={videoRef}
-              src={slide.src}
-              className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
-              style={mediaStyle}
-              muted
-              playsInline
-              preload="auto"
-              aria-hidden="true"
-            />
+          {containBlur ? (
+            <>
+              {/* Soft fill so contain doesn't show black side bars */}
+              <div className="absolute inset-0">
+                {renderMedia('object-cover', 'scale-110 blur-2xl opacity-70')}
+              </div>
+              <div className="absolute inset-0">
+                {renderMedia(
+                  'object-contain',
+                  'blur-[1px] sm:blur-[1.5px]',
+                  true
+                )}
+              </div>
+            </>
           ) : (
-            <img
-              src={slide.src}
-              alt=""
-              aria-hidden="true"
-              className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
-              style={mediaStyle}
-            />
+            renderMedia(
+              'object-cover blur-[1.5px] sm:blur-[2.5px]',
+              '',
+              true
+            )
           )}
         </motion.div>
       </AnimatePresence>

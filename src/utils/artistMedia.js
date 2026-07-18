@@ -98,8 +98,9 @@ export const artistMedia = {
         src: '/images/artist/artist-pov-mic.jpg',
         duration: 3800,
         scale: 1,
-        // Bias down so the handheld mic stays in frame
-        objectPosition: 'center 72%',
+        // Portrait shot: show full frame over blurred fill (zoom out, no side bars)
+        fit: 'containBlur',
+        objectPosition: 'center center',
       },
     ],
   },
