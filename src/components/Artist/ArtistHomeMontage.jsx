@@ -131,7 +131,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
                 src={slide.src}
                 alt=""
                 aria-hidden="true"
-                className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
+                className="h-full w-full object-cover blur-[0.5px] sm:blur-0"
                 style={{ objectPosition: position }}
               />
             </motion.div>
@@ -148,7 +148,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               <video
                 ref={videoRef}
                 src={slide.src}
-                className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
+                className="h-full w-full object-cover blur-[0.5px] sm:blur-0"
                 style={{ objectPosition: position }}
                 muted
                 playsInline
@@ -160,8 +160,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/92 via-black/70 to-transparent sm:via-black/55 lg:via-black/40" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/35 to-black/50" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent" />
     </div>
   );
 };

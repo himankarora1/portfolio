@@ -8,16 +8,21 @@ import { useAnalytics } from '../Analytics';
 
 const menuItems = [
   { id: 'home', label: 'Home', icon: Home, path: '/artist' },
-  { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
-  { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
+  { id: 'about', label: 'About', icon: User, path: '/artist/about' },
+  { id: 'work', label: 'Work', icon: Brush, path: '/artist/work' },
   { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' },
 ];
 
-const ArtistNav = () => {
+/**
+ * @param {'default' | 'overlay'} [variant]
+ * overlay = cinematic home: transparent bar, text-only links
+ */
+const ArtistNav = ({ variant = 'default' }) => {
   const location = useLocation();
   const analytics = useAnalytics();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const name = contentData.personal.name;
+  const isOverlay = variant === 'overlay';
 
   const isActive = (path) => location.pathname === path;
 
@@ -29,48 +34,75 @@ const ArtistNav = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/35 backdrop-blur-xl">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 ${
+        isOverlay
+          ? 'border-b border-transparent bg-gradient-to-b from-black/50 to-transparent'
+          : 'border-b border-white/10 bg-black/35 backdrop-blur-xl'
+      }`}
+    >
       <div className={`${artistPageWidth} ${artistPagePad}`}>
-        <div className="flex h-16 items-center justify-between sm:h-20">
+        <div className={`flex items-center justify-between ${isOverlay ? 'h-14 sm:h-16' : 'h-16 sm:h-20'}`}>
           <Link
             to="/artist"
-            className="group flex items-center space-x-3 sm:space-x-4 transition-all duration-300"
+            onClick={() => handleNav('home')}
+            className="group flex items-center space-x-2.5 transition-all duration-300 sm:space-x-3"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/80 bg-transparent transition-colors group-hover:border-amber-300 sm:h-12 sm:w-12">
-              <span className="text-sm font-bold tracking-tight text-white sm:text-lg">HA</span>
+            <div
+              className={`flex items-center justify-center rounded-full border border-white/70 bg-transparent transition-colors group-hover:border-amber-300 ${
+                isOverlay ? 'h-8 w-8 sm:h-9 sm:w-9' : 'h-10 w-10 border-2 sm:h-12 sm:w-12'
+              }`}
+            >
+              <span className={`font-bold tracking-tight text-white ${isOverlay ? 'text-xs sm:text-sm' : 'text-sm sm:text-lg'}`}>
+                HA
+              </span>
             </div>
-            <span className="text-lg font-bold tracking-tight text-white sm:text-2xl">{name}</span>
+            {!isOverlay && (
+              <span className="text-lg font-bold tracking-tight text-white sm:text-2xl">{name}</span>
+            )}
           </Link>
 
-          <div className="flex items-center space-x-4 sm:space-x-6">
-            <div className="hidden items-center space-x-2 md:flex">
+          <div className="flex items-center space-x-3 sm:space-x-5">
+            <div className="hidden items-center md:flex">
               {menuItems.map((item) => (
                 <Link
                   key={item.id}
                   to={item.path}
                   onClick={() => handleNav(item.id)}
-                  className={`flex items-center space-x-2 rounded-xl px-3 py-2 transition-all ${
-                    isActive(item.path)
-                      ? 'border border-white/20 bg-white/10 text-white'
-                      : 'text-white/80 hover:bg-white/10 hover:text-white'
-                  }`}
+                  className={
+                    isOverlay
+                      ? `px-3 py-2 text-xs uppercase tracking-[0.16em] transition-colors ${
+                          isActive(item.path)
+                            ? 'text-amber-200'
+                            : 'text-white/65 hover:text-white'
+                        }`
+                      : `flex items-center space-x-2 rounded-xl px-3 py-2 transition-all ${
+                          isActive(item.path)
+                            ? 'border border-white/20 bg-white/10 text-white'
+                            : 'text-white/80 hover:bg-white/10 hover:text-white'
+                        }`
+                  }
                 >
-                  <item.icon size={18} />
+                  {!isOverlay && <item.icon size={18} />}
                   <span>{item.label}</span>
                 </Link>
               ))}
             </div>
 
-            <div className="hidden h-8 w-px bg-white/20 md:block" />
+            {!isOverlay && <div className="hidden h-8 w-px bg-white/20 md:block" />}
 
             <div className="hidden md:block">
               <Link
                 to="/"
                 onClick={() => handleNav('portfolio-hub')}
-                className="flex items-center space-x-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-200 backdrop-blur-sm transition-all hover:border-amber-400/40 hover:text-amber-200"
+                className={
+                  isOverlay
+                    ? 'px-3 py-2 text-xs uppercase tracking-[0.16em] text-white/45 transition-colors hover:text-amber-200'
+                    : 'flex items-center space-x-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-200 backdrop-blur-sm transition-all hover:border-amber-400/40 hover:text-amber-200'
+                }
               >
-                <Globe size={18} />
-                <span>Portfolio Hub</span>
+                {!isOverlay && <Globe size={18} />}
+                <span>{isOverlay ? 'Hub' : 'Portfolio Hub'}</span>
               </Link>
             </div>
 
@@ -81,7 +113,7 @@ const ArtistNav = () => {
               aria-expanded={isMobileMenuOpen}
               className="rounded-lg border border-white/15 bg-white/5 p-2 text-gray-200 transition-all hover:text-amber-200 md:hidden"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
