@@ -47,7 +47,7 @@ export const artistMedia = {
         duration: 4500,
         scale: 1,
         // A bit lower than 52% so head/mic stay in frame (clip after this stays as-is)
-        objectPosition: 'center 26%',
+        objectPosition: 'center 28%',
       },
       {
         type: 'video',
