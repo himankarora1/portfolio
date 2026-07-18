@@ -81,15 +81,19 @@ const TechPage = () => {
     (currentProjectPage + 1) * projectsPerPage
   );
 
-  // Mobile menu items for in-page navigation
-  const mobileMenuItems = [
-    { id: 'hero', label: 'Home', icon: Home },
+  // In-page navigation items
+  const sectionNavItems = [
     { id: 'about', label: 'About', icon: User },
     { id: 'experience', label: 'Experience', icon: Briefcase },
     { id: 'projects', label: 'Projects', icon: Target },
     { id: 'skills', label: 'Skills', icon: Zap },
     { id: 'certificates', label: 'Certificates', icon: Award },
     { id: 'contact', label: 'Contact', icon: Mail }
+  ];
+
+  const mobileMenuItems = [
+    { id: 'hero', label: 'Home', icon: Home },
+    ...sectionNavItems
   ];
 
   // Form handlers
@@ -352,19 +356,51 @@ const TechPage = () => {
               </div>
             </Link>
 
-            <div className="flex items-center space-x-4 sm:space-x-6">
-              {/* FIXED: Added Divider for Desktop */}
-              <div className="hidden md:block h-8 w-px bg-white/20"></div>
+            <div className="flex items-center space-x-3 lg:space-x-5">
+              {/* Desktop in-page section links */}
+              <div className="hidden lg:flex items-center space-x-1">
+                {sectionNavItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+                      activeSection === item.id
+                        ? 'text-white'
+                        : 'text-gray-400 hover:text-cyan-300'
+                    }`}
+                  >
+                    {item.label}
+                    <span
+                      className={`absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-opacity duration-300 ${
+                        activeSection === item.id ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
 
-              {/* Portfolio Hub Button - Desktop */}
+              <div className="hidden md:block h-8 w-px bg-white/15"></div>
+
+              {/* Portfolio Hub — secondary / ghost */}
               <div className="hidden md:block">
-                <Link 
-                  to="/" 
-                  className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-cyan-500/20 hover:to-blue-600/20 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-cyan-500/20"
+                <Link
+                  to="/"
+                  className="flex items-center space-x-2 px-3.5 py-2 rounded-full border border-gray-600/50 text-gray-400 hover:text-cyan-300 hover:border-cyan-500/40 transition-all duration-300 text-sm"
                 >
-                  <Globe size={18} />
+                  <Globe size={16} />
                   <span>Portfolio Hub</span>
                 </Link>
+              </div>
+
+              {/* Get in Touch — primary CTA */}
+              <div className="hidden md:block">
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="flex items-center space-x-2 px-4 py-2.5 rounded-full bg-white text-gray-900 font-semibold text-sm hover:bg-gray-100 transition-all duration-300 shadow-sm"
+                >
+                  <Briefcase size={16} />
+                  <span>Get in Touch</span>
+                </button>
               </div>
 
               {/* Mobile Hamburger Menu */}
@@ -389,6 +425,16 @@ const TechPage = () => {
               className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/30"
             >
               <div className="px-3 py-4 space-y-2">
+                <motion.button
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-white text-gray-900 font-semibold transition-all duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Briefcase size={18} />
+                  <span>Get in Touch</span>
+                </motion.button>
+
                 {mobileMenuItems.map((item) => (
                   <motion.button
                     key={item.id}
@@ -415,7 +461,7 @@ const TechPage = () => {
                   <Link
                     to="/"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-all duration-300"
+                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-all duration-300 border border-gray-600/40"
                   >
                     <Globe size={18} />
                     <span className="font-medium">Portfolio Hub</span>
@@ -430,7 +476,7 @@ const TechPage = () => {
       {/* Scroll Progress Bar */}
       <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 h-1 bg-gray-800/50 backdrop-blur-sm">
         <motion.div
-          className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 shadow-lg shadow-cyan-500/20"
+          className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg shadow-cyan-500/20"
           style={{ width: `${scrollProgress}%` }}
           initial={{ width: 0 }}
           animate={{ width: `${scrollProgress}%` }}
@@ -450,7 +496,7 @@ const TechPage = () => {
           >
             <nav className="bg-gray-900/40 backdrop-blur-md border border-gray-700/30 rounded-2xl shadow-2xl shadow-black/10">
               <div className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3">
-                {mobileMenuItems.slice(1).map((item) => (
+                {sectionNavItems.map((item) => (
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
@@ -491,44 +537,53 @@ const TechPage = () => {
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               
-              {/* Left side - Text Content - REDUCED SIZE FOR BETTER FIT */}
+              {/* Left side - Text Content */}
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-left space-y-3 sm:space-y-4 lg:space-y-5" // REDUCED spacing
+                transition={{ duration: 0.6 }}
+                className="text-left space-y-3 sm:space-y-4 lg:space-y-5"
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                <motion.p
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                  transition={{ delay: 0.1, duration: 0.45 }}
+                  className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-gray-500 font-medium"
                 >
-                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-gray-300 mb-1 sm:mb-2"> {/* REDUCED SIZE */}
+                  Technical Analyst & Developer
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15, duration: 0.5 }}
+                >
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-gray-300 mb-1 sm:mb-2">
                     Hi, I'm
                   </h1>
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.6 }}
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1 sm:mb-2" // REDUCED SIZE
+                    transition={{ delay: 0.25, duration: 0.5 }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1 sm:mb-2 leading-tight"
                   >
                     Himank
                   </motion.div>
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.6 }}
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3 sm:mb-4 lg:mb-5"
+                    transition={{ delay: 0.35, duration: 0.5 }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3 sm:mb-4 lg:mb-5 leading-tight"
                   >
                     Arora
                   </motion.div>
                 </motion.div>
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-300 mb-3 sm:mb-4 min-h-[1.5rem] sm:min-h-[2rem] md:min-h-[3rem]" // REDUCED SIZE
+                  transition={{ delay: 0.45, duration: 0.5 }}
+                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-300 mb-3 sm:mb-4 min-h-[1.5rem] sm:min-h-[2rem] md:min-h-[3rem]"
                 >
                   <span className="text-cyan-400">
                     {displayText}
@@ -537,23 +592,23 @@ const TechPage = () => {
                 </motion.div>
                 
                 <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1, duration: 0.6 }}
-                  className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl leading-relaxed mb-4 sm:mb-6" // REDUCED SIZE
+                  transition={{ delay: 0.55, duration: 0.5 }}
+                  className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl leading-relaxed mb-4 sm:mb-6"
                 >
                   {personalInfo.bio}
                 </motion.p>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2, duration: 0.6 }}
-                  className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6" // ADDED MARGIN BOTTOM
+                  transition={{ delay: 0.65, duration: 0.5 }}
+                  className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6"
                 >
                   <button
                     onClick={() => scrollToSection('projects')}
-                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base" // REDUCED SIZE
+                    className="bg-white hover:bg-gray-100 text-gray-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all flex items-center justify-center space-x-2 text-sm sm:text-base shadow-sm"
                   >
                     <Target size={16} className="sm:w-5 sm:h-5" />
                     <span>View My Work</span>
@@ -563,19 +618,26 @@ const TechPage = () => {
                     href={personalInfo.resume}
                     download
                     onClick={handleResumeDownload}
-                    className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-gray-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 text-sm sm:text-base" // REDUCED SIZE
+                    className="border border-gray-500/70 text-gray-200 hover:border-cyan-400/60 hover:text-cyan-300 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
                   >
                     <Download size={16} className="sm:w-5 sm:h-5" />
                     <span>Download Resume</span>
                   </a>
+
+                  <button
+                    onClick={() => scrollToSection('contact')}
+                    className="text-sm sm:text-base text-gray-400 hover:text-cyan-300 transition-colors underline-offset-4 hover:underline px-1 py-2 sm:py-0 text-left sm:text-center"
+                  >
+                    Get in Touch
+                  </button>
                 </motion.div>
 
-                {/* SOCIAL LINKS - MOVED UP WITH BETTER SPACING */}
+                {/* Social links */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 1.4, duration: 0.6 }}
-                  className="flex space-x-4 sm:space-x-6 pt-2 sm:pt-4" // REDUCED TOP PADDING
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                  className="flex space-x-4 sm:space-x-6 pt-2 sm:pt-4"
                 >
                   <a 
                     href={socialLinks.github} 
@@ -584,7 +646,7 @@ const TechPage = () => {
                     onClick={() => handleSocialClick('GitHub', socialLinks.github)}
                     className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
                   >
-                    <Github size={22} className="sm:w-6 sm:h-6" /> {/* SLIGHTLY SMALLER */}
+                    <Github size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
                     href={socialLinks.linkedin} 
@@ -593,24 +655,24 @@ const TechPage = () => {
                     onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
                     className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
                   >
-                    <Linkedin size={22} className="sm:w-6 sm:h-6" /> {/* SLIGHTLY SMALLER */}
+                    <Linkedin size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
                     href="mailto:himankarora1000@gmail.com"
                     onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
                     className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
                   >
-                    <Mail size={22} className="sm:w-6 sm:h-6" /> {/* SLIGHTLY SMALLER */}
+                    <Mail size={22} className="sm:w-6 sm:h-6" />
                   </a>
                 </motion.div>
               </motion.div>
 
               {/* Right side - Visual Animation - Responsive */}
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="relative flex items-center justify-center mt-6 lg:mt-0" // REDUCED TOP MARGIN
+                transition={{ delay: 0.3, duration: 0.65 }}
+                className="relative flex items-center justify-center mt-6 lg:mt-0"
               >
                 {/* Animated Code Editor Mockup */}
                 <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
@@ -628,15 +690,15 @@ const TechPage = () => {
                       <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 1.5, duration: 0.5 }}
+                        transition={{ delay: 0.9, duration: 0.4 }}
                         className="text-blue-400"
                       >
-                        <span className="text-purple-400">const</span> professional = {'{'}
+                        <span className="text-cyan-400">const</span> professional = {'{'}
                       </motion.div>
                       <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 2, duration: 0.5 }}
+                        transition={{ delay: 1.15, duration: 0.4 }}
                         className="text-gray-300 ml-2 sm:ml-4"
                       >
                         name: <span className="text-green-400">'{personalInfo.name}'</span>,
@@ -644,7 +706,7 @@ const TechPage = () => {
                       <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 2.5, duration: 0.5 }}
+                        transition={{ delay: 1.4, duration: 0.4 }}
                         className="text-gray-300 ml-2 sm:ml-4"
                       >
                         skills: [<span className="text-green-400">'Analysis'</span>, <span className="text-green-400">'React'</span>],
@@ -652,7 +714,7 @@ const TechPage = () => {
                       <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 3, duration: 0.5 }}
+                        transition={{ delay: 1.65, duration: 0.4 }}
                         className="text-gray-300 ml-2 sm:ml-4"
                       >
                         focus: <span className="text-green-400">'Ship products'</span>
@@ -660,7 +722,7 @@ const TechPage = () => {
                       <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 3.5, duration: 0.5 }}
+                        transition={{ delay: 1.9, duration: 0.4 }}
                         className="text-blue-400"
                       >
                         {'};'}
@@ -679,22 +741,27 @@ const TechPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                About Me
+              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+                Background
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
+                About <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Me</span>
               </h2>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                Bridging analysis and engineering to ship products people actually use.
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, amount: 0.2 }}
               >
                 <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
                   <p>
@@ -710,10 +777,10 @@ const TechPage = () => {
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 sm:p-8 space-y-5 sm:space-y-6"
               >
                 <h3 className="text-lg sm:text-xl font-semibold text-white">At a glance</h3>
@@ -749,14 +816,16 @@ const TechPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                Experience & Education
+              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+                Career
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
+                Experience & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Education</span>
               </h2>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-4"></div>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 A clear view of my professional path and academic foundation.
               </p>
@@ -765,7 +834,7 @@ const TechPage = () => {
             {/* Professional Experience Timeline */}
             <div className="mb-16 sm:mb-24">
               <div className="flex items-center gap-3 mb-8 sm:mb-10">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/30 flex items-center justify-center">
                   <Briefcase size={18} className="text-cyan-300" />
                 </div>
                 <div>
@@ -783,20 +852,25 @@ const TechPage = () => {
                       key={exp.id || index}
                       initial={{ opacity: 0, y: 24 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.12 }}
-                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      viewport={{ once: true, amount: 0.2 }}
                       className="relative pl-8 sm:pl-10"
                     >
-                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20 shadow-[0_0_16px_rgba(34,211,238,0.55)]"></div>
+                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20"></div>
 
-                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-cyan-400/40 hover:shadow-[0_8px_40px_rgba(34,211,238,0.08)] transition-all duration-300">
+                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-cyan-400/30 transition-all duration-300">
                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 mb-4">
-                          <div>
-                            <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
-                              {exp.title}
-                            </h4>
-                            <div className="text-cyan-400 font-semibold text-sm sm:text-base mt-1">
-                              {exp.company}
+                          <div className="flex items-start gap-3">
+                            <span className="text-xs sm:text-sm font-mono text-gray-500 pt-1 tabular-nums shrink-0">
+                              {String(index + 1).padStart(2, '0')}
+                            </span>
+                            <div>
+                              <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
+                                {exp.title}
+                              </h4>
+                              <div className="text-cyan-400 font-semibold text-sm sm:text-base mt-1">
+                                {exp.company}
+                              </div>
                             </div>
                           </div>
                           <div className="flex flex-wrap gap-2">
@@ -837,7 +911,7 @@ const TechPage = () => {
             {/* Education Timeline */}
             <div id="education" className="scroll-mt-24">
               <div className="flex items-center gap-3 mb-8 sm:mb-10">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(96,165,250,0.15)]">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border border-blue-400/30 flex items-center justify-center">
                   <GraduationCap size={18} className="text-blue-300" />
                 </div>
                 <div>
@@ -855,13 +929,13 @@ const TechPage = () => {
                       key={exp.id || index}
                       initial={{ opacity: 0, y: 24 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.12 }}
-                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      viewport={{ once: true, amount: 0.2 }}
                       className="relative pl-8 sm:pl-10"
                     >
-                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-blue-400/20 shadow-[0_0_16px_rgba(96,165,250,0.55)]"></div>
+                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-blue-400/20"></div>
 
-                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-blue-400/40 hover:shadow-[0_8px_40px_rgba(96,165,250,0.08)] transition-all duration-300">
+                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-blue-400/30 transition-all duration-300">
                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
                           <div>
                             <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-200 transition-colors">
@@ -897,14 +971,19 @@ const TechPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                Featured Projects
+              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+                Selected Work
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
+                Featured <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Projects</span>
               </h2>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                Products and tools I've analyzed, designed, and shipped end to end.
+              </p>
             </motion.div>
 
             <div className="relative">
@@ -912,11 +991,13 @@ const TechPage = () => {
                 {paginatedProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -4 }}
+                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     onClick={() => handleProjectClick(project)}
-                    className="group flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg overflow-hidden hover:shadow-cyan-500/10 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer"
+                    className="group flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl overflow-hidden hover:border-cyan-400/30 transition-colors duration-300 cursor-pointer"
                   >
                     <div className="flex flex-col flex-1 p-6 sm:p-7">
                       <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2 h-4">
@@ -1056,25 +1137,30 @@ const TechPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                Skills & Technologies
+              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+                Toolkit
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
+                Skills & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Technologies</span>
               </h2>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                The stack I use to analyze problems and build solutions.
+              </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {Object.entries(skills).map(([category, skillData], index) => (
                 <motion.div
                   key={category}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-4 sm:p-6 hover:shadow-cyan-500/10 transition-all"
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-4 sm:p-6 hover:border-cyan-400/30 transition-colors"
                 >
                   <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center space-x-2">
                     <Zap size={18} className="text-cyan-400 sm:w-5 sm:h-5" />
@@ -1099,16 +1185,18 @@ const TechPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-                Certificates & Credentials
+              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+                Credentials
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
+                Certificates & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Credentials</span>
               </h2>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
-              <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
-                Professional certifications that validate my expertise and commitment to continuous learning in technology and data analysis.
+              <p className="text-gray-400 text-sm sm:text-base max-w-3xl mx-auto">
+                Professional certifications that validate expertise and continuous learning in technology and data analysis.
               </p>
             </motion.div>
 
@@ -1121,11 +1209,12 @@ const TechPage = () => {
                   .map((cert, index) => (
                     <motion.div
                       key={cert.credentialId}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      className={`bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg p-4 sm:p-6 hover:shadow-cyan-500/10 transition-all duration-300 hover:scale-[1.02] hover:border-cyan-500/50 ${
-                        cert.featured ? 'ring-2 ring-cyan-400/50' : ''
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.08 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      className={`bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl p-4 sm:p-6 hover:border-cyan-400/30 transition-colors duration-300 ${
+                        cert.featured ? 'ring-1 ring-cyan-400/40' : ''
                       }`}
                     >
                       {/* Header */}
@@ -1256,12 +1345,17 @@ const TechPage = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">Let's Have a Chat</h2>
-              <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
+              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+                Contact
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
+                Let's Have a <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Chat</span>
+              </h2>
+              <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
                 Leave your email and I will get back to you within 24 hours
               </p>
             </motion.div>
@@ -1269,10 +1363,10 @@ const TechPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-stretch">
               {/* Left Side - PC Setup Background with Info */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end"
               >
                 <div className="relative z-10 space-y-6 sm:space-y-8">
@@ -1356,10 +1450,10 @@ const TechPage = () => {
 
               {/* Right Side - Contact Form */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 sm:p-8"
               >
                 {/* Success Message */}
