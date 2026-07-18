@@ -43,7 +43,6 @@ const TechPage = () => {
   const [isTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [showFloatingNav, setShowFloatingNav] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
   const [currentCertPage, setCurrentCertPage] = useState(0);
   const [currentProjectPage, setCurrentProjectPage] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -261,8 +260,6 @@ const TechPage = () => {
 
   // Scroll detection
   useEffect(() => {
-    let scrollTimer;
-    
     const handleScroll = () => {
       const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'certificates', 'contact'];
       const scrollPosition = window.scrollY + 200;
@@ -277,15 +274,6 @@ const TechPage = () => {
 
       // Show/hide floating nav based on scroll position (all devices)
       setShowFloatingNav(isScrolled);
-      setIsScrolling(true);
-
-      // Clear existing timer
-      clearTimeout(scrollTimer);
-      
-      // Set timer to hide floating nav after scrolling stops
-      scrollTimer = setTimeout(() => {
-        setIsScrolling(false);
-      }, 1500);
 
       let currentSection = 'hero';
 
@@ -309,7 +297,6 @@ const TechPage = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimer);
     };
   }, []);
 
