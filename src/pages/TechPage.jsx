@@ -34,9 +34,31 @@ const btnPrimary =
 const btnSecondary =
   'inline-flex items-center justify-center space-x-2 border border-gray-500/70 text-gray-200 hover:border-cyan-400/60 hover:text-cyan-300 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all text-sm sm:text-base';
 const btnPager =
-  'inline-flex items-center justify-center space-x-1 sm:space-x-2 border border-gray-600/70 text-gray-300 hover:border-cyan-400/50 hover:text-cyan-300 px-3 sm:px-4 py-2 rounded-full transition-all text-sm sm:text-base';
+  'inline-flex items-center justify-center space-x-1 sm:space-x-2 border border-white/15 text-gray-300 hover:border-cyan-400/50 hover:text-cyan-300 px-3 sm:px-4 py-2 rounded-full transition-all text-sm sm:text-base bg-black/20';
 const btnPagerDisabled =
-  'inline-flex items-center justify-center space-x-1 sm:space-x-2 border border-gray-700/50 text-gray-600 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base cursor-not-allowed';
+  'inline-flex items-center justify-center space-x-1 sm:space-x-2 border border-white/10 text-gray-600 px-3 sm:px-4 py-2 rounded-full text-sm sm:text-base cursor-not-allowed bg-black/10';
+
+// Shared surfaces — match About focus panel / tech-grid theme
+const surfaceCard =
+  'rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm';
+const surfaceCardHover =
+  'rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-cyan-400/30 transition-colors duration-300';
+const surfaceInset =
+  'rounded-xl border border-white/10 bg-black/20';
+const surfaceTag =
+  'px-2.5 py-1 rounded-md border border-white/10 bg-black/25 text-xs text-gray-300 font-medium';
+const surfaceTagSoft =
+  'px-2 sm:px-3 py-1 rounded-lg border border-white/10 bg-black/25 text-xs sm:text-sm text-gray-300 font-medium hover:border-cyan-500/30 hover:text-cyan-300 transition-all';
+const surfaceChip =
+  'px-3 py-1.5 rounded-full border border-white/10 bg-black/25 text-xs text-gray-300';
+const surfacePill =
+  'inline-block px-3 py-1.5 rounded-lg border border-white/10 bg-black/25 text-xs sm:text-sm text-gray-200';
+const surfaceInput =
+  'w-full px-3 sm:px-4 py-3 sm:py-4 bg-black/25 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed';
+const surfaceEyebrow =
+  'inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-white/10 rounded-full bg-black/20';
+const surfaceIconBtn =
+  'w-10 h-10 sm:w-12 sm:h-12 border border-white/10 bg-black/25 rounded-xl flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all';
 
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
@@ -362,7 +384,7 @@ const TechPage = () => {
       />
 
       {/* Professional Navigation - FIXED WITH PROPER SPACING */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/98 backdrop-blur-xl border-b border-gray-700/30 shadow-xl">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#05070b]/90 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-none mx-auto px-3 sm:px-4 lg:px-6">
           <div className="flex justify-between items-center h-16 sm:h-20">
             <Link 
@@ -397,7 +419,7 @@ const TechPage = () => {
                   >
                     {item.label}
                     <span
-                      className={`absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-opacity duration-300 ${
+                      className={`absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-cyan-400 transition-opacity duration-300 ${
                         activeSection === item.id ? 'opacity-100' : 'opacity-0'
                       }`}
                     />
@@ -405,15 +427,15 @@ const TechPage = () => {
                 ))}
               </div>
 
-              <div className="hidden md:block h-8 w-px bg-white/20"></div>
+              <div className="hidden md:block h-8 w-px bg-white/15"></div>
 
               {/* Portfolio Hub Button - Desktop */}
               <div className="hidden md:block">
                 <Link
                   to="/"
-                  className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-cyan-500/20 hover:to-blue-600/20 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-cyan-500/20"
+                  className="flex items-center space-x-2 px-4 py-2.5 rounded-full border border-white/10 bg-black/25 text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all duration-300 text-sm"
                 >
-                  <Globe size={18} />
+                  <Globe size={16} />
                   <span>Portfolio Hub</span>
                 </Link>
               </div>
@@ -421,7 +443,7 @@ const TechPage = () => {
               {/* Mobile Hamburger Menu */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg bg-gray-800/50 border border-gray-600/30 text-gray-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
+                className="md:hidden p-2 rounded-lg border border-white/10 bg-black/25 text-gray-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -437,7 +459,7 @@ const TechPage = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/30"
+              className="md:hidden bg-[#05070b]/95 backdrop-blur-xl border-t border-white/10"
             >
               <div className="px-3 py-4 space-y-2">
                 {mobileMenuItems.map((item) => (
@@ -447,7 +469,7 @@ const TechPage = () => {
                     className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
                       activeSection === item.id
                         ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
-                        : 'text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50'
+                        : 'text-gray-300 hover:text-cyan-400 hover:bg-white/5'
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -459,14 +481,14 @@ const TechPage = () => {
                 
                 {/* Portfolio Hub Link for Mobile */}
                 <motion.div
-                  className="pt-2 mt-2 border-t border-gray-700/30"
+                  className="pt-2 mt-2 border-t border-white/10"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <Link
                     to="/"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-all duration-300"
+                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-white/5 transition-all duration-300"
                   >
                     <Globe size={18} />
                     <span className="font-medium">Portfolio Hub</span>
@@ -479,7 +501,7 @@ const TechPage = () => {
       </nav>
 
       {/* Scroll Progress Bar */}
-      <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 h-1 bg-gray-800/50 backdrop-blur-sm">
+      <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 h-1 bg-white/5 backdrop-blur-sm">
         <motion.div
           className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg shadow-cyan-500/20"
           style={{ width: `${scrollProgress}%` }}
@@ -506,7 +528,7 @@ const TechPage = () => {
               setShowFloatingNav(false);
             }}
           >
-            <nav className="bg-gray-900/40 backdrop-blur-md border border-gray-700/30 rounded-2xl shadow-2xl shadow-black/10">
+            <nav className={`${surfaceCard} shadow-2xl shadow-black/10`}>
               <div className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3">
                 {sectionNavItems.map((item) => (
                   <motion.button
@@ -515,7 +537,7 @@ const TechPage = () => {
                     className={`p-2 sm:p-3 rounded-xl transition-all duration-300 ${
                       activeSection === item.id
                         ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
-                        : 'text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50'
+                        : 'text-gray-400 hover:text-cyan-400 hover:bg-white/5'
                     }`}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
@@ -672,7 +694,7 @@ const TechPage = () => {
                 className="relative flex items-center justify-center mt-4 lg:mt-0"
               >
                 <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
-                  <div className="bg-gray-900/70 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xl">
+                  <div className={`${surfaceCard} p-4 sm:p-6 shadow-2xl`}>
                     <div className="flex items-center space-x-2 mb-3 sm:mb-4">
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
@@ -759,7 +781,7 @@ const TechPage = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+              <span className={surfaceEyebrow}>
                 Background
               </span>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
@@ -795,7 +817,7 @@ const TechPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 sm:p-8"
+                className={`${surfaceCard} p-6 sm:p-8`}
               >
                 <div className="flex items-start justify-between gap-4 mb-5">
                   <div>
@@ -831,7 +853,7 @@ const TechPage = () => {
                     {['Analysis', 'React', 'SQL', 'Systems', 'Delivery'].map((chip) => (
                       <span
                         key={chip}
-                        className="px-3 py-1.5 rounded-full border border-gray-700/80 bg-black/20 text-xs text-gray-300"
+                        className={surfaceChip}
                       >
                         {chip}
                       </span>
@@ -853,7 +875,7 @@ const TechPage = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+              <span className={surfaceEyebrow}>
                 Career
               </span>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
@@ -867,7 +889,7 @@ const TechPage = () => {
             {/* Professional Experience — centered timeline */}
             <div className="mb-16 sm:mb-24">
               <div className="flex items-center justify-center gap-3 mb-10 sm:mb-14">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/30 flex items-center justify-center">
+                <div className="w-11 h-11 rounded-xl border border-white/10 bg-black/25 flex items-center justify-center">
                   <Briefcase size={18} className="text-cyan-300" />
                 </div>
                 <div className="text-left">
@@ -877,7 +899,7 @@ const TechPage = () => {
               </div>
 
               <div className="relative">
-                <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-gray-700/80 md:-translate-x-1/2" />
+                <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-white/10 md:-translate-x-1/2" />
 
                 <div className="space-y-12 sm:space-y-16">
                   {workExperience.map((exp, index) => (
@@ -900,7 +922,7 @@ const TechPage = () => {
 
                       {/* Left: date, title, company */}
                       <div className="pl-10 md:pl-0 md:pr-8 lg:pr-12 md:text-right">
-                        <span className="inline-block mb-3 px-3 py-1.5 rounded-lg bg-gray-800/90 border border-gray-700/80 text-xs sm:text-sm text-gray-200">
+                        <span className={surfacePill}>
                           {exp.duration}
                         </span>
                         <h4 className="text-xl sm:text-2xl font-bold text-white leading-snug">
@@ -941,7 +963,7 @@ const TechPage = () => {
                             {exp.skills.map((skill) => (
                               <span
                                 key={skill}
-                                className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
+                                className={surfaceTag}
                               >
                                 {skill}
                               </span>
@@ -958,7 +980,7 @@ const TechPage = () => {
             {/* Education — same centered timeline */}
             <div id="education" className="scroll-mt-24">
               <div className="flex items-center justify-center gap-3 mb-10 sm:mb-14">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border border-blue-400/30 flex items-center justify-center">
+                <div className="w-11 h-11 rounded-xl border border-white/10 bg-black/25 flex items-center justify-center">
                   <GraduationCap size={18} className="text-blue-300" />
                 </div>
                 <div className="text-left">
@@ -968,7 +990,7 @@ const TechPage = () => {
               </div>
 
               <div className="relative">
-                <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-gray-700/80 md:-translate-x-1/2" />
+                <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-white/10 md:-translate-x-1/2" />
 
                 <div className="space-y-12 sm:space-y-14">
                   {education.map((exp, index) => (
@@ -989,7 +1011,7 @@ const TechPage = () => {
                       />
 
                       <div className="pl-10 md:pl-0 md:pr-8 lg:pr-12 md:text-right">
-                        <span className="inline-block mb-3 px-3 py-1.5 rounded-lg bg-gray-800/90 border border-gray-700/80 text-xs sm:text-sm text-gray-200">
+                        <span className={surfacePill}>
                           {exp.duration}
                         </span>
                         <h4 className="text-xl sm:text-2xl font-bold text-white leading-snug">
@@ -1022,7 +1044,7 @@ const TechPage = () => {
                               {exp.skills.map((skill) => (
                                 <span
                                   key={skill}
-                                  className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
+                                  className={surfaceTag}
                                 >
                                   {skill}
                                 </span>
@@ -1049,7 +1071,7 @@ const TechPage = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+              <span className={surfaceEyebrow}>
                 Selected Work
               </span>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
@@ -1071,7 +1093,7 @@ const TechPage = () => {
                     transition={{ duration: 0.4, delay: index * 0.08 }}
                     viewport={{ once: true, amount: 0.2 }}
                     onClick={() => handleProjectClick(project)}
-                    className="group flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl overflow-hidden hover:border-cyan-400/30 transition-colors duration-300 cursor-pointer"
+                    className={`group flex flex-col h-full ${surfaceCardHover} overflow-hidden cursor-pointer`}
                   >
                     <div className="flex flex-col flex-1 p-6 sm:p-7">
                       <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2 h-4">
@@ -1079,7 +1101,7 @@ const TechPage = () => {
                       </div>
 
                       <h3
-                        className="text-lg sm:text-xl font-bold text-white mb-3 leading-snug h-[3.25rem] sm:h-[3.5rem] overflow-hidden group-hover:text-cyan-300 transition-colors"
+                        className="font-display text-lg sm:text-xl font-semibold text-white mb-3 leading-snug h-[3.25rem] sm:h-[3.5rem] overflow-hidden group-hover:text-cyan-300 transition-colors"
                         style={{
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
@@ -1095,7 +1117,7 @@ const TechPage = () => {
                       </p>
 
                       <div className="mt-auto">
-                        <div className="rounded-lg border border-gray-700/80 bg-gray-900/40 p-3 sm:p-4 h-[6.25rem] flex flex-col">
+                        <div className={`${surfaceInset} p-3 sm:p-4 h-[6.25rem] flex flex-col`}>
                           <div className="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2.5 shrink-0">
                             Tech stack
                           </div>
@@ -1103,7 +1125,7 @@ const TechPage = () => {
                             {project.tech.map(tech => (
                               <span
                                 key={tech}
-                                className="bg-blue-500/15 border border-blue-500/25 text-blue-300 px-2.5 py-1 rounded-md text-xs font-medium"
+                                className={surfaceTag}
                               >
                                 {tech}
                               </span>
@@ -1113,7 +1135,7 @@ const TechPage = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 sm:gap-3 h-[52px] px-6 sm:px-7 border-t border-gray-700/80 bg-gray-900/30 shrink-0">
+                    <div className="flex items-center gap-2 sm:gap-3 h-[52px] px-6 sm:px-7 border-t border-white/10 bg-black/20 shrink-0">
                       {project.github && (
                         <a
                           href={project.github}
@@ -1123,7 +1145,7 @@ const TechPage = () => {
                             e.stopPropagation();
                             handleProjectGithub(project);
                           }}
-                          className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
+                          className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-white/5 text-sm"
                         >
                           <Github size={15} />
                           <span>Code</span>
@@ -1138,7 +1160,7 @@ const TechPage = () => {
                             e.stopPropagation();
                             handleProjectDemo(project);
                           }}
-                          className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-gray-700/40 text-sm"
+                          className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-white/5 text-sm"
                         >
                           <ExternalLink size={15} />
                           <span>Live Demo</span>
@@ -1207,7 +1229,7 @@ const TechPage = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+              <span className={surfaceEyebrow}>
                 Toolkit
               </span>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
@@ -1226,15 +1248,15 @@ const TechPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
                   viewport={{ once: true, amount: 0.2 }}
-                  className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-4 sm:p-6 hover:border-cyan-400/30 transition-colors"
+                  className={`${surfaceCardHover} p-4 sm:p-6`}
                 >
-                  <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4 flex items-center space-x-2">
+                  <h3 className="font-display text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center space-x-2">
                     <Zap size={18} className="text-cyan-400 sm:w-5 sm:h-5" />
                     <span>{category}</span>
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {skillData.items.map(skill => (
-                      <span key={skill} className="bg-gray-700/50 border border-gray-600 text-gray-300 px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-medium hover:bg-cyan-500/20 hover:border-cyan-500/30 hover:text-cyan-300 transition-all">
+                      <span key={skill} className={surfaceTagSoft}>
                         {skill}
                       </span>
                     ))}
@@ -1255,7 +1277,7 @@ const TechPage = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+              <span className={surfaceEyebrow}>
                 Credentials
               </span>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
@@ -1279,15 +1301,15 @@ const TechPage = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: index * 0.08 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      className={`bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl p-4 sm:p-6 hover:border-cyan-400/30 transition-colors duration-300 ${
+                      className={`${surfaceCardHover} p-4 sm:p-6 ${
                         cert.featured ? 'ring-1 ring-cyan-400/40' : ''
                       }`}
                     >
                       {/* Header */}
                       <div className="flex items-start justify-between mb-3 sm:mb-4">
                         <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <GraduationCap size={16} className="text-white sm:w-5 sm:h-5" />
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <GraduationCap size={16} className="text-cyan-400 sm:w-5 sm:h-5" />
                           </div>
                           {cert.featured && (
                             <div className="bg-yellow-400 text-gray-900 px-2 py-1 rounded-full text-xs font-bold">
@@ -1295,14 +1317,14 @@ const TechPage = () => {
                             </div>
                           )}
                         </div>
-                        <div className="text-green-400">
+                        <div className="text-emerald-400">
                           <CheckCircle size={16} className="sm:w-4 sm:h-4" />
                         </div>
                       </div>
 
                       {/* Content */}
                       <div className="space-y-2 sm:space-y-3">
-                        <h3 className="text-base sm:text-lg font-bold text-white leading-tight">{cert.title}</h3>
+                        <h3 className="font-display text-base sm:text-lg font-semibold text-white leading-tight">{cert.title}</h3>
                         <p className="text-cyan-400 font-semibold text-sm">{cert.issuer}</p>
                         
                         <div className="flex items-center text-xs sm:text-sm text-gray-400">
@@ -1314,7 +1336,7 @@ const TechPage = () => {
                         <div>
                           <div className="flex flex-wrap gap-1 mb-2 sm:mb-3">
                             {cert.skills.slice(0, 2).map(skill => (
-                              <span key={skill} className="bg-blue-500/20 border border-blue-500/30 text-blue-300 px-2 py-1 rounded-full text-xs font-medium">
+                              <span key={skill} className={surfaceChip}>
                                 {skill}
                               </span>
                             ))}
@@ -1329,7 +1351,7 @@ const TechPage = () => {
                         {/* Credential ID */}
                         <div>
                           <p className="text-gray-400 text-xs mb-1">Credential ID:</p>
-                          <p className="text-gray-300 text-xs font-mono bg-gray-700/50 px-2 py-1 rounded truncate">
+                          <p className="text-gray-300 text-xs font-mono bg-black/30 border border-white/10 px-2 py-1 rounded truncate">
                             {cert.credentialId}
                           </p>
                         </div>
@@ -1407,7 +1429,7 @@ const TechPage = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-center mb-12 sm:mb-16"
             >
-              <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
+              <span className={surfaceEyebrow}>
                 Contact
               </span>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-3 sm:mb-4">
@@ -1425,7 +1447,7 @@ const TechPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end"
+                className={`relative overflow-hidden ${surfaceCard} p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end`}
               >
                 <div className="relative z-10 space-y-6 sm:space-y-8">
                   <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white mb-6 sm:mb-8">Get in Touch</h3>
@@ -1460,7 +1482,7 @@ const TechPage = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('GitHub', socialLinks.github)}
-                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-110 transition-all"
+                      className={surfaceIconBtn}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -1472,7 +1494,7 @@ const TechPage = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
-                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-110 transition-all"
+                      className={surfaceIconBtn}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -1484,7 +1506,7 @@ const TechPage = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
-                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-110 transition-all"
+                      className={surfaceIconBtn}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -1496,7 +1518,7 @@ const TechPage = () => {
                     <motion.a
                       href="mailto:himankarora1000@gmail.com"
                       onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
-                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-110 transition-all"
+                      className={surfaceIconBtn}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -1512,7 +1534,7 @@ const TechPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 sm:p-8"
+                className={`${surfaceCard} p-6 sm:p-8`}
               >
                 {/* Success Message */}
                 {formStatus.isSuccess && (
@@ -1572,7 +1594,7 @@ const TechPage = () => {
                       placeholder="Your Full Name"
                       required
                       disabled={formStatus.isSubmitting}
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={surfaceInput}
                     />
                   </div>
                   
@@ -1589,7 +1611,7 @@ const TechPage = () => {
                       placeholder="your.email@example.com"
                       required
                       disabled={formStatus.isSubmitting}
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={surfaceInput}
                     />
                   </div>
                   
@@ -1604,7 +1626,7 @@ const TechPage = () => {
                       onChange={handleInputChange}
                       required
                       disabled={formStatus.isSubmitting}
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={surfaceInput}
                     >
                       <option value="" className="text-gray-400">Select a subject</option>
                       <option value="project-inquiry" className="text-gray-900">Project Inquiry</option>
@@ -1630,7 +1652,7 @@ const TechPage = () => {
                       placeholder="Tell me about the role, project, or problem you're working on..."
                       required
                       disabled={formStatus.isSubmitting}
-                      className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all resize-none text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                      className={`${surfaceInput} resize-none`}
                     />
                   </div>
                   
@@ -1664,7 +1686,7 @@ const TechPage = () => {
       </div>
 
       {/* Footer - MATCHING ARTISTABOUT STYLE */}
-      <footer className="bg-gray-900/80 backdrop-blur-sm border-t border-white/10">
+      <footer className="bg-black/40 backdrop-blur-sm border-t border-white/10">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
             {/* Brand Section */}
@@ -1689,7 +1711,7 @@ const TechPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('GitHub', socialLinks.github)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
+                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
                   whileHover={{ scale: 1.1 }}
                 >
                   <Github size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -1699,7 +1721,7 @@ const TechPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
+                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
                   whileHover={{ scale: 1.1 }}
                 >
                   <Linkedin size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -1709,7 +1731,7 @@ const TechPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
+                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
                   whileHover={{ scale: 1.1 }}
                 >
                   <svg width={16} height={16} viewBox="0 0 24 24" fill="currentColor" className="sm:w-[18px] sm:h-[18px]">
@@ -1719,7 +1741,7 @@ const TechPage = () => {
                 <motion.a
                   href="mailto:himankarora1000@gmail.com"
                   onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
+                  className="w-8 h-8 sm:w-10 sm:h-10 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
                   whileHover={{ scale: 1.1 }}
                 >
                   <Mail size={16} className="sm:w-[18px] sm:h-[18px]" />
