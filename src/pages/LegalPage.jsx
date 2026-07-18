@@ -10,7 +10,7 @@ const pages = {
     sections: [
       {
         heading: 'Overview',
-        body: 'This Privacy Policy describes how Himank Arora ("I", "me", or "my") collects, uses, and protects information when you visit himankarora.dev and related portfolio pages.',
+        body: 'This Privacy Policy describes how Himank Arora ("I", "me", or "my") collects, uses, and protects information when you visit himankarora.com and related portfolio pages.',
       },
       {
         heading: 'Information I Collect',
@@ -40,7 +40,7 @@ const pages = {
     sections: [
       {
         heading: 'Agreement',
-        body: 'By using himankarora.dev, you agree to these Terms of Service. If you do not agree, please do not use the site.',
+        body: 'By using himankarora.com, you agree to these Terms of Service. If you do not agree, please do not use the site.',
       },
       {
         heading: 'Portfolio Content',

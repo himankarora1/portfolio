@@ -215,7 +215,7 @@ export const contentData = {
       featured: true,
       image: "/images/projects/portfolio.jpg",
       github: "https://github.com/himankarora1/portfolio",
-      demo: "https://himankarora.dev",
+      demo: "https://himankarora.com",
       status: "completed",
       year: "2025",
       highlights: [
@@ -583,7 +583,7 @@ export const contentData = {
 
   // Meta information for SEO and site management
   meta: {
-    site_url: "https://himankarora.dev",
+    site_url: "https://himankarora.com",
     site_name: "Himank Arora Portfolio",
     og_image: "/images/og-image.jpg",
     twitter_image: "/images/twitter-image.jpg",

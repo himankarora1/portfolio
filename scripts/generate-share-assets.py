@@ -65,7 +65,7 @@ def draw_share_card(path: Path, width=1200, height=630):
         fill=MUTED,
         spacing=8,
     )
-    draw.text((88, 520), "himankarora.dev", font=font(24, bold=True), fill=CYAN)
+    draw.text((88, 520), "himankarora.com", font=font(24, bold=True), fill=CYAN)
 
     # Right visual: role chips + faux code card
     card = (700, 120, 1120, 500)
