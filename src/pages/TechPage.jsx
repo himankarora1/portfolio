@@ -954,9 +954,22 @@ const TechPage = () => {
 
                       <div className="pl-10 md:pl-8 lg:pl-12">
                         {exp.description && (
-                          <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                          <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
                             {exp.description}
                           </p>
+                        )}
+
+                        {exp.skills?.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {exp.skills.map((skill) => (
+                              <span
+                                key={skill}
+                                className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
                         )}
                       </div>
                     </motion.div>

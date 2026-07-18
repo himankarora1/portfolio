@@ -303,9 +303,19 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Grew into a technical analyst who can design systems, ship software, and use data with confidence. Learned to build applications end to end, model and query databases, apply machine learning to real problems, and translate business needs into clear technical direction.",
+      description: "Learned to build and ship applications end to end, design and query databases, and apply data science and machine learning to product and information problems. Also developed skills in software engineering, algorithms, web design and UX, prompt engineering, and business analysis for information systems.",
       achievements: [],
-      skills: [],
+      skills: [
+        "Application Development",
+        "Software Engineering",
+        "Algorithms",
+        "Database Design",
+        "Data Science",
+        "Machine Learning",
+        "Web Design & UX",
+        "Business Analysis",
+        "Prompt Engineering"
+      ],
       logo: "/images/companies/northeastern.png",
       website: "https://northeastern.edu"
     },
@@ -316,9 +326,19 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Built the business foundation that shaped how I think about operations, finance, and people, while picking up the technical base that started my path into systems work. Learned computer applications, information systems, ERP and accounting software, web development for e-commerce, and quantitative analysis through statistics and mathematics. Came out ready to connect business problems with practical technical solutions.",
+      description: "Built a commerce and management foundation while picking up a practical tech base: computer applications, information systems, computerized accounting and ERP workflows, plus e-commerce and web development. Also strengthened quantitative and analyst skills through business statistics, mathematics, financial modeling, project management, and research methods.",
       achievements: [],
-      skills: [],
+      skills: [
+        "Information Systems",
+        "Computer Applications",
+        "Web Development",
+        "E-Commerce",
+        "ERP",
+        "Computerized Accounting",
+        "Business Statistics",
+        "Financial Modeling",
+        "Project Management"
+      ],
       logo: "/images/companies/ggsipu.png",
       website: "http://www.ipu.ac.in"
     },
