@@ -1703,8 +1703,8 @@ const TechPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/30">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+      <footer className="border-t border-white/10 bg-black/30 px-3 sm:px-4 lg:px-6 py-10 sm:py-12">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 items-start">
             {/* Brand */}
             <div>
