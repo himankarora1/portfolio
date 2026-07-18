@@ -380,7 +380,7 @@ const TechPage = () => {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        const offsetTop = element.offsetTop - 80; // Adjust for mobile nav height
+        const offsetTop = element.offsetTop - 72; // Fixed nav height
         window.scrollTo({
           top: offsetTop,
           behavior: 'smooth'
@@ -411,33 +411,29 @@ const TechPage = () => {
         keywords="technical analyst, developer, business analysis, React, Python, data analysis, Boston"
       />
 
-      {/* Professional Navigation - FIXED WITH PROPER SPACING */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#05070b]/90 backdrop-blur-xl border-b border-white/10">
+      {/* Professional Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#05070b]/70 backdrop-blur-md">
         <div className={`${pageWidth} ${pagePad}`}>
-          <div className="flex justify-between items-center h-16 sm:h-20">
+          <div className="flex h-14 items-center justify-between sm:h-16">
             <Link 
               to="/tech" 
-              className="flex items-center space-x-3 sm:space-x-4 group transition-all duration-300 hover:scale-105"
+              className="group flex items-center space-x-2.5 transition-colors duration-300 sm:space-x-3"
             >
-              {/* Logo Icon with Initials */}
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-cyan-500/30 group-hover:border-cyan-400 transition-all duration-300">
-                <span className="font-display text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-transparent transition-colors group-hover:border-cyan-400 sm:h-10 sm:w-10">
+                <span className="font-display text-xs font-bold tracking-tight text-white sm:text-sm">HA</span>
               </div>
-              
-              {/* Name with Modern Typography */}
-              <div className="flex flex-col">
-                <span className="font-display text-lg sm:text-2xl font-semibold text-white tracking-tight leading-none group-hover:text-cyan-300 transition-colors duration-300">
-                  {personalInfo.name}
-                </span>
-              </div>
+              <span className="font-display text-base font-semibold tracking-tight text-white transition-colors group-hover:text-cyan-300 sm:text-lg">
+                {personalInfo.name}
+              </span>
             </Link>
 
-            <div className="flex items-center space-x-4 sm:space-x-6">
+            <div className="flex items-center space-x-3 sm:space-x-5">
               {/* Desktop in-page section links */}
-              <div className="hidden lg:flex items-center space-x-1">
+              <div className="hidden items-center lg:flex">
                 {sectionNavItems.map((item) => (
                   <button
                     key={item.id}
+                    type="button"
                     onClick={() => scrollToSection(item.id)}
                     className={`relative px-3 py-2 text-sm font-medium transition-colors duration-300 ${
                       activeSection === item.id
@@ -447,7 +443,7 @@ const TechPage = () => {
                   >
                     {item.label}
                     <span
-                      className={`absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-cyan-400 transition-opacity duration-300 ${
+                      className={`absolute left-3 right-3 -bottom-0.5 h-px rounded-full bg-cyan-400 transition-opacity duration-300 ${
                         activeSection === item.id ? 'opacity-100' : 'opacity-0'
                       }`}
                     />
@@ -455,25 +451,27 @@ const TechPage = () => {
                 ))}
               </div>
 
-              <div className="hidden md:block h-8 w-px bg-white/15"></div>
+              <div className="hidden h-6 w-px bg-white/15 md:block" />
 
-              {/* Portfolio Hub Button - Desktop */}
+              {/* Portfolio Hub — Desktop */}
               <div className="hidden md:block">
                 <Link
                   to="/"
-                  className="flex items-center space-x-2 px-4 py-2.5 rounded-full border border-white/10 bg-black/25 text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all duration-300 text-sm"
+                  className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-400 transition-colors hover:text-cyan-300"
                 >
-                  <Globe size={16} />
+                  <Globe size={15} />
                   <span>Portfolio Hub</span>
                 </Link>
               </div>
 
-              {/* Mobile Hamburger Menu */}
+              {/* Mobile Hamburger */}
               <button
+                type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg border border-white/10 bg-black/25 text-gray-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
+                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                className="rounded-full border border-white/10 bg-white/5 p-2 text-gray-300 transition-colors hover:border-cyan-400/40 hover:text-cyan-300 md:hidden"
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
@@ -486,42 +484,36 @@ const TechPage = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-[#05070b]/95 backdrop-blur-xl border-t border-white/10"
+              transition={{ duration: 0.25 }}
+              className="border-t border-white/10 bg-[#05070b]/95 backdrop-blur-md md:hidden"
             >
-              <div className="px-3 py-4 space-y-2">
+              <div className="space-y-1 px-3 py-3">
                 {mobileMenuItems.map((item) => (
-                  <motion.button
+                  <button
                     key={item.id}
+                    type="button"
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
+                    className={`flex w-full items-center space-x-3 rounded-full px-4 py-3 text-left text-sm transition-colors ${
                       activeSection === item.id
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
-                        : 'text-gray-300 hover:text-cyan-400 hover:bg-white/5'
+                        ? 'bg-white/10 text-cyan-300'
+                        : 'text-gray-300 hover:bg-white/5 hover:text-cyan-300'
                     }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                   >
-                    <item.icon size={18} />
+                    <item.icon size={16} />
                     <span className="font-medium">{item.label}</span>
-                  </motion.button>
+                  </button>
                 ))}
                 
-                {/* Portfolio Hub Link for Mobile */}
-                <motion.div
-                  className="pt-2 mt-2 border-t border-white/10"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
+                <div className="mt-2 border-t border-white/10 pt-2">
                   <Link
                     to="/"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-white/5 transition-all duration-300"
+                    className="flex w-full items-center space-x-3 rounded-full px-4 py-3 text-sm text-gray-300 transition-colors hover:bg-white/5 hover:text-cyan-300"
                   >
-                    <Globe size={18} />
+                    <Globe size={16} />
                     <span className="font-medium">Portfolio Hub</span>
                   </Link>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           )}
@@ -529,13 +521,13 @@ const TechPage = () => {
       </nav>
 
       {/* Scroll Progress Bar */}
-      <div className="fixed top-16 sm:top-20 left-0 right-0 z-40 h-1 bg-white/5 backdrop-blur-sm">
+      <div className="fixed top-14 left-0 right-0 z-40 h-px bg-white/5 sm:top-16">
         <motion.div
-          className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-lg shadow-cyan-500/20"
+          className="h-full bg-cyan-400/80"
           style={{ width: `${scrollProgress}%` }}
           initial={{ width: 0 }}
           animate={{ width: `${scrollProgress}%` }}
-          transition={{ duration: 0.1, ease: "easeOut" }}
+          transition={{ duration: 0.1, ease: 'easeOut' }}
         />
       </div>
 
@@ -543,11 +535,11 @@ const TechPage = () => {
       <AnimatePresence>
         {showFloatingNav && (
           <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-20 sm:top-28 left-0 right-0 z-40 flex justify-center px-3 sm:px-0"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="fixed top-[4.5rem] left-0 right-0 z-40 flex justify-center px-3 sm:top-24 sm:px-0"
             onMouseEnter={() => {
               floatingNavHoveredRef.current = true;
             }}
@@ -556,22 +548,22 @@ const TechPage = () => {
               setShowFloatingNav(false);
             }}
           >
-            <nav className={`${surfaceCard} shadow-2xl shadow-black/10`}>
-              <div className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3">
+            <nav className="rounded-full border border-white/10 bg-black/55 px-2 py-1.5 shadow-lg shadow-black/20 backdrop-blur-md sm:px-3 sm:py-2">
+              <div className="flex items-center space-x-0.5 sm:space-x-1">
                 {sectionNavItems.map((item) => (
-                  <motion.button
+                  <button
                     key={item.id}
+                    type="button"
                     onClick={() => scrollToSection(item.id)}
-                    className={`p-2 sm:p-3 rounded-xl transition-all duration-300 ${
+                    aria-label={item.label}
+                    className={`rounded-full p-2 transition-colors duration-200 sm:p-2.5 ${
                       activeSection === item.id
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
-                        : 'text-gray-400 hover:text-cyan-400 hover:bg-white/5'
+                        ? 'bg-cyan-500/20 text-cyan-300'
+                        : 'text-gray-400 hover:bg-white/5 hover:text-cyan-300'
                     }`}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
                   >
-                    <item.icon size={16} className="sm:w-[18px] sm:h-[18px]" />
-                  </motion.button>
+                    <item.icon size={16} className="sm:w-[17px] sm:h-[17px]" />
+                  </button>
                 ))}
               </div>
             </nav>
@@ -584,35 +576,31 @@ const TechPage = () => {
         {/* Hero Section */}
         <section 
           id="hero" 
-          className={`min-h-screen flex items-center justify-center ${pagePad} relative z-10`}
-          style={{
-            paddingTop: '8rem',
-            paddingBottom: '2rem'
-          }}
+          className={`relative z-10 flex min-h-screen items-center justify-center ${pagePad} pt-24 pb-12 sm:pt-28 sm:pb-16`}
         >
           <div className={pageWidth}>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
               
               {/* Left side - Text Content */}
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
-                className="text-left space-y-4 sm:space-y-5"
+                transition={{ duration: 0.45 }}
+                className="space-y-4 text-left sm:space-y-5"
               >
                 <motion.p
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.08, duration: 0.4 }}
+                  transition={{ delay: 0.06, duration: 0.35 }}
                   className="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-gray-500 font-medium"
                 >
                   Technical Analyst & Developer
                 </motion.p>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 14 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.14, duration: 0.45 }}
+                  transition={{ delay: 0.1, duration: 0.4 }}
                 >
                   <p className="font-display text-lg sm:text-xl md:text-2xl text-gray-400 mb-2">
                     Hi, I'm
@@ -627,9 +615,9 @@ const TechPage = () => {
                 </motion.div>
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.28, duration: 0.45 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
                   className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-gray-300 min-h-[1.75rem] sm:min-h-[2.25rem]"
                 >
                   <span className="text-cyan-400">
@@ -639,18 +627,18 @@ const TechPage = () => {
                 </motion.div>
                 
                 <motion.p 
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.38, duration: 0.45 }}
+                  transition={{ delay: 0.28, duration: 0.4 }}
                   className="text-sm sm:text-base md:text-[1.05rem] text-gray-400 max-w-xl leading-relaxed"
                 >
                   {personalInfo.bio}
                 </motion.p>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.48, duration: 0.45 }}
+                  transition={{ delay: 0.36, duration: 0.4 }}
                   className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 pt-1"
                 >
                   <button
@@ -683,7 +671,7 @@ const TechPage = () => {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.45 }}
+                  transition={{ delay: 0.44, duration: 0.4 }}
                   className="flex space-x-3 sm:space-x-4 pt-2"
                 >
                   <a 
@@ -716,13 +704,13 @@ const TechPage = () => {
 
               {/* Right side - Code editor animation */}
               <motion.div
-                initial={{ opacity: 0, x: 40 }}
+                initial={{ opacity: 0, x: 24 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.25, duration: 0.6 }}
-                className="relative flex items-center justify-center mt-4 lg:mt-0"
+                transition={{ delay: 0.2, duration: 0.45 }}
+                className="relative mt-4 flex items-center justify-center lg:mt-0"
               >
                 <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
-                  <div className={`${surfaceCard} p-4 sm:p-6 shadow-2xl`}>
+                  <div className={`${surfaceCard} p-4 sm:p-6`}>
                     <div className="flex items-center space-x-2 mb-3 sm:mb-4">
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
                       <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
@@ -800,14 +788,14 @@ const TechPage = () => {
         </div>
 
         {/* About Me Section */}
-        <section id="about" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-b border-white/5`}>
+        <section id="about" className={`flex min-h-screen items-center border-b border-white/5 py-14 sm:py-16 lg:py-20 ${pagePad}`}>
           <div className={pageWidth}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-center mb-12 sm:mb-16"
+              className="mb-10 text-center sm:mb-12"
             >
               <span className={surfaceEyebrow}>
                 Background
@@ -824,7 +812,7 @@ const TechPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.45 }}
                 viewport={{ once: true, amount: 0.2 }}
               >
                 <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
@@ -843,7 +831,7 @@ const TechPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.45, delay: 0.08 }}
                 viewport={{ once: true, amount: 0.2 }}
                 className={`${surfaceCard} p-6 sm:p-8`}
               >
@@ -894,14 +882,14 @@ const TechPage = () => {
         </section>
 
         {/* Experience & Education Section */}
-        <section id="experience" className={`relative py-16 sm:py-20 lg:py-24 ${pagePad} overflow-hidden scroll-mt-20 border-b border-white/5`}>
+        <section id="experience" className={`relative scroll-mt-16 overflow-hidden border-b border-white/5 py-14 sm:py-16 lg:py-20 ${pagePad}`}>
           <div className={`relative ${pageWidth}`}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-center mb-12 sm:mb-16"
+              className="mb-10 text-center sm:mb-12"
             >
               <span className={surfaceEyebrow}>
                 Career
@@ -935,7 +923,7 @@ const TechPage = () => {
                       key={exp.id || index}
                       initial={{ opacity: 0, y: 28 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
                       viewport={{ once: true, amount: 0.2 }}
                       className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 lg:gap-14"
                     >
@@ -1006,7 +994,7 @@ const TechPage = () => {
             </div>
 
             {/* Education — same centered timeline */}
-            <div id="education" className="scroll-mt-24">
+            <div id="education" className="scroll-mt-16">
               <div className="flex items-center justify-center gap-3 mb-10 sm:mb-14">
                 <div className="w-11 h-11 rounded-xl border border-white/10 bg-black/25 flex items-center justify-center">
                   <GraduationCap size={18} className="text-blue-300" />
@@ -1026,7 +1014,7 @@ const TechPage = () => {
                       key={exp.id || index}
                       initial={{ opacity: 0, y: 28 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
                       viewport={{ once: true, amount: 0.2 }}
                       className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 lg:gap-14"
                     >
@@ -1090,14 +1078,14 @@ const TechPage = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-y border-white/5`}>
+        <section id="projects" className={`flex min-h-screen items-center border-y border-white/5 py-14 sm:py-16 lg:py-20 ${pagePad}`}>
           <div className={pageWidth}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-center mb-12 sm:mb-16"
+              className="mb-10 text-center sm:mb-12"
             >
               <span className={surfaceEyebrow}>
                 Selected Work
@@ -1117,8 +1105,8 @@ const TechPage = () => {
                     key={project.id}
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    whileHover={{ y: -4 }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    whileHover={{ y: -2 }}
+                    transition={{ duration: 0.35, delay: index * 0.05 }}
                     viewport={{ once: true, amount: 0.2 }}
                     onClick={() => handleProjectClick(project)}
                     className={`group flex flex-col h-full ${surfaceCardHover} overflow-hidden cursor-pointer`}
@@ -1249,14 +1237,14 @@ const TechPage = () => {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-b border-white/5`}>
+        <section id="skills" className={`flex min-h-screen items-center border-b border-white/5 py-14 sm:py-16 lg:py-20 ${pagePad}`}>
           <div className={pageWidth}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-center mb-12 sm:mb-16"
+              className="mb-10 text-center sm:mb-12"
             >
               <span className={surfaceEyebrow}>
                 Toolkit
@@ -1275,7 +1263,7 @@ const TechPage = () => {
                   key={category}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   viewport={{ once: true, amount: 0.2 }}
                   className={`${surfaceCardHover} p-4 sm:p-6`}
                 >
@@ -1297,14 +1285,14 @@ const TechPage = () => {
         </section>
 
         {/* Certificates Section */}
-        <section id="certificates" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-y border-white/5`}>
+        <section id="certificates" className={`flex min-h-screen items-center border-y border-white/5 py-14 sm:py-16 lg:py-20 ${pagePad}`}>
           <div className={pageWidth}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-center mb-12 sm:mb-16"
+              className="mb-10 text-center sm:mb-12"
             >
               <span className={surfaceEyebrow}>
                 Credentials
@@ -1449,14 +1437,14 @@ const TechPage = () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} relative border-t border-white/5`}>
+        <section id="contact" className={`relative flex min-h-screen items-center border-t border-white/5 py-14 sm:py-16 lg:py-20 ${pagePad}`}>
           <div className={pageWidth}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.45 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="text-center mb-12 sm:mb-16"
+              className="mb-10 text-center sm:mb-12"
             >
               <span className={surfaceEyebrow}>
                 Contact
@@ -1474,7 +1462,7 @@ const TechPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.45 }}
                 viewport={{ once: true, amount: 0.2 }}
                 className={`relative overflow-hidden ${surfaceCard} p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end`}
               >
@@ -1512,8 +1500,8 @@ const TechPage = () => {
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('GitHub', socialLinks.github)}
                       className={surfaceIconBtn}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
                     >
                       <Github size={20} className="sm:w-6 sm:h-6" />
                     </motion.a>
@@ -1524,8 +1512,8 @@ const TechPage = () => {
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
                       className={surfaceIconBtn}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
                     >
                       <Linkedin size={20} className="sm:w-6 sm:h-6" />
                     </motion.a>
@@ -1536,8 +1524,8 @@ const TechPage = () => {
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
                       className={surfaceIconBtn}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
                     >
                       <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor" className="sm:w-6 sm:h-6">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -1548,8 +1536,8 @@ const TechPage = () => {
                       href={`mailto:${personalInfo.email}`}
                       onClick={() => handleSocialClick('Email', personalInfo.email)}
                       className={surfaceIconBtn}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
                     >
                       <Mail size={20} className="sm:w-6 sm:h-6" />
                     </motion.a>
@@ -1561,7 +1549,7 @@ const TechPage = () => {
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.45, delay: 0.08 }}
                 viewport={{ once: true, amount: 0.2 }}
                 className={`${surfaceCard} p-6 sm:p-8`}
               >
@@ -1689,8 +1677,8 @@ const TechPage = () => {
                     type="submit"
                     disabled={formStatus.isSubmitting}
                     className={`w-full ${btnPrimary} disabled:bg-gray-600 disabled:text-gray-300 disabled:hover:bg-gray-600 disabled:cursor-not-allowed py-3 sm:py-4`}
-                    whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
-                    whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
+                    whileHover={!formStatus.isSubmitting ? { scale: 1.01 } : {}}
+                    whileTap={!formStatus.isSubmitting ? { scale: 0.99 } : {}}
                   >
                     {formStatus.isSubmitting ? (
                       <>
@@ -1744,7 +1732,7 @@ const TechPage = () => {
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('GitHub', socialLinks.github)}
                   className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.06 }}
+                  whileHover={{ scale: 1.03 }}
                   aria-label="GitHub"
                 >
                   <Github size={15} />
@@ -1755,7 +1743,7 @@ const TechPage = () => {
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
                   className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.06 }}
+                  whileHover={{ scale: 1.03 }}
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={15} />
@@ -1766,7 +1754,7 @@ const TechPage = () => {
                   rel="noopener noreferrer"
                   onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
                   className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.06 }}
+                  whileHover={{ scale: 1.03 }}
                   aria-label="X"
                 >
                   <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor">
@@ -1777,7 +1765,7 @@ const TechPage = () => {
                   href={`mailto:${personalInfo.email}`}
                   onClick={() => handleSocialClick('Email', personalInfo.email)}
                   className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
-                  whileHover={{ scale: 1.06 }}
+                  whileHover={{ scale: 1.03 }}
                   aria-label="Email"
                 >
                   <Mail size={15} />
