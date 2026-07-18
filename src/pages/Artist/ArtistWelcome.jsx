@@ -6,185 +6,109 @@ import { Music, Gamepad2, Camera, ArrowRight } from 'lucide-react';
 const welcomeWords = ['WELCOME', 'PAUSE', 'FEEL', 'EXPLORE', 'THIS IS ME', 'THROUGH MY ART'];
 
 const ArtistWelcome = ({ onComplete }) => {
-  const [currentWordIndex, setCurrentWordIndex] = useState(-1); // Start with -1 to show initial delay
+  const [currentWordIndex, setCurrentWordIndex] = useState(-1);
   const [showLogo, setShowLogo] = useState(false);
-  const [logoShouldMoveUp, setLogoShouldMoveUp] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
   const [showIcons, setShowIcons] = useState(false);
   const [showFinalText, setShowFinalText] = useState(false);
   const [textSequenceComplete, setTextSequenceComplete] = useState(false);
-  const [compactLayout, setCompactLayout] = useState(true);
 
-  useEffect(() => {
-    const mq = window.matchMedia('(max-height: 720px), (max-width: 640px)');
-    const update = () => setCompactLayout(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
-  // Skip intro function
   const handleSkipIntro = () => {
     onComplete();
   };
 
-  // Single animation flow
   useEffect(() => {
-    let timeouts = [];
+    const timeouts = [];
 
-    // Start after 200ms delay
     timeouts.push(setTimeout(() => {
-      setCurrentWordIndex(0); // Show WELCOME
+      setCurrentWordIndex(0);
     }, 200));
 
-    // Show subsequent words
     welcomeWords.forEach((_, index) => {
       if (index > 0) {
         timeouts.push(setTimeout(() => {
           setCurrentWordIndex(index);
-        }, 200 + (index * 1000))); // 200ms initial delay + 1000ms per word
+        }, 200 + index * 1000));
       }
     });
 
-    // Complete text sequence and start logo
     timeouts.push(setTimeout(() => {
       setTextSequenceComplete(true);
-      setCurrentWordIndex(-1); // Hide text
-      
-      // Show logo after text fades
+      setCurrentWordIndex(-1);
+
       setTimeout(() => {
         setShowLogo(true);
-        
-        // Logo rotates for a bit, then moves up independently
-        setTimeout(() => {
-          setLogoShouldMoveUp(true);
-        }, 1000); // Logo rotates for 1 second before moving up
-        
-        // Show title only after logo has completely moved up
+
         setTimeout(() => {
           setShowTitle(true);
-          
-          // Show icons after title
+
           setTimeout(() => {
             setShowIcons(true);
-            
-            // Show final text after icons
+
             setTimeout(() => {
               setShowFinalText(true);
-              
-              // Complete animation
+
               setTimeout(() => {
                 onComplete();
-              }, 1200);
-            }, 1200);
-          }, 1200);
-        }, 1400); // 1400ms after logo appears
-      }, 600);
-    }, 200 + (welcomeWords.length * 1000)));
+              }, 1400);
+            }, 1100);
+          }, 1100);
+        }, 800);
+      }, 500);
+    }, 200 + welcomeWords.length * 1000));
 
     return () => {
-      timeouts.forEach(timeout => clearTimeout(timeout));
+      timeouts.forEach((timeout) => clearTimeout(timeout));
     };
   }, [onComplete]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: {
-        duration: 1.2,
-        ease: "easeOut"
-      }
+      transition: { duration: 1.2, ease: 'easeOut' },
     },
     exit: {
       opacity: 0,
-      scale: 0.9,
-      transition: {
-        duration: 1.0,
-        ease: "easeIn"
-      }
-    }
+      scale: 0.96,
+      transition: { duration: 0.8, ease: 'easeIn' },
+    },
   };
 
   const welcomeTextVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 15, 
-      scale: 0.97 
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    hidden: { opacity: 0, y: 15, scale: 0.97 },
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
     },
-    exit: { 
-      opacity: 0, 
-      y: -15, 
+    exit: {
+      opacity: 0,
+      y: -15,
       scale: 0.97,
-      transition: {
-        duration: 0.4,
-        ease: [0.55, 0.06, 0.55, 0.94]
-      }
-    }
+      transition: { duration: 0.4, ease: [0.55, 0.06, 0.55, 0.94] },
+    },
   };
 
   const iconVariants = {
-    hidden: { 
-      scale: 0,
-      rotate: -90,
-      opacity: 0
-    },
+    hidden: { scale: 0, rotate: -90, opacity: 0 },
     visible: (index) => ({
       scale: 1,
       rotate: 0,
       opacity: 1,
       transition: {
-        opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.4 },
-        scale: { duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.4 },
-        rotate: { duration: 1.3, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.4 }
-      }
-    })
-  };
-
-  const iconLabelVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 10 
-    },
-    visible: (index) => ({
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-        delay: 0.8 + index * 0.15
-      }
-    })
+        opacity: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.2 },
+        scale: { duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.2 },
+        rotate: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94], delay: index * 0.2 },
+      },
+    }),
   };
 
   const creativityIcons = [
-    { 
-      Icon: Music, 
-      color: "from-amber-600 to-orange-700",
-      label: "Music",
-      delay: 0
-    },
-    { 
-      Icon: Gamepad2, 
-      color: "from-amber-500 to-orange-600",
-      label: "Gaming",
-      delay: 0.2
-    },
-    { 
-      Icon: Camera, 
-      color: "from-stone-600 to-stone-800",
-      label: "Content",
-      delay: 0.4
-    }
+    { Icon: Music, color: 'from-amber-600 to-orange-700', label: 'Music' },
+    { Icon: Gamepad2, color: 'from-amber-500 to-orange-600', label: 'Gaming' },
+    { Icon: Camera, color: 'from-stone-600 to-stone-800', label: 'Content' },
   ];
 
   return (
@@ -196,162 +120,53 @@ const ArtistWelcome = ({ onComplete }) => {
         exit="exit"
         className="fixed inset-0 z-50 flex h-[100dvh] min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-black"
       >
-        {/* Silhouette atmosphere — zoom past the photo's baked-in black ceiling; keep stage + floor */}
+        {/* Pre-cropped silhouette — black ceiling removed from the asset */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <img
-            src="/images/artist/artist-silhouette-pink.jpg"
+            src="/images/artist/artist-silhouette-welcome.jpg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full scale-[1.65] object-cover opacity-55 sm:scale-[1.4] sm:opacity-50"
-            style={{ objectPosition: 'center 78%' }}
+            className="absolute inset-0 h-full w-full scale-110 object-cover opacity-65 sm:scale-105 sm:opacity-55"
+            style={{ objectPosition: 'center 45%' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/35 to-black/75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/35" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/25 to-black/65" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/25" />
         </div>
 
-        {/* Skip Intro Button - Mobile Responsive */}
         <motion.button
           onClick={handleSkipIntro}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="fixed z-[9999] group cursor-pointer pointer-events-auto bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-8 sm:right-8"
-          style={{ pointerEvents: 'auto' }}
+          className="fixed z-[9999] cursor-pointer bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-8 sm:right-8"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300">
-            <motion.span 
-              className="text-xs sm:text-sm font-medium tracking-wide"
-              animate={{ 
-                opacity: [0.7, 1, 0.7]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              Skip Intro
-            </motion.span>
-            <motion.div
-              animate={{ 
-                x: [0, 4, 0],
-                opacity: [0.7, 1, 0.7]
-              }}
-              transition={{ 
-                x: {
-                  duration: 1.5, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                },
-                opacity: {
-                  duration: 2, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }
-              }}
-              className="group-hover:text-amber-200 transition-colors duration-300"
-            >
-              <ArrowRight size={14} className="sm:w-4 sm:h-4" />
-            </motion.div>
+          <div className="flex items-center space-x-2 text-gray-300 transition-colors duration-300 hover:text-white">
+            <span className="text-xs font-medium tracking-wide sm:text-sm">Skip Intro</span>
+            <ArrowRight size={14} className="sm:h-4 sm:w-4" />
           </div>
-          
-          {/* Subtle underline on hover */}
-          <motion.div
-            className="h-0.5 bg-gradient-to-r from-amber-200 to-orange-200 rounded-full mt-1"
-            initial={{ width: 0 }}
-            whileHover={{ width: "100%" }}
-            transition={{ duration: 0.3 }}
-          />
         </motion.button>
 
-        {/* Dynamic Background Elements - Mobile Optimized */}
-        <div className="absolute inset-0">
-          {/* Animated Gradient Orbs - Responsive sizes */}
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-full blur-3xl"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{
-              opacity: [0, 0.15, 0.1],
-              scale: [0.5, 1.2, 1],
-              x: [0, 30, 0],
-              y: [0, -20, 0]
-            }}
-            transition={{
-              opacity: { duration: 3.0, ease: [0.25, 0.46, 0.45, 0.94] },
-              scale: { duration: 4.0, ease: [0.25, 0.46, 0.45, 0.94] },
-              x: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 },
-              y: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-amber-500/10 to-orange-500/8 rounded-full blur-3xl"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{
-              opacity: [0, 0.12, 0.08],
-              scale: [0.5, 1.3, 1],
-              x: [0, -25, 0],
-              y: [0, 25, 0]
-            }}
-            transition={{
-              opacity: { duration: 3.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 1 },
-              scale: { duration: 4.5, ease: [0.25, 0.46, 0.45, 0.94], delay: 1 },
-              x: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 4 },
-              y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 4 }
-            }}
-          />
-
-          {/* Floating Particles - Mobile Optimized */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-gradient-to-r from-amber-400/30 to-orange-400/30 rounded-full"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: [0, 0.4, 0],
-                scale: [0, 1.5, 0.5],
-                y: [-15, -80],
-                x: [Math.random() * 60 - 30, Math.random() * 60 - 30]
-              }}
-              transition={{
-                opacity: { duration: 2.0, ease: [0.25, 0.46, 0.45, 0.94], delay: Math.random() * 3 },
-                scale: { duration: 2.0, ease: [0.25, 0.46, 0.45, 0.94], delay: Math.random() * 3 },
-                y: { duration: 6 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 4 + 3 },
-                x: { duration: 6 + Math.random() * 2, repeat: Infinity, delay: Math.random() * 4 + 3 }
-              }}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Main Content - Mobile Responsive with ORIGINAL SPACING */}
-        <div className="relative z-10 w-full h-full flex items-center justify-center px-4 sm:px-6">
-          
-          {/* Welcome Text Sequence - Mobile Responsive */}
+        <div className="relative z-10 flex h-full w-full items-center justify-center px-4 sm:px-6">
+          {/* Word sequence */}
           <AnimatePresence mode="wait">
             {currentWordIndex >= 0 && !textSequenceComplete && (
               <motion.div
+                key="word-stage"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <AnimatePresence mode="wait">
-                  <motion.h1 
+                  <motion.h1
                     key={`word-${currentWordIndex}`}
                     variants={welcomeTextVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-amber-200 text-center px-4"
-                    style={{
-                      backgroundSize: "200% 100%"
-                    }}
+                    className="px-4 text-center text-3xl font-bold text-amber-200 sm:text-5xl lg:text-6xl xl:text-7xl"
                   >
                     {welcomeWords[currentWordIndex]}
                   </motion.h1>
@@ -360,181 +175,92 @@ const ArtistWelcome = ({ onComplete }) => {
             )}
           </AnimatePresence>
 
-          {/* Logo Animation - Mobile Responsive with ORIGINAL SPACING */}
-          <AnimatePresence>
-            {showLogo && (
-              <motion.div
-                initial={{ 
-                  opacity: 0,
-                  scale: 0,
-                  y: 0 // Start at center
-                }}
-                animate={{ 
-                  opacity: 1,
-                  scale: 1,
-                  y: logoShouldMoveUp ? (compactLayout ? -72 : -160) : 0
-                }}
-                transition={{
-                  opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
-                  scale: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
-                  y: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
-                }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <div className="relative">
-                  <motion.div 
-                    className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-r from-amber-500/80 via-orange-400/60 to-stone-600/80 p-1 shadow-2xl"
-                    animate={{
-                      rotate: [0, 360],
-                      scale: [1, 1.1, 1]
-                    }}
-                    transition={{
-                      rotate: { duration: 2, repeat: Infinity, ease: "linear" },
-                      scale: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-                    }}
+          {/* Identity stack — real vertical gaps, not overlapping absolute layers */}
+          {(showLogo || showTitle || showIcons || showFinalText) && (
+            <div className="flex max-h-full w-full flex-col items-center justify-center gap-7 py-10 sm:gap-9 lg:gap-11">
+              <AnimatePresence>
+                {showLogo && (
+                  <motion.div
+                    key="welcome-logo"
+                    initial={{ opacity: 0, scale: 0.75 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                   >
-                    <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                      <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-200">
-                        HA
-                      </span>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Title Animation - Mobile Responsive with ORIGINAL SPACING */}
-          <AnimatePresence>
-            {showTitle && (
-              <motion.div
-                initial={{ 
-                  opacity: 0,
-                  y: compactLayout ? -8 : -20,
-                  scale: 0.9
-                }}
-                animate={{ 
-                  opacity: 1,
-                  y: compactLayout ? -8 : -20,
-                  scale: 1
-                }}
-                transition={{
-                  opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
-                  y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
-                  scale: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
-                }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <motion.h1 
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-amber-200 text-center px-4"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                  style={{
-                    backgroundSize: "200% 100%"
-                  }}
-                >
-                  HIMANK ARORA
-                </motion.h1>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Icons Animation - Mobile Responsive with ORIGINAL SPACING */}
-          <AnimatePresence>
-            {showIcons && (
-              <motion.div
-                initial={{ 
-                  opacity: 0,
-                  y: compactLayout ? 56 : 110
-                }}
-                animate={{ 
-                  opacity: 1,
-                  y: compactLayout ? 56 : 110
-                }}
-                transition={{
-                  opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
-                  y: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }
-                }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <div className="flex justify-center items-center space-x-6 sm:space-x-8 lg:space-x-12">
-                  {creativityIcons.map(({ Icon, color, label }, index) => (
                     <motion.div
-                      key={label}
-                      variants={iconVariants}
-                      initial="hidden"
-                      animate="visible"
-                      custom={index}
-                      className="flex flex-col items-center space-y-2 sm:space-y-3"
+                      className="h-20 w-20 rounded-full bg-gradient-to-r from-amber-500/80 via-orange-400/60 to-stone-600/80 p-1 shadow-2xl sm:h-28 sm:w-28 lg:h-32 lg:w-32"
+                      animate={{ rotate: [0, 360], scale: [1, 1.05, 1] }}
+                      transition={{
+                        rotate: { duration: 2, repeat: Infinity, ease: 'linear' },
+                        scale: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
+                      }}
                     >
-                      <motion.div 
-                        className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center shadow-xl`}
-                        whileHover={{ 
-                          scale: 1.2, 
-                          rotate: 10,
-                          boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
-                        }}
-                        animate={{
-                          y: [0, -10, 0]
-                        }}
-                        transition={{
-                          y: {
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: index * 0.3
-                          }
-                        }}
-                      >
-                        <Icon size={20} className="text-white sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
-                      </motion.div>
-                      
-                      <motion.span 
-                        className="text-white font-medium text-xs sm:text-sm"
-                        variants={iconLabelVariants}
+                      <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-900">
+                        <span className="text-xl font-bold text-amber-200 sm:text-3xl lg:text-4xl">HA</span>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {showTitle && (
+                  <motion.h1
+                    key="welcome-title"
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="text-center text-3xl font-bold tracking-tight text-amber-200 sm:text-5xl lg:text-6xl xl:text-7xl"
+                  >
+                    HIMANK ARORA
+                  </motion.h1>
+                )}
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {showIcons && (
+                  <motion.div
+                    key="welcome-icons"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="flex items-center justify-center gap-7 sm:gap-10 lg:gap-14"
+                  >
+                    {creativityIcons.map(({ Icon, color, label }, index) => (
+                      <motion.div
+                        key={label}
+                        variants={iconVariants}
                         initial="hidden"
                         animate="visible"
                         custom={index}
+                        className="flex flex-col items-center gap-2.5 sm:gap-3"
                       >
-                        {label}
-                      </motion.span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-r ${color} shadow-xl sm:h-14 sm:w-14 lg:h-16 lg:w-16`}
+                        >
+                          <Icon size={20} className="text-white sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
+                        </div>
+                        <span className="text-xs font-medium text-white sm:text-sm">{label}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
-          {/* Final Text - Mobile Responsive with ORIGINAL SPACING */}
-          <AnimatePresence>
-            {showFinalText && (
-              <motion.div
-                initial={{ 
-                  opacity: 0,
-                  y: compactLayout ? 118 : 220
-                }}
-                animate={{ 
-                  opacity: 1,
-                  y: compactLayout ? 118 : 220
-                }}
-                transition={{
-                  opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
-                  y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
-                }}
-                className="absolute inset-0 flex items-center justify-center px-4"
-              >
-                <motion.p className="text-lg sm:text-xl lg:text-2xl text-gray-300 text-center px-4">
-                  Welcome to my world...
-                </motion.p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              <AnimatePresence>
+                {showFinalText && (
+                  <motion.p
+                    key="welcome-final"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="px-4 text-center text-base text-gray-300 sm:text-xl lg:text-2xl"
+                  >
+                    Welcome to my world...
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>

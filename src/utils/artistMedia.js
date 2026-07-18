@@ -92,7 +92,7 @@ export const artistMedia = {
     atmosphere: '/images/artist/artist-pov-mic.jpg',
   },
   welcome: {
-    atmosphere: '/images/artist/artist-silhouette-pink.jpg',
+    atmosphere: '/images/artist/artist-silhouette-welcome.jpg',
   },
 };
 
