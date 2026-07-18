@@ -369,9 +369,10 @@ const ArtistAbout = () => {
                   <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 p-2 shadow-2xl">
                     <div className="w-full h-full rounded-2xl bg-gray-900 flex items-center justify-center overflow-hidden">
                       <img 
-                        src="/images/itsrhiney.jpg" 
+                        src="/images/artist-about.png" 
                         alt={personalInfo.name}
                         className="w-full h-full object-cover rounded-2xl"
+                        style={{ objectPosition: 'center 15%' }}
                         onError={(e) => {
                           // Fallback to HA if image fails to load
                           e.target.style.display = 'none';
