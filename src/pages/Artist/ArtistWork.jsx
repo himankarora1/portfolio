@@ -18,7 +18,7 @@ import YouTubeVideo from '../../components/YouTubeVideo';
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
-import { artistPagePad, artistPageWidth, artistBtnPrimary, artistBtnSecondary, artistBtnGhost, artistHeadingAccent } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistBtnPrimary, artistBtnSecondary, artistBtnGhost, artistHeadingAccent, artistSurfaceCard } from '../../utils/artistLayout';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -124,7 +124,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
             transition={{ duration: 0.2 }}
             className="absolute top-full right-0 mt-2 z-50 hidden sm:block"
           >
-            <div className="bg-gray-900/95 backdrop-blur-sm border border-gray-700/50 rounded-xl p-4 shadow-xl min-w-[250px]">
+            <div className={`${artistSurfaceCard} !p-4 min-w-[250px] shadow-xl`}>
               {/* Header */}
               <div className="flex items-center space-x-2 mb-3">
                 <StatusIcon size={14} className={getStatusColor()} />
@@ -139,7 +139,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
                   <>
                     <div className="flex justify-between text-gray-300">
                       <span>Updated:</span>
-                      <span className="text-cyan-400 font-mono">
+                      <span className={`${artistHeadingAccent} font-mono`}>
                         {cacheInfo.lastUpdated.toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit'
@@ -167,7 +167,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
               </div>
 
               {/* Status Message */}
-              <div className="mt-3 pt-2 border-t border-gray-700">
+              <div className="mt-3 pt-2 border-t border-white/10">
                 <p className={`text-xs ${cacheInfo.isExpired ? 'text-yellow-400' : 'text-green-400'}`}>
                   {!cacheInfo.hasCache ? 'Will fetch fresh data' :
                    cacheInfo.isExpired ? 'Cache expired - click to refresh' : 
@@ -177,7 +177,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
 
               {/* Last Manual Refresh */}
               {lastRefreshTime && (
-                <div className="mt-2 pt-2 border-t border-gray-700">
+                <div className="mt-2 pt-2 border-t border-white/10">
                   <div className="flex items-center space-x-1 text-xs text-gray-400">
                     <Zap size={10} />
                     <span>
@@ -191,7 +191,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
               )}
 
               {/* Arrow pointer */}
-              <div className="absolute -top-2 right-4 w-4 h-4 bg-gray-900 border-l border-t border-gray-700/50 rotate-45"></div>
+              <div className="absolute -top-2 right-4 w-4 h-4 bg-[#1a1e23] border-l border-t border-white/12 rotate-45"></div>
             </div>
           </motion.div>
         )}
@@ -242,7 +242,7 @@ const ArtistWork = () => {
       id: 'Gaming', 
       label: 'Gaming', 
       icon: Gamepad2, 
-      color: 'from-cyan-600 to-teal-700',
+      color: 'from-amber-500 to-orange-600',
       description: 'Epic gaming sessions and walkthroughs'
     }
   ];
@@ -598,11 +598,11 @@ const ArtistWork = () => {
                       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8">
                         {/* Video Player */}
                         <div className="lg:col-span-3">
-                          <div className="relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden group">
+                          <div className={`relative overflow-hidden group ${artistSurfaceCard} !p-0`}>
                             {!isVideoPlaying || selectedVideo !== getMainVideo().videoId ? (
                               // Thumbnail View
                               <>
-                                <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
+                                <div className="aspect-video bg-[#12151a] flex items-center justify-center relative">
                                   <img 
                                     src={getMainVideo().thumbnail} 
                                     alt={getMainVideo().title}
@@ -664,7 +664,7 @@ const ArtistWork = () => {
                           </div>
 
                           {/* YouTube Subscribe Section */}
-                          <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/80 backdrop-blur-sm border border-gray-600/40 rounded-2xl p-4 sm:p-6 mt-auto shadow-xl">
+                          <div className={`${artistSurfaceCard} !p-4 sm:!p-6 mt-auto`}>
                             <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
                               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-red-600 to-orange-700 rounded-full flex items-center justify-center shadow-lg">
                                 <YouTubeIcon size={20} className="text-white sm:w-7 sm:h-7" />

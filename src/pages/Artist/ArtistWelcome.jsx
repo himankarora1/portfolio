@@ -166,7 +166,7 @@ const ArtistWelcome = ({ onComplete }) => {
     },
     { 
       Icon: Gamepad2, 
-      color: "from-cyan-600 to-teal-700",
+      color: "from-amber-500 to-orange-600",
       label: "Gaming",
       delay: 0.2
     },
@@ -277,7 +277,7 @@ const ArtistWelcome = ({ onComplete }) => {
             }}
           />
           <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-cyan-500/8 to-blue-500/8 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-amber-500/10 to-orange-500/8 rounded-full blur-3xl"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{
               opacity: [0, 0.12, 0.08],

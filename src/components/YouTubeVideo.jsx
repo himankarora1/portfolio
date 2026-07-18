@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Eye, Calendar } from 'lucide-react';
 import { YouTubeIcon } from './SocialIcons';
+import { artistSurfaceCard } from '../utils/artistLayout';
 import { getVideoStats, formatDuration, formatViewCount, formatDate } from '../services/youtubeService';
 
 const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
@@ -47,7 +48,7 @@ const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.35 }}
-      className="relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm transition-colors group hover:border-gray-600/50"
+      className={`relative flex h-full cursor-pointer flex-col overflow-hidden ${artistSurfaceCard} !p-0 transition-colors group hover:border-white/20`}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       onClick={handleVideoClick}
@@ -92,7 +93,7 @@ const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
       
       {/* Video Info */}
       <div className="p-4">
-        <h4 className="text-white font-semibold mb-2 line-clamp-2 group-hover:text-pink-400 transition-colors leading-tight">
+        <h4 className="text-white font-semibold mb-2 line-clamp-2 group-hover:text-amber-300 transition-colors leading-tight">
           {video.title}
         </h4>
         

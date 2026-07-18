@@ -486,10 +486,10 @@ export const contentData = {
     bio: "I make music, gaming, vlogs, and other fun content, and grow a community around it.",
     tagline: "Music, gaming, vlogs, and other fun content, built with the community along the way.",
     creative_stats: [
-      { label: "Original Tracks", value: "25+", icon: "Music", color: "from-pink-500 to-rose-500" },
-      { label: "Video Content", value: "100+", icon: "Camera", color: "from-purple-500 to-indigo-500" },
-      { label: "Gaming Hours", value: "500+", icon: "Gamepad2", color: "from-blue-500 to-cyan-500" },
-      { label: "Community", value: "1K+", icon: "Heart", color: "from-orange-500 to-red-500" }
+      { label: "Original Tracks", value: "25+", icon: "Music", color: "from-amber-500 to-orange-500" },
+      { label: "Video Content", value: "100+", icon: "Camera", color: "from-amber-400 to-yellow-500" },
+      { label: "Gaming Hours", value: "500+", icon: "Gamepad2", color: "from-amber-600 to-orange-600" },
+      { label: "Community", value: "1K+", icon: "Heart", color: "from-orange-500 to-amber-500" }
     ],
     platforms: [
       {
@@ -547,28 +547,28 @@ export const contentData = {
         title: "Musical Beginnings",
         description: "Started creating original music compositions and learning various instruments",
         icon: "Music",
-        color: "from-pink-500 to-rose-500"
+        color: "from-amber-500 to-orange-500"
       },
       {
         year: "2020",
         title: "Gaming Content",
         description: "Began streaming gaming sessions and building an online gaming community",
         icon: "Gamepad2",
-        color: "from-blue-500 to-cyan-500"
+        color: "from-amber-600 to-yellow-500"
       },
       {
         year: "2021",
         title: "Content Creation",
         description: "Expanded into video content and online posts",
         icon: "Camera",
-        color: "from-purple-500 to-indigo-500"
+        color: "from-orange-500 to-amber-400"
       },
       {
         year: "2022",
         title: "Community Building",
         description: "Grew community across platforms through regular posts and streams",
         icon: "Heart",
-        color: "from-orange-500 to-red-500"
+        color: "from-amber-500 to-orange-600"
       }
     ],
     creative_skills: [

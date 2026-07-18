@@ -4,17 +4,13 @@
 
 /* CSS Custom Properties for consistent theming */
 :root {
-  --primary-pink: #ec4899;
-  --primary-purple: #8b5cf6;
   --primary-cyan: #06b6d4;
-  --background-dark: #0f172a;
-  --background-gray: #1f2937;
+  --primary-amber: #fbbf24;
+  --background-dark: #05070b;
+  --background-gray: #1a1e23;
   --text-light: #f8fafc;
   --text-gray: #9ca3af;
   --border-gray: #374151;
-  --accent-green: #10b981;
-  --accent-red: #ef4444;
-  --accent-yellow: #f59e0b;
   
   /* Mobile-specific variables */
   --mobile-padding: 0.75rem;
@@ -203,23 +199,16 @@
   animation: float 3s ease-in-out infinite;
 }
 
-/* Custom gradient text classes */
-.gradient-text {
-  background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+/* Accent text helpers */
+.gradient-text-tech {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-artist {
-  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-tech {
-  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -442,7 +431,6 @@
     border: 2px solid currentColor;
   }
   
-  .gradient-text,
   .gradient-text-artist,
   .gradient-text-tech {
     background: none;

@@ -212,7 +212,7 @@ const ArtistContact = () => {
   // Updated services list
   const services = [
     { icon: Mic, label: "Live Gigs & Performances", color: "bg-amber-600" },
-    { icon: Gamepad2, label: "Gaming Stream Collaborations", color: "bg-cyan-600" },
+    { icon: Gamepad2, label: "Gaming Stream Collaborations", color: "bg-amber-700" },
     { icon: Music, label: "Music Production", color: "bg-stone-700" },
     { icon: Edit, label: "Audio & Video Editing", color: "bg-green-600" },
     { icon: Users, label: "Brand Collaborations", color: "bg-red-600" }

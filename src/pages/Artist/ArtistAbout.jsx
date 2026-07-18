@@ -57,7 +57,7 @@ const ArtistAbout = () => {
       title: "Gaming Content",
       description: "Started posting gaming walkthroughs and streaming sessions.",
       icon: Gamepad2,
-      color: "from-cyan-600 to-teal-700"
+      color: "from-amber-500 to-orange-600"
     },
     {
       year: "2021",
@@ -171,7 +171,7 @@ const ArtistAbout = () => {
               >
                 <div className="relative">
                   <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl bg-gradient-to-r from-amber-500/80 via-orange-400/60 to-stone-600/80 p-2 shadow-2xl ring-1 ring-white/20">
-                    <div className="w-full h-full rounded-2xl bg-gray-900 flex items-center justify-center overflow-hidden">
+                    <div className="w-full h-full rounded-2xl bg-[#12151a] flex items-center justify-center overflow-hidden">
                       <img 
                         src={artistMedia.about.portrait} 
                         alt={personalInfo.name}
@@ -184,7 +184,7 @@ const ArtistAbout = () => {
                         }}
                       />
                       <div 
-                        className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center rounded-2xl"
+                        className="w-full h-full bg-[#12151a] flex items-center justify-center rounded-2xl"
                         style={{ display: 'none' }}
                       >
                         <span className={`text-6xl sm:text-7xl lg:text-8xl font-bold ${artistHeadingAccent}`}>
