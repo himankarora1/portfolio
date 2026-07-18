@@ -418,9 +418,10 @@ const ArtistHome = () => {
                     <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
                       {/* Your Image */}
                       <img 
-                        src="/images/mewithguitar.JPG" 
+                        src="/images/artist-hero.png" 
                         alt={personalInfo.name}
                         className="w-full h-full object-cover rounded-full"
+                        style={{ objectPosition: 'center 18%' }}
                         onError={(e) => {
                           // Fallback to HA if image fails to load
                           e.target.style.display = 'none';
