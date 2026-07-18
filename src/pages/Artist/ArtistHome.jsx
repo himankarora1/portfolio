@@ -9,7 +9,7 @@ import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
-import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistBtnPrimary, artistBtnSecondary } from '../../utils/artistLayout';
 
 const ArtistHome = () => {
   const [showWelcome, setShowWelcome] = useState(false);
@@ -62,7 +62,7 @@ const ArtistHome = () => {
       <div className="relative min-h-screen overflow-hidden bg-black">
         <ArtistHomeMontage slides={media.montage} />
 
-        <ArtistNav variant="overlay" />
+        <ArtistNav />
 
         <div
           className={`relative z-10 flex min-h-screen flex-col justify-end ${artistPagePad} pb-12 pt-28 sm:pb-16 sm:pt-24 lg:pb-20`}
@@ -101,7 +101,7 @@ const ArtistHome = () => {
                 <Link
                   to="/artist/work"
                   onClick={handleExploreContentClick}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-200 px-7 py-3 text-sm font-semibold text-black transition-colors hover:bg-amber-100 sm:px-8 sm:text-base"
+                  className={artistBtnPrimary}
                 >
                   <span>Explore My Work</span>
                   <ArrowRight size={17} />
@@ -110,7 +110,7 @@ const ArtistHome = () => {
                 <Link
                   to="/artist/contact"
                   onClick={handleCollaborateClick}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/35 px-7 py-3 text-sm font-semibold text-white/90 transition-colors hover:border-white/70 hover:text-white sm:px-8 sm:text-base"
+                  className={artistBtnSecondary}
                 >
                   <span>Let&apos;s Collaborate</span>
                 </Link>

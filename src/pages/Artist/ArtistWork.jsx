@@ -18,7 +18,7 @@ import YouTubeVideo from '../../components/YouTubeVideo';
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
-import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistBtnPrimary, artistBtnSecondary, artistBtnGhost } from '../../utils/artistLayout';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -91,15 +91,15 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
         onClick={handleRefresh}
         disabled={isRefreshing}
         className={`
-          group relative flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg border-2 text-sm sm:text-base
+          group relative flex items-center space-x-2 sm:space-x-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base
           ${isRefreshing 
-            ? 'bg-gray-600/50 border-gray-500/50 cursor-not-allowed' 
-            : 'bg-gray-800/50 border-gray-600/50 hover:bg-gradient-to-r hover:from-amber-500/20 hover:to-orange-500/20 hover:border-amber-400/50 hover:scale-105'
+            ? 'bg-white/5 border border-white/10 cursor-not-allowed text-gray-400' 
+            : 'bg-white/5 border border-white/20 text-white/80 hover:border-amber-300/40 hover:text-amber-100'
           }
           backdrop-blur-sm
         `}
-        whileHover={!isRefreshing ? { scale: 1.05 } : {}}
-        whileTap={!isRefreshing ? { scale: 0.95 } : {}}
+        whileHover={!isRefreshing ? { scale: 1.02 } : {}}
+        whileTap={!isRefreshing ? { scale: 0.98 } : {}}
         onHoverStart={() => setShowDetails(true)}
         onHoverEnd={() => setShowDetails(false)}
       >
@@ -587,10 +587,10 @@ const ArtistWork = () => {
                     <motion.button
                       key={tab.id}
                       onClick={() => handleTabSwitch(tab.id)}
-                      className={`flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-3 sm:py-4 rounded-xl font-semibold transition-all text-xs sm:text-base min-w-0 ${
+                      className={`flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-3 sm:py-4 rounded-full font-semibold transition-all text-xs sm:text-base min-w-0 ${
                         activeTab === tab.id
-                          ? `bg-gradient-to-r ${tab.color} text-white shadow-lg`
-                          : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                          ? 'bg-amber-200 text-black shadow-sm'
+                          : 'text-gray-300 hover:text-white hover:bg-white/5'
                       }`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -752,9 +752,9 @@ const ArtistWork = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => handleChannelVisit(getChannelInfo().url, activeTab)}
-                                className="flex-1 inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-red-500/25 text-sm sm:text-base"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                className={`${artistBtnPrimary} flex-1`}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                               >
                                 <Youtube size={16} className="sm:w-5 sm:h-5" />
                                 <span>Subscribe</span>
@@ -765,9 +765,9 @@ const ArtistWork = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => handleChannelVisit(`https://www.youtube.com/watch?v=${getMainVideo().videoId}`, 'video')}
-                                className="flex-1 inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all border border-gray-500/50 shadow-lg hover:shadow-gray-500/25 text-sm sm:text-base"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                className={`${artistBtnSecondary} flex-1`}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                               >
                                 <ExternalLink size={16} className="sm:w-5 sm:h-5" />
                                 <span>View on YouTube</span>
@@ -794,9 +794,9 @@ const ArtistWork = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => handleChannelVisit(getChannelInfo().url, activeTab)}
-                          className="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-700/50 to-gray-600/50 hover:from-red-500/20 hover:to-red-600/20 border border-gray-600/50 hover:border-red-500/50 text-gray-300 hover:text-red-400 px-3 sm:px-4 py-2 rounded-xl font-semibold transition-all backdrop-blur-sm shadow-lg hover:shadow-red-500/25 text-sm sm:text-base"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          className={artistBtnGhost}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
                         >
                           <Youtube size={16} className="sm:w-[18px] sm:h-[18px]" />
                           <span>More Videos</span>
@@ -828,9 +828,9 @@ const ArtistWork = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => handleChannelVisit(getChannelInfo().url, activeTab)}
-                        className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg text-sm sm:text-base"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className={artistBtnPrimary}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                       >
                         <Youtube size={16} className="sm:w-5 sm:h-5" />
                         <span>Visit {getChannelInfo().name}</span>

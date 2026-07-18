@@ -13,16 +13,12 @@ const menuItems = [
   { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' },
 ];
 
-/**
- * @param {'default' | 'overlay'} [variant]
- * overlay = cinematic home: transparent bar, text-only links
- */
-const ArtistNav = ({ variant = 'default' }) => {
+/** One nav language for every artist page — quiet chrome, amber active state */
+const ArtistNav = () => {
   const location = useLocation();
   const analytics = useAnalytics();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const name = contentData.personal.name;
-  const isOverlay = variant === 'overlay';
 
   const isActive = (path) => location.pathname === path;
 
@@ -34,36 +30,18 @@ const ArtistNav = ({ variant = 'default' }) => {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 ${
-        isOverlay
-          ? 'border-b border-transparent bg-gradient-to-b from-black/50 to-transparent'
-          : 'border-b border-white/10 bg-black/35 backdrop-blur-xl'
-      }`}
-    >
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl">
       <div className={`${artistPageWidth} ${artistPagePad}`}>
-        <div className={`flex items-center justify-between ${isOverlay ? 'h-14 sm:h-16' : 'h-16 sm:h-20'}`}>
+        <div className="flex h-16 items-center justify-between sm:h-20">
           <Link
             to="/artist"
             onClick={() => handleNav('home')}
             className="group flex items-center space-x-2.5 transition-all duration-300 sm:space-x-3"
           >
-            <div
-              className={`flex items-center justify-center rounded-full border border-white/70 bg-transparent transition-colors group-hover:border-amber-300 ${
-                isOverlay ? 'h-8 w-8 sm:h-9 sm:w-9' : 'h-10 w-10 border-2 sm:h-12 sm:w-12'
-              }`}
-            >
-              <span className={`font-bold tracking-tight text-white ${isOverlay ? 'text-xs sm:text-sm' : 'text-sm sm:text-lg'}`}>
-                HA
-              </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/70 bg-transparent transition-colors group-hover:border-amber-300 sm:h-10 sm:w-10">
+              <span className="text-xs font-bold tracking-tight text-white sm:text-sm">HA</span>
             </div>
-            <span
-              className={`font-bold tracking-tight text-white ${
-                isOverlay ? 'text-base sm:text-lg' : 'text-lg sm:text-2xl'
-              }`}
-            >
-              {name}
-            </span>
+            <span className="text-base font-bold tracking-tight text-white sm:text-lg">{name}</span>
           </Link>
 
           <div className="flex items-center space-x-3 sm:space-x-5">
@@ -73,39 +51,26 @@ const ArtistNav = ({ variant = 'default' }) => {
                   key={item.id}
                   to={item.path}
                   onClick={() => handleNav(item.id)}
-                  className={
-                    isOverlay
-                      ? `px-3 py-2 text-xs uppercase tracking-[0.16em] transition-colors ${
-                          isActive(item.path)
-                            ? 'text-amber-200'
-                            : 'text-white/65 hover:text-white'
-                        }`
-                      : `flex items-center space-x-2 rounded-xl px-3 py-2 transition-all ${
-                          isActive(item.path)
-                            ? 'border border-white/20 bg-white/10 text-white'
-                            : 'text-white/80 hover:bg-white/10 hover:text-white'
-                        }`
-                  }
+                  className={`px-3 py-2 text-xs uppercase tracking-[0.14em] transition-colors ${
+                    isActive(item.path)
+                      ? 'text-amber-200'
+                      : 'text-white/65 hover:text-white'
+                  }`}
                 >
-                  {!isOverlay && <item.icon size={18} />}
-                  <span>{item.label}</span>
+                  {item.label}
                 </Link>
               ))}
             </div>
 
-            <div className="hidden h-8 w-px bg-white/20 md:block" />
+            <div className="hidden h-6 w-px bg-white/20 md:block" />
 
             <div className="hidden md:block">
               <Link
                 to="/"
                 onClick={() => handleNav('portfolio-hub')}
-                className={
-                  isOverlay
-                    ? 'flex items-center space-x-2 px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/55 transition-colors hover:text-amber-200'
-                    : 'flex items-center space-x-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-200 backdrop-blur-sm transition-all hover:border-amber-400/40 hover:text-amber-200'
-                }
+                className="flex items-center space-x-2 px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/55 transition-colors hover:text-amber-200"
               >
-                <Globe size={isOverlay ? 14 : 18} />
+                <Globe size={14} />
                 <span>Portfolio Hub</span>
               </Link>
             </div>
@@ -130,9 +95,9 @@ const ArtistNav = ({ variant = 'default' }) => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="border-t border-white/10 bg-black/90 backdrop-blur-xl md:hidden"
+            className="border-t border-white/10 bg-black/95 backdrop-blur-xl md:hidden"
           >
-            <div className="space-y-2 px-3 py-4">
+            <div className="space-y-1 px-3 py-4">
               {menuItems.map((item) => (
                 <Link
                   key={item.id}
@@ -140,8 +105,8 @@ const ArtistNav = ({ variant = 'default' }) => {
                   onClick={() => handleNav(item.id)}
                   className={`flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-left transition-all ${
                     isActive(item.path)
-                      ? 'bg-white/15 text-white'
-                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                      ? 'bg-white/10 text-amber-200'
+                      : 'text-gray-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   <item.icon size={18} />
@@ -153,7 +118,7 @@ const ArtistNav = ({ variant = 'default' }) => {
                 <Link
                   to="/"
                   onClick={() => handleNav('portfolio-hub')}
-                  className="flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-gray-300 transition-all hover:bg-white/10 hover:text-white"
+                  className="flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-gray-300 transition-all hover:bg-white/5 hover:text-amber-200"
                 >
                   <Globe size={18} />
                   <span className="font-medium">Portfolio Hub</span>

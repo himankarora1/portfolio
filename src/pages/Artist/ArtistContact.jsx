@@ -22,7 +22,7 @@ import {
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
-import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistBtnPrimary } from '../../utils/artistLayout';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -587,7 +587,7 @@ const ArtistContact = () => {
                     <motion.button
                       type="submit"
                       disabled={formStatus.isSubmitting}
-                      className="w-full bg-gradient-to-r from-amber-600 to-orange-700 hover:from-amber-500 hover:to-orange-600 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] disabled:hover:scale-100 shadow-lg shadow-amber-500/25 disabled:shadow-gray-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base disabled:cursor-not-allowed"
+                      className={`${artistBtnPrimary} w-full py-3.5 sm:py-4`}
                       whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
                       whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
                     >
