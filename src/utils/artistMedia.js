@@ -87,7 +87,8 @@ export const artistMedia = {
     banner: '/images/artist/artist-ensemble-red.jpg',
   },
   contact: {
-    atmosphere: '/images/artist/artist-ensemble-red.jpg',
+    // Distinct from Work banner — stage POV = invitation / “reach out”
+    atmosphere: '/images/artist/artist-pov-mic.jpg',
   },
   welcome: {
     atmosphere: '/images/artist/artist-silhouette-pink.jpg',
