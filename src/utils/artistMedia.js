@@ -39,13 +39,13 @@ export const artistMedia = {
       },
       {
         type: 'video',
-        // WhatsApp Video 12 — short outdoor ensemble beat
+        // WhatsApp Video 12 — from when you're visible; keep you in frame
         src: '/videos/artist/artist-rooftop-clip.mp4',
-        duration: 3800,
+        duration: 4800,
         startAt: 0,
-        playFor: 3.8,
+        playFor: 4.8,
         scale: 1,
-        objectPosition: 'center 45%',
+        objectPosition: '42% 58%',
       },
       {
         type: 'image',
