@@ -1717,9 +1717,9 @@ const TechPage = () => {
       {/* Footer */}
       <footer className={`border-t border-white/10 bg-black/30 ${pagePad} py-10 sm:py-12`}>
         <div className={pageWidth}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 md:items-stretch">
             {/* Brand */}
-            <div>
+            <div className="flex flex-col h-full">
               <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
                 About
               </h4>
@@ -1734,10 +1734,10 @@ const TechPage = () => {
                   <p className="text-gray-500 text-xs">Technical Analyst & Developer</p>
                 </div>
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-4">
+              <p className="text-gray-300 text-sm leading-relaxed">
                 Bridging analysis and engineering to ship products people actually use.
               </p>
-              <div className="flex space-x-2">
+              <div className="flex space-x-2 mt-auto pt-6">
                 <motion.a
                   href={socialLinks.github}
                   target="_blank"
@@ -1785,12 +1785,12 @@ const TechPage = () => {
               </div>
             </div>
 
-            {/* Quick Links */}
-            <div>
+            {/* Quick Links — two columns so height matches siblings */}
+            <div className="flex flex-col h-full">
               <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
                 Quick Links
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 content-start">
                 {[
                   { id: 'hero', label: 'Home' },
                   { id: 'about', label: 'About Me' },
@@ -1813,12 +1813,12 @@ const TechPage = () => {
               </ul>
             </div>
 
-            {/* Contact */}
-            <div>
+            {/* Contact — info only; form CTA lives in the section above */}
+            <div className="flex flex-col h-full">
               <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
                 Contact
               </h4>
-              <ul className="space-y-2.5 text-sm text-gray-300 mb-5">
+              <ul className="space-y-2.5 text-sm text-gray-300 flex-1">
                 <li className="flex items-start gap-2.5">
                   <MapPin size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <span>{personalInfo.location}</span>
@@ -1846,20 +1846,12 @@ const TechPage = () => {
                   <span>Open to opportunities</span>
                 </li>
               </ul>
-              <button
-                type="button"
-                onClick={() => scrollToSection('contact')}
-                className={`${btnSecondary} text-sm px-4 py-2`}
-              >
-                <Mail size={14} />
-                <span>Get in Touch</span>
-              </button>
             </div>
           </div>
 
           <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p className="text-gray-500 text-xs sm:text-sm">
-              © 2025–2026 {personalInfo.name}. All rights reserved.
+              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm">
               <Link to="/privacy" className="text-gray-400 hover:text-cyan-300 transition-colors">

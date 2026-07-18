@@ -139,7 +139,7 @@ const LegalPage = () => {
               </div>
             ))}
           </div>
-          <p className="text-gray-600 text-xs mt-12">© 2025–2026 {personalInfo.name}. All rights reserved.</p>
+          <p className="text-gray-600 text-xs mt-12">© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
         </div>
       </div>
     );
@@ -165,7 +165,7 @@ const LegalPage = () => {
             </section>
           ))}
         </div>
-        <p className="text-gray-600 text-xs mt-12">© 2025–2026 {personalInfo.name}. All rights reserved.</p>
+        <p className="text-gray-600 text-xs mt-12">© {new Date().getFullYear()} {personalInfo.name}. All rights reserved.</p>
       </div>
     </div>
   );
