@@ -324,7 +324,10 @@ const ArtistContact = () => {
         keywords="contact, collaboration, music production, content creation, partnerships, creative projects"
       />
 
-      <ArtistPageShell atmosphereSrc={artistMedia.contact.atmosphere}>
+      <ArtistPageShell
+        atmosphereSrc={artistMedia.contact.atmosphere}
+        atmospherePosition="center 55%"
+      >
         {/* Main Content - FIXED SPACING */}
         <motion.div 
           variants={containerVariants}

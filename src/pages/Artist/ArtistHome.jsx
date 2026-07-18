@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigationType } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import ArtistWelcome from './ArtistWelcome';
@@ -11,7 +11,6 @@ import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
 
 const ArtistHome = () => {
-  const navigationType = useNavigationType();
   const [showWelcome, setShowWelcome] = useState(false);
   const analytics = useAnalytics();
 
@@ -20,15 +19,18 @@ const ArtistHome = () => {
   const media = artistMedia.home;
 
   useEffect(() => {
+    // Once per browser tab session, or when arriving from the portfolio hub.
+    // Note: React Router has no 'RELOAD' navigation type — full refresh keeps
+    // sessionStorage, so welcome correctly does not re-run on F5.
     const hasVisitedArtistSection = sessionStorage.getItem('visitedArtistSection');
     const isFromPortfolioHub = sessionStorage.getItem('fromPortfolioHub') === 'true';
 
-    if (!hasVisitedArtistSection || navigationType === 'RELOAD' || isFromPortfolioHub) {
+    if (!hasVisitedArtistSection || isFromPortfolioHub) {
       setShowWelcome(true);
       sessionStorage.setItem('visitedArtistSection', 'true');
       sessionStorage.removeItem('fromPortfolioHub');
     }
-  }, [navigationType]);
+  }, []);
 
   const handleExploreContentClick = () => {
     if (analytics?.trackPortfolioEvents) {

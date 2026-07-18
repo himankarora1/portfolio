@@ -5,7 +5,6 @@ import {
   Play,
   Music,
   Gamepad2,
-  Camera,
   ExternalLink,
   Youtube,
   Home,
@@ -60,7 +59,6 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
     setLastRefreshTime(new Date());
 
     try {
-      console.log(`🔄 Manual refresh triggered for ${channelType}`);
       const newVideos = await forceRefreshVideos(channelType);
       
       // Update cache info immediately
@@ -71,10 +69,8 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
       if (onRefresh) {
         onRefresh(newVideos);
       }
-      
-      console.log(`✅ Manual refresh completed for ${channelType}`);
     } catch (error) {
-      console.error('❌ Manual refresh failed:', error);
+      console.error('Manual refresh failed:', error);
     } finally {
       setIsRefreshing(false);
     }
@@ -292,8 +288,7 @@ const ArtistWork = () => {
   const [activeTab, setActiveTab] = useState('Music');
   const [youtubeVideos, setYoutubeVideos] = useState({
     Music: [],
-    Gaming: [],
-    'Raw Me': []
+    Gaming: []
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -327,13 +322,6 @@ const ArtistWork = () => {
       icon: Gamepad2, 
       color: 'from-cyan-600 to-teal-700',
       description: 'Epic gaming sessions and walkthroughs'
-    },
-    { 
-      id: 'Raw Me', 
-      label: 'Raw Me', 
-      icon: Camera, 
-      color: 'from-stone-600 to-stone-800',
-      description: 'Behind the scenes and personal vlogs'
     }
   ];
 
@@ -388,7 +376,6 @@ const ArtistWork = () => {
       if (analytics?.trackPortfolioEvents) {
         analytics.trackPortfolioEvents.videoPlay(clickedVideo.videoId, clickedVideo.title, 'artist-portfolio');
       }
-      console.log(`▶️ Playing main video: "${clickedVideo.title}"`);
       return;
     }
     
@@ -399,9 +386,7 @@ const ArtistWork = () => {
     // Update the videos state
     setYoutubeVideos(prev => ({
       ...prev,
-      [activeTab]: newVideos,
-      // Also update Raw Me if it was using music videos
-      ...(activeTab === 'Music' && { 'Raw Me': newVideos.slice(0, 4) })
+      [activeTab]: newVideos
     }));
     
     // Start playing the newly swapped main video
@@ -413,8 +398,6 @@ const ArtistWork = () => {
       analytics.trackPortfolioEvents.videoSwap(currentVideos[0].videoId, clickedVideo.videoId);
       analytics.trackPortfolioEvents.videoPlay(clickedVideo.videoId, clickedVideo.title, 'artist-portfolio');
     }
-    
-    console.log(`🔄 Swapped and playing video: "${clickedVideo.title}"`);
   };
 
   const handleChannelVisit = (channelUrl, channelType) => {
@@ -436,8 +419,6 @@ const ArtistWork = () => {
       setError(null);
       
       try {
-        console.log('Starting YouTube API fetch...');
-        
         // Test API connection first
         const apiTest = await testYouTubeAPI();
         if (!apiTest) {
@@ -450,27 +431,15 @@ const ArtistWork = () => {
           getChannelVideos('gaming', 8)
         ]);
 
-        console.log('Fetched videos:', { 
-          music: musicVideos.length, 
-          gaming: gamingVideos.length 
-        });
-
         setYoutubeVideos({
           Music: musicVideos,
-          Gaming: gamingVideos,
-          'Raw Me': musicVideos.slice(0, 4) // Use music videos for Raw Me or create separate channel
+          Gaming: gamingVideos
         });
 
       } catch (error) {
         console.error('Error fetching YouTube data:', error);
         setError(error.message);
-        
-        // Fallback to static data if API fails
-        setYoutubeVideos({
-          Music: getFallbackVideos('music'),
-          Gaming: getFallbackVideos('gaming'),
-          'Raw Me': getFallbackVideos('raw')
-        });
+        setYoutubeVideos({ Music: [], Gaming: [] });
       } finally {
         setLoading(false);
       }
@@ -483,66 +452,15 @@ const ArtistWork = () => {
   const handleManualRefresh = async (refreshedVideos) => {
     setIsRefreshing(true);
     try {
-      // Update the videos state with fresh data
       setYoutubeVideos(prev => ({
         ...prev,
-        [activeTab]: refreshedVideos,
-        // Also update Raw Me if it was using music videos
-        ...(activeTab === 'Music' && { 'Raw Me': refreshedVideos.slice(0, 4) })
+        [activeTab]: refreshedVideos
       }));
-      
-      console.log(`✅ Manual refresh completed for ${activeTab}`);
     } catch (error) {
       console.error('Error handling manual refresh:', error);
     } finally {
       setIsRefreshing(false);
     }
-  };
-
-  // Fallback static data in case YouTube API fails
-  const getFallbackVideos = (type) => {
-    const fallbackData = {
-      music: [
-        {
-          videoId: "dQw4w9WgXcQ",
-          title: "Symphony of Dreams - Original Composition",
-          description: "My latest original piece featuring a blend of classical and modern elements.",
-          thumbnail: "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-          publishedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-          channelTitle: "Himank Arora"
-        },
-        {
-          videoId: "dQw4w9WgXcQ",
-          title: "Midnight Melody",
-          description: "A soothing composition perfect for late night listening.",
-          thumbnail: "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-          publishedAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-          channelTitle: "Himank Arora"
-        }
-      ],
-      gaming: [
-        {
-          videoId: "dQw4w9WgXcQ",
-          title: "Epic Boss Battle - Elden Ring",
-          description: "Watch me take on one of the toughest bosses in Elden Ring!",
-          thumbnail: "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-          publishedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-          channelTitle: "Himank Gaming"
-        }
-      ],
-      raw: [
-        {
-          videoId: "dQw4w9WgXcQ",
-          title: "My Creative Process - Behind the Scenes",
-          description: "Take a deep dive into how I create content.",
-          thumbnail: "https://i.ytimg.com/vi/dQw4w9WgXcQ/mqdefault.jpg",
-          publishedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-          channelTitle: "Himank Arora"
-        }
-      ]
-    };
-    
-    return fallbackData[type] || [];
   };
 
   const handleCloseVideo = () => {
@@ -634,7 +552,7 @@ const ArtistWork = () => {
       {/* SEO */}
       <SEO 
         title={`${personalInfo.name} - Creative Work & Content`}
-        description="Explore my content across music, gaming, and personal vlogs. Each category showcases different aspects of my creative journey."
+        description="Explore my content across music and gaming. Each category showcases different aspects of my creative journey."
         keywords="creative work, music content, gaming videos, content creation, YouTube, streaming"
       />
 
@@ -660,7 +578,7 @@ const ArtistWork = () => {
               </span>
             </h1>
             <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-300/95 sm:text-base lg:text-lg">
-              Explore my content across music, gaming, and personal vlogs. Each category showcases different aspects of my creative journey.
+              Explore my content across music and gaming. Each category showcases different aspects of my creative journey.
             </p>
           </div>
         </section>
@@ -686,7 +604,7 @@ const ArtistWork = () => {
                 className="bg-red-500/20 border border-red-500/30 rounded-xl p-3 sm:p-4 mb-6 sm:mb-8 max-w-4xl mx-auto"
               >
                 <p className="text-red-300 text-center text-sm sm:text-base">
-                  <strong>API Error:</strong> {error}. Showing sample content instead.
+                  <strong>API Error:</strong> {error}
                 </p>
               </motion.div>
             )}
@@ -694,8 +612,8 @@ const ArtistWork = () => {
             {/* Tab Navigation with Refresh Button - FIXED: Equal width buttons, no scrolling */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
               {/* Tab Navigation - FIXED: Equal width buttons, no scrolling, INCREASED WIDTH */}
-              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 w-full sm:w-auto sm:min-w-[420px]"> {/* ADDED: min-width for larger buttons */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3"> {/* INCREASED: gap from 1 to 2, and sm:gap-2 to sm:gap-3 */}
+              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 w-full sm:w-auto sm:min-w-[320px]">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {tabs.map((tab) => (
                     <motion.button
                       key={tab.id}
@@ -930,18 +848,25 @@ const ArtistWork = () => {
                     </div>
                   )}
 
-                  {/* No Videos Message */}
-                  {getCurrentVideos().length === 0 && !loading && (
+                  {/* Empty state */}
+                  {getCurrentVideos().length === 0 && (
                     <div className="text-center py-12 sm:py-20">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="text-gray-400"
+                      <p className="text-gray-400 text-sm sm:text-base mb-6">
+                        No videos to show right now. Visit the YouTube channel below.
+                      </p>
+                      <motion.a
+                        href={getChannelInfo().url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => handleChannelVisit(getChannelInfo().url, activeTab)}
+                        className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg text-sm sm:text-base"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <Youtube size={48} className="mx-auto mb-4 opacity-50 sm:w-16 sm:h-16" />
-                        <h3 className="text-lg sm:text-xl font-semibold mb-2">No videos found</h3>
-                        <p className="text-sm sm:text-base">Content will appear here once videos are uploaded to the channel.</p>
-                      </motion.div>
+                        <Youtube size={16} className="sm:w-5 sm:h-5" />
+                        <span>Visit {getChannelInfo().name}</span>
+                        <ExternalLink size={14} className="sm:w-4 sm:h-4" />
+                      </motion.a>
                     </div>
                   )}
                 </motion.div>
@@ -968,7 +893,7 @@ const ArtistWork = () => {
                   </div>
                 </div>
                 <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
-                  Creating authentic content through music, gaming, and digital storytelling. 
+                  Creating authentic content through music and gaming. 
                   Join me on this creative journey across multiple platforms.
                 </p>
                 <div className="flex space-x-3 sm:space-x-4">

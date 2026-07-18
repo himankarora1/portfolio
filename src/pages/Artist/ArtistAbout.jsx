@@ -63,63 +63,54 @@ const ArtistAbout = () => {
     }
   };
 
-  // Updated creative stats
-  const creativeStats = [
-    { icon: Mic, value: "25+", label: "Performances", color: "from-amber-600 to-orange-700" },
-    { icon: Camera, value: "50+", label: "Video Content", color: "from-stone-600 to-stone-800" },
-    { icon: Gamepad2, value: "100+", label: "Gaming Hours", color: "from-cyan-600 to-teal-700" },
-    { icon: Heart, value: "1K+", label: "Community", color: "from-rose-600 to-orange-700" }
-  ];
-
-  // Updated creative journey
+  // Creative journey
   const creativeJourney = [
     {
       year: "2005",
       title: "Musical Foundations",
-      description: "Introduced to the world of music, began developing vocal skills and mastering various instruments to build a strong musical foundation.",
+      description: "Started learning music—picking up instruments and working on vocals.",
       icon: Music,
       color: "from-amber-600 to-orange-700"
     },
     {
       year: "2019",
       title: "Content Creation",
-      description: "Started digital content creation, sharing musical performances and creative processes across various social media platforms with dedicated focus.",
+      description: "Began sharing performances and creative process clips online.",
       icon: Camera,
       color: "from-stone-600 to-stone-800"
     },
     {
       year: "2020",
       title: "Gaming Content",
-      description: "Expanded into gaming entertainment, creating gameplay walkthroughs and hosting live streaming sessions with engaging interactions.",
+      description: "Started posting gaming walkthroughs and streaming sessions.",
       icon: Gamepad2,
       color: "from-cyan-600 to-teal-700"
     },
     {
       year: "2021",
       title: "Community Building",
-      description: "Focused on fostering authentic connections and building engaged communities across platforms through consistent content.",
+      description: "Connected with people across platforms through regular posts and streams.",
       icon: Heart,
       color: "from-rose-600 to-orange-700"
     }
   ];
 
   const socialPlatforms = [
-    { icon: Youtube, name: "YouTube (Music)", handle: "@himankarora", followers: "1.2K", color: "bg-red-500", url: socialLinks.youtube_music },
-    { icon: Youtube, name: "YouTube (Gaming)", handle: "@himankaroragaming", followers: "850", color: "bg-red-600", url: socialLinks.youtube_gaming },
-    { icon: Instagram, name: "Instagram", handle: "@himankarora1", followers: "2.1K", color: "bg-gradient-to-r from-rose-500 to-orange-500", url: socialLinks.instagram },
-    { icon: XIcon, name: "X (Twitter)", handle: "@himankaroraa", followers: "1.5K", color: "bg-black", url: socialLinks.x_twitter },
-    { icon: Facebook, name: "Facebook", handle: "himankaroraa", followers: "980", color: "bg-blue-600", url: socialLinks.facebook },
-    { icon: MessageSquare, name: "Discord", handle: "Join Server", followers: "250+", color: "bg-indigo-600", url: socialLinks.discord }
+    { icon: Youtube, name: "YouTube (Music)", handle: "@himankarora", color: "bg-red-500", url: socialLinks.youtube_music },
+    { icon: Youtube, name: "YouTube (Gaming)", handle: "@himankaroragaming", color: "bg-red-600", url: socialLinks.youtube_gaming },
+    { icon: Instagram, name: "Instagram", handle: "@himankarora1", color: "bg-gradient-to-r from-rose-500 to-orange-500", url: socialLinks.instagram },
+    { icon: XIcon, name: "X (Twitter)", handle: "@himankaroraa", color: "bg-black", url: socialLinks.x_twitter },
+    { icon: Facebook, name: "Facebook", handle: "himankaroraa", color: "bg-blue-600", url: socialLinks.facebook },
+    { icon: MessageSquare, name: "Discord", handle: "Join Server", color: "bg-indigo-600", url: socialLinks.discord }
   ];
 
-  // Updated creative skills with new data
   const creativeSkills = [
-    { name: "Singing", level: 95, icon: Mic, category: "audio" },
-    { name: "Gaming", level: 90, icon: Gamepad2, category: "gaming" },
-    { name: "Live Streaming", level: 92, icon: Video, category: "streaming" },
-    { name: "Music Production", level: 85, icon: Music, category: "audio" },
-    { name: "Community Management", level: 88, icon: Heart, category: "social" },
-    { name: "Video Editing", level: 86, icon: Camera, category: "video" }
+    { name: "Singing", icon: Mic },
+    { name: "Gaming", icon: Gamepad2 },
+    { name: "Live Streaming", icon: Video },
+    { name: "Music Production", icon: Music },
+    { name: "Community Management", icon: Heart },
+    { name: "Video Editing", icon: Camera }
   ];
 
   const containerVariants = {
@@ -229,69 +220,8 @@ const ArtistAbout = () => {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Floating stats */}
-                  <motion.div
-                    animate={{ 
-                      y: [0, -15, 0],
-                      rotate: [0, 5, 0]
-                    }}
-                    transition={{ 
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 bg-gradient-to-r from-amber-600 to-orange-700 rounded-2xl p-3 sm:p-4 shadow-lg"
-                  >
-                    <div className="text-white text-center">
-                      <div className="text-lg sm:text-2xl font-bold">25+</div>
-                      <div className="text-xs sm:text-sm">Performances</div>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ 
-                      y: [0, 15, 0],
-                      rotate: [0, -5, 0]
-                    }}
-                    transition={{ 
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1
-                    }}
-                    className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 bg-gradient-to-r from-stone-700 to-stone-900 rounded-2xl p-3 sm:p-4 shadow-lg"
-                  >
-                    <div className="text-white text-center">
-                      <div className="text-lg sm:text-2xl font-bold">1K+</div>
-                      <div className="text-xs sm:text-sm">Community</div>
-                    </div>
-                  </motion.div>
                 </div>
               </motion.div>
-            </motion.div>
-
-            {/* Creative Stats Section */}
-            <motion.div variants={itemVariants} className="mb-12 sm:mb-16 lg:mb-20">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 sm:mb-12">
-                Creative <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Achievements</span>
-              </h2>
-              
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                {creativeStats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    className={`bg-gradient-to-r ${stat.color} bg-opacity-10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 sm:p-6 text-center hover:scale-105 transition-all group`}
-                  >
-                    <stat.icon size={24} className="text-white mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-all sm:w-8 sm:h-8" />
-                    <div className="text-2xl sm:text-3xl font-bold text-white mb-2">{stat.value}</div>
-                    <div className="text-gray-300 text-sm sm:text-base">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
 
             {/* Journey Timeline */}
@@ -328,30 +258,17 @@ const ArtistAbout = () => {
                 Creative <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Skills</span>
               </h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                 {creativeSkills.map((skill, index) => (
                   <motion.div
                     key={skill.name}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 sm:p-6"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 * index }}
+                    className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-stone-900/40 px-4 py-2 text-sm text-stone-200 sm:px-5 sm:py-2.5 sm:text-base"
                   >
-                    <div className="flex items-center justify-between mb-3 sm:mb-4">
-                      <div className="flex items-center space-x-3">
-                        <skill.icon size={20} className="text-amber-200 sm:w-6 sm:h-6" />
-                        <span className="text-white font-semibold text-sm sm:text-base">{skill.name}</span>
-                      </div>
-                      <span className="text-orange-200 font-bold text-sm sm:text-base">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2 sm:h-3">
-                      <motion.div
-                        className="bg-gradient-to-r from-amber-600 to-orange-700 h-2 sm:h-3 rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: 0.2 * index }}
-                      />
-                    </div>
+                    <skill.icon size={16} className="text-amber-200/80 sm:w-[18px] sm:h-[18px]" />
+                    <span>{skill.name}</span>
                   </motion.div>
                 ))}
               </div>
@@ -384,8 +301,7 @@ const ArtistAbout = () => {
                       <platform.icon size={20} className="text-white sm:w-6 sm:h-6" />
                     </div>
                     <h3 className="text-base sm:text-lg font-semibold text-white mb-2">{platform.name}</h3>
-                    <p className="text-gray-400 text-sm mb-2">{platform.handle}</p>
-                    <p className="text-amber-200 font-semibold text-sm sm:text-base">{platform.followers} followers</p>
+                    <p className="text-gray-400 text-sm">{platform.handle}</p>
                   </motion.a>
                 ))}
               </div>

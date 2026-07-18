@@ -50,7 +50,6 @@ const getCachedData = (key) => {
       const hoursOld = Math.round(cacheAge / 1000 / 60 / 60 * 10) / 10; // Round to 1 decimal
       
       if (cacheAge < CACHE_DURATION) {
-        console.log(`📦 Using cached data for ${key} (${hoursOld}h old)`);
         return {
           data: JSON.parse(cachedData),
           cacheInfo: {
@@ -61,7 +60,6 @@ const getCachedData = (key) => {
           }
         };
       } else {
-        console.log(`⏰ Cache expired for ${key} (${hoursOld}h old, max 6h)`);
         return {
           data: JSON.parse(cachedData), // Return expired data as fallback
           cacheInfo: {
@@ -83,7 +81,6 @@ const setCachedData = (key, data) => {
   try {
     localStorage.setItem(key, JSON.stringify(data));
     localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
-    console.log(`💾 Cached data for ${key} - valid for 6 hours`);
   } catch (error) {
     console.error('Error writing cache:', error);
   }
@@ -120,7 +117,6 @@ export const getCacheInfo = (channelType) => {
 // Quota tracking
 const trackQuotaUsage = (cost) => {
   dailyQuotaUsed += cost;
-  console.log(`📊 Quota used: ${dailyQuotaUsed}/${DAILY_QUOTA_LIMIT} units`);
   
   if (dailyQuotaUsed >= DAILY_QUOTA_LIMIT * 0.8) {
     console.warn('⚠️ Approaching quota limit! Consider using cached data.');
@@ -161,7 +157,6 @@ export const getChannelVideos = async (channelType, maxResults = 10, forceRefres
     if (!forceRefresh) {
       const cachedResult = getCachedData(cacheKey);
       if (cachedResult && cachedResult.data && cachedResult.data.length > 0 && !cachedResult.cacheInfo.isExpired) {
-        console.log(`📦 Returning cached videos for ${channelType}`);
         return cachedResult.data.slice(0, maxResults);
       }
     }
@@ -171,8 +166,6 @@ export const getChannelVideos = async (channelType, maxResults = 10, forceRefres
       console.error('Invalid channel type:', channelType);
       return [];
     }
-
-    console.log(`🔍 Fetching ${forceRefresh ? 'fresh' : 'new'} videos for ${channelType} channel:`, channelId);
 
     // Search API costs 100 units per request
     const response = await makeYouTubeRequest('/search', {
@@ -196,7 +189,6 @@ export const getChannelVideos = async (channelType, maxResults = 10, forceRefres
     // Cache the fresh results
     setCachedData(cacheKey, videos);
     
-    console.log(`✅ Found ${videos.length} ${forceRefresh ? 'refreshed' : 'fresh'} videos for ${channelType}`);
     return videos;
   } catch (error) {
     console.error(`❌ Error fetching YouTube videos for ${channelType}:`, error);
@@ -205,7 +197,6 @@ export const getChannelVideos = async (channelType, maxResults = 10, forceRefres
     const cacheKey = `${VIDEO_CACHE_KEY}_${channelType}`;
     const fallbackCache = getCachedData(cacheKey);
     if (fallbackCache && fallbackCache.data) {
-      console.log('📦 Using cached data as fallback (may be expired)');
       return fallbackCache.data.slice(0, maxResults);
     }
     
@@ -215,7 +206,6 @@ export const getChannelVideos = async (channelType, maxResults = 10, forceRefres
 
 // Force refresh function for manual button
 export const forceRefreshVideos = async (channelType, maxResults = 10) => {
-  console.log(`🔄 Force refreshing videos for ${channelType}...`);
   return await getChannelVideos(channelType, maxResults, true);
 };
 
@@ -224,7 +214,6 @@ export const clearChannelCache = (channelType) => {
   try {
     const cacheKey = `${VIDEO_CACHE_KEY}_${channelType}`;
     localStorage.removeItem(cacheKey);
-    console.log(`🧹 Cleared cache for ${channelType}`);
   } catch (error) {
     console.error('Error clearing cache:', error);
   }
@@ -238,7 +227,6 @@ export const clearAllVideoCache = () => {
         localStorage.removeItem(key);
       }
     });
-    console.log('🧹 All video cache cleared');
   } catch (error) {
     console.error('Error clearing cache:', error);
   }
@@ -342,18 +330,12 @@ export const formatDate = (dateString) => {
 
 export const testYouTubeAPI = async () => {
   try {
-    console.log('🧪 Testing YouTube API connection...');
-    console.log('API Key:', YOUTUBE_API_KEY ? 'Present' : 'Missing');
-    console.log('Music Channel ID:', CHANNELS.music.id);
-    console.log('Gaming Channel ID:', CHANNELS.gaming.id);
-    
     const response = await makeYouTubeRequest('/channels', {
       id: CHANNELS.music.id,
       part: 'snippet'
     }, 1);
     
     const success = response.data.items.length > 0;
-    console.log('✅ API Test Result:', success ? 'Success!' : 'No data found');
     return success;
   } catch (error) {
     console.error('❌ YouTube API test failed:', error);
@@ -372,5 +354,4 @@ export const getQuotaStatus = () => {
 
 export const resetDailyQuota = () => {
   dailyQuotaUsed = 0;
-  console.log('🔄 Daily quota reset');
 };
