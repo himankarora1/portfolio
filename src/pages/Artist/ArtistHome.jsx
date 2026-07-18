@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ArtistWelcome from './ArtistWelcome';
 import ArtistNav from '../../components/Artist/ArtistNav';
 import ArtistHomeMontage from '../../components/Artist/ArtistHomeMontage';
@@ -117,20 +117,6 @@ const ArtistHome = () => {
               </div>
             </motion.div>
           </div>
-
-          {/* Quiet scroll cue — points to work via primary path */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.6 }}
-            className="pointer-events-none absolute bottom-6 right-4 hidden text-[10px] uppercase tracking-[0.3em] text-white/35 sm:bottom-8 sm:right-8 sm:block lg:right-12"
-            aria-hidden="true"
-          >
-            <span className="inline-flex items-center gap-2">
-              Scroll
-              <ArrowDown size={12} className="opacity-70" />
-            </span>
-          </motion.div>
         </div>
       </div>
     </>

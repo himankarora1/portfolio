@@ -8,8 +8,8 @@ import { useAnalytics } from '../Analytics';
 
 const menuItems = [
   { id: 'home', label: 'Home', icon: Home, path: '/artist' },
-  { id: 'about', label: 'About', icon: User, path: '/artist/about' },
-  { id: 'work', label: 'Work', icon: Brush, path: '/artist/work' },
+  { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
+  { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
   { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' },
 ];
 
@@ -57,9 +57,13 @@ const ArtistNav = ({ variant = 'default' }) => {
                 HA
               </span>
             </div>
-            {!isOverlay && (
-              <span className="text-lg font-bold tracking-tight text-white sm:text-2xl">{name}</span>
-            )}
+            <span
+              className={`font-bold tracking-tight text-white ${
+                isOverlay ? 'text-base sm:text-lg' : 'text-lg sm:text-2xl'
+              }`}
+            >
+              {name}
+            </span>
           </Link>
 
           <div className="flex items-center space-x-3 sm:space-x-5">
@@ -89,7 +93,7 @@ const ArtistNav = ({ variant = 'default' }) => {
               ))}
             </div>
 
-            {!isOverlay && <div className="hidden h-8 w-px bg-white/20 md:block" />}
+            <div className="hidden h-8 w-px bg-white/20 md:block" />
 
             <div className="hidden md:block">
               <Link
@@ -97,12 +101,12 @@ const ArtistNav = ({ variant = 'default' }) => {
                 onClick={() => handleNav('portfolio-hub')}
                 className={
                   isOverlay
-                    ? 'px-3 py-2 text-xs uppercase tracking-[0.16em] text-white/45 transition-colors hover:text-amber-200'
+                    ? 'flex items-center space-x-2 px-3 py-2 text-xs uppercase tracking-[0.14em] text-white/55 transition-colors hover:text-amber-200'
                     : 'flex items-center space-x-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-200 backdrop-blur-sm transition-all hover:border-amber-400/40 hover:text-amber-200'
                 }
               >
-                {!isOverlay && <Globe size={18} />}
-                <span>{isOverlay ? 'Hub' : 'Portfolio Hub'}</span>
+                <Globe size={isOverlay ? 14 : 18} />
+                <span>Portfolio Hub</span>
               </Link>
             </div>
 
