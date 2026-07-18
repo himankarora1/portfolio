@@ -1,10 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+const CROSSFADE_S = 1.35;
+
+const kenBurnsMotion = (kind, durationMs) => {
+  const duration = Math.max((durationMs || 5000) / 1000, CROSSFADE_S + 0.4);
+  const ease = 'linear';
+
+  switch (kind) {
+    case 'in-left':
+      return {
+        initial: { scale: 1.06, x: '2.5%', y: '0%' },
+        animate: { scale: 1.14, x: '-2%', y: '-1%' },
+        transition: { scale: { duration, ease }, x: { duration, ease }, y: { duration, ease } },
+      };
+    case 'in-up':
+      return {
+        initial: { scale: 1.05, x: '0%', y: '2%' },
+        animate: { scale: 1.13, x: '0%', y: '-2%' },
+        transition: { scale: { duration, ease }, x: { duration, ease }, y: { duration, ease } },
+      };
+    case 'out-right':
+      return {
+        initial: { scale: 1.14, x: '-2%', y: '0%' },
+        animate: { scale: 1.06, x: '2%', y: '1%' },
+        transition: { scale: { duration, ease }, x: { duration, ease }, y: { duration, ease } },
+      };
+    case 'in-right':
+    default:
+      return {
+        initial: { scale: 1.06, x: '-2.5%', y: '0%' },
+        animate: { scale: 1.14, x: '2%', y: '1%' },
+        transition: { scale: { duration, ease }, x: { duration, ease }, y: { duration, ease } },
+      };
+  }
+};
+
 /**
- * Home hero montage — photos + short video beats.
- * Default: object-cover at scale 1 (no zoom-in, no translate → no black bars).
- * fit: 'containBlur' — show full frame (zoomed out) over a blurred cover fill (no side bars).
+ * Home hero montage — unique stills + short video beats.
+ * Stills use Ken Burns drift; all slides crossfade for a continuous blend.
  */
 const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
@@ -13,9 +47,11 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
-  const mediaScale = slide?.scale ?? 1;
   const isLandscape = slide?.orientation === 'landscape';
-  const containBlur = slide?.fit === 'containBlur';
+  const isImage = slide?.type === 'image';
+  const burns = isImage
+    ? kenBurnsMotion(slide.kenBurns || 'in-right', slide.duration)
+    : null;
 
   useEffect(() => {
     const next = slides[nextIndex];
@@ -73,38 +109,6 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
     slide.objectPosition ||
     (isLandscape ? 'center center' : 'center 24%');
 
-  const mediaStyle = {
-    objectPosition: position,
-    transform: mediaScale === 1 ? undefined : `scale(${mediaScale})`,
-  };
-
-  const renderMedia = (fitClass, extraClass = '', withRef = false) => {
-    if (slide.type === 'video') {
-      return (
-        <video
-          ref={withRef ? videoRef : undefined}
-          src={slide.src}
-          className={`h-full w-full ${fitClass} ${extraClass}`}
-          style={mediaStyle}
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
-      );
-    }
-
-    return (
-      <img
-        src={slide.src}
-        alt=""
-        aria-hidden="true"
-        className={`h-full w-full ${fitClass} ${extraClass}`}
-        style={mediaStyle}
-      />
-    );
-  };
-
   return (
     <div className={`absolute inset-0 overflow-hidden bg-black ${className}`}>
       <AnimatePresence mode="sync">
@@ -114,28 +118,44 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.1, ease: 'easeInOut' }}
+          transition={{ duration: CROSSFADE_S, ease: 'easeInOut' }}
         >
-          {containBlur ? (
-            <>
-              {/* Soft fill so contain doesn't show black side bars */}
-              <div className="absolute inset-0">
-                {renderMedia('object-cover', 'scale-110 blur-2xl opacity-70')}
-              </div>
-              <div className="absolute inset-0">
-                {renderMedia(
-                  'object-contain',
-                  'blur-[1px] sm:blur-[1.5px]',
-                  true
-                )}
-              </div>
-            </>
+          {isImage ? (
+            <motion.div
+              className="absolute inset-0"
+              initial={burns.initial}
+              animate={burns.animate}
+              transition={burns.transition}
+            >
+              <img
+                src={slide.src}
+                alt=""
+                aria-hidden="true"
+                className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
+                style={{ objectPosition: position }}
+              />
+            </motion.div>
           ) : (
-            renderMedia(
-              'object-cover blur-[1.5px] sm:blur-[2.5px]',
-              '',
-              true
-            )
+            <motion.div
+              className="absolute inset-0"
+              initial={{ scale: 1.02 }}
+              animate={{ scale: 1.06 }}
+              transition={{
+                duration: Math.max((slide.duration || 4000) / 1000, CROSSFADE_S),
+                ease: 'linear',
+              }}
+            >
+              <video
+                ref={videoRef}
+                src={slide.src}
+                className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
+                style={{ objectPosition: position }}
+                muted
+                playsInline
+                preload="auto"
+                aria-hidden="true"
+              />
+            </motion.div>
           )}
         </motion.div>
       </AnimatePresence>

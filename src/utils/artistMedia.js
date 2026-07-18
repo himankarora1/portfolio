@@ -7,18 +7,17 @@ export const artistMedia = {
     /** SEO / OG still — brown jacket portrait */
     poster: '/images/artist/artist-stage-jacket.jpg',
     /**
-     * Home montage: photos + short video beats (not full clips).
-     * - landscape: fill frame at scale 1, centered (no zoom-in)
-     * - jacket: face right of copy, head near top, mic still in frame (no translateY)
+     * Home montage — each still once, interleaved with short video beats.
+     * Stills get Ken Burns motion in ArtistHomeMontage.
      */
     montage: [
       {
         type: 'image',
         src: '/images/artist/artist-stage-jacket.jpg',
-        duration: 4800,
+        duration: 5200,
         scale: 1,
-        // Right-side face, head high enough for nav, chest/mic still visible
         objectPosition: '6% 18%',
+        kenBurns: 'in-right',
       },
       {
         type: 'video',
@@ -31,24 +30,12 @@ export const artistMedia = {
         objectPosition: 'center center',
       },
       {
-        type: 'video',
-        // WhatsApp Video 9 — upright full landscape (no face zoom)
-        src: '/videos/artist/artist-stage-portrait-clip.mp4',
-        duration: 4200,
-        startAt: 0,
-        playFor: 4.2,
-        orientation: 'landscape',
-        scale: 1,
-        // Tiny bias down-crop so shoes stay in frame
-        objectPosition: 'center 65%',
-      },
-      {
         type: 'image',
         src: '/images/artist/artist-rooftop-solo.jpg',
-        duration: 4500,
+        duration: 5000,
         scale: 1,
-        // A bit lower than 52% so head/mic stay in frame (clip after this stays as-is)
         objectPosition: 'center 28%',
+        kenBurns: 'in-left',
       },
       {
         type: 'video',
@@ -62,11 +49,32 @@ export const artistMedia = {
       },
       {
         type: 'image',
-        src: '/images/artist/artist-silhouette-pink.jpg',
-        duration: 4000,
+        src: '/images/artist/artist-ensemble-red.jpg',
+        duration: 4800,
         orientation: 'landscape',
         scale: 1,
         objectPosition: 'center center',
+        kenBurns: 'in-up',
+      },
+      {
+        type: 'video',
+        // WhatsApp Video 9 — upright full landscape
+        src: '/videos/artist/artist-stage-portrait-clip.mp4',
+        duration: 4200,
+        startAt: 0,
+        playFor: 4.2,
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center 65%',
+      },
+      {
+        type: 'image',
+        src: '/images/artist/artist-silhouette-pink.jpg',
+        duration: 4800,
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center center',
+        kenBurns: 'out-right',
       },
       {
         type: 'video',
@@ -78,30 +86,6 @@ export const artistMedia = {
         scale: 1,
         objectPosition: 'center center',
       },
-      {
-        type: 'image',
-        src: '/images/artist/artist-ensemble-red.jpg',
-        duration: 4200,
-        orientation: 'landscape',
-        scale: 1,
-        objectPosition: 'center center',
-      },
-      {
-        type: 'image',
-        src: '/images/artist/artist-stage-jacket.jpg',
-        duration: 4000,
-        scale: 1,
-        objectPosition: '6% 18%',
-      },
-      {
-        type: 'image',
-        src: '/images/artist/artist-pov-mic.jpg',
-        duration: 3800,
-        scale: 1,
-        // Portrait shot: show full frame over blurred fill (zoom out, no side bars)
-        fit: 'containBlur',
-        objectPosition: 'center center',
-      },
     ],
   },
   about: {
@@ -109,11 +93,10 @@ export const artistMedia = {
     atmosphere: '/images/artist/artist-rooftop-solo.jpg',
   },
   work: {
-    /** Single full-bleed hero for Work — group stage energy */
     banner: '/images/artist/artist-ensemble-red.jpg',
   },
   contact: {
-    atmosphere: '/images/artist/artist-pov-mic.jpg',
+    atmosphere: '/images/artist/artist-silhouette-pink.jpg',
   },
   welcome: {
     atmosphere: '/images/artist/artist-silhouette-pink.jpg',
