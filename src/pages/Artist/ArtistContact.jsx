@@ -383,7 +383,7 @@ const ArtistContact = () => {
                 </div>
 
                 {/* What I Offer */}
-                <div className={`${artistSurfaceCard} flex flex-1 flex-col`}>
+                <div className={artistSurfaceCard}>
                   <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
                     What I <span className={artistHeadingAccent}>Offer</span>
                   </h3>
@@ -427,7 +427,7 @@ const ArtistContact = () => {
                     </div>
                   </div>
                   
-                  <div className="mt-auto border-t border-white/10 pt-4">
+                  <div className="border-t border-white/10 pt-4">
                     <p className="text-gray-400 text-sm leading-relaxed">
                       Live performance, streaming collabs, music production, and editing. Packages include revisions and source files.
                     </p>
@@ -439,7 +439,7 @@ const ArtistContact = () => {
               <motion.div variants={itemVariants} className="flex h-full flex-col gap-6 sm:gap-8">
                 
                 {/* Contact Form */}
-                <div className={`${artistSurfaceCard} flex flex-1 flex-col`}>
+                <div className={`${artistSurfaceCard} flex min-h-0 flex-1 flex-col`}>
                   <h2 className="mb-6 font-display text-2xl font-semibold tracking-tight text-white sm:mb-8 sm:text-3xl">
                     Send Me a <span className={artistHeadingAccent}>Message</span>
                   </h2>
@@ -588,7 +588,7 @@ const ArtistContact = () => {
                 </div>
 
                 {/* Connect on Social */}
-                <div className={artistSurfaceCard}>
+                <div className={`${artistSurfaceCard} mt-auto`}>
                   <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
                     Connect on <span className={artistHeadingAccent}>Social</span>
                   </h3>
