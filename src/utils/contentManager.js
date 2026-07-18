@@ -303,7 +303,7 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Learning to build and ship software end to end: application development, database design, algorithms, and solid engineering practices. Also picking up data science and machine learning, web and UX design, prompt engineering, and how to turn business needs into information systems.",
+      description: "Developing full-stack applications, designing databases, and applying algorithms and software engineering practices to real systems. Expanding into data science, machine learning, web and UX design, prompt engineering, and translating business requirements into information solutions.",
       achievements: [],
       skills: [
         "Full-Stack Development",
@@ -325,7 +325,7 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Built a commerce and management foundation with an early tech base in computer applications, information systems, ERP and computerized accounting, plus web development for e-commerce. Also developed quantitative skills in statistics, mathematics, and financial modeling, with project management and research habits that carry into analyst work.",
+      description: "Combined commerce and management fundamentals with a technical foundation in computer applications, information systems, ERP, and web development. Built quantitative strength in statistics, mathematics, and financial modeling, along with project management and research skills that support analyst work.",
       achievements: [],
       skills: [
         "Information Systems",
