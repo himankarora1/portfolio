@@ -32,8 +32,8 @@ import { contentData } from '../utils/contentManager';
 
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
-  'Technical Business Analyst',
-  'Product-Minded Builder',
+  'Technical Analyst',
+  'Developer & Builder',
   'Problem Solver'
 ];
 
@@ -340,9 +340,9 @@ const TechPage = () => {
     <>
       {/* SEO */}
       <SEO 
-        title="Himank Arora - Technical Business Analyst Portfolio"
-        description="Technical Business Analyst with 3+ years owning requirements, analysis, and execution across data tools, web products, and AI-enabled applications."
-        keywords="technical business analyst, business analysis, React, Python, data analysis, product requirements, Boston"
+        title="Himank Arora - Technical Analyst & Builder"
+        description="IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems."
+        keywords="technical analyst, developer, builder, business analysis, React, Python, data analysis, Boston"
       />
 
       {/* Professional Navigation - FIXED WITH PROPER SPACING */}
@@ -808,13 +808,13 @@ const TechPage = () => {
               >
                 <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
                   <p>
-                    I'm a Technical Business Analyst with 3+ years as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.
+                    I'm a Technical Analyst and builder with 3+ years as the sole technical resource at growing businesses: owning requirements and analysis, then shipping the tools myself across data platforms, web products, and AI-enabled applications.
                   </p>
                   <p>
-                    My strength is bridging business and technology: eliciting requirements, mapping workflows, validating improvements with data, and shipping tools that departments actually adopt.
+                    I work both sides of the problem: eliciting needs, mapping workflows, and validating impact with data, while also designing and building the systems that make those improvements real.
                   </p>
                   <p>
-                    Whether it's a reporting dashboard, a product workflow redesign, or an AI-assisted application, I focus on clear problem framing, measurable outcomes, and solutions that blend analysis with execution.
+                    Whether it's a reporting dashboard, a product workflow redesign, or a full-stack application, I care about clear problem framing, measurable outcomes, and software people actually use.
                   </p>
                 </div>
               </motion.div>
@@ -829,8 +829,8 @@ const TechPage = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-white">At a glance</h3>
                 <div className="space-y-4">
                   {[
-                    { icon: Briefcase, label: 'Role', value: 'Technical Business Analyst' },
-                    { icon: Clock, label: 'Experience', value: '3+ years owning analysis and delivery' },
+                    { icon: Briefcase, label: 'Role', value: 'Technical Analyst & Builder' },
+                    { icon: Clock, label: 'Experience', value: '3+ years analyzing and shipping products' },
                     { icon: GraduationCap, label: 'Education', value: 'MS Information Systems, Northeastern' },
                     { icon: MapPin, label: 'Location', value: 'Boston, MA' }
                   ].map(({ icon: Icon, label, value }) => (
@@ -1591,7 +1591,7 @@ const TechPage = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={5}
-                      placeholder="Looking for a proficient software developer skilled in React and Next.js for a specific project..."
+                      placeholder="Tell me about the role, project, or problem you're working on..."
                       required
                       disabled={formStatus.isSubmitting}
                       className="w-full px-3 sm:px-4 py-3 sm:py-4 bg-gray-900/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all resize-none text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1641,12 +1641,11 @@ const TechPage = () => {
                   <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                     {personalInfo.name}
                   </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">Technical Business Analyst</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Technical Analyst & Builder</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
-                Technical Business Analyst passionate about bridging business needs with technical solutions 
-                that bridge technology and business objectives.
+                Technical Analyst and builder: bridging business needs with working products that teams actually adopt.
               </p>
               <div className="flex space-x-3 sm:space-x-4">
                 <motion.a

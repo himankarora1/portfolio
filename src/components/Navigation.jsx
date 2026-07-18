@@ -45,7 +45,7 @@ const Navigation = () => {
               }`}
             >
               <Code size={18} />
-              <span>Developer</span>
+              <span>Tech</span>
             </Link>
             <Link 
               to="/artist" 
@@ -109,7 +109,7 @@ const Navigation = () => {
                   }`}
                 >
                   <Code size={18} />
-                  <span>Developer</span>
+                  <span>Tech</span>
                 </Link>
                 <Link 
                   to="/artist" 

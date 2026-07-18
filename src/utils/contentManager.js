@@ -2,9 +2,9 @@
 export const contentData = {
   personal: {
     name: "Himank Arora",
-    title: "Technical Business Analyst & Creative Artist",
-    shortTitle: "Analyst & Artist",
-    bio: "Technical Business Analyst with 3+ years serving as the sole technical resource at growing businesses, owning requirements, analysis, and execution end to end across data tools, web products, and AI-enabled applications.",
+    title: "Technical Analyst & Builder",
+    shortTitle: "Analyst & Builder",
+    bio: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
     location: "Boston, MA",
     email: "himankarora1000@gmail.com", // Tech portfolio email
     artistEmail: "himankaroraofficial@gmail.com", // Artist portfolio email
@@ -570,7 +570,9 @@ export const contentData = {
     version: "2.0.0",
     keywords: [
       "Himank Arora",
-      "Technical Business Analyst",
+      "Technical Analyst",
+      "Developer",
+      "Builder",
       "Business Analysis",
       "Content Creator",
       "React",
@@ -649,14 +651,14 @@ export const generateSEOData = (page) => {
     case 'tech':
       return {
         ...baseData,
-        title: `${contentData.personal.name} - Technical Business Analyst Portfolio`,
-        description: "Technical Business Analyst with 3+ years owning requirements, analysis, and execution across data tools, web products, and AI-enabled applications.",
+        title: `${contentData.personal.name} - Technical Analyst & Builder`,
+        description: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
         keywords: [
           ...contentData.meta.keywords,
           "portfolio",
           "projects",
           "web development",
-          "software engineer",
+          "technical analyst",
           "Boston tech"
         ].join(', ')
       };

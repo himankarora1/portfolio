@@ -50,7 +50,11 @@ const SEO = ({
       "url": contentData.meta.site_url,
       "image": pageImage,
       "description": pageDescription,
-      "jobTitle": currentPath.startsWith('/tech') ? "Full Stack Developer" : "Full Stack Developer & Content Creator",
+      "jobTitle": currentPath.startsWith('/tech')
+        ? "Technical Analyst & Builder"
+        : currentPath.startsWith('/artist')
+          ? "Content Creator & Musician"
+          : "Technical Analyst & Builder",
       "worksFor": {
         "@type": "EducationalOrganization",
         "name": "Northeastern University",
@@ -80,15 +84,15 @@ const SEO = ({
         contentData.social.x_twitter
       ],
       "knowsAbout": [
+        "Business Analysis",
+        "Requirements Gathering",
         "Web Development",
         "React",
         "Python",
-        "Machine Learning",
         "Data Analysis",
-        "Full Stack Development",
+        "Product Delivery",
         "JavaScript",
-        "Node.js",
-        "AWS",
+        "SQL",
         "Content Creation",
         "Music Production"
       ]
@@ -98,22 +102,22 @@ const SEO = ({
     if (currentPath.startsWith('/tech')) {
       return {
         ...baseSchema,
-        "@type": ["Person", "SoftwareApplication"],
+        "@type": "Person",
         "hasOccupation": {
           "@type": "Occupation",
-          "name": "Full Stack Developer",
+          "name": "Technical Analyst & Builder",
           "occupationLocation": {
             "@type": "City",
             "name": "Boston, MA"
           },
-          "skills": contentData.meta.keywords.slice(2, 8) // Take relevant tech skills
+          "skills": contentData.meta.keywords.slice(2, 8)
         },
         "makesOffer": {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Full Stack Development Services",
-            "description": "Professional web development, machine learning, and data analysis services"
+            "name": "Analysis and Product Development",
+            "description": "Requirements analysis, web development, data tools, and AI-enabled application delivery"
           }
         }
       };

@@ -295,7 +295,7 @@ const HomePage = () => {
                       backgroundClip: "text"
                     }}
                   >
-                    A Professional by craft and an Artist by passion
+                    Analyst by craft and an Artist by passion
                   </motion.span>
                 </motion.p>
 
@@ -337,7 +337,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3"
                       >
-                        Professional Portfolio
+                        Technical Analyst & Builder
                       </motion.h3>
                       
                       {/* Description - Better mobile formatting */}
@@ -345,7 +345,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="text-gray-300 mb-3 sm:mb-4 text-sm leading-relaxed px-2"
                       >
-                        Building innovative web solutions and data-driven applications using modern technologies and machine learning.
+                        Analyzing business needs and building the products that solve them — from web apps to data tools.
                       </motion.p>
 
                       {/* Skills Tags - Better mobile spacing */}
@@ -353,7 +353,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="flex flex-wrap gap-1 sm:gap-2 justify-center mb-4 sm:mb-6"
                       >
-                        {["Python", "Java", "AWS", "Machine Learning"].map((skill, index) => (
+                        {["Analysis", "React", "Python", "SQL"].map((skill, index) => (
                           <motion.span
                             key={skill}
                             custom={index}
@@ -364,10 +364,10 @@ const HomePage = () => {
                               boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
                             }}
                             className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm border cursor-pointer transition-all ${
+                              skill === "Analysis" ? "bg-cyan-500/20 border-cyan-500/30 text-cyan-300" :
+                              skill === "React" ? "bg-blue-500/20 border-blue-500/30 text-blue-300" :
                               skill === "Python" ? "bg-green-500/20 border-green-500/30 text-green-300" :
-                              skill === "Java" ? "bg-blue-500/20 border-blue-500/30 text-blue-300" :
-                              skill === "AWS" ? "bg-orange-500/20 border-orange-500/30 text-orange-300" :
-                              "bg-purple-500/20 border-purple-500/30 text-purple-300"
+                              "bg-orange-500/20 border-orange-500/30 text-orange-300"
                             }`}
                           >
                             {skill}
