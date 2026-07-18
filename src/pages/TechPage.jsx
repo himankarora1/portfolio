@@ -1704,25 +1704,28 @@ const TechPage = () => {
 
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black/30">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-10 sm:py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 items-start">
             {/* Brand */}
             <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center">
+              <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
+                About
+              </h4>
+              <div className="flex items-center space-x-3 mb-3">
+                <div className="w-9 h-9 border border-white/20 rounded-full flex items-center justify-center shrink-0">
                   <span className="font-display text-white font-semibold text-sm tracking-tight">HA</span>
                 </div>
                 <div>
-                  <h3 className="font-display text-lg sm:text-xl font-semibold text-white">
+                  <h3 className="font-display text-base sm:text-lg font-semibold text-white leading-tight">
                     {personalInfo.name}
                   </h3>
-                  <p className="text-gray-500 text-xs sm:text-sm">Technical Analyst & Developer</p>
+                  <p className="text-gray-500 text-xs">Technical Analyst & Developer</p>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-xs">
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">
                 Bridging analysis and engineering to ship products people actually use.
               </p>
-              <div className="flex space-x-2.5">
+              <div className="flex space-x-2">
                 <motion.a
                   href={socialLinks.github}
                   target="_blank"
@@ -1732,7 +1735,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.06 }}
                   aria-label="GitHub"
                 >
-                  <Github size={16} />
+                  <Github size={15} />
                 </motion.a>
                 <motion.a
                   href={socialLinks.linkedin}
@@ -1743,7 +1746,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.06 }}
                   aria-label="LinkedIn"
                 >
-                  <Linkedin size={16} />
+                  <Linkedin size={15} />
                 </motion.a>
                 <motion.a
                   href={socialLinks.x_twitter}
@@ -1754,7 +1757,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.06 }}
                   aria-label="X"
                 >
-                  <svg width={15} height={15} viewBox="0 0 24 24" fill="currentColor">
+                  <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </motion.a>
@@ -1765,7 +1768,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.06 }}
                   aria-label="Email"
                 >
-                  <Mail size={16} />
+                  <Mail size={15} />
                 </motion.a>
               </div>
             </div>
@@ -1789,7 +1792,7 @@ const TechPage = () => {
                     <button
                       type="button"
                       onClick={() => scrollToSection(item.id)}
-                      className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
+                      className="text-gray-300 hover:text-cyan-300 transition-colors text-sm"
                     >
                       {item.label}
                     </button>
@@ -1803,12 +1806,12 @@ const TechPage = () => {
               <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
                 Contact
               </h4>
-              <ul className="space-y-2.5 text-sm text-gray-400 mb-5">
-                <li className="flex items-start gap-2">
+              <ul className="space-y-2.5 text-sm text-gray-300 mb-5">
+                <li className="flex items-start gap-2.5">
                   <MapPin size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <span>{personalInfo.location}</span>
                 </li>
-                <li className="flex items-start gap-2">
+                <li className="flex items-start gap-2.5">
                   <Mail size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <a
                     href="mailto:himankarora1000@gmail.com"
@@ -1818,15 +1821,15 @@ const TechPage = () => {
                     himankarora1000@gmail.com
                   </a>
                 </li>
-                <li className="flex items-start gap-2">
+                <li className="flex items-start gap-2.5">
                   <Globe size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <span>Available remotely</span>
                 </li>
-                <li className="flex items-start gap-2">
+                <li className="flex items-start gap-2.5">
                   <Clock size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <span>24–48h response</span>
                 </li>
-                <li className="flex items-start gap-2">
+                <li className="flex items-start gap-2.5">
                   <Briefcase size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <span>Open to opportunities</span>
                 </li>
@@ -1834,26 +1837,26 @@ const TechPage = () => {
               <button
                 type="button"
                 onClick={() => scrollToSection('contact')}
-                className={btnPrimary}
+                className={`${btnSecondary} text-sm px-4 py-2`}
               >
-                <Mail size={15} />
+                <Mail size={14} />
                 <span>Get in Touch</span>
               </button>
             </div>
           </div>
 
-          <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p className="text-gray-500 text-xs sm:text-sm">
               © 2025 {personalInfo.name}. All rights reserved.
             </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs sm:text-sm">
-              <Link to="/privacy" className="text-gray-500 hover:text-cyan-300 transition-colors">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm">
+              <Link to="/privacy" className="text-gray-400 hover:text-cyan-300 transition-colors">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-gray-500 hover:text-cyan-300 transition-colors">
+              <Link to="/terms" className="text-gray-400 hover:text-cyan-300 transition-colors">
                 Terms of Service
               </Link>
-              <Link to="/sitemap" className="text-gray-500 hover:text-cyan-300 transition-colors">
+              <Link to="/sitemap" className="text-gray-400 hover:text-cyan-300 transition-colors">
                 Sitemap
               </Link>
             </div>
