@@ -11,9 +11,11 @@ IMAGES.mkdir(parents=True, exist_ok=True)
 BG = (5, 7, 11)
 PANEL = (12, 16, 22)
 CYAN = (6, 182, 212)
+AMBER = (251, 191, 36)
 WHITE = (255, 255, 255)
 MUTED = (156, 163, 175)
-BORDER = (255, 255, 255, 28)
+CHIP_BG = (17, 24, 39)
+CHIP_BORDER = (55, 65, 81)
 
 
 def font(size, bold=False):
@@ -27,37 +29,81 @@ def font(size, bold=False):
     return ImageFont.load_default()
 
 
-def draw_share_card(path: Path, width=1200, height=630):
+def base_canvas(width=1200, height=630, accent=CYAN):
     img = Image.new("RGB", (width, height), BG)
-    draw = ImageDraw.Draw(img)
-
-    # Soft cyan glow
     glow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     gdraw = ImageDraw.Draw(glow)
-    gdraw.ellipse((720, -80, 1280, 480), fill=(6, 182, 212, 36))
-    gdraw.ellipse((-120, 360, 420, 760), fill=(6, 182, 212, 18))
+    gdraw.ellipse((720, -80, 1280, 480), fill=(*accent, 36))
+    gdraw.ellipse((-120, 360, 420, 760), fill=(*accent, 18))
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     draw = ImageDraw.Draw(img)
-
-    # Inner panel
     margin = 40
     draw.rounded_rectangle(
         (margin, margin, width - margin, height - margin),
         radius=24,
         fill=PANEL,
-        outline=(55, 65, 81),
+        outline=CHIP_BORDER,
         width=2,
     )
+    return img, draw
 
-    # Left content
-    draw.text((88, 96), "HIMANK ARORA", font=font(52, bold=True), fill=WHITE)
-    draw.rounded_rectangle((88, 162, 280, 170), radius=4, fill=CYAN)
 
-    badge_x, badge_y = 88, 210
-    draw.ellipse((badge_x, badge_y, badge_x + 64, badge_y + 64), outline=WHITE, width=3)
-    draw.text((badge_x + 32, badge_y + 32), "HA", font=font(22, bold=True), fill=WHITE, anchor="mm")
+def draw_chip(draw, x, y, label, accent=CYAN):
+    tw = draw.textlength(label, font=font(17, bold=True))
+    w, h = tw + 26, 34
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=17, fill=CHIP_BG, outline=accent)
+    draw.text((x + 13, y + 7), label, font=font(17, bold=True), fill=WHITE)
+    return w
+
+
+def draw_hub_card(path: Path):
+    """Dual-identity card for himankarora.com homepage shares."""
+    img, draw = base_canvas()
+
+    draw.text((88, 88), "HIMANK ARORA", font=font(48, bold=True), fill=WHITE)
+    draw.rounded_rectangle((88, 150, 260, 158), radius=4, fill=CYAN)
+
+    badge_x, badge_y = 88, 188
+    draw.ellipse((badge_x, badge_y, badge_x + 56, badge_y + 56), outline=WHITE, width=3)
+    draw.text((badge_x + 28, badge_y + 28), "HA", font=font(20, bold=True), fill=WHITE, anchor="mm")
+    draw.text((164, 198), "Analyst by craft  ·  Artist by passion", font=font(24, bold=True), fill=WHITE)
+
+    draw.text(
+        (88, 270),
+        "One portfolio. Two paths — pick the side you want to explore.",
+        font=font(22),
+        fill=MUTED,
+    )
+
+    # Tech path card
+    draw.rounded_rectangle((88, 330, 560, 510), radius=18, fill=(8, 11, 16), outline=CYAN, width=2)
+    draw.text((118, 358), "Technical Analyst & Developer", font=font(22, bold=True), fill=WHITE)
+    draw.text((118, 400), "Analysis, engineering, and shipping\nproducts people actually use.", font=font(18), fill=MUTED, spacing=4)
+    x = 118
+    for label in ("React", "Python", "SQL"):
+        x += draw_chip(draw, x, 458, label, CYAN) + 10
+
+    # Artist path card
+    draw.rounded_rectangle((600, 330, 1112, 510), radius=18, fill=(8, 11, 16), outline=AMBER, width=2)
+    draw.text((630, 358), "Artist & Content Creator", font=font(22, bold=True), fill=WHITE)
+    draw.text((630, 400), "Music, gaming, and storytelling\nacross communities and platforms.", font=font(18), fill=MUTED, spacing=4)
+    x = 630
+    for label in ("Music", "Gaming", "YouTube"):
+        x += draw_chip(draw, x, 458, label, AMBER) + 10
+
+    draw.text((88, 545), "himankarora.com", font=font(22, bold=True), fill=CYAN)
+
+    img.save(path, "JPEG", quality=92, optimize=True)
+    print(f"Wrote {path}")
+
+
+def draw_tech_card(path: Path):
+    img, draw = base_canvas(accent=CYAN)
+    draw.text((88, 96), "HIMANK ARORA", font=font(50, bold=True), fill=WHITE)
+    draw.rounded_rectangle((88, 160, 270, 168), radius=4, fill=CYAN)
+    draw.ellipse((88, 210, 152, 274), outline=WHITE, width=3)
+    draw.text((120, 242), "HA", font=font(22, bold=True), fill=WHITE, anchor="mm")
     draw.text((172, 228), "Technical Analyst & Developer", font=font(28, bold=True), fill=WHITE)
-
     draw.text(
         (88, 320),
         "Bridging analysis and engineering to ship\nproducts people actually use.",
@@ -65,29 +111,53 @@ def draw_share_card(path: Path, width=1200, height=630):
         fill=MUTED,
         spacing=8,
     )
-    draw.text((88, 520), "himankarora.com", font=font(24, bold=True), fill=CYAN)
+    draw.text((88, 520), "himankarora.com/tech", font=font(24, bold=True), fill=CYAN)
 
-    # Right visual: role chips + faux code card
-    card = (700, 120, 1120, 500)
-    draw.rounded_rectangle(card, radius=18, fill=(8, 11, 16), outline=(6, 182, 212), width=2)
-
-    chips = [
-        (720, 150, "Analysis"),
-        (880, 150, "Engineering"),
-        (720, 210, "React"),
-        (860, 210, "Python"),
-        (990, 210, "SQL"),
-    ]
-    for x, y, label in chips:
-        tw = draw.textlength(label, font=font(18, bold=True))
-        draw.rounded_rectangle((x, y, x + tw + 28, y + 36), radius=18, fill=(17, 24, 39), outline=(55, 65, 81))
-        draw.text((x + 14, y + 8), label, font=font(18, bold=True), fill=WHITE)
+    draw.rounded_rectangle((700, 120, 1120, 500), radius=18, fill=(8, 11, 16), outline=CYAN, width=2)
+    x, y = 720, 150
+    for label in ("Analysis", "Engineering", "React", "Python", "SQL"):
+        w = draw_chip(draw, x, y, label, CYAN)
+        x += w + 12
+        if x > 1000:
+            x, y = 720, 210
 
     draw.text((740, 290), "const profile = {", font=font(20, bold=True), fill=MUTED)
     draw.text((760, 330), "role: 'Technical Analyst',", font=font(20), fill=WHITE)
     draw.text((760, 370), "focus: 'Build & ship',", font=font(20), fill=WHITE)
     draw.text((760, 410), "openTo: 'Opportunities'", font=font(20), fill=WHITE)
     draw.text((740, 450), "}", font=font(20, bold=True), fill=MUTED)
+
+    img.save(path, "JPEG", quality=92, optimize=True)
+    print(f"Wrote {path}")
+
+
+def draw_artist_card(path: Path):
+    img, draw = base_canvas(accent=AMBER)
+    draw.text((88, 96), "HIMANK ARORA", font=font(50, bold=True), fill=WHITE)
+    draw.rounded_rectangle((88, 160, 270, 168), radius=4, fill=AMBER)
+    draw.ellipse((88, 210, 152, 274), outline=WHITE, width=3)
+    draw.text((120, 242), "HA", font=font(22, bold=True), fill=WHITE, anchor="mm")
+    draw.text((172, 228), "Artist & Content Creator", font=font(28, bold=True), fill=WHITE)
+    draw.text(
+        (88, 320),
+        "Music, gaming, and digital storytelling\nbuilt around authentic communities.",
+        font=font(26),
+        fill=MUTED,
+        spacing=8,
+    )
+    draw.text((88, 520), "himankarora.com/artist", font=font(24, bold=True), fill=AMBER)
+
+    draw.rounded_rectangle((700, 120, 1120, 500), radius=18, fill=(8, 11, 16), outline=AMBER, width=2)
+    x, y = 720, 150
+    for label in ("Music", "Gaming", "YouTube", "Streaming", "Community"):
+        w = draw_chip(draw, x, y, label, AMBER)
+        x += w + 12
+        if x > 980:
+            x, y = 720, 210
+
+    draw.text((740, 300), "Creating through", font=font(22), fill=MUTED)
+    draw.text((740, 350), "sound, games,", font=font(28, bold=True), fill=WHITE)
+    draw.text((740, 400), "and stories.", font=font(28, bold=True), fill=WHITE)
 
     img.save(path, "JPEG", quality=92, optimize=True)
     print(f"Wrote {path}")
@@ -104,10 +174,12 @@ def draw_favicon_base(size=512):
 
 
 def main():
-    og = IMAGES / "og-image.jpg"
-    twitter = IMAGES / "twitter-image.jpg"
-    draw_share_card(og)
-    draw_share_card(twitter)
+    # Hub / default share previews
+    draw_hub_card(IMAGES / "og-image.jpg")
+    draw_hub_card(IMAGES / "twitter-image.jpg")
+    # Page-specific previews
+    draw_tech_card(IMAGES / "og-image-tech.jpg")
+    draw_artist_card(IMAGES / "og-image-artist.jpg")
 
     base = draw_favicon_base(512)
     base.resize((180, 180), Image.Resampling.LANCZOS).save(PUBLIC / "apple-touch-icon.png", "PNG")
@@ -116,7 +188,6 @@ def main():
     base.resize((192, 192), Image.Resampling.LANCZOS).save(PUBLIC / "android-chrome-192x192.png", "PNG")
     base.resize((512, 512), Image.Resampling.LANCZOS).save(PUBLIC / "android-chrome-512x512.png", "PNG")
 
-    # Multi-size ICO
     ico_sizes = [(16, 16), (32, 32), (48, 48)]
     ico_images = [base.resize(s, Image.Resampling.LANCZOS) for s in ico_sizes]
     ico_images[0].save(
@@ -126,7 +197,6 @@ def main():
         append_images=ico_images[1:],
     )
 
-    # Safari pinned tab: simple monochrome SVG already referenced; write a clean one
     (PUBLIC / "safari-pinned-tab.svg").write_text(
         """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
   <circle cx="8" cy="8" r="6.5" fill="black"/>
@@ -136,7 +206,6 @@ def main():
         encoding="utf-8",
     )
 
-    # Improve main favicon.svg with dark fill for visibility
     (PUBLIC / "favicon.svg").write_text(
         """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <circle cx="16" cy="16" r="15" fill="#05070b"/>

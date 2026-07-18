@@ -586,6 +586,8 @@ export const contentData = {
     site_url: "https://himankarora.com",
     site_name: "Himank Arora Portfolio",
     og_image: "/images/og-image.jpg",
+    og_image_tech: "/images/og-image-tech.jpg",
+    og_image_artist: "/images/og-image-artist.jpg",
     twitter_image: "/images/twitter-image.jpg",
     favicon: "/favicon.ico",
     last_updated: new Date().toISOString(),
@@ -661,8 +663,8 @@ export const getCertificationById = (id) => {
 // SEO helpers
 export const generateSEOData = (page) => {
   const baseData = {
-    title: `${contentData.personal.name} - ${contentData.personal.title}`,
-    description: contentData.personal.bio,
+    title: `${contentData.personal.name} — Analyst by craft, Artist by passion`,
+    description: "Explore both sides: Technical Analyst & Developer, and Artist & Content Creator. Analysis-driven product work, development projects, music, and creative content.",
     url: contentData.meta.site_url,
     image: `${contentData.meta.site_url}${contentData.meta.og_image}`,
     keywords: contentData.meta.keywords.join(', ')
@@ -674,6 +676,7 @@ export const generateSEOData = (page) => {
         ...baseData,
         title: `${contentData.personal.name} - Technical Analyst & Developer`,
         description: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
+        image: `${contentData.meta.site_url}${contentData.meta.og_image_tech}`,
         keywords: [
           ...contentData.meta.keywords,
           "portfolio",
@@ -686,8 +689,9 @@ export const generateSEOData = (page) => {
     case 'artist':
       return {
         ...baseData,
-        title: `${contentData.personal.name} - Content Creator & Musician`,
+        title: `${contentData.personal.name} - Artist & Content Creator`,
         description: contentData.artist.bio,
+        image: `${contentData.meta.site_url}${contentData.meta.og_image_artist}`,
         keywords: [
           ...contentData.meta.keywords,
           "musician",
