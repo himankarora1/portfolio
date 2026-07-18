@@ -5,13 +5,16 @@ import {
   Gamepad2,
   Camera,
   Mic,
-  Youtube,
-  Instagram,
-  Facebook,
-  MessageSquare,
   Heart,
   Video
 } from 'lucide-react';
+import {
+  DiscordIcon,
+  XIcon,
+  InstagramIcon,
+  FacebookIcon,
+  YouTubeIcon,
+} from '../../components/SocialIcons';
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
@@ -19,13 +22,6 @@ import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
 import { artistPagePad, artistPageWidth, artistHeadingAccent } from '../../utils/artistLayout';
-
-// Custom X (Twitter) icon component
-const XIcon = ({ size = 24, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
 
 const ArtistAbout = () => {
   const analytics = useAnalytics();
@@ -73,12 +69,12 @@ const ArtistAbout = () => {
   ];
 
   const socialPlatforms = [
-    { icon: Youtube, name: "YouTube (Music)", handle: "@himankarora", color: "bg-red-500", url: socialLinks.youtube_music },
-    { icon: Youtube, name: "YouTube (Gaming)", handle: "@himankaroragaming", color: "bg-red-600", url: socialLinks.youtube_gaming },
-    { icon: Instagram, name: "Instagram", handle: "@himankarora1", color: "bg-gradient-to-r from-rose-500 to-orange-500", url: socialLinks.instagram },
+    { icon: YouTubeIcon, name: "YouTube (Music)", handle: "@himankarora", color: "bg-red-500", url: socialLinks.youtube_music },
+    { icon: YouTubeIcon, name: "YouTube (Gaming)", handle: "@himankaroragaming", color: "bg-red-600", url: socialLinks.youtube_gaming },
+    { icon: InstagramIcon, name: "Instagram", handle: "@himankarora1", color: "bg-gradient-to-r from-rose-500 to-orange-500", url: socialLinks.instagram },
     { icon: XIcon, name: "X (Twitter)", handle: "@himankaroraa", color: "bg-black", url: socialLinks.x_twitter },
-    { icon: Facebook, name: "Facebook", handle: "himankaroraa", color: "bg-blue-600", url: socialLinks.facebook },
-    { icon: MessageSquare, name: "Discord", handle: "Join Server", color: "bg-indigo-600", url: socialLinks.discord }
+    { icon: FacebookIcon, name: "Facebook", handle: "himankaroraa", color: "bg-blue-600", url: socialLinks.facebook },
+    { icon: DiscordIcon, name: "Discord", handle: "Join Server", color: "bg-[#5865F2]", url: socialLinks.discord }
   ];
 
   const creativeSkills = [

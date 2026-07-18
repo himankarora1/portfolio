@@ -4,10 +4,6 @@ import {
   Mail, 
   Music, 
   MapPin,
-  Instagram,
-  Youtube,
-  Facebook,
-  MessageSquare,
   Send,
   Star,
   Clock,
@@ -19,6 +15,13 @@ import {
   Edit,
   Users
 } from 'lucide-react';
+import {
+  DiscordIcon,
+  XIcon,
+  InstagramIcon,
+  FacebookIcon,
+  YouTubeIcon,
+} from '../../components/SocialIcons';
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
@@ -26,13 +29,6 @@ import { artistPagePad, artistPageWidth, artistBtnPrimary, artistHeadingAccent }
 import { useAnalytics } from '../../components/Analytics';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
-
-// Custom X (Twitter) icon component
-const XIcon = ({ size = 24, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
 
 const ArtistContact = () => {
   const analytics = useAnalytics();
@@ -226,7 +222,7 @@ const ArtistContact = () => {
 
   const socialPlatforms = [
     { 
-      icon: Youtube, 
+      icon: YouTubeIcon, 
       name: "YouTube (Music)", 
       handle: "@himankarora", 
       followers: "1.2K", 
@@ -234,7 +230,7 @@ const ArtistContact = () => {
       url: contentData.social.youtube_music
     },
     { 
-      icon: Youtube, 
+      icon: YouTubeIcon, 
       name: "YouTube (Gaming)", 
       handle: "@himankaroragaming", 
       followers: "850", 
@@ -242,7 +238,7 @@ const ArtistContact = () => {
       url: contentData.social.youtube_gaming
     },
     { 
-      icon: Instagram, 
+      icon: InstagramIcon, 
       name: "Instagram", 
       handle: "@himankarora1", 
       followers: "2.1K", 
@@ -258,7 +254,7 @@ const ArtistContact = () => {
       url: contentData.social.x_twitter
     },
     { 
-      icon: Facebook, 
+      icon: FacebookIcon, 
       name: "Facebook", 
       handle: "himankaroraa", 
       followers: "980", 
@@ -266,11 +262,11 @@ const ArtistContact = () => {
       url: contentData.social.facebook
     },
     { 
-      icon: MessageSquare, 
+      icon: DiscordIcon, 
       name: "Discord", 
       handle: "Join Server", 
       followers: "250+", 
-      color: "bg-indigo-600", 
+      color: "bg-[#5865F2]", 
       url: contentData.social.discord
     }
   ];

@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 import { 
   Download,
   ExternalLink,
-  Github,
   Mail,
-  Linkedin,
   Home,
   User,
   Briefcase,
@@ -24,6 +22,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import { GitHubIcon, LinkedInIcon, XIcon } from '../components/SocialIcons';
 import SEO from '../components/SEO';
 import { useAnalytics } from '../components/Analytics';
 import { contentData } from '../utils/contentManager';
@@ -681,7 +680,7 @@ const TechPage = () => {
                     onClick={() => handleSocialClick('GitHub', socialLinks.github)}
                     className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
                   >
-                    <Github size={22} className="sm:w-6 sm:h-6" />
+                    <GitHubIcon size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
                     href={socialLinks.linkedin} 
@@ -690,7 +689,7 @@ const TechPage = () => {
                     onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
                     className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
                   >
-                    <Linkedin size={22} className="sm:w-6 sm:h-6" />
+                    <LinkedInIcon size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
                     href={`mailto:${personalInfo.email}`}
@@ -1164,7 +1163,7 @@ const TechPage = () => {
                           }}
                           className="inline-flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition-colors py-1.5 px-2.5 rounded-lg hover:bg-white/5 text-sm"
                         >
-                          <Github size={15} />
+                          <GitHubIcon size={15} />
                           <span>Code</span>
                         </a>
                       )}
@@ -1503,7 +1502,7 @@ const TechPage = () => {
                       whileHover={{ scale: 1.04 }}
                       whileTap={{ scale: 0.97 }}
                     >
-                      <Github size={20} className="sm:w-6 sm:h-6" />
+                      <GitHubIcon size={20} className="sm:w-6 sm:h-6" />
                     </motion.a>
                     
                     <motion.a
@@ -1515,7 +1514,7 @@ const TechPage = () => {
                       whileHover={{ scale: 1.04 }}
                       whileTap={{ scale: 0.97 }}
                     >
-                      <Linkedin size={20} className="sm:w-6 sm:h-6" />
+                      <LinkedInIcon size={20} className="sm:w-6 sm:h-6" />
                     </motion.a>
                     
                     <motion.a
@@ -1527,9 +1526,7 @@ const TechPage = () => {
                       whileHover={{ scale: 1.04 }}
                       whileTap={{ scale: 0.97 }}
                     >
-                      <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor" className="sm:w-6 sm:h-6">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                      </svg>
+                      <XIcon size={20} className="sm:w-6 sm:h-6" />
                     </motion.a>
                     
                     <motion.a
@@ -1735,7 +1732,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.03 }}
                   aria-label="GitHub"
                 >
-                  <Github size={15} />
+                  <GitHubIcon size={15} />
                 </motion.a>
                 <motion.a
                   href={socialLinks.linkedin}
@@ -1746,7 +1743,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.03 }}
                   aria-label="LinkedIn"
                 >
-                  <Linkedin size={15} />
+                  <LinkedInIcon size={15} />
                 </motion.a>
                 <motion.a
                   href={socialLinks.x_twitter}
@@ -1757,9 +1754,7 @@ const TechPage = () => {
                   whileHover={{ scale: 1.03 }}
                   aria-label="X"
                 >
-                  <svg width={14} height={14} viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                  </svg>
+                  <XIcon size={14} />
                 </motion.a>
                 <motion.a
                   href={`mailto:${personalInfo.email}`}
@@ -1944,7 +1939,7 @@ const TechPage = () => {
                     onClick={() => handleProjectGithub(selectedProject)}
                     className={btnSecondary}
                   >
-                    <Github size={16} />
+                    <GitHubIcon size={16} />
                     <span>View Code</span>
                   </a>
                 )}

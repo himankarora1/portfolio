@@ -1,7 +1,8 @@
 // components/YouTubeVideo.jsx - Simplified for direct click-to-swap-and-play
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Eye, Calendar, Youtube } from 'lucide-react';
+import { Play, Eye, Calendar } from 'lucide-react';
+import { YouTubeIcon } from './SocialIcons';
 import { getVideoStats, formatDuration, formatViewCount, formatDate } from '../services/youtubeService';
 
 const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
@@ -122,7 +123,7 @@ const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Youtube size={12} />
+            <YouTubeIcon size={12} />
             <span>YouTube</span>
           </motion.button>
         </div>

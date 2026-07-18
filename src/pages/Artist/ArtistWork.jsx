@@ -5,7 +5,6 @@ import {
   Music,
   Gamepad2,
   ExternalLink,
-  Youtube,
   Loader,
   RefreshCw,
   CheckCircle,
@@ -13,6 +12,7 @@ import {
   Zap,
   Clock
 } from 'lucide-react';
+import { YouTubeIcon } from '../../components/SocialIcons';
 import { getChannelVideos, testYouTubeAPI, forceRefreshVideos, getCacheInfo } from '../../services/youtubeService';
 import YouTubeVideo from '../../components/YouTubeVideo';
 import SEO from '../../components/SEO';
@@ -667,7 +667,7 @@ const ArtistWork = () => {
                           <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/80 backdrop-blur-sm border border-gray-600/40 rounded-2xl p-4 sm:p-6 mt-auto shadow-xl">
                             <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
                               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-red-600 to-orange-700 rounded-full flex items-center justify-center shadow-lg">
-                                <Youtube size={20} className="text-white sm:w-7 sm:h-7" />
+                                <YouTubeIcon size={20} className="text-white sm:w-7 sm:h-7" />
                               </div>
                               <div>
                                 <h4 className="text-base sm:text-lg font-bold text-white">
@@ -693,7 +693,7 @@ const ArtistWork = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                               >
-                                <Youtube size={16} className="sm:w-5 sm:h-5" />
+                                <YouTubeIcon size={16} className="sm:w-5 sm:h-5" />
                                 <span>Subscribe</span>
                               </motion.a>
                               
@@ -735,7 +735,7 @@ const ArtistWork = () => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          <Youtube size={16} className="sm:w-[18px] sm:h-[18px]" />
+                          <YouTubeIcon size={16} className="sm:w-[18px] sm:h-[18px]" />
                           <span>More Videos</span>
                           <ExternalLink size={12} className="sm:w-3.5 sm:h-3.5" />
                         </motion.a>
@@ -769,7 +769,7 @@ const ArtistWork = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <Youtube size={16} className="sm:w-5 sm:h-5" />
+                        <YouTubeIcon size={16} className="sm:w-5 sm:h-5" />
                         <span>Visit {getChannelInfo().name}</span>
                         <ExternalLink size={14} className="sm:w-4 sm:h-4" />
                       </motion.a>

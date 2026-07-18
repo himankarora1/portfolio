@@ -6,23 +6,20 @@ import {
   User,
   Mail,
   Brush,
-  Youtube,
-  Instagram,
-  Facebook,
-  MessageSquare,
   Clock,
   MapPin,
   Globe,
 } from 'lucide-react';
+import {
+  DiscordIcon,
+  XIcon,
+  InstagramIcon,
+  FacebookIcon,
+  YouTubeIcon,
+} from '../SocialIcons';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
 import { useAnalytics } from '../Analytics';
 import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
-
-const XIcon = ({ size = 15 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
 
 const quickLinks = [
   { id: 'home', label: 'Home', icon: Home, path: '/artist' },
@@ -38,12 +35,12 @@ const ArtistFooter = () => {
   const artistEmail = getEmailForContext('artist');
 
   const socials = [
-    { name: 'YouTube Music', url: social.youtube_music, icon: Youtube, color: 'bg-red-500' },
-    { name: 'YouTube Gaming', url: social.youtube_gaming, icon: Youtube, color: 'bg-red-600' },
-    { name: 'Instagram', url: social.instagram, icon: Instagram, color: 'bg-gradient-to-r from-rose-500 to-orange-500' },
+    { name: 'YouTube Music', url: social.youtube_music, icon: YouTubeIcon, color: 'bg-red-500' },
+    { name: 'YouTube Gaming', url: social.youtube_gaming, icon: YouTubeIcon, color: 'bg-red-600' },
+    { name: 'Instagram', url: social.instagram, icon: InstagramIcon, color: 'bg-gradient-to-r from-rose-500 to-orange-500' },
     { name: 'X', url: social.x_twitter, icon: XIcon, color: 'bg-black border border-white/20' },
-    { name: 'Facebook', url: social.facebook, icon: Facebook, color: 'bg-blue-600' },
-    { name: 'Discord', url: social.discord, icon: MessageSquare, color: 'bg-indigo-600' },
+    { name: 'Facebook', url: social.facebook, icon: FacebookIcon, color: 'bg-blue-600' },
+    { name: 'Discord', url: social.discord, icon: DiscordIcon, color: 'bg-[#5865F2]' },
   ];
 
   const trackNav = (section) => {
@@ -145,7 +142,7 @@ const ArtistFooter = () => {
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <MessageSquare size={14} className="text-amber-300 mt-0.5 shrink-0" />
+                  <DiscordIcon size={14} className="text-amber-300 mt-0.5 shrink-0" />
                 <a
                   href={social.discord}
                   target="_blank"

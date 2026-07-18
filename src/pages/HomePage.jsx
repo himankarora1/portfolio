@@ -4,20 +4,13 @@ import { motion } from 'framer-motion';
 import { 
   Code, 
   Palette, 
-  Github, 
-  Linkedin,
   Mail,
   ArrowRight
 } from 'lucide-react';
+import { GitHubIcon, LinkedInIcon, XIcon } from '../components/SocialIcons';
 import { contentData } from '../utils/contentManager';
 import SEO from '../components/SEO';
 import { useAnalytics } from '../components/Analytics';
-
-const XIcon = ({ size = 24, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
 
 const techTag =
   'px-2.5 sm:px-3 py-1 rounded-full text-xs sm:text-sm border bg-cyan-500/15 border-cyan-500/25 text-cyan-300';
@@ -210,8 +203,8 @@ const HomePage = () => {
                   className="flex justify-center space-x-4 sm:space-x-6 px-4"
                 >
                   {[
-                    { icon: Github, href: socialLinks.github, color: 'hover:text-gray-300', platform: 'GitHub' },
-                    { icon: Linkedin, href: socialLinks.linkedin, color: 'hover:text-blue-400', platform: 'LinkedIn' },
+                    { icon: GitHubIcon, href: socialLinks.github, color: 'hover:text-gray-300', platform: 'GitHub' },
+                    { icon: LinkedInIcon, href: socialLinks.linkedin, color: 'hover:text-blue-400', platform: 'LinkedIn' },
                     { icon: XIcon, href: socialLinks.x_twitter, color: 'hover:text-sky-400', platform: 'X Twitter' },
                     { icon: Mail, href: `mailto:${personalInfo.email}`, color: 'hover:text-red-400', platform: 'Email' },
                   ].map((social) => (
