@@ -26,11 +26,19 @@ export const artistMedia = {
         objectPosition: 'center 30%',
       },
       {
+        type: 'video',
+        // WhatsApp Video 9 — rotated upright + face-zoomed
+        src: '/videos/artist/artist-stage-portrait-clip.mp4',
+        duration: 4200,
+        startAt: 0,
+        playFor: 4.2,
+        objectPosition: '32% 28%',
+      },
+      {
         type: 'image',
         src: '/images/artist/artist-rooftop-solo.jpg',
         duration: 4500,
-        // Tall outdoor shot — cover fills frame; bias to face/upper body
-        objectPosition: 'center 18%',
+        objectPosition: 'center 16%',
       },
       {
         type: 'video',
@@ -38,16 +46,7 @@ export const artistMedia = {
         duration: 3800,
         startAt: 2,
         playFor: 3.5,
-        objectPosition: 'center 22%',
-      },
-      {
-        type: 'video',
-        // WhatsApp Video 9 — rotated upright (landscape)
-        src: '/videos/artist/artist-stage-portrait-clip.mp4',
-        duration: 4200,
-        startAt: 0,
-        playFor: 4.2,
-        objectPosition: 'center 28%',
+        objectPosition: 'center 18%',
       },
       {
         type: 'image',
