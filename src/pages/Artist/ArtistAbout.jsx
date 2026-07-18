@@ -18,7 +18,7 @@ import ArtistFooter from '../../components/Artist/ArtistFooter';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
-import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistHeadingAccent } from '../../utils/artistLayout';
 
 // Custom X (Twitter) icon component
 const XIcon = ({ size = 24, className = "" }) => (
@@ -141,10 +141,10 @@ const ArtistAbout = () => {
             
             {/* Header */}
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16 lg:mb-20">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6">
-                About <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">Me</span>
+              <h1 className="mb-4 font-display text-3xl font-semibold tracking-tight text-white sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
+                About <span className={artistHeadingAccent}>Me</span>
               </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+              <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-white/70 sm:text-lg lg:text-xl">
                 Dive deeper into my creative journey, skills, and the passion that drives my content creation across music, gaming, and digital storytelling.
               </p>
             </motion.div>
@@ -152,8 +152,8 @@ const ArtistAbout = () => {
             {/* Story Section */}
             <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12 sm:mb-16 lg:mb-20 items-center">
               <div className="space-y-4 sm:space-y-6">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 sm:mb-8">
-                  My <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Story</span>
+                <h2 className="mb-6 font-display text-2xl font-semibold tracking-tight text-white sm:mb-8 sm:text-3xl lg:text-4xl">
+                  My <span className={artistHeadingAccent}>Story</span>
                 </h2>
                 <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                   My creative journey began with a deep love for music that blossomed into a lifelong passion. What started as learning instruments and developing vocal skills evolved into a serious pursuit of musical excellence and artistic expression through authentic content creation.
@@ -204,7 +204,7 @@ const ArtistAbout = () => {
             {/* Journey Timeline */}
             <motion.div variants={itemVariants} className="mb-12 sm:mb-16 lg:mb-20">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 sm:mb-12">
-                My Creative <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Journey</span>
+                My Creative <span className={artistHeadingAccent}>Journey</span>
               </h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
@@ -232,7 +232,7 @@ const ArtistAbout = () => {
             {/* Skills Section */}
             <motion.div variants={itemVariants} className="mb-12 sm:mb-16 lg:mb-20">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 sm:mb-12">
-                Creative <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Skills</span>
+                Creative <span className={artistHeadingAccent}>Skills</span>
               </h2>
               
               <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
@@ -254,7 +254,7 @@ const ArtistAbout = () => {
             {/* Social Media Section */}
             <motion.div variants={itemVariants} className="text-center">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 sm:mb-8">
-                Follow My <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Creative Journey</span>
+                Follow My <span className={artistHeadingAccent}>Creative Journey</span>
               </h2>
               <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
                 Connect with me across different platforms and be part of my creative community. Let's create, learn, and grow together!

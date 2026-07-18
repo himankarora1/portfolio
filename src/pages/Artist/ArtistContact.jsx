@@ -22,7 +22,7 @@ import {
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
-import { artistPagePad, artistPageWidth, artistBtnPrimary } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistBtnPrimary, artistHeadingAccent } from '../../utils/artistLayout';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -325,12 +325,12 @@ const ArtistContact = () => {
           <div className={artistPageWidth}>
             
             {/* Header - FIXED SPACING */}
-            <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-                Let's <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">Create Together</span>
+            <motion.div variants={itemVariants} className="mb-12 text-center sm:mb-16">
+              <h1 className="mb-4 font-display text-3xl font-semibold tracking-tight text-white sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
+                Let&apos;s <span className={artistHeadingAccent}>Create Together</span>
               </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-                Ready to collaborate, book a session, or just chat about creative projects? I'm always excited to connect with fellow creators and explore new opportunities.
+              <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-white/70 sm:text-lg lg:text-xl">
+                Ready to collaborate, book a session, or just chat about creative projects? I&apos;m always excited to connect with fellow creators and explore new opportunities.
               </p>
             </motion.div>
 
@@ -353,7 +353,7 @@ const ArtistContact = () => {
                     <method.icon size={20} className="text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-white mb-2">{method.title}</h3>
-                  <p className="text-cyan-300 font-semibold mb-2 text-sm sm:text-base">{method.value}</p>
+                  <p className="mb-2 text-sm font-semibold text-amber-200 sm:text-base">{method.value}</p>
                   <p className="text-gray-300 text-xs sm:text-sm">{method.description}</p>
                 </motion.a>
               ))}
@@ -366,8 +366,8 @@ const ArtistContact = () => {
                 
                 {/* Quick Info */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-                    Quick <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Info</span>
+                  <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-6 sm:text-2xl">
+                    Quick <span className={artistHeadingAccent}>Info</span>
                   </h3>
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
@@ -379,19 +379,19 @@ const ArtistContact = () => {
                       <span>Based in {personalInfo.location}</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Calendar size={16} className="text-cyan-400 sm:w-[18px] sm:h-[18px]" />
+                      <Calendar size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
                       <span>Available for projects worldwide</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Mail size={16} className="text-green-400 sm:w-[18px] sm:h-[18px]" />
+                      <Mail size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
                       <span>Professional collaborations welcome</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Star size={16} className="text-yellow-400 sm:w-[18px] sm:h-[18px]" />
+                      <Star size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
                       <span>Quality-focused content creation</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Zap size={16} className="text-orange-400 sm:w-[18px] sm:h-[18px]" />
+                      <Zap size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
                       <span>Fast turnaround times</span>
                     </div>
                   </div>
@@ -399,8 +399,8 @@ const ArtistContact = () => {
 
                 {/* What I Offer - OPTIMIZED SPACING AND TEXT SIZE */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-5">
-                    What I <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Offer</span>
+                  <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
+                    What I <span className={artistHeadingAccent}>Offer</span>
                   </h3>
                   <div className="grid grid-cols-1 gap-3 mb-5">
                     {services.map((service, index) => (
@@ -462,8 +462,8 @@ const ArtistContact = () => {
                 
                 {/* Contact Form - Mobile Responsive */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">
-                    Send Me a <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Message</span>
+                  <h2 className="mb-6 font-display text-2xl font-semibold tracking-tight text-white sm:mb-8 sm:text-3xl">
+                    Send Me a <span className={artistHeadingAccent}>Message</span>
                   </h2>
                   
                   {/* Success Message */}
@@ -587,9 +587,9 @@ const ArtistContact = () => {
                     <motion.button
                       type="submit"
                       disabled={formStatus.isSubmitting}
-                      className={`${artistBtnPrimary} w-full py-3.5 sm:py-4`}
-                      whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
-                      whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
+                      className={`w-full ${artistBtnPrimary}`}
+                      whileHover={!formStatus.isSubmitting ? { scale: 1.01 } : {}}
+                      whileTap={!formStatus.isSubmitting ? { scale: 0.99 } : {}}
                     >
                       {formStatus.isSubmitting ? (
                         <>
@@ -611,8 +611,8 @@ const ArtistContact = () => {
 
                 {/* Connect on Social - REDUCED SPACING */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-5">
-                    Connect on <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Social</span>
+                  <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
+                    Connect on <span className={artistHeadingAccent}>Social</span>
                   </h3>
                   <div className="space-y-2">
                     {socialPlatforms.map((platform, index) => (

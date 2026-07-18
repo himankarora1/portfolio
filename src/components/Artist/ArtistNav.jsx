@@ -13,7 +13,7 @@ const menuItems = [
   { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' },
 ];
 
-/** One nav language for every artist page — quiet chrome, amber active state */
+/** Unified artist nav — same quiet chrome on every artist page */
 const ArtistNav = () => {
   const location = useLocation();
   const analytics = useAnalytics();
@@ -30,9 +30,9 @@ const ArtistNav = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl">
       <div className={`${artistPageWidth} ${artistPagePad}`}>
-        <div className="flex h-16 items-center justify-between sm:h-20">
+        <div className="flex h-16 items-center justify-between sm:h-16">
           <Link
             to="/artist"
             onClick={() => handleNav('home')}
@@ -62,7 +62,7 @@ const ArtistNav = () => {
               ))}
             </div>
 
-            <div className="hidden h-6 w-px bg-white/20 md:block" />
+            <div className="hidden h-7 w-px bg-white/20 md:block" />
 
             <div className="hidden md:block">
               <Link
@@ -80,9 +80,9 @@ const ArtistNav = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
-              className="rounded-lg border border-white/15 bg-white/5 p-2 text-gray-200 transition-all hover:text-amber-200 md:hidden"
+              className="rounded-full border border-white/15 bg-white/5 p-2 text-gray-200 transition-all hover:border-amber-200/40 hover:text-amber-200 md:hidden"
             >
-              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
@@ -103,14 +103,14 @@ const ArtistNav = () => {
                   key={item.id}
                   to={item.path}
                   onClick={() => handleNav(item.id)}
-                  className={`flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-left transition-all ${
+                  className={`flex w-full items-center space-x-3 rounded-full px-4 py-3 text-left text-sm transition-all ${
                     isActive(item.path)
                       ? 'bg-white/10 text-amber-200'
                       : 'text-gray-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
-                  <item.icon size={18} />
-                  <span className="font-medium">{item.label}</span>
+                  <item.icon size={16} />
+                  <span className="font-medium tracking-wide">{item.label}</span>
                 </Link>
               ))}
 
@@ -118,10 +118,10 @@ const ArtistNav = () => {
                 <Link
                   to="/"
                   onClick={() => handleNav('portfolio-hub')}
-                  className="flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-gray-300 transition-all hover:bg-white/5 hover:text-amber-200"
+                  className="flex w-full items-center space-x-3 rounded-full px-4 py-3 text-sm text-gray-300 transition-all hover:bg-white/5 hover:text-amber-200"
                 >
-                  <Globe size={18} />
-                  <span className="font-medium">Portfolio Hub</span>
+                  <Globe size={16} />
+                  <span className="font-medium tracking-wide">Portfolio Hub</span>
                 </Link>
               </div>
             </div>

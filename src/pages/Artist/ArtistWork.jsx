@@ -18,7 +18,7 @@ import YouTubeVideo from '../../components/YouTubeVideo';
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import ArtistFooter from '../../components/Artist/ArtistFooter';
-import { artistPagePad, artistPageWidth, artistBtnPrimary, artistBtnSecondary, artistBtnGhost } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistBtnPrimary, artistBtnSecondary, artistBtnGhost, artistHeadingAccent } from '../../utils/artistLayout';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -90,88 +90,28 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
       <motion.button
         onClick={handleRefresh}
         disabled={isRefreshing}
-        className={`
-          group relative flex items-center space-x-2 sm:space-x-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base
-          ${isRefreshing 
-            ? 'bg-white/5 border border-white/10 cursor-not-allowed text-gray-400' 
-            : 'bg-white/5 border border-white/20 text-white/80 hover:border-amber-300/40 hover:text-amber-100'
-          }
-          backdrop-blur-sm
-        `}
+        className={`${artistBtnGhost} ${isRefreshing ? 'cursor-not-allowed opacity-50' : ''}`}
         whileHover={!isRefreshing ? { scale: 1.02 } : {}}
         whileTap={!isRefreshing ? { scale: 0.98 } : {}}
         onHoverStart={() => setShowDetails(true)}
         onHoverEnd={() => setShowDetails(false)}
       >
-        {/* Background Glow Effect */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Icon Container with Status Dot */}
-        <div className="relative">
-          {/* Refresh Icon with Animation */}
-          <motion.div
-            animate={isRefreshing ? { rotate: 360 } : { rotate: 0 }}
-            transition={isRefreshing ? { 
+        <motion.div
+          animate={isRefreshing ? { rotate: 360 } : { rotate: 0 }}
+          transition={isRefreshing ? { 
               duration: 1, 
               repeat: Infinity, 
               ease: "linear" 
             } : { duration: 0.3 }}
-            className="relative z-10"
-          >
+        >
             <RefreshCw 
               size={16} 
-              className={`sm:w-[18px] sm:h-[18px] ${isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-amber-200'} transition-colors`} 
+              className={`sm:w-[18px] sm:h-[18px] ${isRefreshing ? 'text-gray-400' : 'text-current'}`} 
             />
-          </motion.div>
-
-          {/* Status Dot Indicator */}
-          <div className="absolute -top-1 -right-1 z-20">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-gray-800 ${
-                !cacheInfo?.hasCache ? 'bg-gray-500' :
-                cacheInfo.isExpired ? 'bg-yellow-400' :
-                cacheInfo.hoursOld < 1 ? 'bg-green-400' :
-                cacheInfo.hoursOld < 3 ? 'bg-blue-400' : 'bg-orange-400'
-              }`}
-            >
-              {/* Pulse effect for fresh cache */}
-              {cacheInfo?.hasCache && !cacheInfo.isExpired && cacheInfo.hoursOld < 1 && (
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-green-400"
-                  animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              )}
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Button Text - Hidden on very small screens */}
-        <span className={`hidden xs:inline text-xs sm:text-sm font-medium relative z-10 ${
-          isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-amber-200'
-        } transition-colors`}>
-          {isRefreshing ? 'Checking...' : 'Check for New Videos'}
+        </motion.div>
+        <span className="relative z-10">
+          {isRefreshing ? 'Refreshing...' : 'Refresh'}
         </span>
-
-        {/* Mobile-only shorter text */}
-        <span className={`xs:hidden text-xs font-medium relative z-10 ${
-          isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-amber-200'
-        } transition-colors`}>
-          {isRefreshing ? 'Checking...' : 'Refresh'}
-        </span>
-
-        {/* Loading Overlay */}
-        {isRefreshing && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center backdrop-blur-sm"
-          >
-            <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
-          </motion.div>
-        )}
       </motion.button>
 
       {/* Enhanced Cache Details Tooltip - Mobile Responsive */}
@@ -540,13 +480,10 @@ const ArtistWork = () => {
           </div>
 
           <div className="relative mx-auto flex min-h-[44vh] w-full max-w-4xl flex-col items-center justify-center px-4 pb-12 pt-28 text-center sm:min-h-[52vh] sm:px-6 sm:pb-16 sm:pt-32">
-            <h1 className="mb-3 text-3xl font-bold leading-tight text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
-              My{' '}
-              <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">
-                Creative Work
-              </span>
+            <h1 className="mb-3 font-display text-3xl font-semibold tracking-tight text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
+              My <span className={artistHeadingAccent}>Creative Work</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-300/95 sm:text-base lg:text-lg">
+            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base lg:text-lg">
               Explore my content across music and gaming. Each category showcases different aspects of my creative journey.
             </p>
           </div>
@@ -581,21 +518,21 @@ const ArtistWork = () => {
             {/* Tab Navigation with Refresh Button - FIXED: Equal width buttons, no scrolling */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
               {/* Tab Navigation - FIXED: Equal width buttons, no scrolling, INCREASED WIDTH */}
-              <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 w-full sm:w-auto sm:min-w-[320px]">
-                <div className="grid grid-cols-2 gap-2 sm:gap-3">
+              <div className="w-full rounded-full border border-white/15 bg-black/30 p-1.5 backdrop-blur-sm sm:w-auto sm:min-w-[320px]">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                   {tabs.map((tab) => (
                     <motion.button
                       key={tab.id}
                       onClick={() => handleTabSwitch(tab.id)}
-                      className={`flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-5 py-3 sm:py-4 rounded-full font-semibold transition-all text-xs sm:text-base min-w-0 ${
+                      className={`flex items-center justify-center space-x-1.5 rounded-full px-4 py-2.5 text-xs font-semibold transition-colors sm:space-x-2 sm:px-5 sm:py-3 sm:text-sm ${
                         activeTab === tab.id
-                          ? 'bg-amber-200 text-black shadow-sm'
-                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                          ? 'bg-amber-200 text-black'
+                          : 'text-white/70 hover:bg-white/5 hover:text-white'
                       }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <tab.icon size={16} className="sm:w-5 sm:h-5 flex-shrink-0" />
+                      <tab.icon size={16} className="sm:w-4 sm:h-4 flex-shrink-0" />
                       <span className="truncate">{tab.label}</span>
                     </motion.button>
                   ))}
@@ -654,7 +591,7 @@ const ArtistWork = () => {
                       {/* Latest Video Label */}
                       <div className="mb-4 sm:mb-6">
                         <h2 className="text-2xl sm:text-3xl font-bold text-white text-center">
-                          Watch <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Latest</span> Video
+                          Watch <span className={artistHeadingAccent}>Latest</span> Video
                         </h2>
                       </div>
                       
@@ -752,7 +689,7 @@ const ArtistWork = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => handleChannelVisit(getChannelInfo().url, activeTab)}
-                                className={`${artistBtnPrimary} flex-1`}
+                                className={`flex-1 ${artistBtnPrimary}`}
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                               >
@@ -765,7 +702,7 @@ const ArtistWork = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => handleChannelVisit(`https://www.youtube.com/watch?v=${getMainVideo().videoId}`, 'video')}
-                                className={`${artistBtnSecondary} flex-1`}
+                                className={`flex-1 ${artistBtnSecondary}`}
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                               >
@@ -784,8 +721,8 @@ const ArtistWork = () => {
                     <div>
                       {/* Gallery Header with More Videos Button */}
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
-                        <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                          More <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">{activeTab}</span> Content
+                        <h3 className="font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                          More <span className={artistHeadingAccent}>{activeTab}</span> Content
                         </h3>
                         
                         {/* More Videos Button */}
