@@ -152,60 +152,10 @@ const HomePage = () => {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
-        {/* Enhanced Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* More Floating Particles */}
-          <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-40"
-                animate={{
-                  y: [-30, -120],
-                  x: [Math.random() * 150 - 75, Math.random() * 150 - 75],
-                  opacity: [0, 1, 0],
-                  scale: [0.5, 1.5, 0.5]
-                }}
-                transition={{
-                  duration: 5 + Math.random() * 3,
-                  repeat: Infinity,
-                  delay: Math.random() * 4,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Pulsing Orbs - Responsive sizes */}
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-cyan-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-purple-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.1, 0.15, 0.1]
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-          />
+        {/* Subtle background atmosphere */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-slate-500/10 rounded-full blur-3xl"></div>
         </div>
 
         {/* UPDATED: Main Content Container with Mobile Fixed Spacing */}
@@ -215,25 +165,20 @@ const HomePage = () => {
               <div className="text-center space-y-3 sm:space-y-4">
                 {/* Enhanced Profile Image/Avatar - SLIGHTLY BIGGER */}
                 <motion.div
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ 
-                    type: "spring", 
-                    duration: 1.2,
-                    bounce: 0.6
-                  }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6 }}
                 >
                   <motion.div 
                     className="w-14 h-14 sm:w-18 sm:h-18 lg:w-24 lg:h-24 mx-auto rounded-full bg-transparent border-2 border-white flex items-center justify-center shadow-2xl backdrop-blur-sm"
                     whileHover={{ 
-                      scale: 1.1, 
-                      rotate: 360,
+                      scale: 1.05,
                       borderColor: "#06b6d4"
                     }}
                     transition={{ 
                       type: "spring", 
                       stiffness: 300,
-                      damping: 10
+                      damping: 20
                     }}
                   >
                     <span className="text-white font-bold text-base sm:text-xl lg:text-2xl tracking-tight">HA</span>
@@ -323,11 +268,10 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4"
                         whileHover={{ 
-                          scale: 1.2, 
-                          rotate: 360,
-                          boxShadow: "0 0 20px rgba(6, 182, 212, 0.5)"
+                          scale: 1.08,
+                          boxShadow: "0 0 20px rgba(6, 182, 212, 0.35)"
                         }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
                         <Code size={20} className="text-white sm:w-6 sm:h-6" />
                       </motion.div>
@@ -337,7 +281,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3"
                       >
-                        Technical Analyst & Builder
+                        Technical Analyst & Developer
                       </motion.h3>
                       
                       {/* Description - Better mobile formatting */}
@@ -345,7 +289,7 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="text-gray-300 mb-3 sm:mb-4 text-sm leading-relaxed px-2"
                       >
-                        Analyzing business needs and building the products that solve them — from web apps to data tools.
+                        Analyzing business needs and building the products that solve them, from web apps to data tools.
                       </motion.p>
 
                       {/* Skills Tags - Better mobile spacing */}
@@ -387,12 +331,7 @@ const HomePage = () => {
                           className="inline-flex items-center space-x-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-cyan-500/25 text-sm sm:text-base"
                         >
                           <span>View Portfolio</span>
-                          <motion.div
-                            animate={{ x: [0, 4, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                          >
-                            <ArrowRight size={14} className="sm:w-4 sm:h-4" />
-                          </motion.div>
+                          <ArrowRight size={14} className="sm:w-4 sm:h-4" />
                         </Link>
                       </motion.div>
                     </div>
@@ -415,11 +354,10 @@ const HomePage = () => {
                         variants={cardElementVariants}
                         className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4"
                         whileHover={{ 
-                          scale: 1.2, 
-                          rotate: -360,
-                          boxShadow: "0 0 20px rgba(168, 85, 247, 0.5)"
+                          scale: 1.08,
+                          boxShadow: "0 0 20px rgba(168, 85, 247, 0.35)"
                         }}
-                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
                         <Palette size={20} className="text-white sm:w-6 sm:h-6" />
                       </motion.div>
@@ -479,12 +417,7 @@ const HomePage = () => {
                           className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base"
                         >
                           <span>View Portfolio</span>
-                          <motion.div
-                            animate={{ x: [0, 4, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
-                          >
-                            <ArrowRight size={14} className="sm:w-4 sm:h-4" />
-                          </motion.div>
+                          <ArrowRight size={14} className="sm:w-4 sm:h-4" />
                         </Link>
                       </motion.div>
                     </div>
@@ -513,6 +446,7 @@ const HomePage = () => {
                       href={social.href}
                       target={social.href.startsWith('mailto') ? undefined : "_blank"}
                       rel={social.href.startsWith('mailto') ? undefined : "noopener noreferrer"}
+                      aria-label={social.platform}
                       onClick={() => handleSocialClick(social.platform, social.href)}
                       className={`text-gray-400 ${social.color} transition-colors p-1.5`}
                       initial={{ opacity: 0, y: 20 }}
@@ -520,14 +454,13 @@ const HomePage = () => {
                       transition={{ 
                         delay: 2 + index * 0.1,
                         type: "spring",
-                        bounce: 0.6
+                        bounce: 0.4
                       }}
                       whileHover={{ 
-                        scale: 1.2, 
-                        rotate: 10,
-                        y: -5
+                        scale: 1.1,
+                        y: -2
                       }}
-                      whileTap={{ scale: 0.9 }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       <social.icon size={18} className="sm:w-5 sm:h-5" />
                     </motion.a>

@@ -2,8 +2,8 @@
 export const contentData = {
   personal: {
     name: "Himank Arora",
-    title: "Technical Analyst & Builder",
-    shortTitle: "Analyst & Builder",
+    title: "Technical Analyst & Developer",
+    shortTitle: "Analyst & Developer",
     bio: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
     location: "Boston, MA",
     email: "himankarora1000@gmail.com", // Tech portfolio email
@@ -572,7 +572,7 @@ export const contentData = {
       "Himank Arora",
       "Technical Analyst",
       "Developer",
-      "Builder",
+      "Developer",
       "Business Analysis",
       "Content Creator",
       "React",
@@ -651,7 +651,7 @@ export const generateSEOData = (page) => {
     case 'tech':
       return {
         ...baseData,
-        title: `${contentData.personal.name} - Technical Analyst & Builder`,
+        title: `${contentData.personal.name} - Technical Analyst & Developer`,
         description: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
         keywords: [
           ...contentData.meta.keywords,

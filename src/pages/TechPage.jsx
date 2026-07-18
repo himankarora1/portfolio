@@ -22,7 +22,6 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
   Menu,
   X
 } from 'lucide-react';
@@ -33,7 +32,7 @@ import { contentData } from '../utils/contentManager';
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
   'Technical Analyst',
-  'Developer & Builder',
+  'Developer',
   'Problem Solver'
 ];
 
@@ -340,9 +339,9 @@ const TechPage = () => {
     <>
       {/* SEO */}
       <SEO 
-        title="Himank Arora - Technical Analyst & Builder"
+        title="Himank Arora - Technical Analyst & Developer"
         description="IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems."
-        keywords="technical analyst, developer, builder, business analysis, React, Python, data analysis, Boston"
+        keywords="technical analyst, developer, business analysis, React, Python, data analysis, Boston"
       />
 
       {/* Professional Navigation - FIXED WITH PROPER SPACING */}
@@ -454,7 +453,7 @@ const TechPage = () => {
 
       {/* Floating Navigation - Mobile & Desktop */}
       <AnimatePresence>
-        {showFloatingNav && isScrolling && (
+        {showFloatingNav && (
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -487,38 +486,10 @@ const TechPage = () => {
 
       {/* Main Content */}
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Moving Grid */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-          
-          {/* Floating Particles */}
-          <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-50"
-                animate={{
-                  y: [-20, -100],
-                  x: [Math.random() * 100, Math.random() * 100],
-                  opacity: [0, 1, 0]
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: Math.random() * 2
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Glowing Orbs */}
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        {/* Subtle background atmosphere */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-slate-500/10 rounded-full blur-3xl"></div>
         </div>
         
         {/* Hero Section - FIXED SPACING */}
@@ -560,7 +531,7 @@ const TechPage = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, duration: 0.6 }}
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-3 sm:mb-4 lg:mb-5" // REDUCED SIZE
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3 sm:mb-4 lg:mb-5"
                   >
                     Arora
                   </motion.div>
@@ -673,7 +644,7 @@ const TechPage = () => {
                         transition={{ delay: 1.5, duration: 0.5 }}
                         className="text-blue-400"
                       >
-                        <span className="text-purple-400">const</span> developer = {'{'}
+                        <span className="text-purple-400">const</span> professional = {'{'}
                       </motion.div>
                       <motion.div 
                         initial={{ opacity: 0 }}
@@ -689,7 +660,7 @@ const TechPage = () => {
                         transition={{ delay: 2.5, duration: 0.5 }}
                         className="text-gray-300 ml-2 sm:ml-4"
                       >
-                        skills: [<span className="text-green-400">'React'</span>, <span className="text-green-400">'Python'</span>],
+                        skills: [<span className="text-green-400">'Analysis'</span>, <span className="text-green-400">'React'</span>],
                       </motion.div>
                       <motion.div 
                         initial={{ opacity: 0 }}
@@ -697,7 +668,7 @@ const TechPage = () => {
                         transition={{ delay: 3, duration: 0.5 }}
                         className="text-gray-300 ml-2 sm:ml-4"
                       >
-                        passion: <span className="text-green-400">'Innovation'</span>
+                        focus: <span className="text-green-400">'Ship products'</span>
                       </motion.div>
                       <motion.div 
                         initial={{ opacity: 0 }}
@@ -708,74 +679,6 @@ const TechPage = () => {
                         {'};'}
                       </motion.div>
                     </div>
-                  </div>
-
-                  {/* Floating Tech Icons - Responsive positioning */}
-                  <motion.div
-                    animate={{ 
-                      y: [0, -20, 0],
-                      rotate: [0, 5, 0]
-                    }}
-                    transition={{ 
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                    className="absolute -top-4 sm:-top-8 -right-4 sm:-right-8 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/25"
-                  >
-                    <Target size={16} className="text-white sm:w-6 sm:h-6" />
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ 
-                      y: [0, 20, 0],
-                      rotate: [0, -5, 0]
-                    }}
-                    transition={{ 
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1
-                    }}
-                    className="absolute -bottom-4 sm:-bottom-8 -left-4 sm:-left-8 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/25"
-                  >
-                    <Zap size={16} className="text-white sm:w-6 sm:h-6" />
-                  </motion.div>
-
-                  {/* Circuit Lines - Responsive */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <svg className="w-full h-full" viewBox="0 0 400 400">
-                      <motion.path
-                        d="M50 200 Q 200 50 350 200"
-                        stroke="url(#gradient1)"
-                        strokeWidth="2"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 2, delay: 1 }}
-                      />
-                      <motion.path
-                        d="M50 200 Q 200 350 350 200"
-                        stroke="url(#gradient2)"
-                        strokeWidth="2"
-                        fill="none"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 2, delay: 1.5 }}
-                      />
-                      <defs>
-                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0" />
-                          <stop offset="50%" stopColor="#06b6d4" stopOpacity="1" />
-                          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
-                        </linearGradient>
-                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0" />
-                          <stop offset="50%" stopColor="#8b5cf6" stopOpacity="1" />
-                          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
                   </div>
                 </div>
               </motion.div>
@@ -808,7 +711,7 @@ const TechPage = () => {
               >
                 <div className="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
                   <p>
-                    I'm a Technical Analyst and builder with 3+ years as the sole technical resource at growing businesses: owning requirements and analysis, then shipping the tools myself across data platforms, web products, and AI-enabled applications.
+                    I'm a Technical Analyst and developer with 3+ years as the sole technical resource at growing businesses: owning requirements and analysis, then shipping the tools myself across data platforms, web products, and AI-enabled applications.
                   </p>
                   <p>
                     I work both sides of the problem: eliciting needs, mapping workflows, and validating impact with data, while also designing and building the systems that make those improvements real.
@@ -829,7 +732,7 @@ const TechPage = () => {
                 <h3 className="text-lg sm:text-xl font-semibold text-white">At a glance</h3>
                 <div className="space-y-4">
                   {[
-                    { icon: Briefcase, label: 'Role', value: 'Technical Analyst & Builder' },
+                    { icon: Briefcase, label: 'Role', value: 'Technical Analyst & Developer' },
                     { icon: Clock, label: 'Experience', value: '3+ years analyzing and shipping products' },
                     { icon: GraduationCap, label: 'Education', value: 'MS Information Systems, Northeastern' },
                     { icon: MapPin, label: 'Location', value: 'Boston, MA' }
@@ -1383,16 +1286,10 @@ const TechPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500 p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end"
-                style={{
-                  backgroundImage: `linear-gradient(rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
+                className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end"
               >
                 <div className="relative z-10 space-y-6 sm:space-y-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8 italic">LET'S INNOVATE TOGETHER</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Get in touch</h3>
                   
                   <div className="space-y-4 sm:space-y-6">
                     <div>
@@ -1641,11 +1538,11 @@ const TechPage = () => {
                   <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                     {personalInfo.name}
                   </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm">Technical Analyst & Builder</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">Technical Analyst & Developer</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
-                Technical Analyst and builder: bridging business needs with working products that teams actually adopt.
+                Technical Analyst and developer: bridging business needs with working products that teams actually adopt.
               </p>
               <div className="flex space-x-3 sm:space-x-4">
                 <motion.a
@@ -1777,8 +1674,8 @@ const TechPage = () => {
                 </li>
                 <li>
                   <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                    <Sparkles size={14} className="sm:w-4 sm:h-4" />
-                    <span>Open for Opportunities</span>
+                    <Briefcase size={14} className="sm:w-4 sm:h-4" />
+                    <span>Open to opportunities</span>
                   </span>
                 </li>
               </ul>

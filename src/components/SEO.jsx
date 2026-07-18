@@ -51,10 +51,10 @@ const SEO = ({
       "image": pageImage,
       "description": pageDescription,
       "jobTitle": currentPath.startsWith('/tech')
-        ? "Technical Analyst & Builder"
+        ? "Technical Analyst & Developer"
         : currentPath.startsWith('/artist')
           ? "Content Creator & Musician"
-          : "Technical Analyst & Builder",
+          : "Technical Analyst & Developer",
       "worksFor": {
         "@type": "EducationalOrganization",
         "name": "Northeastern University",
@@ -105,7 +105,7 @@ const SEO = ({
         "@type": "Person",
         "hasOccupation": {
           "@type": "Occupation",
-          "name": "Technical Analyst & Builder",
+          "name": "Technical Analyst & Developer",
           "occupationLocation": {
             "@type": "City",
             "name": "Boston, MA"
