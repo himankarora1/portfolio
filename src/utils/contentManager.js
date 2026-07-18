@@ -483,8 +483,8 @@ export const contentData = {
 
   // Artist content
   artist: {
-    bio: "Welcome to my creative universe! I'm a passionate content creator who blends music, gaming, and digital storytelling to create engaging experiences that resonate with communities worldwide.",
-    tagline: "Creating authentic content through music, gaming, and digital storytelling",
+    bio: "I make music, gaming, vlogs, and other fun content, and grow a community around it.",
+    tagline: "Music, gaming, vlogs, and other fun content, built with the community along the way.",
     creative_stats: [
       { label: "Original Tracks", value: "25+", icon: "Music", color: "from-pink-500 to-rose-500" },
       { label: "Video Content", value: "100+", icon: "Camera", color: "from-purple-500 to-indigo-500" },
@@ -664,7 +664,7 @@ export const getCertificationById = (id) => {
 export const generateSEOData = (page) => {
   const baseData = {
     title: `${contentData.personal.name} - Analyst by craft, Artist by passion`,
-    description: "Explore both sides: Technical Analyst & Developer, and Artist & Content Creator. Analysis-driven product work, development projects, music, and creative content.",
+    description: "Explore both sides: Technical Analyst & Developer, and Artist & Content Creator. Analysis-driven product work, development projects, plus music, gaming, vlogs, and community.",
     url: contentData.meta.site_url,
     image: `${contentData.meta.site_url}${contentData.meta.og_image}`,
     keywords: contentData.meta.keywords.join(', ')
@@ -698,8 +698,9 @@ export const generateSEOData = (page) => {
           "gamer",
           "content creator",
           "YouTube",
+          "vlogs",
           "streaming",
-          "music production"
+          "community"
         ].join(', ')
       };
     case 'home':

@@ -56,7 +56,7 @@ const ArtistHome = () => {
       <SEO
         title={`${personalInfo.name} - Artist & Content Creator`}
         description={artistData.tagline || artistData.bio}
-        keywords="content creator, musician, gaming, YouTube, streaming, music production"
+        keywords="content creator, musician, gaming, YouTube, vlogs, streaming, community"
       />
 
       <div className="relative min-h-screen overflow-hidden bg-black">
@@ -94,7 +94,7 @@ const ArtistHome = () => {
               </h1>
 
               <p className="mb-8 max-w-md text-sm leading-relaxed text-white/70 sm:mb-10 sm:text-base md:text-lg">
-                {artistData.tagline || 'Music, gaming, and storytelling. Creating content that connects.'}
+                {artistData.tagline || 'Music, gaming, vlogs, and other fun content, built with the community along the way.'}
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">

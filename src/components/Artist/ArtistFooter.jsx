@@ -77,7 +77,7 @@ const ArtistFooter = () => {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Creating authentic content through music, gaming, and digital storytelling.
+              Music, gaming, vlogs, and other fun content, built with the community along the way.
             </p>
             <div className="flex flex-wrap gap-2 mt-auto pt-6">
               {socials.map((platform) => (
