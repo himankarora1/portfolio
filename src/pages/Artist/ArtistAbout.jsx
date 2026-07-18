@@ -21,7 +21,7 @@ import ArtistFooter from '../../components/Artist/ArtistFooter';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
-import { artistPagePad, artistPageWidth, artistHeadingAccent } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistHeadingAccent, artistSurfaceCard } from '../../utils/artistLayout';
 
 const ArtistAbout = () => {
   const analytics = useAnalytics();
@@ -212,7 +212,7 @@ const ArtistAbout = () => {
                     transition={{ delay: 0.08 * index, duration: 0.4 }}
                     className="h-full"
                   >
-                    <div className="flex h-full flex-col rounded-2xl border border-gray-700/50 bg-gray-800/50 p-4 backdrop-blur-sm transition-colors group hover:border-gray-600/50 sm:p-6">
+                    <div className={`flex h-full flex-col ${artistSurfaceCard} !p-4 sm:!p-6`}>
                       <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r ${item.color} sm:mb-4 sm:h-12 sm:w-12`}>
                         <item.icon size={20} className="text-white sm:h-6 sm:w-6" />
                       </div>
@@ -269,7 +269,7 @@ const ArtistAbout = () => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.06 * index, duration: 0.35 }}
-                    className="flex h-full flex-col rounded-2xl border border-gray-700/50 bg-gray-800/50 p-4 backdrop-blur-sm transition-colors group hover:border-gray-600/50 sm:p-6"
+                    className={`flex h-full flex-col ${artistSurfaceCard} !p-4 sm:!p-6 transition-colors hover:border-white/20`}
                   >
                     <div className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${platform.color} sm:mb-4 sm:h-12 sm:w-12`}>
                       <platform.icon size={20} className="text-white sm:h-6 sm:w-6" />

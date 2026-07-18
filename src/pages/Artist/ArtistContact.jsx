@@ -340,7 +340,7 @@ const ArtistContact = () => {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.06, duration: 0.35 }}
-                  className={`${artistSurfaceCard} flex h-full flex-col !p-4 sm:!p-6 transition-colors group cursor-pointer hover:border-amber-300/55`}
+                  className={`${artistSurfaceCard} flex h-full flex-col !p-4 sm:!p-6 transition-colors group cursor-pointer hover:border-white/25`}
                 >
                   <div className={`w-10 h-10 sm:w-12 sm:h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg`}>
                     <method.icon size={20} className="text-white sm:w-6 sm:h-6" />
@@ -378,7 +378,7 @@ const ArtistContact = () => {
                   </div>
                 </div>
 
-                <div className="my-6 border-t border-amber-200/20 sm:my-8" />
+                <div className="my-6 border-t border-white/10 sm:my-8" />
 
                 <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
                   What I <span className={artistHeadingAccent}>Offer</span>
@@ -409,7 +409,7 @@ const ArtistContact = () => {
                     <div
                       key={label}
                       className={`flex items-center justify-between px-3 py-2.5 text-sm ${
-                        i < arr.length - 1 ? 'border-b border-amber-200/10' : ''
+                        i < arr.length - 1 ? 'border-b border-white/10' : ''
                       }`}
                     >
                       <span className="text-gray-300">{label}</span>
@@ -484,7 +484,7 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                          className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                           placeholder="Your full name"
                         />
                       </div>
@@ -500,7 +500,7 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                          className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                           placeholder="your.email@example.com"
                         />
                       </div>
@@ -516,7 +516,7 @@ const ArtistContact = () => {
                         onChange={handleInputChange}
                         required
                         disabled={formStatus.isSubmitting}
-                        className="w-full rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                        className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                       >
                         <option value="" className="text-gray-400">Select a subject</option>
                         <option value="live-performance" className="text-gray-900">Live Gigs & Performances</option>
@@ -540,7 +540,7 @@ const ArtistContact = () => {
                         required
                         disabled={formStatus.isSubmitting}
                         rows={4}
-                        className="w-full resize-none rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                        className="w-full resize-none rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                         placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       />
                     </div>
@@ -569,7 +569,7 @@ const ArtistContact = () => {
                     </motion.button>
                   </form>
 
-                <div className="my-6 border-t border-amber-200/20 sm:my-7" />
+                <div className="my-6 border-t border-white/10 sm:my-7" />
 
                 <h3 className="mb-3 font-display text-xl font-semibold tracking-tight text-white sm:mb-4 sm:text-2xl">
                   Connect on <span className={artistHeadingAccent}>Social</span>
@@ -582,7 +582,7 @@ const ArtistContact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick(platform.name, platform.url)}
-                      className={`flex items-center justify-between p-3 ${artistSurfaceInset} transition-colors hover:border-amber-300/40 group`}
+                      className={`flex items-center justify-between p-3 ${artistSurfaceInset} transition-colors hover:border-white/20 group`}
                     >
                       <div className="flex items-center space-x-3">
                         <div className={`w-8 h-8 sm:w-9 sm:h-9 ${platform.color} rounded-lg flex items-center justify-center`}>

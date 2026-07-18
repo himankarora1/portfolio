@@ -13,8 +13,9 @@ export const artistBtnGhost =
 
 export const artistHeadingAccent = 'text-amber-200';
 
+/** Elevated charcoal cards on black (subtle edge highlight, not amber wash) */
 export const artistSurfaceCard =
-  'rounded-2xl border border-amber-300/40 bg-gradient-to-br from-stone-900 via-[#1a1510] to-black p-6 shadow-[inset_0_1px_0_rgba(251,191,36,0.12)] sm:p-8';
+  'rounded-2xl border border-white/12 bg-[#1a1e23] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-8';
 
 export const artistSurfaceInset =
-  'rounded-xl border border-amber-200/20 bg-amber-500/[0.07]';
+  'rounded-xl border border-white/10 bg-[#12151a]';
