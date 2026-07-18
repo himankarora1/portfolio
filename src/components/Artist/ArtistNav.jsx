@@ -1,0 +1,133 @@
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, Mail, Brush, Globe, Menu, X } from 'lucide-react';
+import { contentData } from '../../utils/contentManager';
+import { useAnalytics } from '../Analytics';
+
+const menuItems = [
+  { id: 'home', label: 'Home', icon: Home, path: '/artist' },
+  { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
+  { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
+  { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' },
+];
+
+const ArtistNav = () => {
+  const location = useLocation();
+  const analytics = useAnalytics();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const name = contentData.personal.name;
+
+  const isActive = (path) => location.pathname === path;
+
+  const handleNav = (section) => {
+    setIsMobileMenuOpen(false);
+    if (analytics?.trackPortfolioEvents) {
+      analytics.trackPortfolioEvents.sectionView(section);
+    }
+  };
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/35 backdrop-blur-xl">
+      <div className="mx-auto max-w-none px-3 sm:px-4 lg:px-6">
+        <div className="flex h-16 items-center justify-between sm:h-20">
+          <Link
+            to="/artist"
+            className="group flex items-center space-x-3 sm:space-x-4 transition-all duration-300"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/80 bg-transparent transition-colors group-hover:border-amber-300 sm:h-12 sm:w-12">
+              <span className="text-sm font-bold tracking-tight text-white sm:text-lg">HA</span>
+            </div>
+            <span className="text-lg font-bold tracking-tight text-white sm:text-2xl">{name}</span>
+          </Link>
+
+          <div className="flex items-center space-x-4 sm:space-x-6">
+            <div className="hidden items-center space-x-2 md:flex">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.path}
+                  onClick={() => handleNav(item.id)}
+                  className={`flex items-center space-x-2 rounded-xl px-3 py-2 transition-all ${
+                    isActive(item.path)
+                      ? 'border border-white/20 bg-white/10 text-white'
+                      : 'text-white/80 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <item.icon size={18} />
+                  <span>{item.label}</span>
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden h-8 w-px bg-white/20 md:block" />
+
+            <div className="hidden md:block">
+              <Link
+                to="/"
+                onClick={() => handleNav('portfolio-hub')}
+                className="flex items-center space-x-2 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-gray-200 backdrop-blur-sm transition-all hover:border-amber-400/40 hover:text-amber-200"
+              >
+                <Globe size={18} />
+                <span>Portfolio Hub</span>
+              </Link>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+              className="rounded-lg border border-white/15 bg-white/5 p-2 text-gray-200 transition-all hover:text-amber-200 md:hidden"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="border-t border-white/10 bg-black/90 backdrop-blur-xl md:hidden"
+          >
+            <div className="space-y-2 px-3 py-4">
+              {menuItems.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.path}
+                  onClick={() => handleNav(item.id)}
+                  className={`flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-left transition-all ${
+                    isActive(item.path)
+                      ? 'bg-white/15 text-white'
+                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <item.icon size={18} />
+                  <span className="font-medium">{item.label}</span>
+                </Link>
+              ))}
+
+              <div className="mt-2 border-t border-white/10 pt-2">
+                <Link
+                  to="/"
+                  onClick={() => handleNav('portfolio-hub')}
+                  className="flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-gray-300 transition-all hover:bg-white/10 hover:text-white"
+                >
+                  <Globe size={18} />
+                  <span className="font-medium">Portfolio Hub</span>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+};
+
+export default ArtistNav;

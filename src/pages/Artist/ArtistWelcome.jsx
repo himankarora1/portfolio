@@ -160,19 +160,19 @@ const ArtistWelcome = ({ onComplete }) => {
   const creativityIcons = [
     { 
       Icon: Music, 
-      color: "from-pink-500 to-rose-500",
+      color: "from-amber-600 to-orange-700",
       label: "Music",
       delay: 0
     },
     { 
       Icon: Gamepad2, 
-      color: "from-blue-500 to-cyan-500",
+      color: "from-cyan-600 to-teal-700",
       label: "Gaming",
       delay: 0.2
     },
     { 
       Icon: Camera, 
-      color: "from-purple-500 to-indigo-500",
+      color: "from-stone-600 to-stone-800",
       label: "Content",
       delay: 0.4
     }
@@ -185,8 +185,20 @@ const ArtistWelcome = ({ onComplete }) => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-slate-900 overflow-hidden"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden"
       >
+        {/* Subtle full-bleed atmosphere */}
+        <div className="pointer-events-none absolute inset-0">
+          <img
+            src="/images/artist/artist-silhouette-pink.jpg"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover opacity-35"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/75 to-black/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/50" />
+        </div>
+
         {/* Skip Intro Button - Mobile Responsive */}
         <motion.button
           onClick={handleSkipIntro}
@@ -229,7 +241,7 @@ const ArtistWelcome = ({ onComplete }) => {
                   ease: "easeInOut"
                 }
               }}
-              className="group-hover:text-pink-400 transition-colors duration-300"
+              className="group-hover:text-amber-200 transition-colors duration-300"
             >
               <ArrowRight size={14} className="sm:w-4 sm:h-4" />
             </motion.div>
@@ -237,7 +249,7 @@ const ArtistWelcome = ({ onComplete }) => {
           
           {/* Subtle underline on hover */}
           <motion.div
-            className="h-0.5 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full mt-1"
+            className="h-0.5 bg-gradient-to-r from-amber-200 to-orange-200 rounded-full mt-1"
             initial={{ width: 0 }}
             whileHover={{ width: "100%" }}
             transition={{ duration: 0.3 }}
@@ -248,7 +260,7 @@ const ArtistWelcome = ({ onComplete }) => {
         <div className="absolute inset-0">
           {/* Animated Gradient Orbs - Responsive sizes */}
           <motion.div 
-            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-full blur-3xl"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{
               opacity: [0, 0.15, 0.1],
@@ -284,7 +296,7 @@ const ArtistWelcome = ({ onComplete }) => {
           {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full"
+              className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-gradient-to-r from-amber-400/30 to-orange-400/30 rounded-full"
               initial={{ opacity: 0, scale: 0 }}
               animate={{
                 opacity: [0, 0.4, 0],
@@ -326,7 +338,7 @@ const ArtistWelcome = ({ onComplete }) => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 text-center px-4"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 text-center px-4"
                     style={{
                       backgroundSize: "200% 100%"
                     }}
@@ -365,7 +377,7 @@ const ArtistWelcome = ({ onComplete }) => {
               >
                 <div className="relative">
                   <motion.div 
-                    className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 p-1 shadow-2xl"
+                    className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-r from-amber-500/80 via-orange-400/60 to-stone-600/80 p-1 shadow-2xl"
                     animate={{
                       rotate: [0, 360],
                       scale: [1, 1.1, 1]
@@ -376,7 +388,7 @@ const ArtistWelcome = ({ onComplete }) => {
                     }}
                   >
                     <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                      <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text">
+                      <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text">
                         HA
                       </span>
                     </div>
@@ -412,7 +424,7 @@ const ArtistWelcome = ({ onComplete }) => {
                 }}
               >
                 <motion.h1 
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 text-center px-4"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 text-center px-4"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
                   }}

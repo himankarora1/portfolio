@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { 
   Play,
   Music,
@@ -23,15 +23,15 @@ import {
   RefreshCw,
   CheckCircle,
   AlertCircle,
-  Zap,
-  Menu,
-  X
+  Zap
 } from 'lucide-react';
 import { getChannelVideos, testYouTubeAPI, forceRefreshVideos, getCacheInfo } from '../../services/youtubeService';
 import YouTubeVideo from '../../components/YouTubeVideo';
 import SEO from '../../components/SEO';
+import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
+import { artistMedia } from '../../utils/artistMedia';
 
 // Redesigned Refresh Videos Button Component (integrated directly)
 const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
@@ -107,7 +107,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
           group relative flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg border-2 text-sm sm:text-base
           ${isRefreshing 
             ? 'bg-gray-600/50 border-gray-500/50 cursor-not-allowed' 
-            : 'bg-gray-800/50 border-gray-600/50 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 hover:border-purple-400/50 hover:scale-105'
+            : 'bg-gray-800/50 border-gray-600/50 hover:bg-gradient-to-r hover:from-amber-500/20 hover:to-orange-500/20 hover:border-amber-400/50 hover:scale-105'
           }
           backdrop-blur-sm
         `}
@@ -117,7 +117,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
         onHoverEnd={() => setShowDetails(false)}
       >
         {/* Background Glow Effect */}
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         {/* Icon Container with Status Dot */}
         <div className="relative">
@@ -133,7 +133,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
           >
             <RefreshCw 
               size={16} 
-              className={`sm:w-[18px] sm:h-[18px] ${isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-purple-400'} transition-colors`} 
+              className={`sm:w-[18px] sm:h-[18px] ${isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-amber-200'} transition-colors`} 
             />
           </motion.div>
 
@@ -163,14 +163,14 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
 
         {/* Button Text - Hidden on very small screens */}
         <span className={`hidden xs:inline text-xs sm:text-sm font-medium relative z-10 ${
-          isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-purple-400'
+          isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-amber-200'
         } transition-colors`}>
           {isRefreshing ? 'Checking...' : 'Check for New Videos'}
         </span>
 
         {/* Mobile-only shorter text */}
         <span className={`xs:hidden text-xs font-medium relative z-10 ${
-          isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-purple-400'
+          isRefreshing ? 'text-gray-400' : 'text-gray-300 group-hover:text-amber-200'
         } transition-colors`}>
           {isRefreshing ? 'Checking...' : 'Refresh'}
         </span>
@@ -182,7 +182,7 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
             animate={{ opacity: 1 }}
             className="absolute inset-0 bg-black/20 rounded-xl flex items-center justify-center backdrop-blur-sm"
           >
-            <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
           </motion.div>
         )}
       </motion.button>
@@ -288,7 +288,6 @@ const RefreshVideosButton = ({ channelType = 'music', onRefresh }) => {
 };
 
 const ArtistWork = () => {
-  const location = useLocation();
   const analytics = useAnalytics();
   const [activeTab, setActiveTab] = useState('Music');
   const [youtubeVideos, setYoutubeVideos] = useState({
@@ -301,49 +300,45 @@ const ArtistWork = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Get data from content manager
   const personalInfo = contentData.personal;
   const artistEmail = getEmailForContext('artist'); // Use artist email
 
-  // Mobile menu items
-  const mobileMenuItems = [
+  // Footer / quick links
+  const footerLinks = [
     { id: 'home', label: 'Home', icon: Home, path: '/artist' },
     { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
     { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
     { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' }
   ];
-  
-  const isActive = (path) => location.pathname === path;
 
   const tabs = [
     { 
       id: 'Music', 
       label: 'Music', 
       icon: Music, 
-      color: 'from-pink-500 to-rose-500',
+      color: 'from-amber-600 to-orange-700',
       description: 'Original compositions and musical creations'
     },
     { 
       id: 'Gaming', 
       label: 'Gaming', 
       icon: Gamepad2, 
-      color: 'from-blue-500 to-cyan-500',
+      color: 'from-cyan-600 to-teal-700',
       description: 'Epic gaming sessions and walkthroughs'
     },
     { 
       id: 'Raw Me', 
       label: 'Raw Me', 
       icon: Camera, 
-      color: 'from-purple-500 to-indigo-500',
+      color: 'from-stone-600 to-stone-800',
       description: 'Behind the scenes and personal vlogs'
     }
   ];
 
   // Analytics event handlers
   const handleNavigationClick = (section) => {
-    setIsMobileMenuOpen(false);
     if (analytics?.trackPortfolioEvents) {
       analytics.trackPortfolioEvents.sectionView(section);
     }
@@ -643,163 +638,37 @@ const ArtistWork = () => {
         keywords="creative work, music content, gaming videos, content creation, YouTube, streaming"
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
-        {/* Navigation - FIXED WITH SEPARATOR */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
-          <div className="max-w-none mx-auto px-3 sm:px-4 lg:px-6">
-            <div className="flex justify-between items-center h-16 sm:h-20">
-              <Link 
-                to="/artist" 
-                className="flex items-center space-x-3 sm:space-x-4 group transition-all duration-300 hover:scale-105"
-              >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-pink-500/30 group-hover:border-pink-400 transition-all duration-300">
-                  <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-none bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                    {personalInfo.name}
-                  </span>
-                </div>
-              </Link>
-
-              <div className="flex items-center space-x-4 sm:space-x-6">
-                {/* Desktop Navigation - Hidden on mobile */}
-                <div className="hidden md:flex items-center space-x-4">
-                  {mobileMenuItems.map((item) => (
-                    <Link 
-                      key={item.id}
-                      to={item.path}
-                      onClick={() => handleNavigationClick(item.id)}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
-                        isActive(item.path) 
-                          ? 'bg-white/10 text-white border border-white/20' 
-                          : 'text-white hover:bg-white/10'
-                      }`}
-                    >
-                      <item.icon size={18} />
-                      <span>{item.label}</span>
-                    </Link>
-                  ))}
-                </div>
-
-                {/* FIXED: Added Divider for Desktop */}
-                <div className="hidden md:block h-8 w-px bg-white/20"></div>
-
-                {/* Portfolio Hub Button - Desktop */}
-                <div className="hidden md:block">
-                  <Link 
-                    to="/" 
-                    onClick={() => handleNavigationClick('portfolio-hub')}
-                    className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-pink-500/20 hover:to-purple-600/20 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg"
-                  >
-                    <Globe size={18} />
-                    <span>Portfolio Hub</span>
-                  </Link>
-                </div>
-
-                {/* Mobile Hamburger Menu */}
-                <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="md:hidden p-2 rounded-lg bg-gray-800/50 border border-gray-600/30 text-gray-300 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300"
-                >
-                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
+      <ArtistPageShell atmosphereSrc={artistMedia.work.banner}>
+        {/* Cinematic banner */}
+        <div className="relative z-10 w-full max-h-[40vh] overflow-hidden">
+          <img
+            src={artistMedia.work.banner}
+            alt=""
+            aria-hidden="true"
+            className="h-[28vh] sm:h-[36vh] w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black" />
+          <div className="absolute inset-0 flex items-end justify-center pb-6 sm:pb-10">
+            <div className="text-center px-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 sm:mb-3">
+                My <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">Creative Work</span>
+              </h1>
+              <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Explore my content across music, gaming, and personal vlogs. Each category showcases different aspects of my creative journey.
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* Mobile Dropdown Menu */}
-          <AnimatePresence>
-            {isMobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/30"
-              >
-                <div className="px-3 py-4 space-y-2">
-                  {mobileMenuItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Link
-                        to={item.path}
-                        onClick={() => handleNavigationClick(item.id)}
-                        className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
-                          isActive(item.path)
-                            ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/25'
-                            : 'text-gray-300 hover:text-pink-400 hover:bg-gray-800/50'
-                        }`}
-                      >
-                        <item.icon size={18} />
-                        <span className="font-medium">{item.label}</span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                  
-                  {/* Portfolio Hub Link for Mobile */}
-                  <motion.div
-                    className="pt-2 mt-2 border-t border-gray-700/30"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Link
-                      to="/"
-                      onClick={() => handleNavigationClick('portfolio-hub')}
-                      className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-pink-400 hover:bg-gray-800/50 transition-all duration-300"
-                    >
-                      <Globe size={18} />
-                      <span className="font-medium">Portfolio Hub</span>
-                    </Link>
-                  </motion.div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
-
-        {/* Animated Background - Mobile Optimized */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating Elements */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-20"
-              animate={{
-                y: [-20, -120],
-                x: [Math.random() * 150 - 75, Math.random() * 150 - 75],
-                opacity: [0, 0.4, 0],
-                scale: [0.5, 1.5, 0.5]
-              }}
-              transition={{
-                duration: 5 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 4,
-                ease: "easeInOut"
-              }}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`
-              }}
-            />
-          ))}
-
-          {/* Gradient Orbs - Responsive */}
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+        {/* Secondary cinematic strip */}
+        <div className="relative z-10 w-full h-16 sm:h-20 overflow-hidden opacity-70">
+          <img
+            src={artistMedia.work.collab}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black" />
         </div>
 
         {/* Main Content - FIXED SPACING */}
@@ -809,22 +678,12 @@ const ArtistWork = () => {
           animate="visible"
           className="relative z-10 px-3 sm:px-4 lg:px-6"
           style={{
-            paddingTop: '8rem', // INCREASED from 5rem to 8rem (128px) for more spacing
+            paddingTop: '2rem',
             paddingBottom: '2rem'
           }}
         >
           <div className="max-w-7xl mx-auto">
             
-            {/* Header - FIXED SPACING */}
-            <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-12">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-                My <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Creative Work</span>
-              </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-                Explore my content across music, gaming, and personal vlogs. Each category showcases different aspects of my creative journey.
-              </p>
-            </motion.div>
-
             {/* Error Message */}
             {error && (
               <motion.div 
@@ -875,7 +734,7 @@ const ArtistWork = () => {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="text-pink-400"
+                  className="text-amber-200"
                 >
                   <Loader size={36} className="sm:w-12 sm:h-12" />
                 </motion.div>
@@ -901,9 +760,9 @@ const ArtistWork = () => {
                       animate={{ opacity: 1, y: 0 }}
                       className="text-center py-4"
                     >
-                      <div className="inline-flex items-center space-x-2 bg-purple-500/20 border border-purple-500/30 rounded-xl px-4 py-2">
-                        <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
-                        <span className="text-purple-300 text-xs sm:text-sm">Refreshing videos...</span>
+                      <div className="inline-flex items-center space-x-2 bg-amber-500/20 border border-amber-500/30 rounded-xl px-4 py-2">
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                        <span className="text-amber-200 text-xs sm:text-sm">Refreshing videos...</span>
                       </div>
                     </motion.div>
                   )}
@@ -914,7 +773,7 @@ const ArtistWork = () => {
                       {/* Latest Video Label */}
                       <div className="mb-4 sm:mb-6">
                         <h2 className="text-2xl sm:text-3xl font-bold text-white text-center">
-                          Watch <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Latest</span> Video
+                          Watch <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Latest</span> Video
                         </h2>
                       </div>
                       
@@ -989,7 +848,7 @@ const ArtistWork = () => {
                           {/* YouTube Subscribe Section */}
                           <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/80 backdrop-blur-sm border border-gray-600/40 rounded-2xl p-4 sm:p-6 mt-auto shadow-xl">
                             <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
-                              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg">
+                              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-red-600 to-orange-700 rounded-full flex items-center justify-center shadow-lg">
                                 <Youtube size={20} className="text-white sm:w-7 sm:h-7" />
                               </div>
                               <div>
@@ -1045,7 +904,7 @@ const ArtistWork = () => {
                       {/* Gallery Header with More Videos Button */}
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
                         <h3 className="text-2xl sm:text-3xl font-bold text-white">
-                          More <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">{activeTab}</span> Content
+                          More <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">{activeTab}</span> Content
                         </h3>
                         
                         {/* More Videos Button */}
@@ -1098,7 +957,7 @@ const ArtistWork = () => {
         </motion.div>
 
         {/* Footer - Mobile Responsive */}
-        <footer className="bg-gray-900/80 backdrop-blur-sm border-t border-white/10">
+        <footer className="bg-black/60 backdrop-blur-sm border-t border-white/10">
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
               {/* Brand Section */}
@@ -1108,7 +967,7 @@ const ArtistWork = () => {
                     <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
                   </div>
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">
                       {personalInfo.name}
                     </h3>
                     <p className="text-gray-400 text-xs sm:text-sm">Content Creator & Artist</p>
@@ -1144,7 +1003,7 @@ const ArtistWork = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => handleSocialClick('Instagram', contentData.social.instagram)}
-                    className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-pink-500 to-orange-500 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
+                    className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-rose-500 to-orange-500 rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all"
                     whileHover={{ scale: 1.1 }}
                   >
                     <Instagram size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -1188,12 +1047,12 @@ const ArtistWork = () => {
               <div>
                 <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Quick Links</h4>
                 <ul className="space-y-2 sm:space-y-3">
-                  {mobileMenuItems.map((item) => (
+                  {footerLinks.map((item) => (
                     <li key={item.id}>
                       <Link 
                         to={item.path}
                         onClick={() => handleNavigationClick(item.id)}
-                        className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                        className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                       >
                         <item.icon size={14} className="sm:w-4 sm:h-4" />
                         <span>{item.label}</span>
@@ -1204,7 +1063,7 @@ const ArtistWork = () => {
                     <Link 
                       to="/"
                       onClick={() => handleNavigationClick('portfolio-hub')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Globe size={14} className="sm:w-4 sm:h-4" />
                       <span>Portfolio Hub</span>
@@ -1221,7 +1080,7 @@ const ArtistWork = () => {
                     <a 
                       href={`mailto:${artistEmail}`}
                       onClick={() => handleSocialClick('Email', artistEmail)}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Mail size={14} className="sm:w-4 sm:h-4" />
                       <span>Email Me</span>
@@ -1233,7 +1092,7 @@ const ArtistWork = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('Discord', contentData.social.discord)}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <MessageSquare size={14} className="sm:w-4 sm:h-4" />
                       <span>Join Discord</span>
@@ -1269,7 +1128,7 @@ const ArtistWork = () => {
             </div>
           </div>
         </footer>
-      </div>
+      </ArtistPageShell>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   Mail, 
   Music, 
@@ -22,13 +22,13 @@ import {
   Globe,
   Mic,
   Edit,
-  Users,
-  Menu,
-  X
+  Users
 } from 'lucide-react';
 import SEO from '../../components/SEO';
+import ArtistPageShell from '../../components/Artist/ArtistPageShell';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
+import { artistMedia } from '../../utils/artistMedia';
 
 // Custom X (Twitter) icon component
 const XIcon = ({ size = 24, className = "" }) => (
@@ -38,9 +38,7 @@ const XIcon = ({ size = 24, className = "" }) => (
 );
 
 const ArtistContact = () => {
-  const location = useLocation();
   const analytics = useAnalytics();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Get data from content manager
   const personalInfo = contentData.personal;
@@ -60,8 +58,8 @@ const ArtistContact = () => {
     errorMessage: ''
   });
 
-  // Mobile menu items
-  const mobileMenuItems = [
+  // Footer / quick links
+  const footerLinks = [
     { id: 'home', label: 'Home', icon: Home, path: '/artist' },
     { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
     { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
@@ -173,7 +171,6 @@ const ArtistContact = () => {
 
   // Analytics event handlers
   const handleNavigationClick = (section) => {
-    setIsMobileMenuOpen(false);
     if (analytics?.trackPortfolioEvents) {
       analytics.trackPortfolioEvents.sectionView(section);
     }
@@ -191,8 +188,6 @@ const ArtistContact = () => {
     }
   };
 
-  const isActive = (path) => location.pathname === path;
-
   // Updated contact methods with improved design and artist email
   const contactMethods = [
     {
@@ -200,9 +195,9 @@ const ArtistContact = () => {
       title: "Email",
       value: artistEmail, // Use artist email
       description: "For all inquiries and collaborations",
-      bgColor: "bg-pink-500/10",
-      borderColor: "border-pink-500/30",
-      iconBg: "bg-pink-500",
+      bgColor: "bg-amber-500/10",
+      borderColor: "border-amber-500/30",
+      iconBg: "bg-amber-600",
       href: `mailto:${artistEmail}`
     },
     {
@@ -210,9 +205,9 @@ const ArtistContact = () => {
       title: "Music Collaborations",
       value: "Open for projects",
       description: "Let's create something amazing together",
-      bgColor: "bg-purple-500/10",
-      borderColor: "border-purple-500/30",
-      iconBg: "bg-purple-500",
+      bgColor: "bg-stone-500/10",
+      borderColor: "border-stone-500/30",
+      iconBg: "bg-stone-700",
       href: "#"
     },
     {
@@ -239,11 +234,11 @@ const ArtistContact = () => {
 
   // Updated services list
   const services = [
-    { icon: Mic, label: "Live Gigs & Performances", color: "bg-pink-500" },
-    { icon: Gamepad2, label: "Gaming Stream Collaborations", color: "bg-blue-500" },
-    { icon: Music, label: "Music Production", color: "bg-purple-500" },
-    { icon: Edit, label: "Audio & Video Editing", color: "bg-green-500" },
-    { icon: Users, label: "Brand Collaborations", color: "bg-red-500" }
+    { icon: Mic, label: "Live Gigs & Performances", color: "bg-amber-600" },
+    { icon: Gamepad2, label: "Gaming Stream Collaborations", color: "bg-cyan-600" },
+    { icon: Music, label: "Music Production", color: "bg-stone-700" },
+    { icon: Edit, label: "Audio & Video Editing", color: "bg-green-600" },
+    { icon: Users, label: "Brand Collaborations", color: "bg-red-600" }
   ];
 
   const socialPlatforms = [
@@ -268,7 +263,7 @@ const ArtistContact = () => {
       name: "Instagram", 
       handle: "@himankarora1", 
       followers: "2.1K", 
-      color: "bg-gradient-to-r from-pink-500 to-orange-500", 
+      color: "bg-gradient-to-r from-rose-500 to-orange-500", 
       url: contentData.social.instagram
     },
     { 
@@ -329,165 +324,7 @@ const ArtistContact = () => {
         keywords="contact, collaboration, music production, content creation, partnerships, creative projects"
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
-        {/* Navigation - FIXED WITH SEPARATOR */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10">
-          <div className="max-w-none mx-auto px-3 sm:px-4 lg:px-6">
-            <div className="flex justify-between items-center h-16 sm:h-20">
-              <Link 
-                to="/artist" 
-                className="flex items-center space-x-3 sm:space-x-4 group transition-all duration-300 hover:scale-105"
-              >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-pink-500/30 group-hover:border-pink-400 transition-all duration-300">
-                  <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-none bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                    {personalInfo.name}
-                  </span>
-                </div>
-              </Link>
-
-              <div className="flex items-center space-x-4 sm:space-x-6">
-                {/* Desktop Navigation - Hidden on mobile */}
-                <div className="hidden md:flex items-center space-x-4">
-                  {mobileMenuItems.map((item) => (
-                    <Link 
-                      key={item.id}
-                      to={item.path}
-                      onClick={() => handleNavigationClick(item.id)}
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-xl transition-all ${
-                        isActive(item.path) 
-                          ? 'bg-white/10 text-white border border-white/20' 
-                          : 'text-white hover:bg-white/10'
-                      }`}
-                    >
-                      <item.icon size={18} />
-                      <span>{item.label}</span>
-                    </Link>
-                  ))}
-                </div>
-
-                {/* FIXED: Added Divider for Desktop */}
-                <div className="hidden md:block h-8 w-px bg-white/20"></div>
-
-                {/* Portfolio Hub Button - Desktop */}
-                <div className="hidden md:block">
-                  <Link 
-                    to="/" 
-                    onClick={() => handleNavigationClick('portfolio-hub')}
-                    className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-pink-500/20 hover:to-purple-600/20 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg"
-                  >
-                    <Globe size={18} />
-                    <span>Portfolio Hub</span>
-                  </Link>
-                </div>
-
-                {/* Mobile Hamburger Menu */}
-                <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="md:hidden p-2 rounded-lg bg-gray-800/50 border border-gray-600/30 text-gray-300 hover:text-pink-400 hover:border-pink-500/50 transition-all duration-300"
-                >
-                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Dropdown Menu */}
-          <AnimatePresence>
-            {isMobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/30"
-              >
-                <div className="px-3 py-4 space-y-2">
-                  {mobileMenuItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Link
-                        to={item.path}
-                        onClick={() => handleNavigationClick(item.id)}
-                        className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 ${
-                          isActive(item.path)
-                            ? 'bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-pink-500/25'
-                            : 'text-gray-300 hover:text-pink-400 hover:bg-gray-800/50'
-                        }`}
-                      >
-                        <item.icon size={18} />
-                        <span className="font-medium">{item.label}</span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                  
-                  {/* Portfolio Hub Link for Mobile */}
-                  <motion.div
-                    className="pt-2 mt-2 border-t border-gray-700/30"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Link
-                      to="/"
-                      onClick={() => handleNavigationClick('portfolio-hub')}
-                      className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-pink-400 hover:bg-gray-800/50 transition-all duration-300"
-                    >
-                      <Globe size={18} />
-                      <span className="font-medium">Portfolio Hub</span>
-                    </Link>
-                  </motion.div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </nav>
-
-        {/* Animated Background - Mobile Optimized */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating Elements */}
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-20"
-              animate={{
-                y: [-20, -120],
-                x: [Math.random() * 150 - 75, Math.random() * 150 - 75],
-                opacity: [0, 0.4, 0],
-                scale: [0.5, 1.5, 0.5]
-              }}
-              transition={{
-                duration: 5 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 4,
-                ease: "easeInOut"
-              }}
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`
-              }}
-            />
-          ))}
-
-          {/* Gradient Orbs - Responsive */}
-          <motion.div 
-            className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </div>
-
+      <ArtistPageShell atmosphereSrc={artistMedia.contact.atmosphere}>
         {/* Main Content - FIXED SPACING */}
         <motion.div 
           variants={containerVariants}
@@ -504,7 +341,7 @@ const ArtistContact = () => {
             {/* Header - FIXED SPACING */}
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-                Let's <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">Create Together</span>
+                Let's <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">Create Together</span>
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
                 Ready to collaborate, book a session, or just chat about creative projects? I'm always excited to connect with fellow creators and explore new opportunities.
@@ -544,15 +381,15 @@ const ArtistContact = () => {
                 {/* Quick Info */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-                    Quick <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Info</span>
+                    Quick <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Info</span>
                   </h3>
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Clock size={16} className="text-pink-400 sm:w-[18px] sm:h-[18px]" />
+                      <Clock size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
                       <span>Response time: 24-48 hours</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <MapPin size={16} className="text-purple-400 sm:w-[18px] sm:h-[18px]" />
+                      <MapPin size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
                       <span>Based in {personalInfo.location}</span>
                     </div>
                     <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
@@ -577,7 +414,7 @@ const ArtistContact = () => {
                 {/* What I Offer - OPTIMIZED SPACING AND TEXT SIZE */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-5">
-                    What I <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Offer</span>
+                    What I <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Offer</span>
                   </h3>
                   <div className="grid grid-cols-1 gap-3 mb-5">
                     {services.map((service, index) => (
@@ -640,7 +477,7 @@ const ArtistContact = () => {
                 {/* Contact Form - Mobile Responsive */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
                   <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">
-                    Send Me a <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Message</span>
+                    Send Me a <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Message</span>
                   </h2>
                   
                   {/* Success Message */}
@@ -700,7 +537,7 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="Your full name"
                         />
                       </div>
@@ -716,7 +553,7 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="your.email@example.com"
                         />
                       </div>
@@ -732,7 +569,7 @@ const ArtistContact = () => {
                         onChange={handleInputChange}
                         required
                         disabled={formStatus.isSubmitting}
-                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white border border-gray-600/50 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <option value="" className="text-gray-400">Select a subject</option>
                         <option value="live-performance" className="text-gray-900">Live Gigs & Performances</option>
@@ -756,7 +593,7 @@ const ArtistContact = () => {
                         required
                         disabled={formStatus.isSubmitting}
                         rows={6}
-                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-pink-400 focus:ring-2 focus:ring-pink-400/20 focus:outline-none resize-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-gray-900/50 text-white placeholder-gray-400 border border-gray-600/50 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none resize-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                         placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       />
                     </div>
@@ -764,7 +601,7 @@ const ArtistContact = () => {
                     <motion.button
                       type="submit"
                       disabled={formStatus.isSubmitting}
-                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] disabled:hover:scale-100 shadow-lg shadow-pink-500/25 disabled:shadow-gray-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base disabled:cursor-not-allowed"
+                      className="w-full bg-gradient-to-r from-amber-600 to-orange-700 hover:from-amber-500 hover:to-orange-600 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all transform hover:scale-[1.02] disabled:hover:scale-100 shadow-lg shadow-amber-500/25 disabled:shadow-gray-500/25 flex items-center justify-center space-x-2 text-sm sm:text-base disabled:cursor-not-allowed"
                       whileHover={!formStatus.isSubmitting ? { scale: 1.02 } : {}}
                       whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
                     >
@@ -789,7 +626,7 @@ const ArtistContact = () => {
                 {/* Connect on Social - REDUCED SPACING */}
                 <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8">
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-5">
-                    Connect on <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Social</span>
+                    Connect on <span className="bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">Social</span>
                   </h3>
                   <div className="space-y-2">
                     {socialPlatforms.map((platform, index) => (
@@ -811,7 +648,7 @@ const ArtistContact = () => {
                             <div className="text-gray-400 text-xs">{platform.handle}</div>
                           </div>
                         </div>
-                        <div className="text-purple-400 font-semibold text-xs">
+                        <div className="text-amber-200 font-semibold text-xs">
                           {platform.followers}
                         </div>
                       </motion.a>
@@ -824,7 +661,7 @@ const ArtistContact = () => {
         </motion.div>
 
         {/* Footer - Mobile Responsive */}
-        <footer className="bg-gray-900/80 backdrop-blur-sm border-t border-white/10">
+        <footer className="bg-black/60 backdrop-blur-sm border-t border-white/10">
           <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
               {/* Brand Section */}
@@ -834,7 +671,7 @@ const ArtistContact = () => {
                     <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
                   </div>
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">
                       {personalInfo.name}
                     </h3>
                     <p className="text-gray-400 text-xs sm:text-sm">Content Creator & Artist</p>
@@ -865,12 +702,12 @@ const ArtistContact = () => {
               <div>
                 <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Quick Links</h4>
                 <ul className="space-y-2 sm:space-y-3">
-                  {mobileMenuItems.map((item) => (
+                  {footerLinks.map((item) => (
                     <li key={item.id}>
                       <Link 
                         to={item.path}
                         onClick={() => handleNavigationClick(item.id)}
-                        className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                        className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                       >
                         <item.icon size={14} className="sm:w-4 sm:h-4" />
                         <span>{item.label}</span>
@@ -881,7 +718,7 @@ const ArtistContact = () => {
                     <Link 
                       to="/"
                       onClick={() => handleNavigationClick('portfolio-hub')}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Globe size={14} className="sm:w-4 sm:h-4" />
                       <span>Portfolio Hub</span>
@@ -898,7 +735,7 @@ const ArtistContact = () => {
                     <a 
                       href={`mailto:${artistEmail}`}
                       onClick={() => handleSocialClick('Email', artistEmail)}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <Mail size={14} className="sm:w-4 sm:h-4" />
                       <span>Email Me</span>
@@ -910,7 +747,7 @@ const ArtistContact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => handleSocialClick('Discord', contentData.social.discord)}
-                      className="text-gray-400 hover:text-pink-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                     >
                       <MessageSquare size={14} className="sm:w-4 sm:h-4" />
                       <span>Join Discord</span>
@@ -946,7 +783,7 @@ const ArtistContact = () => {
             </div>
           </div>
         </footer>
-      </div>
+      </ArtistPageShell>
     </>
   );
 };
