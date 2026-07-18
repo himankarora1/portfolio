@@ -571,19 +571,17 @@ input, textarea, select {
   border: 0;
 }
 
-/* Skip link for keyboard navigation */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--primary-pink);
-  color: white;
-  padding: 8px;
-  text-decoration: none;
-  transition: top 0.3s;
-  z-index: 1000;
+/* Tech portfolio atmosphere + marquee */
+.tech-grid-bg {
+  background-color: #05070b;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(34, 211, 238, 0.12), transparent 55%),
+    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
 }
 
-.skip-link:focus {
-  top: 6px;
+.tech-marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }

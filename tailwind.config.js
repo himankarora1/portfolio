@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'sans': ['Manrope', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        'display': ['Outfit', 'Manrope', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
@@ -20,6 +21,7 @@ module.exports = {
         'pulse-slow': 'pulse 3s infinite',
         'spin-slow': 'spin 3s linear infinite',
         'float': 'float 3s ease-in-out infinite',
+        'marquee': 'marquee 32s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -45,6 +47,10 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-10px)' }
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
         }
       }
     },

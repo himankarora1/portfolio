@@ -371,12 +371,12 @@ const TechPage = () => {
             >
               {/* Logo Icon with Initials */}
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-cyan-500/30 group-hover:border-cyan-400 transition-all duration-300">
-                <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
+                <span className="font-display text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
               </div>
               
               {/* Name with Modern Typography */}
               <div className="flex flex-col">
-                <span className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-none bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent group-hover:from-white group-hover:to-gray-200 transition-all duration-300">
+                <span className="font-display text-lg sm:text-2xl font-semibold text-white tracking-tight leading-none group-hover:text-cyan-300 transition-colors duration-300">
                   {personalInfo.name}
                 </span>
               </div>
@@ -530,93 +530,78 @@ const TechPage = () => {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black relative overflow-hidden">
-        {/* Subtle background atmosphere */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-slate-500/10 rounded-full blur-3xl"></div>
-        </div>
-        
-        {/* Hero Section - FIXED SPACING */}
+      <div className="min-h-screen tech-grid-bg relative overflow-hidden">
+        {/* Hero Section */}
         <section 
           id="hero" 
           className="min-h-screen flex items-center justify-center px-3 sm:px-4 lg:px-6 relative z-10"
           style={{
-            paddingTop: '8rem', // INCREASED from default to 8rem (128px) for more spacing - same as ArtistAbout
+            paddingTop: '8rem',
             paddingBottom: '2rem'
           }}
         >
           <div className="max-w-7xl mx-auto w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               
               {/* Left side - Text Content */}
               <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-left space-y-3 sm:space-y-4 lg:space-y-5"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55 }}
+                className="text-left space-y-4 sm:space-y-5"
               >
                 <motion.p
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.45 }}
-                  className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-gray-500 font-medium"
+                  transition={{ delay: 0.08, duration: 0.4 }}
+                  className="text-[11px] sm:text-xs uppercase tracking-[0.22em] text-gray-500 font-medium"
                 >
                   Technical Analyst & Developer
                 </motion.p>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15, duration: 0.5 }}
+                  transition={{ delay: 0.14, duration: 0.45 }}
                 >
-                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-gray-300 mb-1 sm:mb-2">
+                  <p className="font-display text-lg sm:text-xl md:text-2xl text-gray-400 mb-2">
                     Hi, I'm
+                  </p>
+                  <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight leading-[1.05]">
+                    Himank{' '}
+                    <span className="relative inline-block">
+                      Arora
+                      <span className="absolute left-0 -bottom-1 h-[3px] w-full rounded-full bg-cyan-400/80" />
+                    </span>
                   </h1>
-                  <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.25, duration: 0.5 }}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-1 sm:mb-2 leading-tight"
-                  >
-                    Himank
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35, duration: 0.5 }}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3 sm:mb-4 lg:mb-5 leading-tight"
-                  >
-                    Arora
-                  </motion.div>
                 </motion.div>
                 
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.45, duration: 0.5 }}
-                  className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-gray-300 mb-3 sm:mb-4 min-h-[1.5rem] sm:min-h-[2rem] md:min-h-[3rem]"
+                  transition={{ delay: 0.28, duration: 0.45 }}
+                  className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-gray-300 min-h-[1.75rem] sm:min-h-[2.25rem]"
                 >
                   <span className="text-cyan-400">
                     {displayText}
-                    <span className="animate-pulse text-cyan-300">|</span>
+                    <span className="animate-pulse text-cyan-300/80">|</span>
                   </span>
                 </motion.div>
                 
                 <motion.p 
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.55, duration: 0.5 }}
-                  className="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl leading-relaxed mb-4 sm:mb-6"
+                  transition={{ delay: 0.38, duration: 0.45 }}
+                  className="text-sm sm:text-base md:text-[1.05rem] text-gray-400 max-w-xl leading-relaxed"
                 >
                   {personalInfo.bio}
                 </motion.p>
 
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.65, duration: 0.5 }}
-                  className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6"
+                  transition={{ delay: 0.48, duration: 0.45 }}
+                  className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 pt-1"
                 >
                   <button
                     onClick={() => scrollToSection('projects')}
@@ -645,19 +630,18 @@ const TechPage = () => {
                   </button>
                 </motion.div>
 
-                {/* Social links */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.5 }}
-                  className="flex space-x-4 sm:space-x-6 pt-2 sm:pt-4"
+                  transition={{ delay: 0.6, duration: 0.45 }}
+                  className="flex space-x-3 sm:space-x-4 pt-2"
                 >
                   <a 
                     href={socialLinks.github} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => handleSocialClick('GitHub', socialLinks.github)}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
+                    className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
                   >
                     <Github size={22} className="sm:w-6 sm:h-6" />
                   </a>
@@ -666,80 +650,67 @@ const TechPage = () => {
                     target="_blank" 
                     rel="noopener noreferrer" 
                     onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
+                    className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
                   >
                     <Linkedin size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
                     href="mailto:himankarora1000@gmail.com"
                     onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110 p-2"
+                    className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
                   >
                     <Mail size={22} className="sm:w-6 sm:h-6" />
                   </a>
                 </motion.div>
               </motion.div>
 
-              {/* Right side - Visual Animation - Responsive */}
+              {/* Right side - Focus panel */}
               <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3, duration: 0.65 }}
-                className="relative flex items-center justify-center mt-6 lg:mt-0"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.22, duration: 0.55 }}
+                className="relative flex items-center justify-center mt-4 lg:mt-0"
               >
-                {/* Animated Code Editor Mockup */}
-                <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
-                  {/* Main Terminal/Editor Window */}
-                  <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xl">
-                    {/* Window Controls */}
-                    <div className="flex items-center space-x-2 mb-3 sm:mb-4">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+                <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 sm:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-2">Currently</p>
+                      <p className="font-display text-xl sm:text-2xl font-semibold text-white leading-snug">
+                        Technical Analyst & Developer
+                      </p>
                     </div>
-                    
-                    {/* Code Content */}
-                    <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.9, duration: 0.4 }}
-                        className="text-blue-400"
-                      >
-                        <span className="text-cyan-400">const</span> professional = {'{'}
-                      </motion.div>
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.15, duration: 0.4 }}
-                        className="text-gray-300 ml-2 sm:ml-4"
-                      >
-                        name: <span className="text-green-400">'{personalInfo.name}'</span>,
-                      </motion.div>
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.4, duration: 0.4 }}
-                        className="text-gray-300 ml-2 sm:ml-4"
-                      >
-                        skills: [<span className="text-green-400">'Analysis'</span>, <span className="text-green-400">'React'</span>],
-                      </motion.div>
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.65, duration: 0.4 }}
-                        className="text-gray-300 ml-2 sm:ml-4"
-                      >
-                        focus: <span className="text-green-400">'Ship products'</span>
-                      </motion.div>
-                      <motion.div 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.9, duration: 0.4 }}
-                        className="text-blue-400"
-                      >
-                        {'};'}
-                      </motion.div>
+                    <div className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      <span className="text-[11px] text-emerald-300 font-medium">Open</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center gap-3 text-sm text-gray-300">
+                      <MapPin size={15} className="text-cyan-400 shrink-0" />
+                      <span>{personalInfo.location}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-gray-300">
+                      <Briefcase size={15} className="text-cyan-400 shrink-0" />
+                      <span>Analysis to shipped products</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-gray-300">
+                      <GraduationCap size={15} className="text-cyan-400 shrink-0" />
+                      <span>MS Information Systems, Northeastern</span>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-white/10 pt-5">
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-3">Focus</p>
+                    <div className="flex flex-wrap gap-2">
+                      {['Analysis', 'React', 'SQL', 'Systems', 'Delivery'].map((chip) => (
+                        <span
+                          key={chip}
+                          className="px-3 py-1.5 rounded-full border border-gray-700/80 bg-black/20 text-xs text-gray-300"
+                        >
+                          {chip}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -748,8 +719,29 @@ const TechPage = () => {
           </div>
         </section>
 
+        {/* Signature skill marquee */}
+        <div className="relative z-10 border-y border-white/10 bg-black/20 py-4 sm:py-5 overflow-hidden">
+          <div className="tech-marquee-mask">
+            <div className="flex w-max animate-marquee whitespace-nowrap">
+              {[0, 1].map((copy) => (
+                <div key={copy} className="flex items-center">
+                  {['Requirements', 'Analysis', 'React', 'SQL', 'Systems', 'Delivery', 'Data', 'Product'].map((label, i) => (
+                    <span key={`${copy}-${label}`} className="flex items-center">
+                      <span className="font-display text-sm sm:text-base tracking-[0.12em] uppercase text-gray-400 px-4 sm:px-6">
+                        {label}
+                      </span>
+                      <span className="text-cyan-400/70 text-xs" aria-hidden="true">✦</span>
+                      {i === 7 && <span className="w-4 sm:w-6" />}
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* About Me Section */}
-        <section id="about" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-800/50 backdrop-blur-sm border-y border-gray-700">
+        <section id="about" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-b border-white/5">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -761,8 +753,8 @@ const TechPage = () => {
               <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
                 Background
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                About <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Me</span>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+                About <span className="text-cyan-400">Me</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 Bridging analysis and engineering to ship products people actually use.
@@ -821,10 +813,7 @@ const TechPage = () => {
         </section>
 
         {/* Experience & Education Section */}
-        <section id="experience" className="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-4 lg:px-6 overflow-hidden scroll-mt-20">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900/90 to-gray-900"></div>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100%,48rem)] h-64 bg-cyan-500/10 blur-3xl pointer-events-none"></div>
-
+        <section id="experience" className="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-4 lg:px-6 overflow-hidden scroll-mt-20 border-b border-white/5">
           <div className="relative max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -836,8 +825,8 @@ const TechPage = () => {
               <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
                 Career
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                Experience & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Education</span>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+                Experience & <span className="text-cyan-400">Education</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 A clear view of my professional path and academic foundation.
@@ -851,7 +840,7 @@ const TechPage = () => {
                   <Briefcase size={18} className="text-cyan-300" />
                 </div>
                 <div className="text-left">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">Professional Experience</h3>
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-white">Professional Experience</h3>
                   <p className="text-gray-500 text-xs sm:text-sm">Roles and impact across organizations</p>
                 </div>
               </div>
@@ -942,7 +931,7 @@ const TechPage = () => {
                   <GraduationCap size={18} className="text-blue-300" />
                 </div>
                 <div className="text-left">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white">Education</h3>
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-white">Education</h3>
                   <p className="text-gray-500 text-xs sm:text-sm">Academic credentials and foundation</p>
                 </div>
               </div>
@@ -1020,7 +1009,7 @@ const TechPage = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-800/50 backdrop-blur-sm border-y border-gray-700">
+        <section id="projects" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-y border-white/5">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1032,8 +1021,8 @@ const TechPage = () => {
               <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
                 Selected Work
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                Featured <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Projects</span>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+                Featured <span className="text-cyan-400">Projects</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 Products and tools I've analyzed, designed, and shipped end to end.
@@ -1178,7 +1167,7 @@ const TechPage = () => {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-900/50 backdrop-blur-sm">
+        <section id="skills" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-b border-white/5">
           <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1190,8 +1179,8 @@ const TechPage = () => {
               <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
                 Toolkit
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                Skills & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Technologies</span>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+                Skills & <span className="text-cyan-400">Technologies</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 The stack I use to analyze problems and build solutions.
@@ -1226,7 +1215,7 @@ const TechPage = () => {
         </section>
 
         {/* Certificates Section */}
-        <section id="certificates" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-800/50 backdrop-blur-sm border-y border-gray-700">
+        <section id="certificates" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-y border-white/5">
           <div className="max-w-7xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1238,8 +1227,8 @@ const TechPage = () => {
               <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
                 Credentials
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-                Certificates & <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Credentials</span>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-3 sm:mb-4">
+                Certificates & <span className="text-cyan-400">Credentials</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-3xl mx-auto">
                 Professional certifications that validate expertise and continuous learning in technology and data analysis.
@@ -1378,7 +1367,7 @@ const TechPage = () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gradient-to-br from-slate-900 via-gray-900 to-black relative">
+        <section id="contact" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 relative border-t border-white/5">
           <div className="max-w-7xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1390,8 +1379,8 @@ const TechPage = () => {
               <span className="inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-gray-600/60 rounded-full">
                 Contact
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
-                Let's Have a <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Chat</span>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-3 sm:mb-4">
+                Let's Have a <span className="text-cyan-400">Chat</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
                 Leave your email and I will get back to you within 24 hours
@@ -1408,7 +1397,7 @@ const TechPage = () => {
                 className="relative overflow-hidden rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800 to-gray-900 p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end"
               >
                 <div className="relative z-10 space-y-6 sm:space-y-8">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Get in Touch</h3>
+                  <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white mb-6 sm:mb-8">Get in Touch</h3>
                   
                   <div className="space-y-4 sm:space-y-6">
                     <div>
@@ -1651,12 +1640,12 @@ const TechPage = () => {
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
+                  <span className="font-display text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    {personalInfo.name}
-                  </h3>
+                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-white">
+                      {personalInfo.name}
+                    </h3>
                   <p className="text-gray-400 text-xs sm:text-sm">Technical Analyst & Developer</p>
                 </div>
               </div>
