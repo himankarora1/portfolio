@@ -664,53 +664,62 @@ const TechPage = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Right side - Focus panel */}
+              {/* Right side - Code editor animation */}
               <motion.div
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22, duration: 0.55 }}
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.25, duration: 0.6 }}
                 className="relative flex items-center justify-center mt-4 lg:mt-0"
               >
-                <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 sm:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
-                  <div className="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                      <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-2">Currently</p>
-                      <p className="font-display text-xl sm:text-2xl font-semibold text-white leading-snug">
-                        Technical Analyst & Developer
-                      </p>
+                <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+                  <div className="bg-gray-900/70 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xl">
+                    <div className="flex items-center space-x-2 mb-3 sm:mb-4">
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                      <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
                     </div>
-                    <div className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                      <span className="text-[11px] text-emerald-300 font-medium">Open</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4 mb-6">
-                    <div className="flex items-center gap-3 text-sm text-gray-300">
-                      <MapPin size={15} className="text-cyan-400 shrink-0" />
-                      <span>{personalInfo.location}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-gray-300">
-                      <Briefcase size={15} className="text-cyan-400 shrink-0" />
-                      <span>Analysis to shipped products</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-gray-300">
-                      <GraduationCap size={15} className="text-cyan-400 shrink-0" />
-                      <span>MS Information Systems, Northeastern</span>
-                    </div>
-                  </div>
-
-                  <div className="border-t border-white/10 pt-5">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-3">Focus</p>
-                    <div className="flex flex-wrap gap-2">
-                      {['Analysis', 'React', 'SQL', 'Systems', 'Delivery'].map((chip) => (
-                        <span
-                          key={chip}
-                          className="px-3 py-1.5 rounded-full border border-gray-700/80 bg-black/20 text-xs text-gray-300"
-                        >
-                          {chip}
-                        </span>
-                      ))}
+                    
+                    <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.9, duration: 0.4 }}
+                        className="text-blue-400"
+                      >
+                        <span className="text-cyan-400">const</span> professional = {'{'}
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.15, duration: 0.4 }}
+                        className="text-gray-300 ml-2 sm:ml-4"
+                      >
+                        name: <span className="text-green-400">'{personalInfo.name}'</span>,
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.4, duration: 0.4 }}
+                        className="text-gray-300 ml-2 sm:ml-4"
+                      >
+                        skills: [<span className="text-green-400">'Analysis'</span>, <span className="text-green-400">'React'</span>],
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.65, duration: 0.4 }}
+                        className="text-gray-300 ml-2 sm:ml-4"
+                      >
+                        focus: <span className="text-green-400">'Ship products'</span>
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.9, duration: 0.4 }}
+                        className="text-blue-400"
+                      >
+                        {'};'}
+                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -786,26 +795,48 @@ const TechPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 sm:p-8 space-y-5 sm:space-y-6"
+                className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 sm:p-8"
               >
-                <h3 className="text-lg sm:text-xl font-semibold text-white">At a glance</h3>
-                <div className="space-y-4">
-                  {[
-                    { icon: Briefcase, label: 'Role', value: 'Technical Analyst & Developer' },
-                    { icon: Clock, label: 'Experience', value: '3+ years analyzing and shipping products' },
-                    { icon: GraduationCap, label: 'Education', value: 'MS Information Systems, Northeastern' },
-                    { icon: MapPin, label: 'Location', value: 'Boston, MA' }
-                  ].map(({ icon: Icon, label, value }) => (
-                    <div key={label} className="flex items-start space-x-3">
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                        <Icon size={16} className="text-cyan-400 sm:w-[18px] sm:h-[18px]" />
-                      </div>
-                      <div>
-                        <div className="text-xs sm:text-sm text-gray-400 mb-0.5">{label}</div>
-                        <div className="text-sm sm:text-base text-white font-medium">{value}</div>
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-start justify-between gap-4 mb-5">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-2">Currently</p>
+                    <h3 className="font-display text-xl sm:text-2xl font-semibold text-white leading-snug">
+                      Technical Analyst & Developer
+                    </h3>
+                  </div>
+                  <div className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    <span className="text-[11px] text-emerald-300 font-medium">Open</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-gray-300">
+                    <MapPin size={15} className="text-cyan-400 shrink-0" />
+                    <span>{personalInfo.location}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-gray-300">
+                    <Clock size={15} className="text-cyan-400 shrink-0" />
+                    <span>3+ years analyzing and shipping products</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-gray-300">
+                    <GraduationCap size={15} className="text-cyan-400 shrink-0" />
+                    <span>MS Information Systems, Northeastern</span>
+                  </div>
+                </div>
+
+                <div className="border-t border-white/10 pt-5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-gray-500 mb-3">Focus</p>
+                  <div className="flex flex-wrap gap-2">
+                    {['Analysis', 'React', 'SQL', 'Systems', 'Delivery'].map((chip) => (
+                      <span
+                        key={chip}
+                        className="px-3 py-1.5 rounded-full border border-gray-700/80 bg-black/20 text-xs text-gray-300"
+                      >
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </div>
