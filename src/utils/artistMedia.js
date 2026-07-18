@@ -46,8 +46,8 @@ export const artistMedia = {
         src: '/images/artist/artist-rooftop-solo.jpg',
         duration: 4500,
         scale: 1,
-        // Head/hair just under nav
-        objectPosition: 'center 6%',
+        // Subject sits low in a tall frame — high % brings YOU up under the nav
+        objectPosition: 'center 78%',
       },
       {
         type: 'video',
@@ -56,7 +56,7 @@ export const artistMedia = {
         startAt: 2,
         playFor: 3.5,
         scale: 1,
-        objectPosition: 'center 8%',
+        objectPosition: 'center 75%',
       },
       {
         type: 'image',
