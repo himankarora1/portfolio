@@ -15,9 +15,10 @@ export const artistMedia = {
         type: 'image',
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4800,
-        // Zoom out (still cover); lower subject so hair clears the nav
+        // Zoom out + shift down so full head/hair clears the top/nav
         scale: 1,
-        objectPosition: 'center 42%',
+        objectPosition: 'center top',
+        offsetY: '7%',
       },
       {
         type: 'video',
@@ -75,7 +76,8 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4000,
         scale: 1,
-        objectPosition: 'center 42%',
+        objectPosition: 'center top',
+        offsetY: '7%',
       },
       {
         type: 'image',

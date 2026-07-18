@@ -14,6 +14,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
   const mediaScale = slide?.scale ?? 1.05;
+  const offsetY = slide?.offsetY || '0%';
 
   useEffect(() => {
     const next = slides[nextIndex];
@@ -85,7 +86,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               className="h-full w-full object-cover blur-[2px] sm:blur-[3px]"
               style={{
                 objectPosition: slide.objectPosition || 'center 28%',
-                transform: `scale(${mediaScale})`,
+                transform: `scale(${mediaScale}) translateY(${offsetY})`,
               }}
               muted
               playsInline
@@ -100,7 +101,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               className="h-full w-full object-cover blur-[2px] sm:blur-[3px]"
               style={{
                 objectPosition: slide.objectPosition || 'center 28%',
-                transform: `scale(${mediaScale})`,
+                transform: `scale(${mediaScale}) translateY(${offsetY})`,
               }}
             />
           )}
