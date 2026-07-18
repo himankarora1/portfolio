@@ -143,25 +143,20 @@ const HomePage = () => {
 
   return (
     <>
-      {/* Page-specific SEO */}
-      <SEO 
-        title={`${personalInfo.name} - ${personalInfo.title}`}
-        description={personalInfo.bio}
-        keywords={contentData.meta.keywords.join(', ')}
-        image={contentData.meta.og_image}
-      />
+      {/* Page-specific SEO — dual identity (absolute OG from generateSEOData) */}
+      <SEO />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden flex flex-col">
         {/* Subtle background atmosphere */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-slate-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
         </div>
 
         {/* UPDATED: Main Content Container with Mobile Fixed Spacing */}
-        <div className="relative z-10 flex items-center justify-center px-3 sm:px-4 lg:px-6 pt-8 pb-8 sm:pt-0 sm:pb-0 sm:h-screen">
+        <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-0 sm:pb-0 sm:min-h-0">
           <div className="w-full h-full flex flex-col justify-center">
-            <div className="max-w-6xl mx-auto w-full">
+            <div className="max-w-7xl mx-auto w-full">
               <div className="text-center space-y-3 sm:space-y-4">
                 {/* Enhanced Profile Image/Avatar - SLIGHTLY BIGGER */}
                 <motion.div
@@ -233,7 +228,7 @@ const HomePage = () => {
                       ease: "linear"
                     }}
                     style={{
-                      background: "linear-gradient(90deg, #d1d5db, #06b6d4, #8b5cf6, #d1d5db)",
+                      background: "linear-gradient(90deg, #d1d5db, #06b6d4, #fbbf24, #d1d5db)",
                       backgroundSize: "300% 100%",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
@@ -344,7 +339,7 @@ const HomePage = () => {
                     whileHover={{ 
                       scale: 1.02,
                       rotateY: -2,
-                      boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.25)"
+                      boxShadow: "0 25px 50px -12px rgba(251, 191, 36, 0.2)"
                     }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -352,10 +347,10 @@ const HomePage = () => {
                       {/* Icon - Responsive sizing */}
                       <motion.div 
                         variants={cardElementVariants}
-                        className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4"
+                        className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4"
                         whileHover={{ 
                           scale: 1.08,
-                          boxShadow: "0 0 20px rgba(168, 85, 247, 0.35)"
+                          boxShadow: "0 0 20px rgba(251, 191, 36, 0.35)"
                         }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       >
@@ -394,10 +389,10 @@ const HomePage = () => {
                               boxShadow: "0 4px 8px rgba(0,0,0,0.2)"
                             }}
                             className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm border cursor-pointer transition-all ${
-                              skill === "Music" ? "bg-pink-500/20 border-pink-500/30 text-pink-300" :
-                              skill === "Gaming" ? "bg-blue-500/20 border-blue-500/30 text-blue-300" :
-                              skill === "Streaming" ? "bg-red-500/20 border-red-500/30 text-red-300" :
-                              "bg-yellow-500/20 border-yellow-500/30 text-yellow-300"
+                              skill === "Music" ? "bg-amber-500/20 border-amber-500/30 text-amber-200" :
+                              skill === "Gaming" ? "bg-cyan-500/20 border-cyan-500/30 text-cyan-300" :
+                              skill === "Streaming" ? "bg-orange-500/20 border-orange-500/30 text-orange-200" :
+                              "bg-stone-500/20 border-stone-500/30 text-stone-300"
                             }`}
                           >
                             {skill}
@@ -414,7 +409,7 @@ const HomePage = () => {
                         <Link
                           to="/artist"
                           onClick={handleArtistClick}
-                          className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-purple-500/25 text-sm sm:text-base"
+                          className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-all shadow-lg hover:shadow-amber-500/25 text-sm sm:text-base"
                         >
                           <span>View Portfolio</span>
                           <ArrowRight size={14} className="sm:w-4 sm:h-4" />
@@ -467,6 +462,19 @@ const HomePage = () => {
                   ))}
                 </motion.div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 border-t border-white/10 px-4 sm:px-6 lg:px-8 py-4">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm">
+            <p className="text-gray-500">
+              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
+            </p>
+            <div className="flex flex-wrap gap-x-5 gap-y-1">
+              <Link to="/privacy" className="text-gray-400 hover:text-cyan-300 transition-colors">Privacy</Link>
+              <Link to="/terms" className="text-gray-400 hover:text-cyan-300 transition-colors">Terms</Link>
+              <Link to="/sitemap" className="text-gray-400 hover:text-cyan-300 transition-colors">Sitemap</Link>
             </div>
           </div>
         </div>

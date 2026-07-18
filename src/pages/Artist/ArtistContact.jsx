@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { 
   Mail, 
   Music, 
@@ -12,20 +11,18 @@ import {
   Send,
   Star,
   Clock,
-  Home,
-  User,
-  Brush,
   Zap,
   Calendar,
   Camera,
   Gamepad2,
-  Globe,
   Mic,
   Edit,
   Users
 } from 'lucide-react';
 import SEO from '../../components/SEO';
 import ArtistPageShell from '../../components/Artist/ArtistPageShell';
+import ArtistFooter from '../../components/Artist/ArtistFooter';
+import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -57,14 +54,6 @@ const ArtistContact = () => {
     isError: false,
     errorMessage: ''
   });
-
-  // Footer / quick links
-  const footerLinks = [
-    { id: 'home', label: 'Home', icon: Home, path: '/artist' },
-    { id: 'about', label: 'About Me', icon: User, path: '/artist/about' },
-    { id: 'work', label: 'My Work', icon: Brush, path: '/artist/work' },
-    { id: 'contact', label: 'Contact', icon: Mail, path: '/artist/contact' }
-  ];
 
   const handleInputChange = (e) => {
     setFormData({
@@ -170,12 +159,6 @@ const ArtistContact = () => {
   };
 
   // Analytics event handlers
-  const handleNavigationClick = (section) => {
-    if (analytics?.trackPortfolioEvents) {
-      analytics.trackPortfolioEvents.sectionView(section);
-    }
-  };
-
   const handleSocialClick = (platform, url) => {
     if (analytics?.trackPortfolioEvents) {
       analytics.trackPortfolioEvents.socialClick(platform, url);
@@ -333,13 +316,13 @@ const ArtistContact = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 px-3 sm:px-4 lg:px-6"
+          className={`relative z-10 ${artistPagePad}`}
           style={{
             paddingTop: '8rem', // INCREASED from 5rem to 8rem (128px) for more spacing
             paddingBottom: '2rem'
           }}
         >
-          <div className="max-w-7xl mx-auto">
+          <div className={artistPageWidth}>
             
             {/* Header - FIXED SPACING */}
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
@@ -662,130 +645,7 @@ const ArtistContact = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* Footer - Mobile Responsive */}
-        <footer className="bg-black/60 backdrop-blur-sm border-t border-white/10">
-          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
-              {/* Brand Section */}
-              <div className="md:col-span-2">
-                <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-transparent border-2 border-white rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-sm sm:text-lg tracking-tight">HA</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">
-                      {personalInfo.name}
-                    </h3>
-                    <p className="text-gray-400 text-xs sm:text-sm">Content Creator & Artist</p>
-                  </div>
-                </div>
-                <p className="text-gray-400 mb-4 sm:mb-6 max-w-md leading-relaxed text-sm sm:text-base">
-                  Ready to collaborate? Let's create something amazing together. 
-                  I'm always excited to work on new projects and creative ideas.
-                </p>
-                <div className="flex space-x-3 sm:space-x-4">
-                  {socialPlatforms.map((platform, index) => (
-                    <motion.a
-                      key={index}
-                      href={platform.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleSocialClick(platform.name, platform.url)}
-                      className={`w-8 h-8 sm:w-10 sm:h-10 ${platform.color} rounded-lg flex items-center justify-center text-white hover:scale-110 transition-all`}
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <platform.icon size={16} className="sm:w-[18px] sm:h-[18px]" />
-                    </motion.a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Quick Links</h4>
-                <ul className="space-y-2 sm:space-y-3">
-                  {footerLinks.map((item) => (
-                    <li key={item.id}>
-                      <Link 
-                        to={item.path}
-                        onClick={() => handleNavigationClick(item.id)}
-                        className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                      >
-                        <item.icon size={14} className="sm:w-4 sm:h-4" />
-                        <span>{item.label}</span>
-                      </Link>
-                    </li>
-                  ))}
-                  <li>
-                    <Link 
-                      to="/"
-                      onClick={() => handleNavigationClick('portfolio-hub')}
-                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                    >
-                      <Globe size={14} className="sm:w-4 sm:h-4" />
-                      <span>Portfolio Hub</span>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Contact Methods */}
-              <div>
-                <h4 className="text-white font-semibold mb-4 sm:mb-6 text-sm sm:text-base">Get In Touch</h4>
-                <ul className="space-y-2 sm:space-y-3">
-                  <li>
-                    <a 
-                      href={`mailto:${artistEmail}`}
-                      onClick={() => handleSocialClick('Email', artistEmail)}
-                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                    >
-                      <Mail size={14} className="sm:w-4 sm:h-4" />
-                      <span>Email Me</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a 
-                      href={contentData.social.discord}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleSocialClick('Discord', contentData.social.discord)}
-                      className="text-gray-400 hover:text-amber-200 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                    >
-                      <MessageSquare size={14} className="sm:w-4 sm:h-4" />
-                      <span>Join Discord</span>
-                    </a>
-                  </li>
-                  <li>
-                    <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                      <Clock size={14} className="sm:w-4 sm:h-4" />
-                      <span>24-48h Response</span>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                      <MapPin size={14} className="sm:w-4 sm:h-4" />
-                      <span>{personalInfo.location}</span>
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-gray-400 flex items-center space-x-2 text-sm sm:text-base">
-                      <Globe size={14} className="sm:w-4 sm:h-4" />
-                      <span>Available Remotely</span>
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Copyright */}
-            <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col md:flex-row justify-center items-center">
-              <p className="text-gray-400 text-xs sm:text-sm">
-                © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </footer>
+        <ArtistFooter />
       </ArtistPageShell>
     </>
   );

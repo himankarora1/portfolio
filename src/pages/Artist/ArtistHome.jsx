@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import SEO from '../../components/SEO';
 import ArtistWelcome from './ArtistWelcome';
 import ArtistNav from '../../components/Artist/ArtistNav';
 import ArtistHomeMontage from '../../components/Artist/ArtistHomeMontage';
-import SEO from '../../components/SEO';
+import ArtistFooter from '../../components/Artist/ArtistFooter';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
+import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
 
 const ArtistHome = () => {
   const [showWelcome, setShowWelcome] = useState(false);
@@ -54,7 +56,6 @@ const ArtistHome = () => {
         title={`${personalInfo.name} - Artist & Content Creator`}
         description={artistData.tagline || artistData.bio}
         keywords="content creator, musician, gaming, YouTube, streaming, music production"
-        image={media.poster}
       />
 
       <div className="relative min-h-screen overflow-hidden bg-black">
@@ -62,8 +63,8 @@ const ArtistHome = () => {
 
         <ArtistNav />
 
-        <div className="relative z-10 flex min-h-screen items-end px-4 pb-16 pt-28 sm:items-center sm:px-6 sm:pb-20 sm:pt-24 lg:px-10">
-          <div className="mx-auto w-full max-w-6xl">
+        <div className={`relative z-10 flex min-h-screen items-end ${artistPagePad} pb-16 pt-28 sm:items-center sm:pb-20 sm:pt-24`}>
+          <div className={`${artistPageWidth}`}>
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
@@ -123,6 +124,8 @@ const ArtistHome = () => {
             </motion.div>
           </div>
         </div>
+
+        <ArtistFooter />
       </div>
     </>
   );
