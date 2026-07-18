@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
 import TechPage from './pages/TechPage';
 import ArtistRoutes from './pages/Artist/ArtistRoutes';
+import LegalPage from './pages/LegalPage';
 import SEO from './components/SEO'; // NEW
 import { AnalyticsProvider, useAnalytics } from './components/Analytics'; // NEW
 import { ThemeProvider } from './context/ThemeContext';
@@ -43,13 +44,14 @@ const AppContent = () => {
   const isHomePage = location.pathname === '/';
   const isArtistPage = location.pathname.startsWith('/artist');
   const isTechPage = location.pathname.startsWith('/tech');
+  const isLegalPage = ['/privacy', '/terms', '/sitemap'].includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* Add SEO component to every page */}
       <SEO />
       
-      {!isHomePage && !isArtistPage && !isTechPage && <Navigation />}
+      {!isHomePage && !isArtistPage && !isTechPage && !isLegalPage && <Navigation />}
       
       <ErrorBoundary 
         FallbackComponent={ErrorFallback}
@@ -59,6 +61,9 @@ const AppContent = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/tech" element={<TechPage />} />
           <Route path="/artist/*" element={<ArtistRoutes />} />
+          <Route path="/privacy" element={<LegalPage />} />
+          <Route path="/terms" element={<LegalPage />} />
+          <Route path="/sitemap" element={<LegalPage />} />
         </Routes>
       </ErrorBoundary>
     </div>

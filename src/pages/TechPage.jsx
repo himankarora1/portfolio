@@ -1702,12 +1702,12 @@ const TechPage = () => {
         </section>
       </div>
 
-      {/* Footer — full link map, inspired by reference layout */}
+      {/* Footer */}
       <footer className="border-t border-white/10 bg-black/30">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-10 sm:py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
+            <div>
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center">
                   <span className="font-display text-white font-semibold text-sm tracking-tight">HA</span>
@@ -1722,15 +1722,6 @@ const TechPage = () => {
               <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-xs">
                 Bridging analysis and engineering to ship products people actually use.
               </p>
-              <a
-                href={personalInfo.resume}
-                download
-                onClick={handleResumeDownload}
-                className={`${btnSecondary} mb-5`}
-              >
-                <Download size={15} />
-                <span>Download Resume</span>
-              </a>
               <div className="flex space-x-2.5">
                 <motion.a
                   href={socialLinks.github}
@@ -1779,7 +1770,7 @@ const TechPage = () => {
               </div>
             </div>
 
-            {/* Quick Links — all in-page sections */}
+            {/* Quick Links */}
             <div>
               <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
                 Quick Links
@@ -1804,44 +1795,6 @@ const TechPage = () => {
                     </button>
                   </li>
                 ))}
-              </ul>
-            </div>
-
-            {/* Explore — hub / artist / education (his “extra” column, adapted) */}
-            <div>
-              <h4 className="font-display text-xs uppercase tracking-[0.16em] text-gray-500 mb-4">
-                Explore
-              </h4>
-              <ul className="space-y-2.5">
-                <li>
-                  <Link to="/" className="text-gray-400 hover:text-cyan-300 transition-colors text-sm">
-                    Portfolio Hub
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/artist" className="text-gray-400 hover:text-cyan-300 transition-colors text-sm">
-                    Artist Portfolio
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => scrollToSection('education')}
-                    className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
-                  >
-                    Education
-                  </button>
-                </li>
-                <li>
-                  <a
-                    href={personalInfo.resume}
-                    download
-                    onClick={handleResumeDownload}
-                    className="text-gray-400 hover:text-cyan-300 transition-colors text-sm"
-                  >
-                    Resume PDF
-                  </a>
-                </li>
               </ul>
             </div>
 
@@ -1889,13 +1842,21 @@ const TechPage = () => {
             </div>
           </div>
 
-          <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <p className="text-gray-500 text-xs sm:text-sm">
-              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
+              © 2025 {personalInfo.name}. All rights reserved.
             </p>
-            <p className="text-gray-600 text-xs">
-              Boston, MA
-            </p>
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs sm:text-sm">
+              <Link to="/privacy" className="text-gray-500 hover:text-cyan-300 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="text-gray-500 hover:text-cyan-300 transition-colors">
+                Terms of Service
+              </Link>
+              <Link to="/sitemap" className="text-gray-500 hover:text-cyan-300 transition-colors">
+                Sitemap
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
