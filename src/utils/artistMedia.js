@@ -13,11 +13,11 @@ export const artistMedia = {
     montage: [
       {
         type: 'image',
-        src: '/images/artist/artist-stage-jacket.jpg',
+        src: '/images/artist/artist-rooftop-solo.jpg',
         duration: 5200,
         scale: 1,
-        objectPosition: '6% 18%',
-        kenBurns: 'in-right',
+        objectPosition: 'center 28%',
+        kenBurns: 'in-left',
       },
       {
         type: 'video',
@@ -31,11 +31,11 @@ export const artistMedia = {
       },
       {
         type: 'image',
-        src: '/images/artist/artist-rooftop-solo.jpg',
+        src: '/images/artist/artist-stage-jacket.jpg',
         duration: 5000,
         scale: 1,
-        objectPosition: 'center 28%',
-        kenBurns: 'in-left',
+        objectPosition: '6% 18%',
+        kenBurns: 'in-right',
       },
       {
         type: 'video',
