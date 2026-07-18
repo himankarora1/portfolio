@@ -406,7 +406,7 @@ const TechPage = () => {
       {/* SEO */}
       <SEO 
         title="Himank Arora - Technical Analyst & Developer"
-        description="IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems."
+        description="Turning business needs into working products across data tools, web apps, and AI-enabled systems."
         keywords="technical analyst, developer, business analysis, React, Python, data analysis, Boston"
       />
 
