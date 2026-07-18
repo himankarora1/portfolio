@@ -51,12 +51,13 @@ export const artistMedia = {
       },
       {
         type: 'video',
+        // WhatsApp Video 12 — short outdoor ensemble beat
         src: '/videos/artist/artist-rooftop-clip.mp4',
         duration: 3800,
-        startAt: 2,
-        playFor: 3.5,
+        startAt: 0,
+        playFor: 3.8,
         scale: 1,
-        objectPosition: 'center 50%',
+        objectPosition: 'center 45%',
       },
       {
         type: 'image',
