@@ -356,7 +356,7 @@ const TechPage = () => {
               </div>
             </Link>
 
-            <div className="flex items-center space-x-3 lg:space-x-5">
+            <div className="flex items-center space-x-4 sm:space-x-6">
               {/* Desktop in-page section links */}
               <div className="hidden lg:flex items-center space-x-1">
                 {sectionNavItems.map((item) => (
@@ -379,28 +379,17 @@ const TechPage = () => {
                 ))}
               </div>
 
-              <div className="hidden md:block h-8 w-px bg-white/15"></div>
+              <div className="hidden md:block h-8 w-px bg-white/20"></div>
 
-              {/* Portfolio Hub — secondary / ghost */}
+              {/* Portfolio Hub Button - Desktop */}
               <div className="hidden md:block">
                 <Link
                   to="/"
-                  className="flex items-center space-x-2 px-3.5 py-2 rounded-full border border-gray-600/50 text-gray-400 hover:text-cyan-300 hover:border-cyan-500/40 transition-all duration-300 text-sm"
+                  className="flex items-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-gray-800/50 to-gray-700/50 border border-gray-600/30 text-gray-300 hover:from-cyan-500/20 hover:to-blue-600/20 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300 backdrop-blur-sm shadow-lg hover:shadow-cyan-500/20"
                 >
-                  <Globe size={16} />
+                  <Globe size={18} />
                   <span>Portfolio Hub</span>
                 </Link>
-              </div>
-
-              {/* Get in Touch — primary CTA */}
-              <div className="hidden md:block">
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="flex items-center space-x-2 px-4 py-2.5 rounded-full bg-white text-gray-900 font-semibold text-sm hover:bg-gray-100 transition-all duration-300 shadow-sm"
-                >
-                  <Briefcase size={16} />
-                  <span>Get in Touch</span>
-                </button>
               </div>
 
               {/* Mobile Hamburger Menu */}
@@ -425,16 +414,6 @@ const TechPage = () => {
               className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/30"
             >
               <div className="px-3 py-4 space-y-2">
-                <motion.button
-                  onClick={() => scrollToSection('contact')}
-                  className="w-full flex items-center justify-center space-x-2 px-4 py-3 rounded-full bg-white text-gray-900 font-semibold transition-all duration-300"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Briefcase size={18} />
-                  <span>Get in Touch</span>
-                </motion.button>
-
                 {mobileMenuItems.map((item) => (
                   <motion.button
                     key={item.id}
@@ -461,7 +440,7 @@ const TechPage = () => {
                   <Link
                     to="/"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-all duration-300 border border-gray-600/40"
+                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-all duration-300"
                   >
                     <Globe size={18} />
                     <span className="font-medium">Portfolio Hub</span>
