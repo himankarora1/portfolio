@@ -15,7 +15,9 @@ export const artistMedia = {
         type: 'image',
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4800,
-        objectPosition: 'center 20%',
+        // Zoom out a touch (cover, no bars); keep headroom so hair isn't clipped
+        scale: 1,
+        objectPosition: 'center 8%',
       },
       {
         type: 'video',
@@ -72,7 +74,8 @@ export const artistMedia = {
         type: 'image',
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4000,
-        objectPosition: 'center 16%',
+        scale: 1,
+        objectPosition: 'center 8%',
       },
       {
         type: 'image',

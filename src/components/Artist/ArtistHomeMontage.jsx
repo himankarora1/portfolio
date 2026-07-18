@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 /**
  * Crossfading photo + short video-beat montage for the artist home hero.
  * Videos play muted from `startAt` for `duration` only (not full loops).
- * Always object-cover (no letterboxing). Use objectPosition to keep faces in frame.
+ * Always object-cover (no letterboxing). Optional per-slide `scale` (default 1.05).
  */
 const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
@@ -13,6 +13,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
+  const mediaScale = slide?.scale ?? 1.05;
 
   useEffect(() => {
     const next = slides[nextIndex];
@@ -72,8 +73,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
         <motion.div
           key={`${slide.type}-${slide.src}-${index}`}
           className="absolute inset-0"
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1.02 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeInOut' }}
         >
@@ -81,8 +82,11 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
             <video
               ref={videoRef}
               src={slide.src}
-              className="h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]"
-              style={{ objectPosition: slide.objectPosition || 'center 28%' }}
+              className="h-full w-full object-cover blur-[2px] sm:blur-[3px]"
+              style={{
+                objectPosition: slide.objectPosition || 'center 28%',
+                transform: `scale(${mediaScale})`,
+              }}
               muted
               playsInline
               preload="auto"
@@ -93,8 +97,11 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               src={slide.src}
               alt=""
               aria-hidden="true"
-              className="h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]"
-              style={{ objectPosition: slide.objectPosition || 'center 28%' }}
+              className="h-full w-full object-cover blur-[2px] sm:blur-[3px]"
+              style={{
+                objectPosition: slide.objectPosition || 'center 28%',
+                transform: `scale(${mediaScale})`,
+              }}
             />
           )}
         </motion.div>
