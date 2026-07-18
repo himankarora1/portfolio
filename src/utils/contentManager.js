@@ -335,6 +335,7 @@ export const contentData = {
         "Recommended reorder thresholds for SKUs based on depletion rate analysis, reducing excess stock orders by 15%",
         "Traced a 12+ hour weekly bottleneck to catalog inconsistencies and eliminated it by building Excel templates"
       ],
+      skills: ["React", "MySQL", "SQL", "ERP", "Excel", "Requirements Analysis", "Reporting Dashboards", "Process Mapping"],
       logo: "/images/companies/ferro-star.png",
       website: "https://ferrostar.com"
     },
@@ -352,6 +353,7 @@ export const contentData = {
         "Found a manual notification bottleneck and cut response time from 24 hours to under 2 by integrating email APIs",
         "Audited 300+ SKUs for pricing and data inconsistencies, resolving errors undetected across manual records"
       ],
+      skills: ["HTML", "CSS", "JavaScript", "Email APIs", "Form UX", "Data Quality", "Web Analytics"],
       logo: "/images/companies/super-enterprises.png",
       website: "#"
     }

@@ -791,7 +791,7 @@ const TechPage = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900/90 to-gray-900"></div>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100%,48rem)] h-64 bg-cyan-500/10 blur-3xl pointer-events-none"></div>
 
-          <div className="relative max-w-5xl mx-auto w-full">
+          <div className="relative max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -810,75 +810,89 @@ const TechPage = () => {
               </p>
             </motion.div>
 
-            {/* Professional Experience Timeline */}
+            {/* Professional Experience — centered timeline */}
             <div className="mb-16 sm:mb-24">
-              <div className="flex items-center gap-3 mb-8 sm:mb-10">
+              <div className="flex items-center justify-center gap-3 mb-10 sm:mb-14">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/30 flex items-center justify-center">
                   <Briefcase size={18} className="text-cyan-300" />
                 </div>
-                <div>
+                <div className="text-left">
                   <h3 className="text-xl sm:text-2xl font-bold text-white">Professional Experience</h3>
                   <p className="text-gray-500 text-xs sm:text-sm">Roles and impact across organizations</p>
                 </div>
               </div>
 
-              <div className="relative ml-3 sm:ml-4">
-                <div className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-500/40 to-cyan-500/10 rounded-full"></div>
+              <div className="relative">
+                <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-gray-700/80 md:-translate-x-1/2" />
 
-                <div className="space-y-6 sm:space-y-8">
+                <div className="space-y-12 sm:space-y-16">
                   {workExperience.map((exp, index) => (
                     <motion.div
                       key={exp.id || index}
-                      initial={{ opacity: 0, y: 24 }}
+                      initial={{ opacity: 0, y: 28 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      className="relative pl-8 sm:pl-10"
+                      className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 lg:gap-14"
                     >
-                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20"></div>
+                      {/* Timeline node */}
+                      <div
+                        className={`absolute left-4 md:left-1/2 top-3 md:top-4 w-3 h-3 rounded-full -translate-x-1/2 z-10 ${
+                          index === 0
+                            ? 'bg-cyan-400 ring-[6px] ring-cyan-400/20 shadow-[0_0_18px_rgba(34,211,238,0.45)]'
+                            : 'bg-white ring-[3px] ring-gray-800'
+                        }`}
+                      />
 
-                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-cyan-400/30 transition-all duration-300">
-                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 mb-4">
-                          <div className="flex items-start gap-3">
-                            <span className="text-xs sm:text-sm font-mono text-gray-500 pt-1 tabular-nums shrink-0">
-                              {String(index + 1).padStart(2, '0')}
-                            </span>
-                            <div>
-                              <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
-                                {exp.title}
-                              </h4>
-                              <div className="text-cyan-400 font-semibold text-sm sm:text-base mt-1">
-                                {exp.company}
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
-                              <Calendar size={12} className="text-cyan-400" />
-                              {exp.duration}
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
-                              <MapPin size={12} className="text-cyan-400" />
-                              {exp.location}
-                            </span>
-                          </div>
-                        </div>
+                      {/* Left: date, title, company */}
+                      <div className="pl-10 md:pl-0 md:pr-8 lg:pr-12 md:text-right">
+                        <span className="inline-block mb-3 px-3 py-1.5 rounded-lg bg-gray-800/90 border border-gray-700/80 text-xs sm:text-sm text-gray-200">
+                          {exp.duration}
+                        </span>
+                        <h4 className="text-xl sm:text-2xl font-bold text-white leading-snug">
+                          {exp.title}
+                        </h4>
+                        <p className="mt-1.5 text-cyan-400 font-medium text-sm sm:text-base">
+                          {exp.company}
+                        </p>
+                        {exp.location && (
+                          <p className="mt-1 text-gray-500 text-xs sm:text-sm flex items-center gap-1.5 md:justify-end">
+                            <MapPin size={12} className="text-gray-500 shrink-0" />
+                            {exp.location}
+                          </p>
+                        )}
+                      </div>
 
+                      {/* Right: description, achievements, skills */}
+                      <div className="pl-10 md:pl-8 lg:pl-12">
                         {exp.description && (
-                          <p className="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed border-l-2 border-cyan-500/30 pl-3">
+                          <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-4">
                             {exp.description}
                           </p>
                         )}
 
                         {exp.achievements?.length > 0 && (
-                          <ul className="space-y-2.5">
+                          <ul className="space-y-2 mb-5">
                             {exp.achievements.map((achievement, i) => (
-                              <li key={i} className="flex items-start gap-2.5 text-gray-300 text-sm sm:text-base">
-                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-400 shrink-0"></span>
-                                <span className="leading-relaxed">{achievement}</span>
+                              <li key={i} className="flex items-start gap-2.5 text-gray-400 text-sm leading-relaxed">
+                                <span className="mt-2 h-1 w-1 rounded-full bg-cyan-400/80 shrink-0" />
+                                <span>{achievement}</span>
                               </li>
                             ))}
                           </ul>
+                        )}
+
+                        {exp.skills?.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {exp.skills.map((skill) => (
+                              <span
+                                key={skill}
+                                className="px-2.5 py-1 rounded-md bg-gray-800/80 border border-gray-700/70 text-xs text-gray-300"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
                         )}
                       </div>
                     </motion.div>
@@ -887,54 +901,61 @@ const TechPage = () => {
               </div>
             </div>
 
-            {/* Education Timeline */}
+            {/* Education — same centered timeline */}
             <div id="education" className="scroll-mt-24">
-              <div className="flex items-center gap-3 mb-8 sm:mb-10">
+              <div className="flex items-center justify-center gap-3 mb-10 sm:mb-14">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border border-blue-400/30 flex items-center justify-center">
                   <GraduationCap size={18} className="text-blue-300" />
                 </div>
-                <div>
+                <div className="text-left">
                   <h3 className="text-xl sm:text-2xl font-bold text-white">Education</h3>
                   <p className="text-gray-500 text-xs sm:text-sm">Academic credentials and foundation</p>
                 </div>
               </div>
 
-              <div className="relative ml-3 sm:ml-4">
-                <div className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-blue-400 via-blue-500/40 to-blue-500/10 rounded-full"></div>
+              <div className="relative">
+                <div className="absolute left-4 md:left-1/2 top-2 bottom-2 w-px bg-gray-700/80 md:-translate-x-1/2" />
 
-                <div className="space-y-6 sm:space-y-8">
+                <div className="space-y-12 sm:space-y-14">
                   {education.map((exp, index) => (
                     <motion.div
                       key={exp.id || index}
-                      initial={{ opacity: 0, y: 24 }}
+                      initial={{ opacity: 0, y: 28 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      className="relative pl-8 sm:pl-10"
+                      className="relative grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 lg:gap-14"
                     >
-                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-blue-400/20"></div>
+                      <div
+                        className={`absolute left-4 md:left-1/2 top-3 md:top-4 w-3 h-3 rounded-full -translate-x-1/2 z-10 ${
+                          index === 0
+                            ? 'bg-blue-400 ring-[6px] ring-blue-400/20 shadow-[0_0_18px_rgba(96,165,250,0.4)]'
+                            : 'bg-white ring-[3px] ring-gray-800'
+                        }`}
+                      />
 
-                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-blue-400/30 transition-all duration-300">
-                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
-                          <div>
-                            <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-200 transition-colors">
-                              {exp.title}
-                            </h4>
-                            <div className="text-blue-400 font-semibold text-sm sm:text-base mt-1">
-                              {exp.company}
-                            </div>
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
-                              <Calendar size={12} className="text-blue-400" />
-                              {exp.duration}
-                            </span>
-                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
-                              <MapPin size={12} className="text-blue-400" />
-                              {exp.location}
-                            </span>
-                          </div>
-                        </div>
+                      <div className="pl-10 md:pl-0 md:pr-8 lg:pr-12 md:text-right">
+                        <span className="inline-block mb-3 px-3 py-1.5 rounded-lg bg-gray-800/90 border border-gray-700/80 text-xs sm:text-sm text-gray-200">
+                          {exp.duration}
+                        </span>
+                        <h4 className="text-xl sm:text-2xl font-bold text-white leading-snug">
+                          {exp.title}
+                        </h4>
+                        <p className="mt-1.5 text-blue-400 font-medium text-sm sm:text-base">
+                          {exp.company}
+                        </p>
+                        {exp.location && (
+                          <p className="mt-1 text-gray-500 text-xs sm:text-sm flex items-center gap-1.5 md:justify-end">
+                            <MapPin size={12} className="text-gray-500 shrink-0" />
+                            {exp.location}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="pl-10 md:pl-8 lg:pl-12 flex items-start md:pt-2">
+                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
+                          {exp.description || 'Academic foundation supporting technical analysis and product delivery.'}
+                        </p>
                       </div>
                     </motion.div>
                   ))}
