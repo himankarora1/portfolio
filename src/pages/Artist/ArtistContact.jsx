@@ -208,7 +208,7 @@ const ArtistContact = () => {
       bgColor: "bg-stone-500/10",
       borderColor: "border-stone-500/30",
       iconBg: "bg-stone-700",
-      href: "#"
+      href: contentData.social.youtube_music
     },
     {
       icon: Gamepad2,
@@ -218,7 +218,7 @@ const ArtistContact = () => {
       bgColor: "bg-blue-500/10",
       borderColor: "border-blue-500/30",
       iconBg: "bg-blue-500",
-      href: "#"
+      href: contentData.social.youtube_gaming
     },
     {
       icon: Camera,
@@ -228,7 +228,7 @@ const ArtistContact = () => {
       bgColor: "bg-orange-500/10",
       borderColor: "border-orange-500/30",
       iconBg: "bg-orange-500",
-      href: "#"
+      href: `mailto:${artistEmail}?subject=${encodeURIComponent('Brand / Content Collaboration')}`
     }
   ];
 

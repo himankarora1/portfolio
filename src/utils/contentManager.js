@@ -16,7 +16,7 @@ export const contentData = {
   social: {
     github: "https://github.com/himankarora1",
     linkedin: "https://linkedin.com/in/himankarora",
-    twitter: "https://twitter.com/himankarora",
+    twitter: "https://x.com/himankaroraa",
     youtube_music: "https://youtube.com/@himankarora",
     youtube_gaming: "https://youtube.com/@himankaroragaming",
     instagram: "https://instagram.com/himankarora1",
@@ -215,7 +215,7 @@ export const contentData = {
       featured: true,
       image: "/images/projects/portfolio.jpg",
       github: "https://github.com/himankarora1/portfolio",
-      demo: "https://himankarora.com",
+      demo: "https://himankarora.dev",
       status: "completed",
       year: "2025",
       highlights: [
@@ -593,7 +593,6 @@ export const contentData = {
     keywords: [
       "Himank Arora",
       "Technical Analyst",
-      "Developer",
       "Developer",
       "Business Analysis",
       "Content Creator",

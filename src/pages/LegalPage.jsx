@@ -30,7 +30,7 @@ const pages = {
       },
       {
         heading: 'Contact',
-        body: 'For privacy questions, email himankarora1000@gmail.com.',
+        body: `For privacy questions, email ${contentData.personal.email}.`,
       },
     ],
   },
@@ -60,7 +60,7 @@ const pages = {
       },
       {
         heading: 'Contact',
-        body: 'Questions about these terms can be sent to himankarora1000@gmail.com.',
+        body: `Questions about these terms can be sent to ${contentData.personal.email}.`,
       },
     ],
   },
@@ -139,7 +139,7 @@ const LegalPage = () => {
               </div>
             ))}
           </div>
-          <p className="text-gray-600 text-xs mt-12">© 2025 {personalInfo.name}. All rights reserved.</p>
+          <p className="text-gray-600 text-xs mt-12">© 2025–2026 {personalInfo.name}. All rights reserved.</p>
         </div>
       </div>
     );
@@ -165,7 +165,7 @@ const LegalPage = () => {
             </section>
           ))}
         </div>
-        <p className="text-gray-600 text-xs mt-12">© 2025 {personalInfo.name}. All rights reserved.</p>
+        <p className="text-gray-600 text-xs mt-12">© 2025–2026 {personalInfo.name}. All rights reserved.</p>
       </div>
     </div>
   );

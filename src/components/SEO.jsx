@@ -245,12 +245,12 @@ const SEO = ({
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={pageImage} />
-      <meta name="twitter:creator" content="@himankarora" />
-      <meta name="twitter:site" content="@himankarora" />
+      <meta name="twitter:creator" content="@himankaroraa" />
+      <meta name="twitter:site" content="@himankaroraa" />
 
       {/* Additional Meta Tags */}
-      <meta name="theme-color" content="#6366f1" />
-      <meta name="msapplication-TileColor" content="#6366f1" />
+      <meta name="theme-color" content="#06b6d4" />
+      <meta name="msapplication-TileColor" content="#05070b" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-title" content={contentData.personal.name} />
@@ -293,22 +293,6 @@ const SEO = ({
         </script>
       )}
 
-      {/* Performance hints */}
-      {currentPath === '/' && (
-        <>
-          <link rel="preload" href="/images/hero-bg.jpg" as="image" />
-          <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        </>
-      )}
-
-      {/* Additional page-specific preloads */}
-      {currentPath.startsWith('/tech') && (
-        <link rel="preload" href="/images/tech-bg.jpg" as="image" />
-      )}
-
-      {currentPath.startsWith('/artist') && (
-        <link rel="preload" href="/images/artist-bg.jpg" as="image" />
-      )}
     </Helmet>
   );
 };

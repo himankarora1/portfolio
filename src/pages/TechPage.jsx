@@ -219,7 +219,7 @@ const TechPage = () => {
       } else if (error.message.includes('non-JSON response')) {
         errorMessage += 'Server configuration error.';
       } else {
-        errorMessage += 'Please try again or email me directly at himankarora1000@gmail.com';
+        errorMessage += `Please try again or email me directly at ${personalInfo.email}`;
       }
       
       setFormStatus({
@@ -389,6 +389,14 @@ const TechPage = () => {
       analytics.trackPortfolioEvents.sectionView(sectionId);
     }
   };
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    const timer = setTimeout(() => scrollToSection(hash), 150);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount for deep links
+  }, []);
 
   return (
     <>
@@ -578,7 +586,7 @@ const TechPage = () => {
             paddingBottom: '2rem'
           }}
         >
-          <div className="max-w-7xl mx-auto w-full">
+          <div className="max-w-6xl mx-auto w-full">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               
               {/* Left side - Text Content */}
@@ -693,8 +701,8 @@ const TechPage = () => {
                     <Linkedin size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
-                    href="mailto:himankarora1000@gmail.com"
-                    onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                    href={`mailto:${personalInfo.email}`}
+                    onClick={() => handleSocialClick('Email', personalInfo.email)}
                     className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
                   >
                     <Mail size={22} className="sm:w-6 sm:h-6" />
@@ -1286,7 +1294,7 @@ const TechPage = () => {
 
         {/* Certificates Section */}
         <section id="certificates" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-y border-white/5">
-          <div className="max-w-7xl mx-auto w-full">
+          <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1438,7 +1446,7 @@ const TechPage = () => {
 
         {/* Contact Section */}
         <section id="contact" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 relative border-t border-white/5">
-          <div className="max-w-7xl mx-auto w-full">
+          <div className="max-w-6xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1453,7 +1461,7 @@ const TechPage = () => {
                 Let's Have a <span className="text-cyan-400">Chat</span>
               </h2>
               <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
-                Leave your email and I will get back to you within 24 hours
+                Leave your email and I will get back to you within 24–48 hours
               </p>
             </motion.div>
 
@@ -1473,11 +1481,11 @@ const TechPage = () => {
                     <div>
                       <h4 className="text-base sm:text-lg font-semibold text-cyan-300 mb-2">EMAIL</h4>
                       <a 
-                        href="mailto:himankarora1000@gmail.com"
-                        onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                        href={`mailto:${personalInfo.email}`}
+                        onClick={() => handleSocialClick('Email', personalInfo.email)}
                         className="text-white text-base sm:text-lg hover:text-cyan-300 transition-colors"
                       >
-                        himankarora1000@gmail.com
+                        {personalInfo.email}
                       </a>
                     </div>
                     
@@ -1533,8 +1541,8 @@ const TechPage = () => {
                     </motion.a>
                     
                     <motion.a
-                      href="mailto:himankarora1000@gmail.com"
-                      onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                      href={`mailto:${personalInfo.email}`}
+                      onClick={() => handleSocialClick('Email', personalInfo.email)}
                       className={surfaceIconBtn}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -1569,7 +1577,7 @@ const TechPage = () => {
                       </div>
                       <div>
                         <p className="text-green-300 font-semibold text-sm sm:text-base">Message sent successfully!</p>
-                        <p className="text-green-400 text-xs sm:text-sm">I'll get back to you within 24 hours.</p>
+                        <p className="text-green-400 text-xs sm:text-sm">I'll get back to you within 24–48 hours.</p>
                       </div>
                     </div>
                   </motion.div>
@@ -1704,7 +1712,7 @@ const TechPage = () => {
 
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black/30 px-3 sm:px-4 lg:px-6 py-10 sm:py-12">
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="max-w-6xl mx-auto w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 items-start">
             {/* Brand */}
             <div>
@@ -1762,8 +1770,8 @@ const TechPage = () => {
                   </svg>
                 </motion.a>
                 <motion.a
-                  href="mailto:himankarora1000@gmail.com"
-                  onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                  href={`mailto:${personalInfo.email}`}
+                  onClick={() => handleSocialClick('Email', personalInfo.email)}
                   className="w-9 h-9 border border-white/10 bg-black/25 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-all"
                   whileHover={{ scale: 1.06 }}
                   aria-label="Email"
@@ -1814,11 +1822,11 @@ const TechPage = () => {
                 <li className="flex items-start gap-2.5">
                   <Mail size={14} className="text-cyan-400 mt-0.5 shrink-0" />
                   <a
-                    href="mailto:himankarora1000@gmail.com"
-                    onClick={() => handleSocialClick('Email', 'himankarora1000@gmail.com')}
+                    href={`mailto:${personalInfo.email}`}
+                    onClick={() => handleSocialClick('Email', personalInfo.email)}
                     className="hover:text-cyan-300 transition-colors break-all"
                   >
-                    himankarora1000@gmail.com
+                    {personalInfo.email}
                   </a>
                 </li>
                 <li className="flex items-start gap-2.5">
@@ -1847,7 +1855,7 @@ const TechPage = () => {
 
           <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p className="text-gray-500 text-xs sm:text-sm">
-              © 2025 {personalInfo.name}. All rights reserved.
+              © 2025–2026 {personalInfo.name}. All rights reserved.
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm">
               <Link to="/privacy" className="text-gray-400 hover:text-cyan-300 transition-colors">
