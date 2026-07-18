@@ -16,9 +16,9 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4800,
         scale: 1,
-        // Far-right face (clear of copy); hair just under nav
-        objectPosition: '0% 5%',
-        offsetY: '-1%',
+        // Face clear of copy on the right; hair tucked just under nav
+        objectPosition: '0% top',
+        offsetY: '-12%',
       },
       {
         type: 'video',
@@ -76,8 +76,8 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4000,
         scale: 1,
-        objectPosition: '0% 5%',
-        offsetY: '-1%',
+        objectPosition: '0% top',
+        offsetY: '-12%',
       },
       {
         type: 'image',
