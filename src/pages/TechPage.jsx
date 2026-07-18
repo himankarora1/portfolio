@@ -264,10 +264,15 @@ const TechPage = () => {
 
   // Scroll detection
   useEffect(() => {
+    const updateFloatingNav = () => {
+      const isScrolled = window.scrollY > 120;
+      const isCompactViewport = window.innerWidth < 1024; // main nav already has section links on lg+
+      setShowFloatingNav(isScrolled && isCompactViewport);
+    };
+
     const handleScroll = () => {
       const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'certificates', 'contact'];
       const scrollPosition = window.scrollY + 200;
-      const isScrolled = window.scrollY > 100;
 
       // Calculate scroll progress
       const windowHeight = window.innerHeight;
@@ -276,8 +281,7 @@ const TechPage = () => {
       const currentScrollProgress = Math.min((window.scrollY / totalScrollableHeight) * 100, 100);
       setScrollProgress(currentScrollProgress);
 
-      // Show/hide floating nav based on scroll position (all devices)
-      setShowFloatingNav(isScrolled);
+      updateFloatingNav();
 
       let currentSection = 'hero';
 
@@ -296,11 +300,13 @@ const TechPage = () => {
       setActiveSection(currentSection);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', updateFloatingNav);
     setTimeout(handleScroll, 100);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateFloatingNav);
     };
   }, []);
 
@@ -463,7 +469,7 @@ const TechPage = () => {
         />
       </div>
 
-      {/* Floating Navigation - Mobile & Desktop */}
+      {/* Floating Navigation - mobile/tablet only (desktop uses main nav section links) */}
       <AnimatePresence>
         {showFloatingNav && (
           <motion.div
