@@ -1005,24 +1005,32 @@ const TechPage = () => {
                     className="group flex flex-col h-full bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700 rounded-xl shadow-lg overflow-hidden hover:shadow-cyan-500/10 transition-all duration-300 hover:border-cyan-500/50 cursor-pointer"
                   >
                     <div className="flex flex-col flex-1 p-6 sm:p-7">
-                      <div className="mb-4">
-                        <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2">
-                          {project.category}
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-                          {project.description}
-                        </p>
+                      <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2 h-4">
+                        {project.category}
                       </div>
 
-                      <div className="mt-auto pt-4">
-                        <div className="rounded-lg border border-gray-700/80 bg-gray-900/40 p-3 sm:p-4">
-                          <div className="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2.5">
+                      <h3
+                        className="text-lg sm:text-xl font-bold text-white mb-3 leading-snug h-[3.25rem] sm:h-[3.5rem] overflow-hidden group-hover:text-cyan-300 transition-colors"
+                        style={{
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical'
+                        }}
+                        title={project.title}
+                      >
+                        {project.title}
+                      </h3>
+
+                      <p className="text-gray-300 leading-relaxed text-sm sm:text-base h-[6.5rem] overflow-y-auto pr-1 mb-4">
+                        {project.description}
+                      </p>
+
+                      <div className="mt-auto">
+                        <div className="rounded-lg border border-gray-700/80 bg-gray-900/40 p-3 sm:p-4 h-[6.25rem] flex flex-col">
+                          <div className="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2.5 shrink-0">
                             Tech stack
                           </div>
-                          <div className="flex flex-wrap gap-2 content-start">
+                          <div className="flex flex-wrap gap-2 content-start overflow-y-auto">
                             {project.tech.map(tech => (
                               <span
                                 key={tech}
@@ -1036,7 +1044,7 @@ const TechPage = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 sm:gap-3 min-h-[52px] px-6 sm:px-7 py-3.5 sm:py-4 border-t border-gray-700/80 bg-gray-900/30">
+                    <div className="flex items-center gap-2 sm:gap-3 h-[52px] px-6 sm:px-7 border-t border-gray-700/80 bg-gray-900/30 shrink-0">
                       {project.github && (
                         <a
                           href={project.github}
