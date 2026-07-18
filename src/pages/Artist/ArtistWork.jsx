@@ -639,30 +639,31 @@ const ArtistWork = () => {
       />
 
       <ArtistPageShell>
-        {/* Single cinematic hero — ensemble stage shot */}
-        <div className="relative z-10 w-full min-h-[42vh] sm:min-h-[50vh] overflow-hidden">
-          <img
-            src={artistMedia.work.banner}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover object-[center_32%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/55" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/50" />
-          <div className="relative flex min-h-[42vh] sm:min-h-[50vh] items-end justify-center px-4 pb-10 pt-28 sm:pb-14 sm:pt-32">
-            <div className="max-w-3xl text-center">
-              <h1 className="mb-3 text-3xl font-bold text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
-                My{' '}
-                <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">
-                  Creative Work
-                </span>
-              </h1>
-              <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base lg:text-lg">
-                Explore my content across music, gaming, and personal vlogs. Each category showcases different aspects of my creative journey.
-              </p>
-            </div>
+        {/* Single blurred cinematic hero — one framed shot */}
+        <section className="relative isolate w-full overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src={artistMedia.work.banner}
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full scale-110 object-cover object-center blur-[3px] sm:blur-[4px]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
           </div>
-        </div>
+
+          <div className="relative mx-auto flex min-h-[44vh] w-full max-w-4xl flex-col items-center justify-center px-4 pb-12 pt-28 text-center sm:min-h-[52vh] sm:px-6 sm:pb-16 sm:pt-32">
+            <h1 className="mb-3 text-3xl font-bold leading-tight text-white sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
+              My{' '}
+              <span className="bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 bg-clip-text text-transparent">
+                Creative Work
+              </span>
+            </h1>
+            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-300/95 sm:text-base lg:text-lg">
+              Explore my content across music, gaming, and personal vlogs. Each category showcases different aspects of my creative journey.
+            </p>
+          </div>
+        </section>
 
         {/* Main Content */}
         <motion.div 

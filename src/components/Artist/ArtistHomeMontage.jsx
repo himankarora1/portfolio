@@ -72,8 +72,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
         <motion.div
           key={`${slide.type}-${slide.src}-${index}`}
           className="absolute inset-0"
-          initial={{ opacity: 0, scale: 1.04 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1.03 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeInOut' }}
         >
@@ -81,7 +81,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
             <video
               ref={videoRef}
               src={slide.src}
-              className="h-full w-full object-cover"
+              className="h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]"
               style={{ objectPosition: slide.objectPosition || 'center center' }}
               muted
               playsInline
@@ -93,7 +93,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               src={slide.src}
               alt=""
               aria-hidden="true"
-              className="h-full w-full object-cover"
+              className="h-full w-full scale-105 object-cover blur-[2px] sm:blur-[3px]"
               style={{ objectPosition: slide.objectPosition || 'center 30%' }}
             />
           )}
