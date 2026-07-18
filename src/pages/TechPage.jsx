@@ -75,6 +75,7 @@ const TechPage = () => {
   const floatingNavHoveredRef = useRef(false);
   const [currentCertPage, setCurrentCertPage] = useState(0);
   const [currentProjectPage, setCurrentProjectPage] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   
@@ -238,10 +239,13 @@ const TechPage = () => {
   };
 
   const handleProjectClick = (project) => {
+    setSelectedProject(project);
     if (analytics?.trackPortfolioEvents) {
       analytics.trackPortfolioEvents.projectView(project.id, project.title);
     }
   };
+
+  const closeProjectDetail = () => setSelectedProject(null);
 
   const handleProjectDemo = (project) => {
     if (analytics?.trackPortfolioEvents) {
@@ -260,6 +264,20 @@ const TechPage = () => {
       analytics.trackPortfolioEvents.socialClick(platform, url);
     }
   };
+
+  // Close project detail on Escape
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') closeProjectDetail();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [selectedProject]);
 
   // Fixed typing animation effect
   useEffect(() => {
@@ -1111,6 +1129,9 @@ const TechPage = () => {
                       >
                         {project.description}
                       </p>
+                      <p className="text-xs text-gray-500 mb-4 group-hover:text-cyan-400/80 transition-colors">
+                        View details →
+                      </p>
 
                       <div className="mt-auto">
                         <div className="text-xs font-medium uppercase tracking-wide text-gray-500 mb-2.5">
@@ -1847,6 +1868,116 @@ const TechPage = () => {
           </div>
         </div>
       </footer>
+      {/* Project detail modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+            onClick={closeProjectDetail}
+          >
+            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-detail-title"
+              className={`relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto ${surfaceCard} p-6 sm:p-8`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-4 mb-5">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2">
+                    {selectedProject.category}
+                  </p>
+                  <h3
+                    id="project-detail-title"
+                    className="font-display text-xl sm:text-2xl font-semibold text-white leading-snug"
+                  >
+                    {selectedProject.title}
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeProjectDetail}
+                  className="shrink-0 p-2 rounded-lg border border-white/10 bg-black/25 text-gray-400 hover:text-white hover:border-white/20 transition-colors"
+                  aria-label="Close project details"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+                {selectedProject.description}
+              </p>
+
+              {selectedProject.highlights?.length > 0 && (
+                <div className="mb-6">
+                  <p className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-medium">
+                    Highlights
+                  </p>
+                  <ul className="space-y-2.5">
+                    {selectedProject.highlights.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-gray-300 text-sm leading-relaxed">
+                        <span className="mt-2 h-1 w-1 rounded-full bg-cyan-400/80 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {selectedProject.tech?.length > 0 && (
+                <div className="mb-6">
+                  <p className="text-xs uppercase tracking-wider text-gray-500 mb-3 font-medium">
+                    Tech stack
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tech.map((tech) => (
+                      <span key={tech} className={surfaceTag}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-3 pt-2 border-t border-white/10">
+                {selectedProject.github && (
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleProjectGithub(selectedProject)}
+                    className={btnSecondary}
+                  >
+                    <Github size={16} />
+                    <span>View Code</span>
+                  </a>
+                )}
+                {selectedProject.demo && selectedProject.demo !== '#' && (
+                  <a
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleProjectDemo(selectedProject)}
+                    className={btnPrimary}
+                  >
+                    <ExternalLink size={16} />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
