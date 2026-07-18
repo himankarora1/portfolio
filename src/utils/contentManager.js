@@ -303,7 +303,7 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Developing full-stack applications, designing databases, and applying algorithms and software engineering practices to real systems. Expanding into data science, machine learning, web and UX design, prompt engineering, and translating business requirements into information solutions.",
+      description: "Built full-stack applications, designed databases, and applied algorithms and software engineering practices to real systems. Developed skills in data science, machine learning, web and UX design, prompt engineering, and translating business requirements into information solutions.",
       achievements: [],
       skills: [
         "Full-Stack Development",
@@ -375,7 +375,7 @@ export const contentData = {
       ],
       skills: ["HTML", "CSS", "JavaScript", "Email APIs", "Form UX", "Data Quality", "Web Analytics"],
       logo: "/images/companies/super-enterprises.png",
-      website: "#"
+      website: null
     }
   ],
 
@@ -664,7 +664,7 @@ export const generateSEOData = (page) => {
     title: `${contentData.personal.name} - ${contentData.personal.title}`,
     description: contentData.personal.bio,
     url: contentData.meta.site_url,
-    image: contentData.meta.og_image,
+    image: `${contentData.meta.site_url}${contentData.meta.og_image}`,
     keywords: contentData.meta.keywords.join(', ')
   };
 

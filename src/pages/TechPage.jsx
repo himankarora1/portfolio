@@ -871,7 +871,7 @@ const TechPage = () => {
                   </div>
                   <div className="flex items-center gap-3 text-sm sm:text-base text-gray-300">
                     <GraduationCap size={15} className="text-cyan-400 shrink-0" />
-                    <span>MS Information Systems, Northeastern</span>
+                    <span>MS Information Systems, Northeastern ’26</span>
                   </div>
                 </div>
 

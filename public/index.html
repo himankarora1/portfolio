@@ -42,22 +42,14 @@
     <meta name="twitter:creator" content="@himankaroraa" />
     <meta name="twitter:site" content="@himankaroraa" />
     
-    <!-- Enhanced Favicon set -->
-    <!-- <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ec4899" /> -->
-
-    <!-- Simple Favicon set -->
+    <!-- Favicon set -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#06b6d4" />
     
     <!-- DNS prefetch and preconnect for performance -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -107,14 +99,16 @@
         "Gaming"
       ],
       "description": "Technical Analyst and developer who turns business needs into working products, plus a creative artist and content creator.",
-      "worksFor": {
-        "@type": "EducationalOrganization",
-        "name": "Northeastern University"
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Northeastern University"
-      }
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Northeastern University"
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Guru Gobind Singh Indraprastha University"
+        }
+      ]
     }
     </script>
     
@@ -524,25 +518,6 @@
         window.addEventListener('online', updateNetworkStatus);
         window.addEventListener('offline', updateNetworkStatus);
       }
-      
-      // Preload critical resources
-      function preloadCriticalResources() {
-        const criticalImages = [
-          '/images/mewithguitar.jpg',
-          '/images/itsrhiney.jpg'
-        ];
-        
-        criticalImages.forEach(src => {
-          const link = document.createElement('link');
-          link.rel = 'preload';
-          link.as = 'image';
-          link.href = src;
-          document.head.appendChild(link);
-        });
-      }
-      
-      // Start preloading after initial load
-      setTimeout(preloadCriticalResources, 1000);
     </script>
   </body>
 </html>

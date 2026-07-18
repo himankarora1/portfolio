@@ -1,14 +1,16 @@
 // Service Worker for Himank Arora Portfolio
 // Offline support + caching. Never cache Range/206 responses (breaks video).
 
-const CACHE_NAME = 'himank-portfolio-v1.1.0';
-const RUNTIME_CACHE = 'himank-runtime-v1.1.0';
+const CACHE_NAME = 'himank-portfolio-v1.2.0';
+const RUNTIME_CACHE = 'himank-runtime-v1.2.0';
 
 // Keep precache minimal — hashed CRA assets change every deploy
 const PRECACHE_ASSETS = [
   '/',
   '/favicon.ico',
+  '/favicon.svg',
   '/apple-touch-icon.png',
+  '/images/og-image.jpg',
 ];
 
 self.addEventListener('install', (event) => {

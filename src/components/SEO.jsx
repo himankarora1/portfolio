@@ -55,20 +55,22 @@ const SEO = ({
         : currentPath.startsWith('/artist')
           ? "Content Creator & Musician"
           : "Technical Analyst & Developer",
-      "worksFor": {
-        "@type": "EducationalOrganization",
-        "name": "Northeastern University",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Boston",
-          "addressRegion": "MA",
-          "addressCountry": "US"
+      "alumniOf": [
+        {
+          "@type": "EducationalOrganization",
+          "name": "Northeastern University",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Boston",
+            "addressRegion": "MA",
+            "addressCountry": "US"
+          }
+        },
+        {
+          "@type": "EducationalOrganization",
+          "name": "Guru Gobind Singh Indraprastha University"
         }
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Northeastern University"
-      },
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": contentData.personal.location.split(', ')[0],
@@ -275,11 +277,13 @@ const SEO = ({
       <link rel="dns-prefetch" href="https://instagram.com" />
 
       {/* Favicon and Icons */}
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <link rel="icon" type="image/x-icon" href={contentData.meta.favicon} />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="manifest" href="/site.webmanifest" />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#06b6d4" />
 
       {/* JSON-LD Schema */}
       <script type="application/ld+json">
