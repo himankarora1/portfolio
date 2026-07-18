@@ -88,7 +88,6 @@ const TechPage = () => {
     { id: 'hero', label: 'Home', icon: Home },
     { id: 'about', label: 'About', icon: User },
     { id: 'experience', label: 'Experience', icon: Briefcase },
-    { id: 'education', label: 'Education', icon: GraduationCap },
     { id: 'projects', label: 'Projects', icon: Target },
     { id: 'skills', label: 'Skills', icon: Zap },
     { id: 'certificates', label: 'Certificates', icon: Award },
@@ -266,7 +265,7 @@ const TechPage = () => {
     let scrollTimer;
     
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'experience', 'education', 'projects', 'skills', 'certificates', 'contact'];
+      const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'certificates', 'contact'];
       const scrollPosition = window.scrollY + 200;
       const isScrolled = window.scrollY > 100;
 
@@ -852,8 +851,11 @@ const TechPage = () => {
         </section>
 
         {/* Experience & Education Section */}
-        <section id="experience" className="py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gray-900/50 backdrop-blur-sm border-y border-gray-700 scroll-mt-20">
-          <div className="max-w-4xl mx-auto w-full">
+        <section id="experience" className="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-4 lg:px-6 overflow-hidden scroll-mt-20">
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-slate-900/90 to-gray-900"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100%,48rem)] h-64 bg-cyan-500/10 blur-3xl pointer-events-none"></div>
+
+          <div className="relative max-w-5xl mx-auto w-full">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -864,64 +866,73 @@ const TechPage = () => {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
                 Experience & Education
               </h2>
-              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6 sm:mb-8"></div>
+              <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-4"></div>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+                A clear view of my professional path and academic foundation.
+              </p>
             </motion.div>
 
             {/* Professional Experience Timeline */}
-            <div className="mb-14 sm:mb-20">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center">
-                  <Briefcase size={18} className="text-cyan-400" />
+            <div className="mb-16 sm:mb-24">
+              <div className="flex items-center gap-3 mb-8 sm:mb-10">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+                  <Briefcase size={18} className="text-cyan-300" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">Professional Experience</h3>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Professional Experience</h3>
+                  <p className="text-gray-500 text-xs sm:text-sm">Roles and impact across organizations</p>
+                </div>
               </div>
 
-              <div className="relative pl-6 sm:pl-8">
-                <div className="absolute left-[11px] sm:left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-cyan-400 via-blue-500/60 to-transparent"></div>
+              <div className="relative ml-3 sm:ml-4">
+                <div className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-cyan-400 via-cyan-500/40 to-cyan-500/10 rounded-full"></div>
 
-                <div className="space-y-8">
+                <div className="space-y-6 sm:space-y-8">
                   {workExperience.map((exp, index) => (
                     <motion.div
                       key={exp.id || index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.12 }}
                       viewport={{ once: true }}
-                      className="relative"
+                      className="relative pl-8 sm:pl-10"
                     >
-                      <div className="absolute -left-6 sm:-left-8 top-5 w-[14px] h-[14px] sm:w-4 sm:h-4 rounded-full bg-cyan-400 border-4 border-gray-900 shadow-[0_0_12px_rgba(34,211,238,0.5)]"></div>
+                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/20 shadow-[0_0_16px_rgba(34,211,238,0.55)]"></div>
 
-                      <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-xl p-5 sm:p-6 hover:border-cyan-500/40 transition-all">
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-cyan-400/40 hover:shadow-[0_8px_40px_rgba(34,211,238,0.08)] transition-all duration-300">
+                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 mb-4">
                           <div>
-                            <div className="inline-flex items-center px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-medium mb-2">
-                              Work
+                            <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-200 transition-colors">
+                              {exp.title}
+                            </h4>
+                            <div className="text-cyan-400 font-semibold text-sm sm:text-base mt-1">
+                              {exp.company}
                             </div>
-                            <h4 className="text-lg sm:text-xl font-bold text-white">{exp.title}</h4>
-                            <div className="text-cyan-400 font-semibold text-sm sm:text-base">{exp.company}</div>
                           </div>
-                          <div className="flex flex-col sm:items-end text-xs sm:text-sm text-gray-400 shrink-0">
-                            <div className="flex items-center space-x-1 mb-1">
-                              <Calendar size={12} />
-                              <span>{exp.duration}</span>
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <MapPin size={12} />
-                              <span>{exp.location}</span>
-                            </div>
+                          <div className="flex flex-wrap gap-2">
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
+                              <Calendar size={12} className="text-cyan-400" />
+                              {exp.duration}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
+                              <MapPin size={12} className="text-cyan-400" />
+                              {exp.location}
+                            </span>
                           </div>
                         </div>
 
                         {exp.description && (
-                          <p className="text-gray-300 text-sm sm:text-base mb-3 leading-relaxed">{exp.description}</p>
+                          <p className="text-gray-300 text-sm sm:text-base mb-4 leading-relaxed border-l-2 border-cyan-500/30 pl-3">
+                            {exp.description}
+                          </p>
                         )}
 
                         {exp.achievements?.length > 0 && (
-                          <ul className="space-y-2">
+                          <ul className="space-y-2.5">
                             {exp.achievements.map((achievement, i) => (
-                              <li key={i} className="flex items-start space-x-2 text-gray-300 text-sm sm:text-base">
-                                <Award size={14} className="text-cyan-400 mt-1 flex-shrink-0" />
-                                <span>{achievement}</span>
+                              <li key={i} className="flex items-start gap-2.5 text-gray-300 text-sm sm:text-base">
+                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-400 shrink-0"></span>
+                                <span className="leading-relaxed">{achievement}</span>
                               </li>
                             ))}
                           </ul>
@@ -935,46 +946,50 @@ const TechPage = () => {
 
             {/* Education Timeline */}
             <div id="education" className="scroll-mt-24">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center">
-                  <GraduationCap size={18} className="text-blue-400" />
+              <div className="flex items-center gap-3 mb-8 sm:mb-10">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-400/30 flex items-center justify-center shadow-[0_0_20px_rgba(96,165,250,0.15)]">
+                  <GraduationCap size={18} className="text-blue-300" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white">Education</h3>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Education</h3>
+                  <p className="text-gray-500 text-xs sm:text-sm">Academic credentials and foundation</p>
+                </div>
               </div>
 
-              <div className="relative pl-6 sm:pl-8">
-                <div className="absolute left-[11px] sm:left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-400 via-indigo-500/60 to-transparent"></div>
+              <div className="relative ml-3 sm:ml-4">
+                <div className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-blue-400 via-blue-500/40 to-blue-500/10 rounded-full"></div>
 
-                <div className="space-y-8">
+                <div className="space-y-6 sm:space-y-8">
                   {education.map((exp, index) => (
                     <motion.div
                       key={exp.id || index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.12 }}
                       viewport={{ once: true }}
-                      className="relative"
+                      className="relative pl-8 sm:pl-10"
                     >
-                      <div className="absolute -left-6 sm:-left-8 top-5 w-[14px] h-[14px] sm:w-4 sm:h-4 rounded-full bg-blue-400 border-4 border-gray-900 shadow-[0_0_12px_rgba(96,165,250,0.5)]"></div>
+                      <div className="absolute left-[-5px] top-6 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-blue-400/20 shadow-[0_0_16px_rgba(96,165,250,0.55)]"></div>
 
-                      <div className="bg-gray-800/60 backdrop-blur-sm border border-gray-700 rounded-xl p-5 sm:p-6 hover:border-blue-500/40 transition-all">
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                      <div className="group rounded-2xl border border-gray-700/80 bg-gradient-to-br from-gray-800/90 to-gray-900/80 backdrop-blur-sm p-5 sm:p-7 hover:border-blue-400/40 hover:shadow-[0_8px_40px_rgba(96,165,250,0.08)] transition-all duration-300">
+                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
                           <div>
-                            <div className="inline-flex items-center px-2 py-0.5 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-medium mb-2">
-                              Education
+                            <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-blue-200 transition-colors">
+                              {exp.title}
+                            </h4>
+                            <div className="text-blue-400 font-semibold text-sm sm:text-base mt-1">
+                              {exp.company}
                             </div>
-                            <h4 className="text-lg sm:text-xl font-bold text-white">{exp.title}</h4>
-                            <div className="text-blue-400 font-semibold text-sm sm:text-base">{exp.company}</div>
                           </div>
-                          <div className="flex flex-col sm:items-end text-xs sm:text-sm text-gray-400 shrink-0">
-                            <div className="flex items-center space-x-1 mb-1">
-                              <Calendar size={12} />
-                              <span>{exp.duration}</span>
-                            </div>
-                            <div className="flex items-center space-x-1">
-                              <MapPin size={12} />
-                              <span>{exp.location}</span>
-                            </div>
+                          <div className="flex flex-wrap gap-2">
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
+                              <Calendar size={12} className="text-blue-400" />
+                              {exp.duration}
+                            </span>
+                            <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-900/70 border border-gray-600/80 px-3 py-1 text-xs text-gray-300">
+                              <MapPin size={12} className="text-blue-400" />
+                              {exp.location}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -1696,16 +1711,7 @@ const TechPage = () => {
                     className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
                   >
                     <Briefcase size={14} className="sm:w-4 sm:h-4" />
-                    <span>Experience</span>
-                  </button>
-                </li>
-                <li>
-                  <button 
-                    onClick={() => scrollToSection('education')}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center space-x-2 text-sm sm:text-base"
-                  >
-                    <GraduationCap size={14} className="sm:w-4 sm:h-4" />
-                    <span>Education</span>
+                    <span>Experience & Education</span>
                   </button>
                 </li>
                 <li>
