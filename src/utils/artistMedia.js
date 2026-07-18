@@ -46,8 +46,8 @@ export const artistMedia = {
         src: '/images/artist/artist-rooftop-solo.jpg',
         duration: 4500,
         scale: 1,
-        // Mid bias: face under nav (78% was too high — only legs showed)
-        objectPosition: 'center 52%',
+        // A bit lower than 52% so head/mic stay in frame (clip after this stays as-is)
+        objectPosition: 'center 38%',
       },
       {
         type: 'video',
