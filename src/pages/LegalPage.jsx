@@ -116,8 +116,8 @@ const LegalPage = () => {
       <div className="min-h-screen tech-grid-bg text-white">
         <SEO title="Sitemap | Himank Arora" description="Sitemap for Himank Arora portfolio." />
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-          <Link to="/tech" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
-            Back to Tech Portfolio
+        <Link to="/" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
+            Back to Portfolio Hub
           </Link>
           <h1 className="font-display text-3xl sm:text-4xl font-semibold mt-6 mb-2">Sitemap</h1>
           <p className="text-gray-400 text-sm mb-10">All primary pages and sections on this site.</p>
@@ -152,8 +152,8 @@ const LegalPage = () => {
     <div className="min-h-screen tech-grid-bg text-white">
       <SEO title={`${doc.title} | Himank Arora`} description={`${doc.title} for Himank Arora portfolio.`} />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <Link to="/tech" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
-          Back to Tech Portfolio
+        <Link to="/" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
+          Back to Portfolio Hub
         </Link>
         <h1 className="font-display text-3xl sm:text-4xl font-semibold mt-6 mb-2">{doc.title}</h1>
         <p className="text-gray-500 text-sm mb-10">Last updated: {doc.updated}</p>

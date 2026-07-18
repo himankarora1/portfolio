@@ -84,7 +84,7 @@ const ArtistFooter = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackSocial(platform.name, platform.url)}
-                  className={`w-9 h-9 ${platform.color} rounded-lg flex items-center justify-center text-white hover:opacity-90 transition-opacity`}
+                  className={`inline-flex h-11 w-11 items-center justify-center ${platform.color} rounded-lg text-white hover:opacity-90 transition-opacity`}
                   whileHover={{ scale: 1.06 }}
                   aria-label={platform.name}
                 >

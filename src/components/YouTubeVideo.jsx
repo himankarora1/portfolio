@@ -97,7 +97,7 @@ const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
           {video.title}
         </h4>
         
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-gray-400 mb-3">
           {stats?.viewCount && (
             <div className="flex items-center space-x-1">
               <Eye size={12} />

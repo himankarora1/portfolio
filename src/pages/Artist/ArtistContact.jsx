@@ -192,9 +192,9 @@ const ArtistContact = () => {
       title: "Gaming Content",
       value: "Stream collaborations",
       description: "Walkthroughs and live streams",
-      bgColor: "bg-blue-500/10",
-      borderColor: "border-blue-500/30",
-      iconBg: "bg-blue-500",
+      bgColor: "bg-amber-500/10",
+      borderColor: "border-amber-500/30",
+      iconBg: "bg-amber-700",
       href: contentData.social.youtube_gaming
     },
     {
@@ -204,7 +204,7 @@ const ArtistContact = () => {
       description: "Brand and content partnerships",
       bgColor: "bg-orange-500/10",
       borderColor: "border-orange-500/30",
-      iconBg: "bg-orange-500",
+      iconBg: "bg-orange-600",
       href: `mailto:${artistEmail}?subject=${encodeURIComponent('Brand / Content Collaboration')}`
     }
   ];
@@ -214,8 +214,8 @@ const ArtistContact = () => {
     { icon: Mic, label: "Live Gigs & Performances", color: "bg-amber-600" },
     { icon: Gamepad2, label: "Gaming Stream Collaborations", color: "bg-amber-700" },
     { icon: Music, label: "Music Production", color: "bg-stone-700" },
-    { icon: Edit, label: "Audio & Video Editing", color: "bg-green-600" },
-    { icon: Users, label: "Brand Collaborations", color: "bg-red-600" }
+    { icon: Edit, label: "Audio & Video Editing", color: "bg-amber-800" },
+    { icon: Users, label: "Brand Collaborations", color: "bg-orange-700" }
   ];
 
   const socialPlatforms = [
@@ -346,7 +346,7 @@ const ArtistContact = () => {
                     <method.icon size={20} className="text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-white mb-2">{method.title}</h3>
-                  <p className="mb-2 text-sm font-semibold text-amber-200 sm:text-base">{method.value}</p>
+                  <p className="mb-2 break-all text-sm font-semibold text-amber-200 sm:text-base">{method.value}</p>
                   <p className="mt-auto text-gray-300 text-xs sm:text-sm">{method.description}</p>
                 </motion.a>
               ))}
@@ -408,12 +408,12 @@ const ArtistContact = () => {
                   ].map(([label, price], i, arr) => (
                     <div
                       key={label}
-                      className={`flex items-center justify-between px-3 py-2.5 text-sm ${
+                      className={`flex items-start justify-between gap-3 px-3 py-2.5 text-sm ${
                         i < arr.length - 1 ? 'border-b border-white/10' : ''
                       }`}
                     >
-                      <span className="text-gray-300">{label}</span>
-                      <span className="font-medium text-amber-200">{price}</span>
+                      <span className="min-w-0 text-gray-300 pr-2">{label}</span>
+                      <span className="shrink-0 font-medium text-amber-200">{price}</span>
                     </div>
                   ))}
                 </div>
@@ -484,7 +484,7 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                          className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-base text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5"
                           placeholder="Your full name"
                         />
                       </div>
@@ -500,7 +500,7 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                          className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-base text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5"
                           placeholder="your.email@example.com"
                         />
                       </div>
@@ -516,16 +516,16 @@ const ArtistContact = () => {
                         onChange={handleInputChange}
                         required
                         disabled={formStatus.isSubmitting}
-                        className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                        className="w-full rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-base text-white transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5"
                       >
                         <option value="" className="text-gray-400">Select a subject</option>
-                        <option value="live-performance" className="text-gray-900">Live Gigs & Performances</option>
-                        <option value="gaming-collaboration" className="text-gray-900">Gaming Stream Collaboration</option>
-                        <option value="music-production" className="text-gray-900">Music Production</option>
-                        <option value="audio-video-editing" className="text-gray-900">Audio & Video Editing</option>
-                        <option value="brand-collaboration" className="text-gray-900">Brand Collaboration</option>
-                        <option value="general" className="text-gray-900">General Inquiry</option>
-                        <option value="other" className="text-gray-900">Other</option>
+                        <option value="Live Gigs & Performances" className="text-gray-900">Live Gigs & Performances</option>
+                        <option value="Gaming Stream Collaboration" className="text-gray-900">Gaming Stream Collaboration</option>
+                        <option value="Music Production" className="text-gray-900">Music Production</option>
+                        <option value="Audio & Video Editing" className="text-gray-900">Audio & Video Editing</option>
+                        <option value="Brand Collaboration" className="text-gray-900">Brand Collaboration</option>
+                        <option value="General Inquiry" className="text-gray-900">General Inquiry</option>
+                        <option value="Other" className="text-gray-900">Other</option>
                       </select>
                     </div>
                     
@@ -540,7 +540,7 @@ const ArtistContact = () => {
                         required
                         disabled={formStatus.isSubmitting}
                         rows={4}
-                        className="w-full resize-none rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
+                        className="w-full resize-none rounded-xl border border-white/10 bg-[#12151a] px-3 py-3 text-base text-white placeholder-gray-500 transition-all focus:border-amber-300/50 focus:outline-none focus:ring-2 focus:ring-amber-400/15 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5"
                         placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       />
                     </div>

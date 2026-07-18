@@ -658,7 +658,7 @@ const ArtistWork = () => {
                             <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 leading-tight">
                               {getMainVideo().title}
                             </h3>
-                            <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+                            <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base line-clamp-4 sm:line-clamp-6">
                               {getMainVideo().description || 'Watch the full video on YouTube.'}
                             </p>
                           </div>

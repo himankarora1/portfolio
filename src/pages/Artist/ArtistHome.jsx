@@ -59,13 +59,13 @@ const ArtistHome = () => {
         keywords="content creator, musician, gaming, YouTube, vlogs, streaming, community"
       />
 
-      <div className="relative min-h-screen overflow-hidden bg-black">
+      <div className="relative min-h-screen min-h-[100dvh] overflow-hidden bg-black">
         <ArtistHomeMontage slides={media.montage} />
 
         <ArtistNav />
 
         <div
-          className={`relative z-10 flex min-h-screen flex-col justify-end ${artistPagePad} pb-12 pt-28 sm:pb-16 sm:pt-24 lg:pb-20`}
+          className={`relative z-10 flex min-h-screen min-h-[100dvh] flex-col justify-end ${artistPagePad} pb-12 pt-28 sm:pb-16 sm:pt-24 lg:pb-20`}
         >
           <div className={`${artistPageWidth}`}>
             <motion.div

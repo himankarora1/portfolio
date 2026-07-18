@@ -35,12 +35,15 @@ const SEO = ({
   const pageTitle = title || seoData.title;
   const pageDescription = description || seoData.description;
   const pageImage = image || seoData.image;
-  const twitterImage = contentData.meta.twitter_image
-    ? `${contentData.meta.site_url}${contentData.meta.twitter_image}`
-    : pageImage;
+  const twitterImage = pageImage;
   const pageKeywords = keywords || seoData.keywords;
   const canonicalUrl = canonical || `${seoData.url}${currentPath}`;
   const pageAuthor = author || contentData.personal.name;
+  const themeColor = currentPath.startsWith('/artist')
+    ? '#f59e0b'
+    : currentPath.startsWith('/tech')
+      ? '#06b6d4'
+      : '#0f172a';
   
   // Generate JSON-LD schema
   const generateSchema = () => {
@@ -254,7 +257,7 @@ const SEO = ({
       <meta name="twitter:site" content="@himankaroraa" />
 
       {/* Additional Meta Tags */}
-      <meta name="theme-color" content="#06b6d4" />
+      <meta name="theme-color" content={themeColor} />
       <meta name="msapplication-TileColor" content="#05070b" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />

@@ -396,32 +396,15 @@
     
     <!-- Enhanced performance monitoring and error handling -->
     <script>
-      // Global error handler
+      // Global error handler — log only; avoid nuking the UI for non-fatal script noise
       window.addEventListener('error', function(event) {
         console.error('Global error:', event.error);
-        showErrorScreen('Application Error', 'Something went wrong. Please refresh the page.');
       });
       
       window.addEventListener('unhandledrejection', function(event) {
         console.error('Unhandled promise rejection:', event.reason);
         event.preventDefault();
       });
-      
-      // Error screen function
-      function showErrorScreen(title, message) {
-        const errorHtml = `
-          <div class="error-container">
-            <div class="error-content">
-              <div class="error-title">${title}</div>
-              <div class="error-text">${message}</div>
-              <button class="error-button" onclick="window.location.reload()">
-                Refresh Page
-              </button>
-            </div>
-          </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', errorHtml);
-      }
       
       // Enhanced performance monitoring
       window.addEventListener('load', function() {

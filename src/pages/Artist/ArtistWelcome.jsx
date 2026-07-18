@@ -13,6 +13,15 @@ const ArtistWelcome = ({ onComplete }) => {
   const [showIcons, setShowIcons] = useState(false);
   const [showFinalText, setShowFinalText] = useState(false);
   const [textSequenceComplete, setTextSequenceComplete] = useState(false);
+  const [compactLayout, setCompactLayout] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-height: 720px), (max-width: 640px)');
+    const update = () => setCompactLayout(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   // Skip intro function
   const handleSkipIntro = () => {
@@ -206,7 +215,7 @@ const ArtistWelcome = ({ onComplete }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[9999] group cursor-pointer pointer-events-auto"
+          className="fixed z-[9999] group cursor-pointer pointer-events-auto bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-8 sm:right-8"
           style={{ pointerEvents: 'auto' }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -363,7 +372,7 @@ const ArtistWelcome = ({ onComplete }) => {
                 animate={{ 
                   opacity: 1,
                   scale: 1,
-                  y: logoShouldMoveUp ? -160 : 0 // KEEP ORIGINAL SPACING for desktop
+                  y: logoShouldMoveUp ? (compactLayout ? -72 : -160) : 0
                 }}
                 transition={{
                   opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
@@ -371,10 +380,6 @@ const ArtistWelcome = ({ onComplete }) => {
                   y: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  // Responsive Y offset using CSS transforms for mobile - CLOSER spacing
-                  transform: logoShouldMoveUp ? 'translateY(max(-80px, -160px))' : 'translateY(0)'
-                }}
               >
                 <div className="relative">
                   <motion.div 
@@ -405,12 +410,12 @@ const ArtistWelcome = ({ onComplete }) => {
               <motion.div
                 initial={{ 
                   opacity: 0,
-                  y: -20, // KEEP ORIGINAL positioning
+                  y: compactLayout ? -8 : -20,
                   scale: 0.9
                 }}
                 animate={{ 
                   opacity: 1,
-                  y: -20, // KEEP ORIGINAL positioning
+                  y: compactLayout ? -8 : -20,
                   scale: 1
                 }}
                 transition={{
@@ -419,10 +424,6 @@ const ArtistWelcome = ({ onComplete }) => {
                   scale: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  // Responsive positioning using CSS - CLOSER spacing
-                  transform: 'translateY(max(-5px, -20px))'
-                }}
               >
                 <motion.h1 
                   className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-amber-200 text-center px-4"
@@ -450,21 +451,17 @@ const ArtistWelcome = ({ onComplete }) => {
               <motion.div
                 initial={{ 
                   opacity: 0,
-                  y: 110 // KEEP ORIGINAL spacing for desktop
+                  y: compactLayout ? 56 : 110
                 }}
                 animate={{ 
                   opacity: 1,
-                  y: 110 // KEEP ORIGINAL spacing for desktop
+                  y: compactLayout ? 56 : 110
                 }}
                 transition={{
                   opacity: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
                   y: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
                 className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  // Responsive positioning using CSS - CLOSER spacing
-                  transform: 'translateY(max(60px, 110px))'
-                }}
               >
                 <div className="flex justify-center items-center space-x-6 sm:space-x-8 lg:space-x-12">
                   {creativityIcons.map(({ Icon, color, label }, index) => (
@@ -520,21 +517,17 @@ const ArtistWelcome = ({ onComplete }) => {
               <motion.div
                 initial={{ 
                   opacity: 0,
-                  y: 220 // KEEP ORIGINAL spacing for desktop
+                  y: compactLayout ? 118 : 220
                 }}
                 animate={{ 
                   opacity: 1,
-                  y: 220 // KEEP ORIGINAL spacing for desktop
+                  y: compactLayout ? 118 : 220
                 }}
                 transition={{
                   opacity: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] },
                   y: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }
                 }}
-                className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  // Responsive positioning using CSS - CLOSER spacing
-                  transform: 'translateY(max(120px, 220px))'
-                }}
+                className="absolute inset-0 flex items-center justify-center px-4"
               >
                 <motion.p className="text-lg sm:text-xl lg:text-2xl text-gray-300 text-center px-4">
                   Welcome to my world...

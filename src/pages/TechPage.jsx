@@ -51,7 +51,7 @@ const surfaceChip =
 const surfacePill =
   'inline-block px-3 py-1.5 rounded-lg border border-white/10 bg-black/25 text-xs sm:text-sm text-gray-200';
 const surfaceInput =
-  'w-full px-3 sm:px-4 py-3 sm:py-4 bg-black/25 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed';
+  'w-full px-3 sm:px-4 py-3 sm:py-4 bg-black/25 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none transition-all text-base disabled:opacity-50 disabled:cursor-not-allowed';
 const surfaceEyebrow =
   'inline-block mb-4 px-3 py-1 text-xs uppercase tracking-widest text-gray-400 border border-white/10 rounded-full bg-black/20';
 const surfaceIconBtn =
@@ -411,7 +411,7 @@ const TechPage = () => {
       />
 
       {/* Professional Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#05070b]/70 backdrop-blur-md">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#05070b]/70 backdrop-blur-md pt-[env(safe-area-inset-top)]">
         <div className={`${pageWidth} ${pagePad}`}>
           <div className="flex h-14 items-center justify-between sm:h-16">
             <Link 
@@ -468,7 +468,7 @@ const TechPage = () => {
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-                className="rounded-full border border-white/10 bg-white/5 p-2 text-gray-300 transition-colors hover:border-cyan-400/40 hover:text-cyan-300 md:hidden"
+                className="rounded-full border border-white/10 bg-white/5 p-2.5 text-gray-300 transition-colors hover:border-cyan-400/40 hover:text-cyan-300 lg:hidden min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
               >
                 {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
@@ -476,7 +476,7 @@ const TechPage = () => {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile / tablet dropdown (shown below lg where section links hide) */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
@@ -484,7 +484,7 @@ const TechPage = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
-              className="border-t border-white/10 bg-[#05070b]/95 backdrop-blur-md md:hidden"
+              className="border-t border-white/10 bg-[#05070b]/95 backdrop-blur-md lg:hidden"
             >
               <div className="space-y-1 px-3 py-3">
                 {mobileMenuItems.map((item) => (
@@ -1210,18 +1210,23 @@ const TechPage = () => {
                       <span>Previous</span>
                     </button>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-1">
                       {Array.from({ length: totalProjectPages }).map((_, index) => (
                         <button
                           key={index}
+                          type="button"
                           onClick={() => setCurrentProjectPage(index)}
-                          className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
-                            index === currentProjectPage
-                              ? 'bg-cyan-400 scale-125'
-                              : 'bg-gray-600 hover:bg-gray-500'
-                          }`}
+                          className="flex h-11 w-11 items-center justify-center"
                           aria-label={`Go to projects page ${index + 1}`}
-                        />
+                        >
+                          <span
+                            className={`block h-2.5 w-2.5 rounded-full transition-all sm:h-3 sm:w-3 ${
+                              index === currentProjectPage
+                                ? 'scale-125 bg-cyan-400'
+                                : 'bg-gray-600 hover:bg-gray-500'
+                            }`}
+                          />
+                        </button>
                       ))}
                     </div>
 
@@ -1411,17 +1416,23 @@ const TechPage = () => {
                 </button>
 
                 {/* Page Indicators */}
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
                   {Array.from({ length: Math.ceil(certificates.length / 6) }).map((_, index) => (
                     <button
                       key={index}
+                      type="button"
                       onClick={() => setCurrentCertPage(index)}
-                      className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all ${
-                        index === currentCertPage
-                          ? 'bg-cyan-400 scale-125'
-                          : 'bg-gray-600 hover:bg-gray-500'
-                      }`}
-                    />
+                      className="flex h-11 w-11 items-center justify-center"
+                      aria-label={`Go to certificates page ${index + 1}`}
+                    >
+                      <span
+                        className={`block h-2.5 w-2.5 rounded-full transition-all sm:h-3 sm:w-3 ${
+                          index === currentCertPage
+                            ? 'scale-125 bg-cyan-400'
+                            : 'bg-gray-600 hover:bg-gray-500'
+                        }`}
+                      />
+                    </button>
                   ))}
                 </div>
 
@@ -1491,7 +1502,7 @@ const TechPage = () => {
                       <a 
                         href={`mailto:${personalInfo.email}`}
                         onClick={() => handleSocialClick('Email', personalInfo.email)}
-                        className="text-base text-white transition-colors hover:text-cyan-300 sm:text-lg"
+                        className="break-all text-base text-white transition-colors hover:text-cyan-300 sm:text-lg"
                       >
                         {personalInfo.email}
                       </a>

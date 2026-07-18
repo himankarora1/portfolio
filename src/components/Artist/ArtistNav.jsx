@@ -30,7 +30,7 @@ const ArtistNav = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/45 backdrop-blur-xl pt-[env(safe-area-inset-top)]">
       <div className={`${artistPageWidth} ${artistPagePad}`}>
         <div className="flex h-16 items-center justify-between sm:h-16">
           <Link
@@ -80,7 +80,7 @@ const ArtistNav = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
-              className="rounded-full border border-white/15 bg-white/5 p-2 text-gray-200 transition-all hover:border-amber-200/40 hover:text-amber-200 md:hidden"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/15 bg-white/5 p-2.5 text-gray-200 transition-all hover:border-amber-200/40 hover:text-amber-200 md:hidden"
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>

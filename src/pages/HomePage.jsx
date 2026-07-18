@@ -70,13 +70,13 @@ const HomePage = () => {
     <>
       <SEO />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
+      <div className="min-h-screen min-h-[100dvh] bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-cyan-500/10 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-amber-500/10 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-0 sm:pb-0 sm:h-screen">
+        <div className="relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-0 sm:pb-0 sm:min-h-screen sm:min-h-[100dvh]">
           <div className="w-full h-full flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
               <div className="text-center space-y-3 sm:space-y-4">
@@ -85,7 +85,7 @@ const HomePage = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.45 }}
                 >
-                  <div className="w-14 h-14 sm:w-18 sm:h-18 lg:w-24 lg:h-24 mx-auto rounded-full bg-transparent border-2 border-white/80 flex items-center justify-center transition-colors hover:border-white">
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto rounded-full bg-transparent border-2 border-white/80 flex items-center justify-center transition-colors hover:border-white">
                     <span className="text-white font-bold text-base sm:text-xl lg:text-2xl tracking-tight">HA</span>
                   </div>
                 </motion.div>
@@ -215,9 +215,9 @@ const HomePage = () => {
                       rel={social.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                       aria-label={social.platform}
                       onClick={() => handleSocialClick(social.platform, social.href)}
-                      className={`p-1.5 text-gray-400 transition-colors ${social.color}`}
+                      className={`inline-flex min-h-[44px] min-w-[44px] items-center justify-center p-2.5 text-gray-400 transition-colors ${social.color}`}
                     >
-                      <social.icon size={18} className="sm:h-5 sm:w-5" />
+                      <social.icon size={20} className="sm:h-5 sm:w-5" />
                     </a>
                   ))}
                 </motion.div>

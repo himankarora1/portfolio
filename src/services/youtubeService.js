@@ -7,7 +7,8 @@ const YOUTUBE_API_BASE_URL = 'https://www.googleapis.com/youtube/v3';
 // Cache configuration - Customized for your posting schedule
 const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 const VIDEO_CACHE_KEY = 'youtube_videos_cache';
-const CACHE_TIMESTAMP_KEY = 'youtube_cache_timestamp';
+
+const getCacheTimestampKey = (key) => `${key}_timestamp`;
 
 // Your channel configurations
 const CHANNELS = {
@@ -43,7 +44,7 @@ export const handleAPIError = (error) => {
 const getCachedData = (key) => {
   try {
     const cachedData = localStorage.getItem(key);
-    const timestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+    const timestamp = localStorage.getItem(getCacheTimestampKey(key));
     
     if (cachedData && timestamp) {
       const cacheAge = Date.now() - parseInt(timestamp);
@@ -80,7 +81,7 @@ const getCachedData = (key) => {
 const setCachedData = (key, data) => {
   try {
     localStorage.setItem(key, JSON.stringify(data));
-    localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
+    localStorage.setItem(getCacheTimestampKey(key), Date.now().toString());
   } catch (error) {
     console.error('Error writing cache:', error);
   }
@@ -214,6 +215,7 @@ export const clearChannelCache = (channelType) => {
   try {
     const cacheKey = `${VIDEO_CACHE_KEY}_${channelType}`;
     localStorage.removeItem(cacheKey);
+    localStorage.removeItem(getCacheTimestampKey(cacheKey));
   } catch (error) {
     console.error('Error clearing cache:', error);
   }
@@ -223,7 +225,7 @@ export const clearChannelCache = (channelType) => {
 export const clearAllVideoCache = () => {
   try {
     Object.keys(localStorage).forEach(key => {
-      if (key.startsWith(VIDEO_CACHE_KEY) || key === CACHE_TIMESTAMP_KEY) {
+      if (key.startsWith(VIDEO_CACHE_KEY)) {
         localStorage.removeItem(key);
       }
     });

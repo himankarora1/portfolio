@@ -118,7 +118,7 @@ module.exports = async (req, res) => {
     // Different email templates based on page type
     const getEmailTemplate = (pageType, name, email, subject, message) => {
       const isTechPage = pageType === 'tech'; // FIXED: typo was "isTeachPage"
-      const brandColor = isTechPage ? '#06b6d4' : '#ec4899'; // cyan for tech, pink for artist
+      const brandColor = isTechPage ? '#06b6d4' : '#f59e0b'; // cyan for tech, amber for artist
       const pageTitle = isTechPage ? 'Tech Portfolio' : 'Artist Portfolio';
       const emoji = isTechPage ? '💻' : '🎨';
 
