@@ -146,7 +146,7 @@ const HomePage = () => {
       {/* Page-specific SEO — dual identity (absolute OG from generateSEOData) */}
       <SEO />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden flex flex-col">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black relative overflow-hidden">
         {/* Subtle background atmosphere */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
@@ -154,7 +154,7 @@ const HomePage = () => {
         </div>
 
         {/* UPDATED: Main Content Container with Mobile Fixed Spacing */}
-        <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-0 sm:pb-0 sm:min-h-0">
+        <div className="relative z-10 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-8 sm:pt-0 sm:pb-0 sm:h-screen">
           <div className="w-full h-full flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
               <div className="text-center space-y-3 sm:space-y-4">
@@ -462,19 +462,6 @@ const HomePage = () => {
                   ))}
                 </motion.div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 border-t border-white/10 px-4 sm:px-6 lg:px-8 py-4">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-sm">
-            <p className="text-gray-500">
-              © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
-            </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-1">
-              <Link to="/privacy" className="text-gray-400 hover:text-cyan-300 transition-colors">Privacy</Link>
-              <Link to="/terms" className="text-gray-400 hover:text-cyan-300 transition-colors">Terms</Link>
-              <Link to="/sitemap" className="text-gray-400 hover:text-cyan-300 transition-colors">Sitemap</Link>
             </div>
           </div>
         </div>

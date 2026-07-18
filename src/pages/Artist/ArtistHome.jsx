@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import SEO from '../../components/SEO';
 import ArtistWelcome from './ArtistWelcome';
 import ArtistNav from '../../components/Artist/ArtistNav';
 import ArtistHomeMontage from '../../components/Artist/ArtistHomeMontage';
-import ArtistFooter from '../../components/Artist/ArtistFooter';
+import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
 import { artistMedia } from '../../utils/artistMedia';
@@ -124,8 +123,6 @@ const ArtistHome = () => {
             </motion.div>
           </div>
         </div>
-
-        <ArtistFooter />
       </div>
     </>
   );
