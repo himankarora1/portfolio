@@ -29,12 +29,16 @@ def font(size, bold=False):
     return ImageFont.load_default()
 
 
-def base_canvas(width=1200, height=630, accent=CYAN):
+def base_canvas(width=1200, height=630, accent=CYAN, dual=False):
     img = Image.new("RGB", (width, height), BG)
     glow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     gdraw = ImageDraw.Draw(glow)
-    gdraw.ellipse((720, -80, 1280, 480), fill=(*accent, 36))
-    gdraw.ellipse((-120, 360, 420, 760), fill=(*accent, 18))
+    if dual:
+        gdraw.ellipse((-80, -100, 520, 420), fill=(*CYAN, 42))
+        gdraw.ellipse((680, 220, 1320, 760), fill=(*AMBER, 42))
+    else:
+        gdraw.ellipse((720, -80, 1280, 480), fill=(*accent, 36))
+        gdraw.ellipse((-120, 360, 420, 760), fill=(*accent, 18))
     img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
     draw = ImageDraw.Draw(img)
     margin = 40
@@ -57,41 +61,67 @@ def draw_chip(draw, x, y, label, accent=CYAN):
 
 
 def draw_hub_card(path: Path):
-    """Dual-identity card for himankarora.com homepage shares."""
-    img, draw = base_canvas()
+    """Dual-identity share card: equal tech + artist halves about Himank."""
+    img, draw = base_canvas(dual=True)
+    width, height = img.size
 
-    draw.text((88, 88), "HIMANK ARORA", font=font(48, bold=True), fill=WHITE)
-    draw.rounded_rectangle((88, 150, 260, 158), radius=4, fill=CYAN)
+    # Centered brand header
+    draw.text((width / 2, 92), "HIMANK ARORA", font=font(52, bold=True), fill=WHITE, anchor="mt")
+    # Dual underline: cyan + amber
+    draw.rounded_rectangle((width / 2 - 120, 156, width / 2 - 8, 164), radius=4, fill=CYAN)
+    draw.rounded_rectangle((width / 2 + 8, 156, width / 2 + 120, 164), radius=4, fill=AMBER)
 
-    badge_x, badge_y = 88, 188
+    badge_x, badge_y = width / 2 - 28, 186
     draw.ellipse((badge_x, badge_y, badge_x + 56, badge_y + 56), outline=WHITE, width=3)
-    draw.text((badge_x + 28, badge_y + 28), "HA", font=font(20, bold=True), fill=WHITE, anchor="mm")
-    draw.text((164, 198), "Analyst by craft  ·  Artist by passion", font=font(24, bold=True), fill=WHITE)
-
+    draw.text((width / 2, badge_y + 28), "HA", font=font(20, bold=True), fill=WHITE, anchor="mm")
     draw.text(
-        (88, 270),
-        "One portfolio. Two paths — pick the side you want to explore.",
-        font=font(22),
+        (width / 2, 268),
+        "Analyst by craft  ·  Artist by passion",
+        font=font(24, bold=True),
+        fill=WHITE,
+        anchor="mt",
+    )
+    draw.text(
+        (width / 2, 308),
+        "One person. Two portfolios. Pick a path.",
+        font=font(20),
         fill=MUTED,
+        anchor="mt",
     )
 
-    # Tech path card
-    draw.rounded_rectangle((88, 330, 560, 510), radius=18, fill=(8, 11, 16), outline=CYAN, width=2)
-    draw.text((118, 358), "Technical Analyst & Developer", font=font(22, bold=True), fill=WHITE)
-    draw.text((118, 400), "Analysis, engineering, and shipping\nproducts people actually use.", font=font(18), fill=MUTED, spacing=4)
-    x = 118
-    for label in ("React", "Python", "SQL"):
-        x += draw_chip(draw, x, 458, label, CYAN) + 10
+    # Equal path panels
+    left = (72, 360, 584, 540)
+    right = (616, 360, 1128, 540)
+    draw.rounded_rectangle(left, radius=18, fill=(8, 11, 16), outline=CYAN, width=3)
+    draw.rounded_rectangle(right, radius=18, fill=(8, 11, 16), outline=AMBER, width=3)
 
-    # Artist path card
-    draw.rounded_rectangle((600, 330, 1112, 510), radius=18, fill=(8, 11, 16), outline=AMBER, width=2)
-    draw.text((630, 358), "Artist & Content Creator", font=font(22, bold=True), fill=WHITE)
-    draw.text((630, 400), "Music, gaming, and storytelling\nacross communities and platforms.", font=font(18), fill=MUTED, spacing=4)
-    x = 630
-    for label in ("Music", "Gaming", "YouTube"):
-        x += draw_chip(draw, x, 458, label, AMBER) + 10
+    draw.text((112, 384), "TECH", font=font(14, bold=True), fill=CYAN)
+    draw.text((112, 408), "Technical Analyst & Developer", font=font(22, bold=True), fill=WHITE)
+    draw.text(
+        (112, 446),
+        "Analysis and engineering.\nShipping products people use.",
+        font=font(17),
+        fill=MUTED,
+        spacing=3,
+    )
+    x = 112
+    for label in ("Analysis", "React", "Python"):
+        x += draw_chip(draw, x, 498, label, CYAN) + 8
 
-    draw.text((88, 545), "himankarora.com", font=font(22, bold=True), fill=CYAN)
+    draw.text((656, 384), "ARTIST", font=font(14, bold=True), fill=AMBER)
+    draw.text((656, 408), "Artist & Content Creator", font=font(22, bold=True), fill=WHITE)
+    draw.text(
+        (656, 446),
+        "Music, gaming, vlogs, and\ncommunity along the way.",
+        font=font(17),
+        fill=MUTED,
+        spacing=3,
+    )
+    x = 656
+    for label in ("Music", "Gaming", "Vlogs"):
+        x += draw_chip(draw, x, 498, label, AMBER) + 8
+
+    draw.text((width / 2, 572), "himankarora.com", font=font(22, bold=True), fill=WHITE, anchor="mt")
 
     img.save(path, "JPEG", quality=92, optimize=True)
     print(f"Wrote {path}")
@@ -140,8 +170,8 @@ def draw_artist_card(path: Path):
     draw.text((172, 228), "Artist & Content Creator", font=font(28, bold=True), fill=WHITE)
     draw.text(
         (88, 320),
-        "Music, gaming, and digital storytelling\nbuilt around authentic communities.",
-        font=font(26),
+        "Music, gaming, vlogs, and other fun content,\nbuilt with the community along the way.",
+        font=font(24),
         fill=MUTED,
         spacing=8,
     )
@@ -149,15 +179,15 @@ def draw_artist_card(path: Path):
 
     draw.rounded_rectangle((700, 120, 1120, 500), radius=18, fill=(8, 11, 16), outline=AMBER, width=2)
     x, y = 720, 150
-    for label in ("Music", "Gaming", "YouTube", "Streaming", "Community"):
+    for label in ("Music", "Gaming", "Vlogs", "YouTube", "Community"):
         w = draw_chip(draw, x, y, label, AMBER)
         x += w + 12
         if x > 980:
             x, y = 720, 210
 
     draw.text((740, 300), "Creating through", font=font(22), fill=MUTED)
-    draw.text((740, 350), "sound, games,", font=font(28, bold=True), fill=WHITE)
-    draw.text((740, 400), "and stories.", font=font(28, bold=True), fill=WHITE)
+    draw.text((740, 350), "music, games,", font=font(28, bold=True), fill=WHITE)
+    draw.text((740, 400), "and community.", font=font(28, bold=True), fill=WHITE)
 
     img.save(path, "JPEG", quality=92, optimize=True)
     print(f"Wrote {path}")
@@ -174,7 +204,9 @@ def draw_favicon_base(size=512):
 
 
 def main():
-    # Hub / default share previews
+    # Hub / default share previews (new filenames bust Discord/Twitter caches)
+    draw_hub_card(IMAGES / "og-hub.jpg")
+    draw_hub_card(IMAGES / "twitter-hub.jpg")
     draw_hub_card(IMAGES / "og-image.jpg")
     draw_hub_card(IMAGES / "twitter-image.jpg")
     # Page-specific previews

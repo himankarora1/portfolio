@@ -53,8 +53,8 @@ const SEO = ({
       "jobTitle": currentPath.startsWith('/tech')
         ? "Technical Analyst & Developer"
         : currentPath.startsWith('/artist')
-          ? "Content Creator & Musician"
-          : "Technical Analyst & Developer",
+          ? "Artist & Content Creator"
+          : ["Technical Analyst & Developer", "Artist & Content Creator"],
       "alumniOf": [
         {
           "@type": "EducationalOrganization",

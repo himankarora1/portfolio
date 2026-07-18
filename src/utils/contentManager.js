@@ -585,10 +585,10 @@ export const contentData = {
   meta: {
     site_url: "https://himankarora.com",
     site_name: "Himank Arora Portfolio",
-    og_image: "/images/og-image.jpg",
+    og_image: "/images/og-hub.jpg",
     og_image_tech: "/images/og-image-tech.jpg",
     og_image_artist: "/images/og-image-artist.jpg",
-    twitter_image: "/images/twitter-image.jpg",
+    twitter_image: "/images/twitter-hub.jpg",
     favicon: "/favicon.ico",
     last_updated: new Date().toISOString(),
     version: "2.0.0",

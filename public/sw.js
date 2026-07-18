@@ -10,7 +10,7 @@ const PRECACHE_ASSETS = [
   '/favicon.ico',
   '/favicon.svg',
   '/apple-touch-icon.png',
-  '/images/og-image.jpg',
+  '/images/og-hub.jpg',
 ];
 
 self.addEventListener('install', (event) => {
