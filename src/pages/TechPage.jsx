@@ -1012,14 +1012,7 @@ const TechPage = () => {
                         <h3 className="text-lg sm:text-xl font-bold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
                           {project.title}
                         </h3>
-                        <p
-                          className="text-gray-300 leading-relaxed text-sm sm:text-base overflow-hidden"
-                          style={{
-                            display: '-webkit-box',
-                            WebkitLineClamp: 3,
-                            WebkitBoxOrient: 'vertical'
-                          }}
-                        >
+                        <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                           {project.description}
                         </p>
                       </div>
@@ -1029,8 +1022,8 @@ const TechPage = () => {
                           <div className="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2.5">
                             Tech stack
                           </div>
-                          <div className="flex flex-wrap gap-2 min-h-[52px] content-start">
-                            {project.tech.slice(0, 6).map(tech => (
+                          <div className="flex flex-wrap gap-2 content-start">
+                            {project.tech.map(tech => (
                               <span
                                 key={tech}
                                 className="bg-blue-500/15 border border-blue-500/25 text-blue-300 px-2.5 py-1 rounded-md text-xs font-medium"
@@ -1038,11 +1031,6 @@ const TechPage = () => {
                                 {tech}
                               </span>
                             ))}
-                            {project.tech.length > 6 && (
-                              <span className="text-gray-400 text-xs px-2 py-1">
-                                +{project.tech.length - 6} more
-                              </span>
-                            )}
                           </div>
                         </div>
                       </div>
