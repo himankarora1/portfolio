@@ -339,7 +339,7 @@ const ArtistWelcome = ({ onComplete }) => {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 text-center px-4"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-amber-200 text-center px-4"
                     style={{
                       backgroundSize: "200% 100%"
                     }}
@@ -389,7 +389,7 @@ const ArtistWelcome = ({ onComplete }) => {
                     }}
                   >
                     <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                      <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text">
+                      <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-200">
                         HA
                       </span>
                     </div>
@@ -425,7 +425,7 @@ const ArtistWelcome = ({ onComplete }) => {
                 }}
               >
                 <motion.h1 
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-orange-200 to-amber-100 text-center px-4"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-amber-200 text-center px-4"
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
                   }}

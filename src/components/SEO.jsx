@@ -35,6 +35,9 @@ const SEO = ({
   const pageTitle = title || seoData.title;
   const pageDescription = description || seoData.description;
   const pageImage = image || seoData.image;
+  const twitterImage = contentData.meta.twitter_image
+    ? `${contentData.meta.site_url}${contentData.meta.twitter_image}`
+    : pageImage;
   const pageKeywords = keywords || seoData.keywords;
   const canonicalUrl = canonical || `${seoData.url}${currentPath}`;
   const pageAuthor = author || contentData.personal.name;
@@ -246,7 +249,7 @@ const SEO = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
-      <meta name="twitter:image" content={pageImage} />
+      <meta name="twitter:image" content={twitterImage} />
       <meta name="twitter:creator" content="@himankaroraa" />
       <meta name="twitter:site" content="@himankaroraa" />
 

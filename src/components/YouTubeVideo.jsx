@@ -44,11 +44,10 @@ const YouTubeVideo = ({ video, onPlay, index = 0 }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden hover:border-gray-600/50 transition-all group cursor-pointer relative"
-      whileHover={{ scale: 1.05, y: -5 }}
+      transition={{ delay: index * 0.06, duration: 0.35 }}
+      className="relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm transition-colors group hover:border-gray-600/50"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       onClick={handleVideoClick}

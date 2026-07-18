@@ -114,8 +114,8 @@ const ArtistAbout = () => {
       {/* SEO for Artist About */}
       <SEO 
         title={`About ${personalInfo.name} - Content Creator & Musician`}
-        description="Dive deeper into my creative journey, skills, and the passion that drives my content creation across music, gaming, and digital storytelling."
-        keywords="about, creative journey, content creator, musician, gaming, digital storytelling"
+        description="Music, gaming, vlogs, and the path that got me here."
+        keywords="about, creative journey, content creator, musician, gaming, vlogs"
       />
 
       <ArtistPageShell
@@ -141,7 +141,7 @@ const ArtistAbout = () => {
                 About <span className={artistHeadingAccent}>Me</span>
               </h1>
               <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-white/70 sm:text-lg lg:text-xl">
-                Dive deeper into my creative journey, skills, and the passion that drives my content creation across music, gaming, and digital storytelling.
+                Music, gaming, vlogs, and the path that got me here.
               </p>
             </motion.div>
 
@@ -152,13 +152,13 @@ const ArtistAbout = () => {
                   My <span className={artistHeadingAccent}>Story</span>
                 </h2>
                 <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                  My creative journey began with a deep love for music that blossomed into a lifelong passion. What started as learning instruments and developing vocal skills evolved into a serious pursuit of musical excellence and artistic expression through authentic content creation.
+                  It started with music: learning instruments, working on vocals, and figuring out how I wanted to sound. Over time that turned into sharing performances and process online, not just finished tracks.
                 </p>
                 <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                  As my musical foundation grew stronger, I discovered the power of digital platforms to connect with audiences. This led me to explore video content creation, where I could showcase not just my performances, but the entire creative process behind my art and the stories that inspire each piece.
+                  Video came next. I began posting clips, covers, and behind-the-scenes work so people could see how the music comes together, not only the final cut.
                 </p>
                 <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                  Gaming has always been another passion of mine, and I found joy in sharing that enthusiasm through streaming and creating walkthroughs. Whether I'm producing music, creating videos, or streaming games, my goal remains the same: to inspire, entertain, and build genuine connections with communities who share these passions.
+                  Gaming and streaming grew alongside that. Today I make music, gaming, vlogs, and other fun content, and keep building a community around it.
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ const ArtistAbout = () => {
                         className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center rounded-2xl"
                         style={{ display: 'none' }}
                       >
-                        <span className="text-6xl sm:text-7xl lg:text-8xl font-bold text-transparent bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text">
+                        <span className={`text-6xl sm:text-7xl lg:text-8xl font-bold ${artistHeadingAccent}`}>
                           HA
                         </span>
                       </div>

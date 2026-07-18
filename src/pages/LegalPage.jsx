@@ -6,7 +6,7 @@ import { contentData } from '../utils/contentManager';
 const pages = {
   privacy: {
     title: 'Privacy Policy',
-    updated: 'January 2025',
+    updated: 'July 2026',
     sections: [
       {
         heading: 'Overview',
@@ -36,7 +36,7 @@ const pages = {
   },
   terms: {
     title: 'Terms of Service',
-    updated: 'January 2025',
+    updated: 'July 2026',
     sections: [
       {
         heading: 'Agreement',

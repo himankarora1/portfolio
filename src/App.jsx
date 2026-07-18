@@ -1,14 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { HelmetProvider } from 'react-helmet-async'; // NEW
-import Navigation from './components/Navigation';
+import { HelmetProvider } from 'react-helmet-async';
 import HomePage from './pages/HomePage';
 import TechPage from './pages/TechPage';
 import ArtistRoutes from './pages/Artist/ArtistRoutes';
 import LegalPage from './pages/LegalPage';
-import SEO from './components/SEO'; // NEW
-import { AnalyticsProvider, useAnalytics } from './components/Analytics'; // NEW
+import SEO from './components/SEO';
+import { AnalyticsProvider, useAnalytics } from './components/Analytics';
 import { ThemeProvider } from './context/ThemeContext';
 
 // Error Fallback Component
@@ -40,18 +39,9 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
 };
 
 const AppContent = () => {
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
-  const isArtistPage = location.pathname.startsWith('/artist');
-  const isTechPage = location.pathname.startsWith('/tech');
-  const isLegalPage = ['/privacy', '/terms', '/sitemap'].includes(location.pathname);
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
-      {/* Add SEO component to every page */}
+    <div className="min-h-screen bg-[#05070b]">
       <SEO />
-      
-      {!isHomePage && !isArtistPage && !isTechPage && !isLegalPage && <Navigation />}
       
       <ErrorBoundary 
         FallbackComponent={ErrorFallback}
@@ -78,9 +68,9 @@ const App = () => {
         console.error('App Error:', error, errorInfo);
       }}
     >
-      <HelmetProvider> {/* NEW - Wrap everything in HelmetProvider */}
+      <HelmetProvider>
         <ThemeProvider>
-          <AnalyticsProvider measurementId={process.env.REACT_APP_GA_MEASUREMENT_ID}> {/* NEW */}
+          <AnalyticsProvider measurementId={process.env.REACT_APP_GA_MEASUREMENT_ID}>
             <Router>
               <AppContent />
             </Router>

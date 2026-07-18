@@ -556,7 +556,7 @@ const ArtistWork = () => {
                 >
                   <Loader size={36} className="sm:w-12 sm:h-12" />
                 </motion.div>
-                <span className="text-white text-lg sm:text-xl ml-4">Loading amazing content...</span>
+                <span className="text-white text-lg sm:text-xl ml-4">Loading videos...</span>
               </div>
             )}
 
@@ -659,7 +659,7 @@ const ArtistWork = () => {
                               {getMainVideo().title}
                             </h3>
                             <p className="text-gray-300 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
-                              {getMainVideo().description || 'Check out this amazing content! Don\'t forget to like and subscribe for more.'}
+                              {getMainVideo().description || 'Watch the full video on YouTube.'}
                             </p>
                           </div>
 
@@ -679,7 +679,7 @@ const ArtistWork = () => {
                               </div>
                             </div>
                             <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-4">
-                              Subscribe for more {activeTab.toLowerCase()} content and join our amazing community!
+                              Subscribe for more {activeTab.toLowerCase()} videos.
                             </p>
                             
                             {/* Action Buttons */}
@@ -741,7 +741,7 @@ const ArtistWork = () => {
                         </motion.a>
                       </div>
                       
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
                         {getGalleryVideos().map((video, index) => (
                           <YouTubeVideo
                             key={video.videoId}

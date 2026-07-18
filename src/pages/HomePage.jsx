@@ -106,7 +106,7 @@ const HomePage = () => {
                   className="text-sm sm:text-base md:text-lg text-gray-400 px-4"
                 >
                   <span className="text-cyan-300">Analyst</span>
-                  {' by craft and an '}
+                  {' by craft, '}
                   <span className="text-amber-200">Artist</span>
                   {' by passion'}
                 </motion.p>

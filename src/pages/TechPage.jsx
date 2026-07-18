@@ -100,7 +100,7 @@ const TechPage = () => {
   const analytics = useAnalytics();
 
   // Get data from content manager
-  const projects = contentData.featured_projects;
+  const projects = contentData.featured_projects.filter((project) => project.featured);
   const skills = contentData.skills;
   const experience = contentData.experience;
   const workExperience = experience.filter(exp => exp.type === 'work');
@@ -692,6 +692,15 @@ const TechPage = () => {
                     <LinkedInIcon size={22} className="sm:w-6 sm:h-6" />
                   </a>
                   <a 
+                    href={socialLinks.x_twitter} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
+                    className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
+                  >
+                    <XIcon size={22} className="sm:w-6 sm:h-6" />
+                  </a>
+                  <a 
                     href={`mailto:${personalInfo.email}`}
                     onClick={() => handleSocialClick('Email', personalInfo.email)}
                     className="text-gray-500 hover:text-cyan-400 transition-colors p-2"
@@ -803,7 +812,7 @@ const TechPage = () => {
                 About <span className="text-cyan-400">Me</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-                Bridging analysis and engineering to ship products people actually use.
+                Turning analysis into shipped tools and products.
               </p>
             </motion.div>
 
@@ -822,7 +831,7 @@ const TechPage = () => {
                     I work both sides of the problem: eliciting needs, mapping workflows, and validating impact with data, while also designing and building the systems that make those improvements real.
                   </p>
                   <p>
-                    Whether it's a reporting dashboard, a product workflow redesign, or a full-stack application, I care about clear problem framing, measurable outcomes, and software people actually use.
+                    Whether it's a reporting dashboard, a product workflow redesign, or a full-stack application, I care about clear problem framing, measurable outcomes, and software that holds up in real use.
                   </p>
                 </div>
               </motion.div>
@@ -897,7 +906,7 @@ const TechPage = () => {
                 Experience & <span className="text-cyan-400">Education</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
-                A clear view of my professional path and academic foundation.
+                Roles, projects, and education that shaped how I work.
               </p>
             </motion.div>
 
@@ -1151,6 +1160,7 @@ const TechPage = () => {
                       </div>
                     </div>
 
+                    {(project.github || (project.demo && project.demo !== '#')) && (
                     <div className="flex items-center gap-2 sm:gap-3 h-[52px] px-6 sm:px-7 border-t border-white/10 bg-black/20 shrink-0">
                       {project.github && (
                         <a
@@ -1183,6 +1193,7 @@ const TechPage = () => {
                         </a>
                       )}
                     </div>
+                    )}
                   </motion.div>
                 ))}
               </div>
@@ -1300,7 +1311,7 @@ const TechPage = () => {
                 Certificates & <span className="text-cyan-400">Credentials</span>
               </h2>
               <p className="text-gray-400 text-sm sm:text-base max-w-3xl mx-auto">
-                Professional certifications that validate expertise and continuous learning in technology and data analysis.
+                Certifications across analysis, development, and data.
               </p>
             </motion.div>
 
@@ -1457,87 +1468,100 @@ const TechPage = () => {
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-stretch">
-              {/* Left Side - PC Setup Background with Info */}
+              {/* Left Side - Contact info */}
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className={`relative overflow-hidden ${surfaceCard} p-6 sm:p-8 min-h-[400px] sm:min-h-[500px] flex flex-col justify-end`}
+                className={`relative overflow-hidden ${surfaceCard} flex h-full flex-col p-6 sm:p-8`}
               >
-                <div className="relative z-10 space-y-6 sm:space-y-8">
-                  <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white mb-6 sm:mb-8">Get in Touch</h3>
-                  
-                  <div className="space-y-4 sm:space-y-6">
-                    <div>
-                      <h4 className="text-base sm:text-lg font-semibold text-cyan-300 mb-2">EMAIL</h4>
+                <div className="relative z-10 flex flex-1 flex-col">
+                  <div>
+                    <p className="mb-2 text-[11px] uppercase tracking-[0.18em] text-gray-500">Contact</p>
+                    <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl">Get in Touch</h3>
+                    <p className="mt-3 max-w-sm text-sm leading-relaxed text-gray-400 sm:text-base">
+                      Open to roles, collaborations, and product problems worth solving.
+                    </p>
+                  </div>
+
+                  <div className="mt-8 space-y-5 sm:mt-10 sm:space-y-6">
+                    <div className="rounded-xl border border-white/10 bg-black/25 p-4">
+                      <h4 className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-cyan-300">Email</h4>
                       <a 
                         href={`mailto:${personalInfo.email}`}
                         onClick={() => handleSocialClick('Email', personalInfo.email)}
-                        className="text-white text-base sm:text-lg hover:text-cyan-300 transition-colors"
+                        className="text-base text-white transition-colors hover:text-cyan-300 sm:text-lg"
                       >
                         {personalInfo.email}
                       </a>
                     </div>
                     
-                    <div>
-                      <h4 className="text-base sm:text-lg font-semibold text-cyan-300 mb-2">WORKING HOURS</h4>
-                      <p className="text-white text-base sm:text-lg">10:00 AM - 6:00 PM EST</p>
+                    <div className="rounded-xl border border-white/10 bg-black/25 p-4">
+                      <h4 className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-cyan-300">Working hours</h4>
+                      <p className="text-base text-white sm:text-lg">10:00 AM - 6:00 PM EST</p>
+                      <p className="mt-1 text-sm text-gray-500">Usually replies within 24-48 hours</p>
                     </div>
                     
-                    <div>
-                      <h4 className="text-base sm:text-lg font-semibold text-cyan-300 mb-2">ADDRESS</h4>
-                      <p className="text-white text-base sm:text-lg">{personalInfo.location}</p>
+                    <div className="rounded-xl border border-white/10 bg-black/25 p-4">
+                      <h4 className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-cyan-300">Location</h4>
+                      <p className="text-base text-white sm:text-lg">{personalInfo.location}</p>
                     </div>
                   </div>
 
-                  {/* Social Links */}
-                  <div className="flex space-x-4 sm:space-x-6 mt-6 sm:mt-8">
-                    <motion.a
-                      href={socialLinks.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleSocialClick('GitHub', socialLinks.github)}
-                      className={surfaceIconBtn}
-                      whileHover={{ scale: 1.04 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <GitHubIcon size={20} className="sm:w-6 sm:h-6" />
-                    </motion.a>
-                    
-                    <motion.a
-                      href={socialLinks.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
-                      className={surfaceIconBtn}
-                      whileHover={{ scale: 1.04 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <LinkedInIcon size={20} className="sm:w-6 sm:h-6" />
-                    </motion.a>
-                    
-                    <motion.a
-                      href={socialLinks.x_twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
-                      className={surfaceIconBtn}
-                      whileHover={{ scale: 1.04 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <XIcon size={20} className="sm:w-6 sm:h-6" />
-                    </motion.a>
-                    
-                    <motion.a
-                      href={`mailto:${personalInfo.email}`}
-                      onClick={() => handleSocialClick('Email', personalInfo.email)}
-                      className={surfaceIconBtn}
-                      whileHover={{ scale: 1.04 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <Mail size={20} className="sm:w-6 sm:h-6" />
-                    </motion.a>
+                  <div className="mt-auto pt-8">
+                    <p className="mb-3 text-xs uppercase tracking-[0.16em] text-gray-500">Connect</p>
+                    <div className="flex space-x-3 sm:space-x-4">
+                      <motion.a
+                        href={socialLinks.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => handleSocialClick('GitHub', socialLinks.github)}
+                        className={surfaceIconBtn}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.97 }}
+                        aria-label="GitHub"
+                      >
+                        <GitHubIcon size={20} className="sm:w-6 sm:h-6" />
+                      </motion.a>
+                      
+                      <motion.a
+                        href={socialLinks.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => handleSocialClick('LinkedIn', socialLinks.linkedin)}
+                        className={surfaceIconBtn}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.97 }}
+                        aria-label="LinkedIn"
+                      >
+                        <LinkedInIcon size={20} className="sm:w-6 sm:h-6" />
+                      </motion.a>
+                      
+                      <motion.a
+                        href={socialLinks.x_twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => handleSocialClick('X Twitter', socialLinks.x_twitter)}
+                        className={surfaceIconBtn}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.97 }}
+                        aria-label="X"
+                      >
+                        <XIcon size={20} className="sm:w-6 sm:h-6" />
+                      </motion.a>
+                      
+                      <motion.a
+                        href={`mailto:${personalInfo.email}`}
+                        onClick={() => handleSocialClick('Email', personalInfo.email)}
+                        className={surfaceIconBtn}
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.97 }}
+                        aria-label="Email"
+                      >
+                        <Mail size={20} className="sm:w-6 sm:h-6" />
+                      </motion.a>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -1548,7 +1572,7 @@ const TechPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: 0.08 }}
                 viewport={{ once: true, amount: 0.2 }}
-                className={`${surfaceCard} p-6 sm:p-8`}
+                className={`${surfaceCard} flex h-full flex-col p-6 sm:p-8`}
               >
                 {/* Success Message */}
                 {formStatus.isSuccess && (
@@ -1720,7 +1744,7 @@ const TechPage = () => {
                 </div>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed">
-                Bridging analysis and engineering to ship products people actually use.
+                Turning analysis into shipped tools and products.
               </p>
               <div className="flex space-x-2 mt-auto pt-6">
                 <motion.a

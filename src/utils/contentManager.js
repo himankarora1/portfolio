@@ -4,7 +4,7 @@ export const contentData = {
     name: "Himank Arora",
     title: "Technical Analyst & Developer",
     shortTitle: "Analyst & Developer",
-    bio: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
+    bio: "Turning business needs into working products across data tools, web apps, and AI-enabled systems.",
     location: "Boston, MA",
     email: "himankarora1000@gmail.com", // Tech portfolio email
     artistEmail: "himankaroraofficial@gmail.com", // Artist portfolio email
@@ -31,7 +31,7 @@ export const contentData = {
       title: "MatchRide",
       description: "Full-stack carpooling platform matching riders and drivers in real time. Uses PostGIS spatial queries for sub-second route matching, a fairness algorithm to prevent new-driver bias, and real-time chat plus WebRTC voice signaling.",
       tech: ["Next.js 14", "TypeScript", "PostgreSQL", "PostGIS", "Supabase", "Clerk", "Google Gemini AI", "WebRTC", "Tailwind CSS"],
-      category: "Full Stack Development",
+      category: "Web Application",
       featured: true,
       image: "/images/projects/matchride.jpg",
       github: null,
@@ -49,7 +49,7 @@ export const contentData = {
       title: "MatchWise",
       description: "AI-powered job matching platform using semantic analysis rather than keyword search to match resumes to job descriptions. Includes recruiter and job-seeker dashboards with role-based access, LLM-based candidate scoring, and a full CI/CD pipeline.",
       tech: ["Python", "FastAPI", "React", "MongoDB", "LLM APIs", "GitHub Actions"],
-      category: "Full Stack Development",
+      category: "Web Application",
       featured: true,
       image: "/images/projects/matchwise.jpg",
       github: "https://github.com/himankarora1/MatchWise",
@@ -57,7 +57,7 @@ export const contentData = {
       status: "completed",
       year: "2025",
       highlights: [
-        "45% higher resume-to-JD relevance vs. keyword search",
+        "Semantic resume-to-JD matching beyond keyword search",
         "Role-based 3-tier architecture (React, FastAPI, MongoDB)",
         "CI/CD with 40+ automated tests on every push"
       ]
@@ -85,7 +85,7 @@ export const contentData = {
       title: "Mental Health Wellness Website",
       description: "Full-stack mental health wellness platform managing therapy bookings and mental health resources, with role-based dashboards for patients, doctors, and admins.",
       tech: ["React", "Node.js", "Express.js", "MongoDB", "JWT Authentication"],
-      category: "Full Stack Development",
+      category: "Web Application",
       featured: true,
       image: "/images/projects/mental-health.jpg",
       github: "https://github.com/himankarora1/mentalhealthwellnessplatform",
@@ -421,7 +421,7 @@ export const contentData = {
       credentialId: "DPJKTLNH6D7N",
       verifyUrl: "https://coursera.org/verify/DPJKTLNH6D7N",
       skills: ["Python", "Programming Fundamentals", "Problem Solving"],
-      featured: true,
+      featured: false,
       image: "/images/certifications/umich-python-basics.png"
     },
     {
@@ -559,14 +559,14 @@ export const contentData = {
       {
         year: "2021",
         title: "Content Creation",
-        description: "Expanded into video content creation and digital storytelling",
+        description: "Expanded into video content and online posts",
         icon: "Camera",
         color: "from-purple-500 to-indigo-500"
       },
       {
         year: "2022",
         title: "Community Building",
-        description: "Focused on building authentic connections with audiences across platforms",
+        description: "Grew community across platforms through regular posts and streams",
         icon: "Heart",
         color: "from-orange-500 to-red-500"
       }
@@ -675,7 +675,7 @@ export const generateSEOData = (page) => {
       return {
         ...baseData,
         title: `${contentData.personal.name} - Technical Analyst & Developer`,
-        description: "IT professional who bridges analysis and engineering: turning business needs into working products across data tools, web apps, and AI-enabled systems.",
+        description: "Turning business needs into working products across data tools, web apps, and AI-enabled systems.",
         image: `${contentData.meta.site_url}${contentData.meta.og_image_tech}`,
         keywords: [
           ...contentData.meta.keywords,

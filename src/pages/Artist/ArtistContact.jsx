@@ -173,7 +173,7 @@ const ArtistContact = () => {
       icon: Mail,
       title: "Email",
       value: artistEmail, // Use artist email
-      description: "For all inquiries and collaborations",
+      description: "For inquiries and collaborations",
       bgColor: "bg-amber-500/10",
       borderColor: "border-amber-500/30",
       iconBg: "bg-amber-600",
@@ -183,7 +183,7 @@ const ArtistContact = () => {
       icon: Music,
       title: "Music Collaborations",
       value: "Open for projects",
-      description: "Let's create something amazing together",
+      description: "Covers, originals, and collabs",
       bgColor: "bg-stone-500/10",
       borderColor: "border-stone-500/30",
       iconBg: "bg-stone-700",
@@ -193,7 +193,7 @@ const ArtistContact = () => {
       icon: Gamepad2,
       title: "Gaming Content",
       value: "Stream collaborations",
-      description: "Join me for epic gaming sessions",
+      description: "Walkthroughs and live streams",
       bgColor: "bg-blue-500/10",
       borderColor: "border-blue-500/30",
       iconBg: "bg-blue-500",
@@ -203,7 +203,7 @@ const ArtistContact = () => {
       icon: Camera,
       title: "Content Creation",
       value: "Brand partnerships",
-      description: "Professional content creation services",
+      description: "Brand and content partnerships",
       bgColor: "bg-orange-500/10",
       borderColor: "border-orange-500/30",
       iconBg: "bg-orange-500",
@@ -331,7 +331,7 @@ const ArtistContact = () => {
             </motion.div>
 
             {/* Updated Contact Methods - Mobile Responsive */}
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16 items-stretch">
               {contactMethods.map((method, index) => (
                 <motion.a
                   key={index}
@@ -339,18 +339,17 @@ const ArtistContact = () => {
                   target={method.href.startsWith('mailto') ? undefined : "_blank"}
                   rel={method.href.startsWith('mailto') ? undefined : "noopener noreferrer"}
                   onClick={() => handleContactMethodClick(method.title)}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className={`${method.bgColor} backdrop-blur-sm border ${method.borderColor} rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all group cursor-pointer`}
+                  transition={{ delay: index * 0.06, duration: 0.35 }}
+                  className={`${method.bgColor} flex h-full flex-col backdrop-blur-sm border ${method.borderColor} rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-colors group cursor-pointer`}
                 >
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all shadow-lg`}>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg`}>
                     <method.icon size={20} className="text-white sm:w-6 sm:h-6" />
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-white mb-2">{method.title}</h3>
                   <p className="mb-2 text-sm font-semibold text-amber-200 sm:text-base">{method.value}</p>
-                  <p className="text-gray-300 text-xs sm:text-sm">{method.description}</p>
+                  <p className="mt-auto text-gray-300 text-xs sm:text-sm">{method.description}</p>
                 </motion.a>
               ))}
             </motion.div>

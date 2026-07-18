@@ -19,7 +19,7 @@ import {
 } from '../SocialIcons';
 import { contentData, getEmailForContext } from '../../utils/contentManager';
 import { useAnalytics } from '../Analytics';
-import { artistPagePad, artistPageWidth } from '../../utils/artistLayout';
+import { artistPagePad, artistPageWidth, artistHeadingAccent } from '../../utils/artistLayout';
 
 const quickLinks = [
   { id: 'home', label: 'Home', icon: Home, path: '/artist' },
@@ -67,7 +67,7 @@ const ArtistFooter = () => {
                 <span className="text-white font-semibold text-sm tracking-tight">HA</span>
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-semibold text-white leading-tight bg-gradient-to-r from-amber-200 to-orange-200 bg-clip-text text-transparent">
+                <h3 className={`text-base sm:text-lg font-semibold leading-tight ${artistHeadingAccent}`}>
                   {personalInfo.name}
                 </h3>
                 <p className="text-gray-500 text-xs">Artist & Content Creator</p>
