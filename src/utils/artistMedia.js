@@ -8,7 +8,8 @@ export const artistMedia = {
     poster: '/images/artist/artist-stage-jacket.jpg',
     /**
      * Home montage: photos + short video beats (not full clips).
-     * Brown shirt/jacket portrait is featured early and again mid-loop.
+     * - landscape: fill frame at scale 1, centered (no zoom-in)
+     * - jacket: face right of copy, head near top, mic still in frame (no translateY)
      */
     montage: [
       {
@@ -16,9 +17,8 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4800,
         scale: 1,
-        // Face clear of copy on the right; hair tucked just under nav
-        objectPosition: '0% top',
-        offsetY: '-12%',
+        // Right-side face, head high enough for nav, chest/mic still visible
+        objectPosition: '6% 18%',
       },
       {
         type: 'video',
@@ -26,22 +26,27 @@ export const artistMedia = {
         duration: 4200,
         startAt: 4,
         playFor: 4,
-        objectPosition: 'center 30%',
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center center',
       },
       {
         type: 'video',
-        // WhatsApp Video 9 — rotated upright + face-zoomed
+        // WhatsApp Video 9 — upright full landscape (no face zoom)
         src: '/videos/artist/artist-stage-portrait-clip.mp4',
         duration: 4200,
         startAt: 0,
         playFor: 4.2,
-        objectPosition: '32% 28%',
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center center',
       },
       {
         type: 'image',
         src: '/images/artist/artist-rooftop-solo.jpg',
         duration: 4500,
-        objectPosition: 'center 16%',
+        scale: 1,
+        objectPosition: 'center 18%',
       },
       {
         type: 'video',
@@ -49,13 +54,16 @@ export const artistMedia = {
         duration: 3800,
         startAt: 2,
         playFor: 3.5,
-        objectPosition: 'center 18%',
+        scale: 1,
+        objectPosition: 'center 20%',
       },
       {
         type: 'image',
         src: '/images/artist/artist-silhouette-pink.jpg',
         duration: 4000,
-        objectPosition: 'center 40%',
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center center',
       },
       {
         type: 'video',
@@ -63,27 +71,32 @@ export const artistMedia = {
         duration: 4000,
         startAt: 14,
         playFor: 3.8,
-        objectPosition: 'center 30%',
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center center',
       },
       {
         type: 'image',
         src: '/images/artist/artist-ensemble-red.jpg',
         duration: 4200,
-        objectPosition: 'center 32%',
+        orientation: 'landscape',
+        scale: 1,
+        objectPosition: 'center center',
       },
       {
         type: 'image',
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4000,
         scale: 1,
-        objectPosition: '0% top',
-        offsetY: '-12%',
+        objectPosition: '6% 18%',
       },
       {
         type: 'image',
         src: '/images/artist/artist-pov-mic.jpg',
         duration: 3800,
-        objectPosition: 'center 42%',
+        scale: 1,
+        // Bias down so the handheld mic stays in frame
+        objectPosition: 'center 72%',
       },
     ],
   },

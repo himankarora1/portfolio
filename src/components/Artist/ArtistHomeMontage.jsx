@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 /**
- * Crossfading photo + short video-beat montage for the artist home hero.
- * Videos play muted from `startAt` for `duration` only (not full loops).
- * Always object-cover (no letterboxing). Optional per-slide `scale` (default 1.05).
+ * Home hero montage — photos + short video beats.
+ * Default: object-cover at scale 1 (no zoom-in, no translate → no black bars).
+ * Landscape slides stay centered so the full frame reads naturally.
  */
 const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
@@ -13,8 +13,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
-  const mediaScale = slide?.scale ?? 1.05;
-  const offsetY = slide?.offsetY || '0%';
+  const mediaScale = slide?.scale ?? 1;
+  const isLandscape = slide?.orientation === 'landscape';
 
   useEffect(() => {
     const next = slides[nextIndex];
@@ -68,6 +68,15 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
   if (!slides?.length) return null;
 
+  const position =
+    slide.objectPosition ||
+    (isLandscape ? 'center center' : 'center 24%');
+
+  const mediaStyle = {
+    objectPosition: position,
+    transform: mediaScale === 1 ? undefined : `scale(${mediaScale})`,
+  };
+
   return (
     <div className={`absolute inset-0 overflow-hidden bg-black ${className}`}>
       <AnimatePresence mode="sync">
@@ -83,11 +92,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
             <video
               ref={videoRef}
               src={slide.src}
-              className="h-full w-full object-cover blur-[2px] sm:blur-[3px]"
-              style={{
-                objectPosition: slide.objectPosition || 'center 28%',
-                transform: `scale(${mediaScale}) translateY(${offsetY})`,
-              }}
+              className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
+              style={mediaStyle}
               muted
               playsInline
               preload="auto"
@@ -98,11 +104,8 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
               src={slide.src}
               alt=""
               aria-hidden="true"
-              className="h-full w-full object-cover blur-[2px] sm:blur-[3px]"
-              style={{
-                objectPosition: slide.objectPosition || 'center 28%',
-                transform: `scale(${mediaScale}) translateY(${offsetY})`,
-              }}
+              className="h-full w-full object-cover blur-[1.5px] sm:blur-[2.5px]"
+              style={mediaStyle}
             />
           )}
         </motion.div>
