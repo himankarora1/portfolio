@@ -340,7 +340,7 @@ const ArtistContact = () => {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.06, duration: 0.35 }}
-                  className={`${method.bgColor} flex h-full flex-col backdrop-blur-sm border ${method.borderColor} rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-colors group cursor-pointer`}
+                  className={`${artistSurfaceCard} flex h-full flex-col !p-4 sm:!p-6 transition-colors group cursor-pointer hover:border-amber-300/55`}
                 >
                   <div className={`w-10 h-10 sm:w-12 sm:h-12 ${method.iconBg} rounded-xl flex items-center justify-center mb-3 sm:mb-4 shadow-lg`}>
                     <method.icon size={20} className="text-white sm:w-6 sm:h-6" />
@@ -354,103 +354,87 @@ const ArtistContact = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
               
-              {/* Left Column */}
-              <motion.div variants={itemVariants} className="flex h-full flex-col gap-6 sm:gap-8">
-                
-                {/* Quick Info */}
-                <div className={artistSurfaceCard}>
-                  <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-6 sm:text-2xl">
-                    Quick <span className={artistHeadingAccent}>Info</span>
-                  </h3>
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Clock size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
-                      <span>Response time: 24-48 hours</span>
-                    </div>
-                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <MapPin size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
-                      <span>Based in {personalInfo.location}</span>
-                    </div>
-                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Calendar size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
-                      <span>Open to projects worldwide</span>
-                    </div>
-                    <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
-                      <Mail size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
-                      <span>Collaborations welcome</span>
-                    </div>
+              {/* Left column - one continuous card */}
+              <motion.div variants={itemVariants} className={`${artistSurfaceCard} flex h-full flex-col`}>
+                <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
+                  Quick <span className={artistHeadingAccent}>Info</span>
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                    <Clock size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
+                    <span>Response time: 24-48 hours</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                    <MapPin size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
+                    <span>Based in {personalInfo.location}</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                    <Calendar size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
+                    <span>Open to projects worldwide</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-gray-300 text-sm sm:text-base">
+                    <Mail size={16} className="text-amber-200 sm:w-[18px] sm:h-[18px]" />
+                    <span>Collaborations welcome</span>
                   </div>
                 </div>
 
-                {/* What I Offer */}
-                <div className={artistSurfaceCard}>
-                  <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
-                    What I <span className={artistHeadingAccent}>Offer</span>
-                  </h3>
-                  <div className="mb-5 grid grid-cols-1 gap-3">
-                    {services.map((service, index) => (
-                      <div
-                        key={index}
-                        className={`flex items-center space-x-3 p-3 ${artistSurfaceInset}`}
-                      >
-                        <div className={`w-9 h-9 sm:w-10 sm:h-10 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                          <service.icon size={16} className="text-white sm:w-[18px] sm:h-[18px]" />
-                        </div>
-                        <span className="text-white font-medium text-sm sm:text-base">{service.label}</span>
+                <div className="my-6 border-t border-amber-200/20 sm:my-8" />
+
+                <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
+                  What I <span className={artistHeadingAccent}>Offer</span>
+                </h3>
+                <div className="mb-5 grid grid-cols-1 gap-2.5">
+                  {services.map((service, index) => (
+                    <div
+                      key={index}
+                      className={`flex items-center space-x-3 p-3 ${artistSurfaceInset}`}
+                    >
+                      <div className={`w-9 h-9 sm:w-10 sm:h-10 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                        <service.icon size={16} className="text-white sm:w-[18px] sm:h-[18px]" />
                       </div>
-                    ))}
-                  </div>
-                  
-                  <div className="border-t border-white/10 pt-4 mb-4">
-                    <h4 className="text-base sm:text-lg font-semibold text-white mb-3">Pricing & Packages</h4>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center text-gray-300 text-sm">
-                        <span>Live Gigs & Performances</span>
-                        <span className="text-amber-200 font-medium">From $300</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm">
-                        <span>Gaming Stream Collaborations</span>
-                        <span className="text-amber-200 font-medium">From $100</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm">
-                        <span>Music Production</span>
-                        <span className="text-amber-200 font-medium">From $200</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm">
-                        <span>Audio & Video Editing</span>
-                        <span className="text-amber-200 font-medium">From $150</span>
-                      </div>
-                      <div className="flex justify-between items-center text-gray-300 text-sm">
-                        <span>Brand Collaborations</span>
-                        <span className="text-amber-200 font-medium">Custom Quote</span>
-                      </div>
+                      <span className="text-white font-medium text-sm sm:text-base">{service.label}</span>
                     </div>
-                  </div>
-                  
-                  <div className="border-t border-white/10 pt-4">
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                      Live performance, streaming collabs, music production, and editing. Packages include revisions and source files.
-                    </p>
-                  </div>
+                  ))}
                 </div>
+
+                <h4 className="mb-3 text-base font-semibold text-white sm:text-lg">Pricing & Packages</h4>
+                <div className={`mb-5 space-y-0 overflow-hidden ${artistSurfaceInset}`}>
+                  {[
+                    ['Live Gigs & Performances', 'From $300'],
+                    ['Gaming Stream Collaborations', 'From $100'],
+                    ['Music Production', 'From $200'],
+                    ['Audio & Video Editing', 'From $150'],
+                    ['Brand Collaborations', 'Custom Quote'],
+                  ].map(([label, price], i, arr) => (
+                    <div
+                      key={label}
+                      className={`flex items-center justify-between px-3 py-2.5 text-sm ${
+                        i < arr.length - 1 ? 'border-b border-amber-200/10' : ''
+                      }`}
+                    >
+                      <span className="text-gray-300">{label}</span>
+                      <span className="font-medium text-amber-200">{price}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-sm leading-relaxed text-gray-400">
+                  Packages include revisions and source files.
+                </p>
               </motion.div>
 
-              {/* Right Column */}
-              <motion.div variants={itemVariants} className="flex h-full flex-col gap-6 sm:gap-8">
-                
-                {/* Contact Form */}
-                <div className={`${artistSurfaceCard} flex min-h-0 flex-1 flex-col`}>
-                  <h2 className="mb-6 font-display text-2xl font-semibold tracking-tight text-white sm:mb-8 sm:text-3xl">
-                    Send Me a <span className={artistHeadingAccent}>Message</span>
-                  </h2>
+              {/* Right column - form + social in one card */}
+              <motion.div variants={itemVariants} className={`${artistSurfaceCard} flex h-full flex-col`}>
+                <h2 className="mb-5 font-display text-2xl font-semibold tracking-tight text-white sm:mb-6 sm:text-3xl">
+                  Send Me a <span className={artistHeadingAccent}>Message</span>
+                </h2>
                   
-                  {/* Success Message */}
                   {formStatus.isSuccess && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95, y: -10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                      className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-xl"
+                      className="mb-5 p-4 bg-green-500/10 border border-green-500/30 rounded-xl"
                     >
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -466,13 +450,12 @@ const ArtistContact = () => {
                     </motion.div>
                   )}
 
-                  {/* Error Message */}
                   {formStatus.isError && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95, y: -10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                      className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
+                      className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-xl"
                     >
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
@@ -488,10 +471,10 @@ const ArtistContact = () => {
                     </motion.div>
                   )}
                   
-                  <form onSubmit={handleSubmit} className="flex flex-1 flex-col space-y-4 sm:space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
+                        <label className="mb-2 block text-sm font-semibold text-white">
                           Name *
                         </label>
                         <input
@@ -501,13 +484,13 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-black/40 text-white placeholder-gray-400 border border-white/10 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                           placeholder="Your full name"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
+                        <label className="mb-2 block text-sm font-semibold text-white">
                           Email *
                         </label>
                         <input
@@ -517,14 +500,14 @@ const ArtistContact = () => {
                           onChange={handleInputChange}
                           required
                           disabled={formStatus.isSubmitting}
-                          className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-black/40 text-white placeholder-gray-400 border border-white/10 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                           placeholder="your.email@example.com"
                         />
                       </div>
                     </div>
                     
                     <div>
-                      <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
+                      <label className="mb-2 block text-sm font-semibold text-white">
                         Subject *
                       </label>
                       <select
@@ -533,7 +516,7 @@ const ArtistContact = () => {
                         onChange={handleInputChange}
                         required
                         disabled={formStatus.isSubmitting}
-                        className="w-full px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-black/40 text-white border border-white/10 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                       >
                         <option value="" className="text-gray-400">Select a subject</option>
                         <option value="live-performance" className="text-gray-900">Live Gigs & Performances</option>
@@ -546,8 +529,8 @@ const ArtistContact = () => {
                       </select>
                     </div>
                     
-                    <div className="flex flex-1 flex-col">
-                      <label className="block text-white text-sm sm:text-base font-semibold mb-2 sm:mb-3">
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold text-white">
                         Message *
                       </label>
                       <textarea
@@ -556,8 +539,8 @@ const ArtistContact = () => {
                         onChange={handleInputChange}
                         required
                         disabled={formStatus.isSubmitting}
-                        rows={6}
-                        className="w-full flex-1 min-h-[9rem] px-3 sm:px-4 py-3 sm:py-4 rounded-xl bg-black/40 text-white placeholder-gray-400 border border-white/10 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 focus:outline-none resize-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                        rows={4}
+                        className="w-full resize-none rounded-xl border border-amber-200/20 bg-black/50 px-3 py-3 text-sm text-white placeholder-gray-500 transition-all focus:border-amber-300 focus:outline-none focus:ring-2 focus:ring-amber-400/20 disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3.5 sm:text-base"
                         placeholder="Tell me about your project, collaboration idea, or just say hello..."
                       />
                     </div>
@@ -585,38 +568,36 @@ const ArtistContact = () => {
                       )}
                     </motion.button>
                   </form>
-                </div>
 
-                {/* Connect on Social */}
-                <div className={`${artistSurfaceCard} mt-auto`}>
-                  <h3 className="mb-4 font-display text-xl font-semibold tracking-tight text-white sm:mb-5 sm:text-2xl">
-                    Connect on <span className={artistHeadingAccent}>Social</span>
-                  </h3>
-                  <div className="space-y-2">
-                    {socialPlatforms.map((platform, index) => (
-                      <a
-                        key={index}
-                        href={platform.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => handleSocialClick(platform.name, platform.url)}
-                        className={`flex items-center justify-between p-3 ${artistSurfaceInset} transition-colors hover:border-amber-400/30 group`}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <div className={`w-8 h-8 sm:w-9 sm:h-9 ${platform.color} rounded-lg flex items-center justify-center`}>
-                            <platform.icon size={14} className="text-white sm:w-4 sm:h-4" />
-                          </div>
-                          <div>
-                            <div className="text-white font-semibold text-sm">{platform.name}</div>
-                            <div className="text-gray-400 text-xs">{platform.handle}</div>
-                          </div>
+                <div className="my-6 border-t border-amber-200/20 sm:my-7" />
+
+                <h3 className="mb-3 font-display text-xl font-semibold tracking-tight text-white sm:mb-4 sm:text-2xl">
+                  Connect on <span className={artistHeadingAccent}>Social</span>
+                </h3>
+                <div className="space-y-2">
+                  {socialPlatforms.map((platform, index) => (
+                    <a
+                      key={index}
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleSocialClick(platform.name, platform.url)}
+                      className={`flex items-center justify-between p-3 ${artistSurfaceInset} transition-colors hover:border-amber-300/40 group`}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-8 h-8 sm:w-9 sm:h-9 ${platform.color} rounded-lg flex items-center justify-center`}>
+                          <platform.icon size={14} className="text-white sm:w-4 sm:h-4" />
                         </div>
-                        <div className="text-amber-200 font-semibold text-xs">
-                          {platform.followers}
+                        <div>
+                          <div className="text-sm font-semibold text-white">{platform.name}</div>
+                          <div className="text-xs text-gray-400">{platform.handle}</div>
                         </div>
-                      </a>
-                    ))}
-                  </div>
+                      </div>
+                      <div className="text-xs font-semibold text-amber-200">
+                        {platform.followers}
+                      </div>
+                    </a>
+                  ))}
                 </div>
               </motion.div>
             </div>

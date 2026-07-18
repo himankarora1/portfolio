@@ -14,7 +14,7 @@ export const artistBtnGhost =
 export const artistHeadingAccent = 'text-amber-200';
 
 export const artistSurfaceCard =
-  'rounded-2xl border border-white/12 bg-stone-950/80 p-6 shadow-lg shadow-black/30 backdrop-blur-md sm:p-8';
+  'rounded-2xl border border-amber-300/40 bg-gradient-to-br from-stone-900 via-[#1a1510] to-black p-6 shadow-[inset_0_1px_0_rgba(251,191,36,0.12)] sm:p-8';
 
 export const artistSurfaceInset =
-  'rounded-xl border border-white/10 bg-black/40';
+  'rounded-xl border border-amber-200/20 bg-amber-500/[0.07]';
