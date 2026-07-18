@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -43,6 +43,7 @@ const TechPage = () => {
   const [isTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
   const [showFloatingNav, setShowFloatingNav] = useState(false);
+  const floatingNavHoveredRef = useRef(false);
   const [currentCertPage, setCurrentCertPage] = useState(0);
   const [currentProjectPage, setCurrentProjectPage] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -262,8 +263,10 @@ const TechPage = () => {
     return () => clearTimeout(timer);
   }, [displayText, isTyping, isDeleting, currentRoleIndex]);
 
-  // Scroll detection
+  // Scroll detection — floating nav shows while scrolling, hides after idle
   useEffect(() => {
+    let hideTimer = null;
+
     const handleScroll = () => {
       const sections = ['hero', 'about', 'experience', 'projects', 'skills', 'certificates', 'contact'];
       const scrollPosition = window.scrollY + 200;
@@ -276,8 +279,21 @@ const TechPage = () => {
       const currentScrollProgress = Math.min((window.scrollY / totalScrollableHeight) * 100, 100);
       setScrollProgress(currentScrollProgress);
 
-      // Show floating nav after scroll; hide at top where main nav is enough
-      setShowFloatingNav(isScrolled);
+      if (hideTimer) {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+
+      if (isScrolled) {
+        setShowFloatingNav(true);
+        hideTimer = setTimeout(() => {
+          if (!floatingNavHoveredRef.current) {
+            setShowFloatingNav(false);
+          }
+        }, 1400);
+      } else {
+        setShowFloatingNav(false);
+      }
 
       let currentSection = 'hero';
 
@@ -301,6 +317,7 @@ const TechPage = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (hideTimer) clearTimeout(hideTimer);
     };
   }, []);
 
@@ -463,7 +480,7 @@ const TechPage = () => {
         />
       </div>
 
-      {/* Floating Navigation — visible after scroll on all devices; hidden at top */}
+      {/* Floating Navigation — shows while scrolling, hides shortly after idle */}
       <AnimatePresence>
         {showFloatingNav && (
           <motion.div
@@ -472,6 +489,13 @@ const TechPage = () => {
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="fixed top-20 sm:top-28 left-0 right-0 z-40 flex justify-center px-3 sm:px-0"
+            onMouseEnter={() => {
+              floatingNavHoveredRef.current = true;
+            }}
+            onMouseLeave={() => {
+              floatingNavHoveredRef.current = false;
+              setShowFloatingNav(false);
+            }}
           >
             <nav className="bg-gray-900/40 backdrop-blur-md border border-gray-700/30 rounded-2xl shadow-2xl shadow-black/10">
               <div className="flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3">
