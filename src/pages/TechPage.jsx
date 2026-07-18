@@ -43,8 +43,6 @@ const surfaceCard =
   'rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm';
 const surfaceCardHover =
   'rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-cyan-400/30 transition-colors duration-300';
-const surfaceInset =
-  'rounded-xl border border-white/10 bg-black/20';
 const surfaceTag =
   'px-2.5 py-1 rounded-md border border-white/10 bg-black/25 text-xs text-gray-300 font-medium';
 const surfaceTagSoft =
@@ -1083,7 +1081,7 @@ const TechPage = () => {
             </motion.div>
 
             <div className="relative">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 min-h-[400px]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {paginatedProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
@@ -1096,41 +1094,39 @@ const TechPage = () => {
                     className={`group flex flex-col h-full ${surfaceCardHover} overflow-hidden cursor-pointer`}
                   >
                     <div className="flex flex-col flex-1 p-6 sm:p-7">
-                      <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2 h-4">
+                      <div className="text-xs font-medium uppercase tracking-wide text-cyan-400 mb-2">
                         {project.category}
                       </div>
 
                       <h3
-                        className="font-display text-lg sm:text-xl font-semibold text-white mb-3 leading-snug h-[3.25rem] sm:h-[3.5rem] overflow-hidden group-hover:text-cyan-300 transition-colors"
-                        style={{
-                          display: '-webkit-box',
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: 'vertical'
-                        }}
+                        className="font-display text-lg sm:text-xl font-semibold text-white mb-3 leading-snug line-clamp-2 group-hover:text-cyan-300 transition-colors"
                         title={project.title}
                       >
                         {project.title}
                       </h3>
 
-                      <p className="text-gray-300 leading-relaxed text-sm sm:text-base h-[6.5rem] overflow-y-auto pr-1 mb-4">
+                      <p
+                        className="text-gray-300 leading-relaxed text-sm sm:text-base line-clamp-3 mb-5"
+                        title={project.description}
+                      >
                         {project.description}
                       </p>
 
                       <div className="mt-auto">
-                        <div className={`${surfaceInset} p-3 sm:p-4 h-[6.25rem] flex flex-col`}>
-                          <div className="text-xs font-medium uppercase tracking-wide text-gray-400 mb-2.5 shrink-0">
-                            Tech stack
-                          </div>
-                          <div className="flex flex-wrap gap-2 content-start overflow-y-auto">
-                            {project.tech.map(tech => (
-                              <span
-                                key={tech}
-                                className={surfaceTag}
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
+                        <div className="text-xs font-medium uppercase tracking-wide text-gray-500 mb-2.5">
+                          Tech stack
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.slice(0, 4).map((tech) => (
+                            <span key={tech} className={surfaceTag}>
+                              {tech}
+                            </span>
+                          ))}
+                          {project.tech.length > 4 && (
+                            <span className={surfaceTag} title={project.tech.slice(4).join(', ')}>
+                              +{project.tech.length - 4}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
