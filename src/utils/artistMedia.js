@@ -4,17 +4,82 @@
  */
 export const artistMedia = {
   home: {
-    video: '/videos/artist/artist-stage-landscape.mp4',
-    poster: '/images/artist/artist-silhouette-pink.jpg',
-    fallbackStill: '/images/artist-hero.png',
+    /** SEO / OG still — brown jacket portrait */
+    poster: '/images/artist/artist-stage-jacket.jpg',
+    /**
+     * Home montage: photos + short video beats (not full clips).
+     * Brown shirt/jacket portrait is featured early and again mid-loop.
+     */
+    montage: [
+      {
+        type: 'image',
+        src: '/images/artist/artist-stage-jacket.jpg',
+        duration: 4800,
+        objectPosition: 'center 22%',
+      },
+      {
+        type: 'video',
+        src: '/videos/artist/artist-stage-landscape.mp4',
+        duration: 4200,
+        startAt: 4,
+        playFor: 4,
+        objectPosition: 'center center',
+      },
+      {
+        type: 'image',
+        src: '/images/artist/artist-rooftop-solo.jpg',
+        duration: 4500,
+        objectPosition: 'center 28%',
+      },
+      {
+        type: 'video',
+        src: '/videos/artist/artist-rooftop-clip.mp4',
+        duration: 3800,
+        startAt: 2,
+        playFor: 3.5,
+        objectPosition: 'center 30%',
+      },
+      {
+        type: 'image',
+        src: '/images/artist/artist-silhouette-pink.jpg',
+        duration: 4000,
+        objectPosition: 'center 40%',
+      },
+      {
+        type: 'video',
+        src: '/videos/artist/artist-stage-landscape.mp4',
+        duration: 4000,
+        startAt: 14,
+        playFor: 3.8,
+        objectPosition: 'center center',
+      },
+      {
+        type: 'image',
+        src: '/images/artist/artist-ensemble-red.jpg',
+        duration: 4200,
+        objectPosition: 'center 35%',
+      },
+      {
+        type: 'image',
+        src: '/images/artist/artist-stage-jacket.jpg',
+        duration: 4000,
+        objectPosition: 'center 18%',
+      },
+      {
+        type: 'image',
+        src: '/images/artist/artist-pov-mic.jpg',
+        duration: 3800,
+        objectPosition: 'center 45%',
+      },
+    ],
   },
   about: {
     portrait: '/images/artist/artist-stage-jacket.jpg',
     atmosphere: '/images/artist/artist-rooftop-solo.jpg',
   },
   work: {
+    /** Single full-bleed hero for Work — group stage energy */
     banner: '/images/artist/artist-ensemble-red.jpg',
-    collab: '/images/artist/artist-rooftop-duo.jpg',
   },
   contact: {
     atmosphere: '/images/artist/artist-pov-mic.jpg',

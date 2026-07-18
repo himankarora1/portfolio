@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import ArtistWelcome from './ArtistWelcome';
 import ArtistNav from '../../components/Artist/ArtistNav';
+import ArtistHomeMontage from '../../components/Artist/ArtistHomeMontage';
 import SEO from '../../components/SEO';
 import { useAnalytics } from '../../components/Analytics';
 import { contentData } from '../../utils/contentManager';
@@ -12,7 +13,6 @@ import { artistMedia } from '../../utils/artistMedia';
 const ArtistHome = () => {
   const navigationType = useNavigationType();
   const [showWelcome, setShowWelcome] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
   const analytics = useAnalytics();
 
   const artistData = contentData.artist;
@@ -56,32 +56,7 @@ const ArtistHome = () => {
       />
 
       <div className="relative min-h-screen overflow-hidden bg-black">
-        {/* Cinematic stage video + still fallback */}
-        <div className="absolute inset-0">
-          <img
-            src={media.poster}
-            alt=""
-            aria-hidden="true"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-              videoReady ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <video
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-              videoReady ? 'opacity-100' : 'opacity-0'
-            }`}
-            src={media.video}
-            poster={media.poster}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            onCanPlay={() => setVideoReady(true)}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/88 via-black/60 to-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/45" />
-        </div>
+        <ArtistHomeMontage slides={media.montage} />
 
         <ArtistNav />
 
