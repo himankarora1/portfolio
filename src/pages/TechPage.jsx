@@ -58,9 +58,9 @@ const surfaceEyebrow =
 const surfaceIconBtn =
   'w-10 h-10 sm:w-12 sm:h-12 border border-white/10 bg-black/25 rounded-xl flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all';
 
-// Shared page shell — wide professional width, consistent edges
+// Shared page shell — balanced professional width, consistent edges
 const pagePad = 'px-4 sm:px-6 lg:px-8';
-const pageWidth = 'max-w-screen-2xl mx-auto w-full';
+const pageWidth = 'max-w-7xl mx-auto w-full';
 
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
