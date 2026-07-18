@@ -58,6 +58,10 @@ const surfaceEyebrow =
 const surfaceIconBtn =
   'w-10 h-10 sm:w-12 sm:h-12 border border-white/10 bg-black/25 rounded-xl flex items-center justify-center text-gray-300 hover:text-cyan-300 hover:border-cyan-400/40 transition-all';
 
+// Shared page shell — wide professional width, consistent edges
+const pagePad = 'px-4 sm:px-6 lg:px-8';
+const pageWidth = 'max-w-screen-2xl mx-auto w-full';
+
 // Rotating role titles for the typing animation (module-level so the array reference is stable across renders)
 const roles = [
   'Technical Analyst',
@@ -409,7 +413,7 @@ const TechPage = () => {
 
       {/* Professional Navigation - FIXED WITH PROPER SPACING */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#05070b]/90 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-none mx-auto px-3 sm:px-4 lg:px-6">
+        <div className={`${pageWidth} ${pagePad}`}>
           <div className="flex justify-between items-center h-16 sm:h-20">
             <Link 
               to="/tech" 
@@ -580,13 +584,13 @@ const TechPage = () => {
         {/* Hero Section */}
         <section 
           id="hero" 
-          className="min-h-screen flex items-center justify-center px-3 sm:px-4 lg:px-6 relative z-10"
+          className={`min-h-screen flex items-center justify-center ${pagePad} relative z-10`}
           style={{
             paddingTop: '8rem',
             paddingBottom: '2rem'
           }}
         >
-          <div className="max-w-6xl mx-auto w-full">
+          <div className={pageWidth}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               
               {/* Left side - Text Content */}
@@ -796,8 +800,8 @@ const TechPage = () => {
         </div>
 
         {/* About Me Section */}
-        <section id="about" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-b border-white/5">
-          <div className="max-w-6xl mx-auto w-full">
+        <section id="about" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-b border-white/5`}>
+          <div className={pageWidth}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -890,8 +894,8 @@ const TechPage = () => {
         </section>
 
         {/* Experience & Education Section */}
-        <section id="experience" className="relative py-16 sm:py-20 lg:py-24 px-3 sm:px-4 lg:px-6 overflow-hidden scroll-mt-20 border-b border-white/5">
-          <div className="relative max-w-6xl mx-auto w-full">
+        <section id="experience" className={`relative py-16 sm:py-20 lg:py-24 ${pagePad} overflow-hidden scroll-mt-20 border-b border-white/5`}>
+          <div className={`relative ${pageWidth}`}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1086,8 +1090,8 @@ const TechPage = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-y border-white/5">
-          <div className="max-w-6xl mx-auto w-full">
+        <section id="projects" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-y border-white/5`}>
+          <div className={pageWidth}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1245,8 +1249,8 @@ const TechPage = () => {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-b border-white/5">
-          <div className="max-w-6xl mx-auto w-full">
+        <section id="skills" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-b border-white/5`}>
+          <div className={pageWidth}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1293,8 +1297,8 @@ const TechPage = () => {
         </section>
 
         {/* Certificates Section */}
-        <section id="certificates" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 border-y border-white/5">
-          <div className="max-w-6xl mx-auto w-full">
+        <section id="certificates" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} border-y border-white/5`}>
+          <div className={pageWidth}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1445,8 +1449,8 @@ const TechPage = () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="min-h-screen flex items-center py-12 sm:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 relative border-t border-white/5">
-          <div className="max-w-6xl mx-auto w-full">
+        <section id="contact" className={`min-h-screen flex items-center py-12 sm:py-16 lg:py-20 ${pagePad} relative border-t border-white/5`}>
+          <div className={pageWidth}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1711,8 +1715,8 @@ const TechPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/30 px-3 sm:px-4 lg:px-6 py-10 sm:py-12">
-        <div className="max-w-6xl mx-auto w-full">
+      <footer className={`border-t border-white/10 bg-black/30 ${pagePad} py-10 sm:py-12`}>
+        <div className={pageWidth}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 lg:gap-12 items-start">
             {/* Brand */}
             <div>
