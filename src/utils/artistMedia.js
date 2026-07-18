@@ -16,7 +16,8 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4800,
         scale: 1,
-        objectPosition: 'center 12%',
+        // Keep face in the open right half, clear of left text
+        objectPosition: '72% 14%',
         offsetY: '2.5%',
       },
       {
@@ -75,7 +76,7 @@ export const artistMedia = {
         src: '/images/artist/artist-stage-jacket.jpg',
         duration: 4000,
         scale: 1,
-        objectPosition: 'center 12%',
+        objectPosition: '72% 14%',
         offsetY: '2.5%',
       },
       {
