@@ -29,7 +29,8 @@ export const artistMedia = {
         type: 'image',
         src: '/images/artist/artist-rooftop-solo.jpg',
         duration: 4500,
-        objectPosition: 'center 28%',
+        fit: 'contain',
+        objectPosition: 'center center',
       },
       {
         type: 'video',
@@ -37,7 +38,8 @@ export const artistMedia = {
         duration: 3800,
         startAt: 2,
         playFor: 3.5,
-        objectPosition: 'center 30%',
+        fit: 'contain',
+        objectPosition: 'center center',
       },
       {
         type: 'image',
