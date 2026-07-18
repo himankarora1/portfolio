@@ -303,18 +303,9 @@ export const contentData = {
       duration: "May 2026",
       location: "Boston, MA",
       type: "education",
-      description: "Building full-stack applications, designing databases, and applying data science and machine learning to product and information problems. Coursework also covers software engineering practices, algorithms, UX-focused web design, prompt engineering, and business analysis for information systems.",
+      description: "Grew into a technical analyst who can design systems, ship software, and use data with confidence. Learned to build applications end to end, model and query databases, apply machine learning to real problems, and translate business needs into clear technical direction.",
       achievements: [],
-      skills: [
-        "Application Engineering",
-        "Software Engineering",
-        "Program Structures & Algorithms",
-        "Database Design",
-        "Data Science & ML",
-        "Web Design & UX",
-        "Business Analysis",
-        "Prompt Engineering"
-      ],
+      skills: [],
       logo: "/images/companies/northeastern.png",
       website: "https://northeastern.edu"
     },
@@ -325,18 +316,9 @@ export const contentData = {
       duration: "September 2021",
       location: "New Delhi, India",
       type: "education",
-      description: "Core commerce and management training with a real technical base: computer applications, information systems management, computerized accounting and ERP-style workflows, plus e-commerce and web development. Strengthened quantitative skills through business statistics, mathematics, and financial modeling, alongside project management and research methods used in analyst work.",
+      description: "Built the business foundation that shaped how I think about operations, finance, and people, while picking up the technical base that started my path into systems work. Learned computer applications, information systems, ERP and accounting software, web development for e-commerce, and quantitative analysis through statistics and mathematics. Came out ready to connect business problems with practical technical solutions.",
       achievements: [],
-      skills: [
-        "Information Systems Management",
-        "Computer Applications",
-        "E-Commerce & Web Development",
-        "Computerized Accounting / ERP",
-        "Business Statistics",
-        "Business Mathematics",
-        "Financial Modeling",
-        "Project Management"
-      ],
+      skills: [],
       logo: "/images/companies/ggsipu.png",
       website: "http://www.ipu.ac.in"
     },
