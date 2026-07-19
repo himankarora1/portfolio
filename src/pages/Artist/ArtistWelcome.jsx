@@ -81,11 +81,11 @@ const ArtistWelcome = ({ onComplete }) => {
     };
   }, [onComplete]);
 
-  // Even vertical rhythm (~125px desktop / ~90px phone between centers)
-  const logoY = logoShouldMoveUp ? (compactLayout ? -130 : -185) : 0;
-  const titleY = compactLayout ? -40 : -60;
-  const iconsY = compactLayout ? 50 : 65;
-  const finalY = compactLayout ? 140 : 190;
+  // Even vertical rhythm — larger step so nothing feels cramped
+  const logoY = logoShouldMoveUp ? (compactLayout ? -155 : -220) : 0;
+  const titleY = compactLayout ? -40 : -55;
+  const iconsY = compactLayout ? 75 : 110;
+  const finalY = compactLayout ? 190 : 275;
 
   const containerVariants = {
     hidden: { opacity: 0 },
