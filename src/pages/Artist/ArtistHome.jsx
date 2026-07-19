@@ -60,7 +60,7 @@ const ArtistHome = () => {
       />
 
       <div className="relative min-h-screen min-h-[100dvh] overflow-hidden bg-black">
-        <ArtistHomeMontage slides={media.montage} poster={media.poster} />
+        <ArtistHomeMontage slides={media.montage} />
 
         <ArtistNav />
 

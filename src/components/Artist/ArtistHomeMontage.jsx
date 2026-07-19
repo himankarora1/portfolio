@@ -46,15 +46,32 @@ const applySafariVideoAttrs = (el) => {
   el.setAttribute('webkit-playsinline', '');
 };
 
+const captureVideoFrame = (el) => {
+  try {
+    if (!el || el.videoWidth < 2 || el.videoHeight < 2) return null;
+    const canvas = document.createElement('canvas');
+    canvas.width = el.videoWidth;
+    canvas.height = el.videoHeight;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+    ctx.drawImage(el, 0, 0);
+    return canvas.toDataURL('image/jpeg', 0.72);
+  } catch {
+    return null;
+  }
+};
+
 /**
  * Home hero montage — unique stills + short video beats.
- * Safari-safe: metadata before seek/play; soft fill until first frame.
+ * Videos show a frame still from that clip while loading (never the jacket poster loop).
  */
-const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
+const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
+  const [videoFrame, setVideoFrame] = useState(null);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
+  const frameCacheRef = useRef({});
 
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
@@ -85,6 +102,8 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
     if (!slide) return undefined;
 
     setVideoReady(false);
+    setVideoFrame(null);
+
     const advance = () => {
       setIndex((i) => (i + 1) % slides.length);
     };
@@ -94,6 +113,11 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
       return () => clearTimeout(timerRef.current);
     }
 
+    const cacheKey = `${slide.src}@${slide.startAt || 0}`;
+    if (frameCacheRef.current[cacheKey]) {
+      setVideoFrame(frameCacheRef.current[cacheKey]);
+    }
+
     const el = videoRef.current;
     if (!el) {
       timerRef.current = setTimeout(advance, slide.duration);
@@ -101,41 +125,87 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
     }
 
     let cancelled = false;
-    // Prefer start of clip on first paint — mid-file seeks often black out on iOS Safari
+    let started = false;
     const startAt = slide.startAt || 0;
     const playFor = slide.playFor || slide.duration / 1000;
 
-    const tryPlay = async () => {
+    const stashFrame = () => {
       if (cancelled) return;
+      const dataUrl = captureVideoFrame(el);
+      if (dataUrl) {
+        frameCacheRef.current[cacheKey] = dataUrl;
+        setVideoFrame(dataUrl);
+      }
+    };
+
+    const tryPlay = async () => {
+      if (cancelled || started) return;
+      started = true;
       applySafariVideoAttrs(el);
 
-      if (startAt > 0) {
-        try {
-          if (Number.isFinite(el.duration) && el.duration > startAt + 0.25) {
-            el.currentTime = startAt;
-          }
-        } catch {
-          /* play from 0 */
+      try {
+        if (startAt > 0 && Number.isFinite(el.duration) && el.duration > startAt + 0.25) {
+          el.currentTime = startAt;
         }
+      } catch {
+        /* play from 0 */
       }
 
       try {
         const playPromise = el.play();
         if (playPromise?.then) await playPromise;
-        if (!cancelled) setVideoReady(true);
+        if (!cancelled) {
+          stashFrame();
+          setVideoReady(true);
+        }
       } catch {
         if (!cancelled) setVideoReady(false);
       }
     };
 
+    const prepareFrameThenPlay = async () => {
+      if (cancelled || started) return;
+      applySafariVideoAttrs(el);
+
+      const seekTo = startAt > 0 ? startAt : 0.05;
+      let handled = false;
+
+      const finish = () => {
+        if (cancelled || handled) return;
+        handled = true;
+        stashFrame();
+        tryPlay();
+      };
+
+      try {
+        if (Number.isFinite(el.duration) && el.duration > seekTo) {
+          el.addEventListener('seeked', finish, { once: true });
+          el.currentTime = seekTo;
+          setTimeout(finish, 700);
+          return;
+        }
+      } catch {
+        /* fall through */
+      }
+
+      finish();
+    };
+
     const onPlaying = () => {
-      if (!cancelled) setVideoReady(true);
+      if (!cancelled) {
+        stashFrame();
+        setVideoReady(true);
+      }
     };
 
     const onTimeUpdate = () => {
       if (el.currentTime >= startAt + playFor) {
         el.pause();
       }
+    };
+
+    const onError = () => {
+      if (!cancelled) setVideoReady(false);
     };
 
     applySafariVideoAttrs(el);
@@ -145,22 +215,19 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
     }
     el.load();
 
-    const onCanPlay = () => {
-      tryPlay();
-    };
-
     el.addEventListener('playing', onPlaying);
     el.addEventListener('timeupdate', onTimeUpdate);
+    el.addEventListener('error', onError);
 
-    if (el.readyState >= 2) onCanPlay();
+    if (el.readyState >= 2) prepareFrameThenPlay();
     else {
-      el.addEventListener('loadedmetadata', onCanPlay, { once: true });
-      el.addEventListener('canplay', onCanPlay, { once: true });
+      el.addEventListener('loadeddata', prepareFrameThenPlay, { once: true });
+      el.addEventListener('canplay', prepareFrameThenPlay, { once: true });
     }
 
     const metaFallback = setTimeout(() => {
-      if (!cancelled) tryPlay();
-    }, 1200);
+      if (!cancelled) prepareFrameThenPlay();
+    }, 1400);
 
     timerRef.current = setTimeout(advance, slide.duration);
 
@@ -170,6 +237,7 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
       clearTimeout(timerRef.current);
       el.removeEventListener('playing', onPlaying);
       el.removeEventListener('timeupdate', onTimeUpdate);
+      el.removeEventListener('error', onError);
       el.pause();
     };
   }, [slide, slides.length]);
@@ -182,17 +250,6 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
 
   return (
     <div className={`absolute inset-0 overflow-hidden bg-black ${className}`}>
-      {/* Persistent still under videos so Safari never flashes pure black */}
-      {poster && (
-        <img
-          src={poster}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
-          style={{ objectPosition: 'center 28%' }}
-        />
-      )}
-
       <AnimatePresence mode="sync">
         <motion.div
           key={`${slide.type}-${slide.src}-${index}`}
@@ -227,6 +284,16 @@ const ArtistHomeMontage = ({ slides, poster, className = '' }) => {
                 ease: 'linear',
               }}
             >
+              {/* Frame from THIS video while it loads — black if capture isn't ready yet */}
+              {videoFrame && !videoReady && (
+                <img
+                  src={videoFrame}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: position }}
+                />
+              )}
               <video
                 ref={videoRef}
                 className={`h-full w-full object-cover blur-[0.5px] sm:blur-0 transition-opacity duration-500 ${
