@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# Himank Arora — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dual-identity personal site for **Himank Arora**:
 
-## Available Scripts
+- **Hub** (`/`) — choose Tech or Artist
+- **Tech** (`/tech`) — Technical Analyst & Developer portfolio
+- **Artist** (`/artist`) — music, gaming, and content creator portfolio
 
-In the project directory, you can run:
+**Live:** [himankarora.com](https://himankarora.com)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- React 18 (Create React App)
+- React Router
+- Tailwind CSS
+- Framer Motion
+- Lucide React + custom brand social icons
+- React Helmet Async (SEO)
+- Vercel serverless function for contact email (`api/send-email.js`)
+- YouTube Data API (Artist Work gallery)
+- Google Analytics (optional)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Site map
 
-### `npm run build`
+| Path | Purpose |
+|------|---------|
+| `/` | Dual-path hub |
+| `/tech` | Tech portfolio (single-page sections) |
+| `/artist` | Artist home + cinematic welcome |
+| `/artist/about` | Artist about |
+| `/artist/work` | Music / gaming YouTube work |
+| `/artist/contact` | Artist contact |
+| `/privacy`, `/terms`, `/sitemap` | Legal |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Theme model**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Hub: cyan + amber
+- Tech: cyan / glass / dark grid
+- Artist: amber accents + charcoal surfaces
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Getting started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+App runs at [http://localhost:3000](http://localhost:3000).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm run build   # production build → build/
+npm test        # test runner
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Deployed from `main` on Vercel.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Environment variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create a `.env` in the project root for local development. On Vercel, set the same keys in Project Settings → Environment Variables.
 
-### Code Splitting
+### Frontend (CRA — must be prefixed with `REACT_APP_`)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+| Variable | Purpose |
+|----------|---------|
+| `REACT_APP_YOUTUBE_API_KEY` | YouTube Data API key (Artist Work) |
+| `REACT_APP_MUSIC_CHANNEL_ID` | Music channel ID |
+| `REACT_APP_GAMING_CHANNEL_ID` | Gaming channel ID |
+| `REACT_APP_GA_MEASUREMENT_ID` | Google Analytics measurement ID (optional) |
 
-### Analyzing the Bundle Size
+### Serverless contact form (`api/send-email.js`)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Variable | Purpose |
+|----------|---------|
+| `GMAIL_USER` | Gmail address that sends form mail |
+| `GMAIL_APP_PASSWORD` | Gmail app password |
 
-### Making a Progressive Web App
+Without Gmail vars, contact forms will fail in production. Without YouTube vars, Artist Work falls back / shows API errors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Project structure (high level)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+src/
+  pages/           # Hub, Tech, Artist, Legal
+  components/      # Shared UI, SEO, Analytics, Artist chrome
+  services/        # YouTube API + cache
+  utils/           # contentManager, artistMedia, layout tokens
+  context/         # Theme context (legacy; site is dark-by-design)
+api/
+  send-email.js    # Vercel serverless contact handler
+public/
+  images/          # OG + artist stills
+  videos/artist/   # Home montage clips
+```
 
-### Deployment
+Content and copy live mainly in `src/utils/contentManager.js`.  
+Artist media paths live in `src/utils/artistMedia.js`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Artist welcome intro runs once per browser tab session (or when arriving from the hub).
+- Service worker lives in `public/sw.js` — bump cache version when shipping major asset changes.
+- Do not commit secrets (`.env`). Use Vercel env for production.
+
+---
+
+## License
+
+Personal portfolio — all rights reserved © Himank Arora.
