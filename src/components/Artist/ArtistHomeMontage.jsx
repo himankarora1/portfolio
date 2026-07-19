@@ -46,32 +46,15 @@ const applySafariVideoAttrs = (el) => {
   el.setAttribute('webkit-playsinline', '');
 };
 
-const captureVideoFrame = (el) => {
-  try {
-    if (!el || el.videoWidth < 2 || el.videoHeight < 2) return null;
-    const canvas = document.createElement('canvas');
-    canvas.width = el.videoWidth;
-    canvas.height = el.videoHeight;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return null;
-    ctx.drawImage(el, 0, 0);
-    return canvas.toDataURL('image/jpeg', 0.72);
-  } catch {
-    return null;
-  }
-};
-
 /**
  * Home hero montage — unique stills + short video beats.
- * Videos show a frame still from that clip while loading (never the jacket poster loop).
+ * Videos fade through black while loading (no poster / frame flash).
  */
 const ArtistHomeMontage = ({ slides, className = '' }) => {
   const [index, setIndex] = useState(0);
   const [videoReady, setVideoReady] = useState(false);
-  const [videoFrame, setVideoFrame] = useState(null);
   const videoRef = useRef(null);
   const timerRef = useRef(null);
-  const frameCacheRef = useRef({});
 
   const slide = slides[index];
   const nextIndex = (index + 1) % slides.length;
@@ -102,8 +85,6 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
     if (!slide) return undefined;
 
     setVideoReady(false);
-    setVideoFrame(null);
-
     const advance = () => {
       setIndex((i) => (i + 1) % slides.length);
     };
@@ -111,11 +92,6 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
     if (slide.type !== 'video') {
       timerRef.current = setTimeout(advance, slide.duration);
       return () => clearTimeout(timerRef.current);
-    }
-
-    const cacheKey = `${slide.src}@${slide.startAt || 0}`;
-    if (frameCacheRef.current[cacheKey]) {
-      setVideoFrame(frameCacheRef.current[cacheKey]);
     }
 
     const el = videoRef.current;
@@ -128,15 +104,6 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
     let started = false;
     const startAt = slide.startAt || 0;
     const playFor = slide.playFor || slide.duration / 1000;
-
-    const stashFrame = () => {
-      if (cancelled) return;
-      const dataUrl = captureVideoFrame(el);
-      if (dataUrl) {
-        frameCacheRef.current[cacheKey] = dataUrl;
-        setVideoFrame(dataUrl);
-      }
-    };
 
     const tryPlay = async () => {
       if (cancelled || started) return;
@@ -154,58 +121,20 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
       try {
         const playPromise = el.play();
         if (playPromise?.then) await playPromise;
-        if (!cancelled) {
-          stashFrame();
-          setVideoReady(true);
-        }
+        if (!cancelled) setVideoReady(true);
       } catch {
         if (!cancelled) setVideoReady(false);
       }
     };
 
-    const prepareFrameThenPlay = async () => {
-      if (cancelled || started) return;
-      applySafariVideoAttrs(el);
-
-      const seekTo = startAt > 0 ? startAt : 0.05;
-      let handled = false;
-
-      const finish = () => {
-        if (cancelled || handled) return;
-        handled = true;
-        stashFrame();
-        tryPlay();
-      };
-
-      try {
-        if (Number.isFinite(el.duration) && el.duration > seekTo) {
-          el.addEventListener('seeked', finish, { once: true });
-          el.currentTime = seekTo;
-          setTimeout(finish, 700);
-          return;
-        }
-      } catch {
-        /* fall through */
-      }
-
-      finish();
-    };
-
     const onPlaying = () => {
-      if (!cancelled) {
-        stashFrame();
-        setVideoReady(true);
-      }
+      if (!cancelled) setVideoReady(true);
     };
 
     const onTimeUpdate = () => {
       if (el.currentTime >= startAt + playFor) {
         el.pause();
       }
-    };
-
-    const onError = () => {
-      if (!cancelled) setVideoReady(false);
     };
 
     applySafariVideoAttrs(el);
@@ -217,17 +146,16 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
 
     el.addEventListener('playing', onPlaying);
     el.addEventListener('timeupdate', onTimeUpdate);
-    el.addEventListener('error', onError);
 
-    if (el.readyState >= 2) prepareFrameThenPlay();
+    if (el.readyState >= 2) tryPlay();
     else {
-      el.addEventListener('loadeddata', prepareFrameThenPlay, { once: true });
-      el.addEventListener('canplay', prepareFrameThenPlay, { once: true });
+      el.addEventListener('loadedmetadata', tryPlay, { once: true });
+      el.addEventListener('canplay', tryPlay, { once: true });
     }
 
     const metaFallback = setTimeout(() => {
-      if (!cancelled) prepareFrameThenPlay();
-    }, 1400);
+      if (!cancelled) tryPlay();
+    }, 1200);
 
     timerRef.current = setTimeout(advance, slide.duration);
 
@@ -237,7 +165,6 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
       clearTimeout(timerRef.current);
       el.removeEventListener('playing', onPlaying);
       el.removeEventListener('timeupdate', onTimeUpdate);
-      el.removeEventListener('error', onError);
       el.pause();
     };
   }, [slide, slides.length]);
@@ -276,7 +203,7 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
             </motion.div>
           ) : (
             <motion.div
-              className="absolute inset-0"
+              className="absolute inset-0 bg-black"
               initial={{ scale: 1.02 }}
               animate={{ scale: 1.06 }}
               transition={{
@@ -284,19 +211,9 @@ const ArtistHomeMontage = ({ slides, className = '' }) => {
                 ease: 'linear',
               }}
             >
-              {/* Frame from THIS video while it loads — black if capture isn't ready yet */}
-              {videoFrame && !videoReady && (
-                <img
-                  src={videoFrame}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: position }}
-                />
-              )}
               <video
                 ref={videoRef}
-                className={`h-full w-full object-cover blur-[0.5px] sm:blur-0 transition-opacity duration-500 ${
+                className={`h-full w-full object-cover blur-[0.5px] sm:blur-0 transition-opacity duration-700 ${
                   videoReady ? 'opacity-100' : 'opacity-0'
                 }`}
                 style={{ objectPosition: position }}
