@@ -81,12 +81,11 @@ const ArtistWelcome = ({ onComplete }) => {
     };
   }, [onComplete]);
 
-  // Spread further apart so logo / name / icons / text breathe
-  // Extra gap between HA and HIMANK ARORA (both large)
-  const logoY = logoShouldMoveUp ? (compactLayout ? -150 : -225) : 0;
-  const titleY = compactLayout ? -8 : -12;
-  const iconsY = compactLayout ? 95 : 140;
-  const finalY = compactLayout ? 195 : 265;
+  // Even vertical rhythm (~125px desktop / ~90px phone between centers)
+  const logoY = logoShouldMoveUp ? (compactLayout ? -130 : -185) : 0;
+  const titleY = compactLayout ? -40 : -60;
+  const iconsY = compactLayout ? 50 : 65;
+  const finalY = compactLayout ? 140 : 190;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -182,9 +181,24 @@ const ArtistWelcome = ({ onComplete }) => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className="flex items-center space-x-2 text-gray-300 transition-colors duration-300 hover:text-white">
-            <span className="text-xs font-medium tracking-wide sm:text-sm">Skip Intro</span>
-            <ArrowRight size={14} className="sm:h-4 sm:w-4" />
+          <div className="group flex items-center space-x-2 text-gray-300 transition-colors duration-300 hover:text-white">
+            <motion.span
+              className="text-xs font-medium tracking-wide sm:text-sm"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              Skip Intro
+            </motion.span>
+            <motion.div
+              animate={{ x: [0, 4, 0], opacity: [0.7, 1, 0.7] }}
+              transition={{
+                x: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
+                opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+              }}
+              className="transition-colors duration-300 group-hover:text-amber-200"
+            >
+              <ArrowRight size={14} className="sm:h-4 sm:w-4" />
+            </motion.div>
           </div>
         </motion.button>
 
