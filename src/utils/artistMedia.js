@@ -14,7 +14,7 @@ export const artistMedia = {
       {
         type: 'image',
         src: '/images/artist/artist-rooftop-solo.jpg',
-        duration: 5200,
+        duration: 5000,
         scale: 1,
         objectPosition: 'center 28%',
         kenBurns: 'in-left',
@@ -22,10 +22,9 @@ export const artistMedia = {
       {
         type: 'video',
         src: '/videos/artist/artist-stage-landscape.mp4',
-        duration: 4200,
-        // Mid-file seeks often black out on iOS Safari — play from the start beat
+        duration: 5000,
         startAt: 0,
-        playFor: 4,
+        playFor: 5,
         orientation: 'landscape',
         scale: 1,
         objectPosition: 'center center',
@@ -40,18 +39,17 @@ export const artistMedia = {
       },
       {
         type: 'video',
-        // WhatsApp Video 12 — from when you're visible; keep you in frame
         src: '/videos/artist/artist-rooftop-clip.mp4',
-        duration: 4800,
+        duration: 5000,
         startAt: 0,
-        playFor: 4.8,
+        playFor: 5,
         scale: 1,
         objectPosition: '42% 58%',
       },
       {
         type: 'image',
         src: '/images/artist/artist-ensemble-red.jpg',
-        duration: 4800,
+        duration: 5000,
         orientation: 'landscape',
         scale: 1,
         objectPosition: 'center center',
@@ -59,11 +57,10 @@ export const artistMedia = {
       },
       {
         type: 'video',
-        // WhatsApp Video 9 — upright full landscape
         src: '/videos/artist/artist-stage-portrait-clip.mp4',
-        duration: 4200,
+        duration: 5000,
         startAt: 0,
-        playFor: 4.2,
+        playFor: 5,
         orientation: 'landscape',
         scale: 1,
         objectPosition: 'center 65%',
@@ -71,9 +68,9 @@ export const artistMedia = {
       {
         type: 'video',
         src: '/videos/artist/artist-stage-landscape.mp4',
-        duration: 4000,
+        duration: 5000,
         startAt: 12,
-        playFor: 3.8,
+        playFor: 5,
         orientation: 'landscape',
         scale: 1,
         objectPosition: 'center center',
