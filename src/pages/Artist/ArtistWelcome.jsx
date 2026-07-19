@@ -81,11 +81,11 @@ const ArtistWelcome = ({ onComplete }) => {
     };
   }, [onComplete]);
 
-  // Original desktop offsets; slightly tighter on phones so nothing clips
-  const logoY = logoShouldMoveUp ? (compactLayout ? -110 : -160) : 0;
-  const titleY = compactLayout ? -14 : -20;
-  const iconsY = compactLayout ? 78 : 110;
-  const finalY = compactLayout ? 165 : 220;
+  // Spread further apart so logo / name / icons / text breathe
+  const logoY = logoShouldMoveUp ? (compactLayout ? -130 : -195) : 0;
+  const titleY = compactLayout ? -28 : -40;
+  const iconsY = compactLayout ? 95 : 140;
+  const finalY = compactLayout ? 195 : 265;
 
   const containerVariants = {
     hidden: { opacity: 0 },
