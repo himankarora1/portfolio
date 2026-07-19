@@ -176,30 +176,43 @@ const ArtistWelcome = ({ onComplete }) => {
           onClick={handleSkipIntro}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          whileHover="hover"
+          whileTap={{ scale: 0.97 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="fixed z-[9999] cursor-pointer bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-8 sm:right-8"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          className="group fixed z-[9999] cursor-pointer bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] sm:bottom-8 sm:right-8"
         >
-          <div className="group flex items-center space-x-2 text-gray-300 transition-colors duration-300 hover:text-white">
+          <motion.div
+            className="flex items-center space-x-2 text-gray-400 transition-colors duration-300 group-hover:text-white"
+            variants={{ hover: { scale: 1.04 } }}
+            transition={{ duration: 0.25 }}
+          >
             <motion.span
               className="text-xs font-medium tracking-wide sm:text-sm"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              animate={{ opacity: [0.55, 0.9, 0.55] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             >
               Skip Intro
             </motion.span>
             <motion.div
-              animate={{ x: [0, 4, 0], opacity: [0.7, 1, 0.7] }}
+              animate={{ x: [0, 3, 0], opacity: [0.55, 0.9, 0.55] }}
               transition={{
-                x: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' },
-                opacity: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
+                x: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' },
+                opacity: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
               }}
               className="transition-colors duration-300 group-hover:text-amber-200"
             >
               <ArrowRight size={14} className="sm:h-4 sm:w-4" />
             </motion.div>
-          </div>
+          </motion.div>
+          <motion.div
+            className="mt-1 h-px origin-left rounded-full bg-gradient-to-r from-amber-200 to-orange-200"
+            variants={{
+              hover: { scaleX: 1, opacity: 1 },
+            }}
+            initial={{ scaleX: 0, opacity: 0.5 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            style={{ transformOrigin: 'left' }}
+          />
         </motion.button>
 
         {/* Soft ambient orbs */}
