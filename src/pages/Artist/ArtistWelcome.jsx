@@ -82,8 +82,9 @@ const ArtistWelcome = ({ onComplete }) => {
   }, [onComplete]);
 
   // Spread further apart so logo / name / icons / text breathe
-  const logoY = logoShouldMoveUp ? (compactLayout ? -130 : -195) : 0;
-  const titleY = compactLayout ? -28 : -40;
+  // Extra gap between HA and HIMANK ARORA (both large)
+  const logoY = logoShouldMoveUp ? (compactLayout ? -150 : -225) : 0;
+  const titleY = compactLayout ? -8 : -12;
   const iconsY = compactLayout ? 95 : 140;
   const finalY = compactLayout ? 195 : 265;
 
