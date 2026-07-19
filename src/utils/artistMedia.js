@@ -23,7 +23,7 @@ export const artistMedia = {
         type: 'video',
         src: '/videos/artist/artist-stage-landscape.mp4',
         duration: 5000,
-        startAt: 0,
+        startAt: 1,
         playFor: 5,
         orientation: 'landscape',
         scale: 1,
